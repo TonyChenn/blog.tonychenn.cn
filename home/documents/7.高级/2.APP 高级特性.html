@@ -1,0 +1,105 @@
+<h2 id="APP高级特性"><a class="header-anchor" href="#APP高级特性">¶</a>APP高级特性</h2>
+<p>APP的表现形式不仅仅可以是一个个窗口，还可以为动态壁纸，小工具，后台服务等，取决于开发者的想象力。</p>
+<p>下面我们将以几个特殊APP为例，探索如何利用APP的高级特性。</p>
+<h3 id="便签"><a class="header-anchor" href="#便签">¶</a>便签</h3>
+<p>便签用于快速记录信息，设计为一个小窗口，自启动于屏幕右上角。</p>
+<p><img src="../assets/4.png" alt=""></p>
+<ul>
+<li>
+<p>便签作为小工具，需要低调。设置<code>plugin:true</code>，默认隐藏标题栏</p>
+</li>
+<li>
+<p>每次启动自动出现在右上角，设置上对齐，右对齐，偏移4px</p>
+</li>
+<li>
+<p>自启动级别设置为2</p>
+</li>
+<li>
+<p>不需要用户改动url，设置地址栏默认隐藏<code>addressBar: false</code></p>
+</li>
+<li>
+<p>固定一个合适的尺寸宽度250px，高度320px</p>
+<p>​</p>
+</li>
+</ul>
+<p>完整的便签APP数据</p>
+<pre><code class="language-javascript">		&quot;plugin-note&quot;: {
+            &quot;addressBar&quot;: false,
+            &quot;autoRun&quot;: 2,
+            &quot;background&quot;: false,
+            &quot;badge&quot;: 0,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;icon&quot;: {
+                &quot;type&quot;: &quot;fa&quot;,
+                &quot;bg&quot;: &quot;orange&quot;,
+                &quot;content&quot;: &quot;sticky-note-o&quot;
+            },
+            &quot;openMode&quot;: &quot;normal&quot;,
+            &quot;plugin&quot;: true,
+            &quot;position&quot;: {
+                &quot;x&quot;: &quot;4&quot;,
+                &quot;y&quot;: &quot;4&quot;,
+                &quot;left&quot;: false,
+                &quot;top&quot;: true,
+                &quot;autoOffset&quot;: false
+            },
+            &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+            &quot;resizable&quot;: true,
+            &quot;single&quot;: true,
+            &quot;size&quot;: {
+                &quot;width&quot;: 250,
+                &quot;height&quot;: 326
+            },
+            &quot;title&quot;: &quot;便签&quot;,
+            &quot;url&quot;: &quot;./res/apps/note/index.html&quot;,
+            &quot;customTile&quot;: &quot;&quot;
+        }
+</code></pre>
+<h3 id="时钟"><a class="header-anchor" href="#时钟">¶</a>时钟</h3>
+<p>类似于便签，但是时钟不需要交互操作，可以变得更低调。</p>
+<p><img src="../assets/5.png" alt=""></p>
+<p>我们希望用户根本不会触碰到它，设置<code>background:true</code>开启背景模式，让这个时钟成为一个背景装饰。</p>
+<p>完整的时钟APP数据</p>
+<pre><code class="language-javascript">		&quot;plugin-clock&quot;: {
+            &quot;addressBar&quot;: true,
+            &quot;autoRun&quot;: 2,
+            &quot;background&quot;: true,
+            &quot;badge&quot;: 0,
+            &quot;desc&quot;: &quot;&quot;,
+            &quot;icon&quot;: {
+                &quot;type&quot;: &quot;fa&quot;,
+                &quot;bg&quot;: &quot;rgb(238,37,96)&quot;,
+                &quot;content&quot;: &quot;clock-o&quot;
+            },
+            &quot;openMode&quot;: &quot;normal&quot;,
+            &quot;plugin&quot;: true,
+            &quot;position&quot;: {
+                &quot;left&quot;: false,
+                &quot;top&quot;: false,
+                &quot;x&quot;: &quot;0&quot;,
+                &quot;y&quot;: &quot;0&quot;
+            },
+            &quot;poweredBy&quot;: &quot;unknown&quot;,
+            &quot;resizable&quot;: true,
+            &quot;single&quot;: true,
+            &quot;size&quot;: {
+                &quot;width&quot;: 336,
+                &quot;height&quot;: 383
+            },
+            &quot;title&quot;: &quot;创意时钟&quot;,
+            &quot;url&quot;: &quot;./res/apps/React Morph Clock/index.html&quot;,
+            &quot;customTile&quot;: &quot;&quot;
+        }		
+</code></pre>
+<h3 id="动态壁纸"><a class="header-anchor" href="#动态壁纸">¶</a>动态壁纸</h3>
+<p>那么动态壁纸的特性是什么？</p>
+<ul>
+<li>覆盖整个屏幕</li>
+<li>自动启动</li>
+<li>无交互</li>
+<li>位于最底层</li>
+</ul>
+<p>结合上述两个例子，你是否能写出一个动态壁纸的APP数据？</p>
+<blockquote>
+<p>位于最底层意味着该APP的启动顺序要足够靠前，它优先启动，后启动的的APP才能正确的覆盖在它上方。</p>
+</blockquote>

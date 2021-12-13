@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>Unity编辑器拓展-数据存储(3) - 默然的小窝</title>
+
+    <meta property="og:url" content="https://tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Unity编辑器拓展-数据存储(3) - 默然的小窝 | 默然的小窝">
+    
+    
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0227/icon.png">
+    
+
+    
+      <meta property="og:description" content="编辑器拓展过程中存储数据的方式">
+    
+
+    <!--mdui-->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+          integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+          crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+            integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+            crossorigin="anonymous">
+    </script>
+    <!--jquery-->
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://cdn.jsdelivr.net/npm/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+        
+<link rel="stylesheet" href="/css/grey.css">
+
+    
+
+    <!--点击特效-->
+    
+        <script async src="js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的小窝&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0227/icon.png)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">Unity编辑器拓展-数据存储(3)</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center mdui-shadow-2">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <p>在编辑器拓展过程中如果需要保存一些数据以便在下次打开后使用，如：项目的设置，编辑器拓展需要的参数等。可以通过下面几种方式实现：</p>
+<h1>EditorPrefs</h1>
+<p>首先说下EditorPrefs,它和PlayerPrefs相似，只是后者在Runtime下使用，前者在编辑器模式下使用。在EditorPrefs中存储的数据不会限制于项目。用于存储一些编辑器相关数据，由于是明文存储，所以不适合存放密码。对于一些敏感数据，可以存放到EditorUserSettings中以二进制进行加密，使用<code>EditorUserSettings.Set / GetConfigValue</code>读，取。</p>
+<p>可以使用<code>EditorPrefs.Get/Set</code> 保存一些基础数据类型如：int, float,bool,string。</p>
+<p>当然通过一些方法也是可以保存其他类型的数据，下面是封装的一些方法，相信你以看就会。</p>
+<ol>
+<li>枚举类型</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Get</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> T <span class="title">GetEnum</span>&lt;<span class="title">T</span>&gt;(<span class="params"><span class="built_in">string</span> prefs_key, T defaultValue</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> val = GetString(prefs_key, defaultValue.ToString());</span><br><span class="line">    <span class="built_in">string</span>[] names = System.Enum.GetNames(<span class="keyword">typeof</span>(T));</span><br><span class="line">    System.Array values = System.Enum.GetValues(<span class="keyword">typeof</span>(T));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; names.Length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (names[i] == val)</span><br><span class="line">            <span class="keyword">return</span> (T)values.GetValue(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> defaultValue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Set</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetEnum</span>(<span class="params"><span class="built_in">string</span> prefs_key, System.Enum val</span>)</span> </span><br><span class="line">&#123; </span><br><span class="line">    SetString(prefs_key, val.ToString()); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>泛型</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Get</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> T <span class="title">Get</span>&lt;<span class="title">T</span>&gt;(<span class="params"><span class="built_in">string</span> prefs_key, T defaultValue</span>) <span class="keyword">where</span> T : Object</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!key_obj_list.Contains(prefs_key))</span><br><span class="line">        key_obj_list.Add(prefs_key);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> path = EditorPrefs.GetString(prefs_key);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">string</span>.IsNullOrEmpty(path)) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    T retVal = SUGUIEditorTool.LoadAsset&lt;T&gt;(path);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (retVal == <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> id;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">int</span>.TryParse(path, <span class="keyword">out</span> id))</span><br><span class="line">            <span class="keyword">return</span> EditorUtility.InstanceIDToObject(id) <span class="keyword">as</span> T;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> retVal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Set</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetObject</span>(<span class="params"><span class="built_in">string</span> prefs_key, Object obj</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!key_obj_list.Contains(prefs_key))</span><br><span class="line">        key_obj_list.Add(prefs_key);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        EditorPrefs.DeleteKey(prefs_key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">string</span> path = AssetDatabase.GetAssetPath(obj);</span><br><span class="line">            EditorPrefs.SetString(prefs_key, <span class="built_in">string</span>.IsNullOrEmpty(path) ? obj.GetInstanceID().ToString() : path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> EditorPrefs.DeleteKey(prefs_key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>颜色</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Get</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Color <span class="title">GetColor</span>(<span class="params"><span class="built_in">string</span> prefs_key, Color c</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> strVal = GetString(prefs_key, c.r + <span class="string">&quot; &quot;</span> + c.g + <span class="string">&quot; &quot;</span> + c.b + <span class="string">&quot; &quot;</span> + c.a);</span><br><span class="line">    <span class="built_in">string</span>[] parts = strVal.Split(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (parts.Length == <span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">float</span>.TryParse(parts[<span class="number">0</span>], <span class="keyword">out</span> c.r);</span><br><span class="line">        <span class="built_in">float</span>.TryParse(parts[<span class="number">1</span>], <span class="keyword">out</span> c.g);</span><br><span class="line">        <span class="built_in">float</span>.TryParse(parts[<span class="number">2</span>], <span class="keyword">out</span> c.b);</span><br><span class="line">        <span class="built_in">float</span>.TryParse(parts[<span class="number">3</span>], <span class="keyword">out</span> c.a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Set</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetColor</span>(<span class="params"><span class="built_in">string</span> prefs_key, Color c</span>)</span> </span><br><span class="line">&#123; </span><br><span class="line">    SetString(prefs_key, c.r + <span class="string">&quot; &quot;</span> + c.g + <span class="string">&quot; &quot;</span> + c.b + <span class="string">&quot; &quot;</span> + c.a); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本上所有类型都可以通过泛型的方式进行保存。</p>
+<h2 id="存放位置"><a class="header-anchor" href="#存放位置">¶</a>存放位置</h2>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows(Unity4.x)</td>
+<td>HKEY_CURRENT_USER\Software\Unity Technologies\UnityEditor 4.x</td>
+</tr>
+<tr>
+<td>Windows(Unity5.x)</td>
+<td>HKEY_CURRENT_USER\Software\Unity Technologies\UnityEditor 5.x</td>
+</tr>
+<tr>
+<td>MacOS X(Unity4.x)</td>
+<td>~/Library/Preferences/com.unity3d.UnityEditor4.x.plist</td>
+</tr>
+<tr>
+<td>MacOS X(Unity5.x)</td>
+<td>~/Library/Preferences/com.unity3d.UnityEditor5.x.plist</td>
+</tr>
+</tbody>
+</table>
+<h2 id="注意"><a class="header-anchor" href="#注意">¶</a>注意</h2>
+<ul>
+<li>不要在OnGUI中对EditorPrefs进行保存操作，OnGUI会被多次调用，负荷高。</li>
+<li>谨慎使用<code>EditorPrefs.ClearAll()</code>.</li>
+</ul>
+<h1>ScriptableObject</h1>
+<p>用来存放项目中共享的数据，可以当作本地数据库，可以存储大量数据。ScriptObject的用途还是挺大的，篇幅过大之后专门写一篇关于ScriptObject的各种方便开发的用法。</p>
+<h1>Json</h1>
+<p>第三种当然是Json啦。当然网上有着各种已经成熟的Json的序列化/反序列化插件了。这里就不介绍了。下面说下Unity本身自带的一个非常小型的Json序列化工具类。但是只支持简单的数据类型，不支持<code>List</code>和<code>字典</code>这些数据结构。下面也是做一个小拓展，完善它的一些不足。通过将列表字典转化为对象的形式再进行序列化与反序列化，实现支持List，Dictionary 类型。<br>
+代码如下:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// List&lt;T&gt;</span></span><br><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Serialization</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    List&lt;T&gt; target;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">ToList</span>(<span class="params"></span>)</span> &#123; <span class="keyword">return</span> target; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Serialization</span>(<span class="params">List&lt;T&gt; target</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Dictionary&lt;TKey, TValue&gt;</span></span><br><span class="line">[<span class="meta">Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Serialization</span>&lt;<span class="title">TKey</span>, <span class="title">TValue</span>&gt; : <span class="title">ISerializationCallbackReceiver</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    List&lt;TKey&gt; keys;</span><br><span class="line">    [<span class="meta">SerializeField</span>]</span><br><span class="line">    List&lt;TValue&gt; values;</span><br><span class="line"></span><br><span class="line">    Dictionary&lt;TKey, TValue&gt; target;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Dictionary&lt;TKey, TValue&gt; <span class="title">ToDictionary</span>(<span class="params"></span>)</span> &#123; <span class="keyword">return</span> target; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Serialization</span>(<span class="params">Dictionary&lt;TKey, TValue&gt; target</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnBeforeSerialize</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        keys = <span class="keyword">new</span> List&lt;TKey&gt;(target.Keys);</span><br><span class="line">        values = <span class="keyword">new</span> List&lt;TValue&gt;(target.Values);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnAfterDeserialize</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> count = Math.Min(keys.Count, values.Count);</span><br><span class="line">        target = <span class="keyword">new</span> Dictionary&lt;TKey, TValue&gt;(count);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            target.Add(keys[i], values[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用法：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// List&lt;T&gt; -&gt; Json ( 例 : List&lt;Enemy&gt; )</span></span><br><span class="line"><span class="built_in">string</span> str = JsonUtility.ToJson(<span class="keyword">new</span> Serialization&lt;Enemy&gt;(enemies)); </span><br><span class="line"><span class="comment">// 输出 : &#123;&quot;target&quot;:[&#123;&quot;name&quot;:&quot;怪物1,&quot;skills&quot;:[&quot;攻击&quot;]&#125;,&#123;&quot;name&quot;:&quot;怪物2&quot;,&quot;skills&quot;:[&quot;攻击&quot;,&quot;恢复&quot;]&#125;]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Json-&gt; List&lt;T&gt;</span></span><br><span class="line">List&lt;Enemy&gt; enemies = JsonUtility.FromJson&lt;Serialization&lt;Enemy&gt;&gt;(str).ToList();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Dictionary&lt;TKey,TValue&gt; -&gt; Json( 例 : Dictionary&lt;int, Enemy&gt; )</span></span><br><span class="line"><span class="built_in">string</span> str = JsonUtility.ToJson(<span class="keyword">new</span> Serialization&lt;<span class="built_in">int</span>, Enemy&gt;(enemies)); </span><br><span class="line"><span class="comment">// 输出 : &#123;&quot;keys&quot;:[1000,2000],&quot;values&quot;:[&#123;&quot;name&quot;:&quot;怪物1&quot;,&quot;skills&quot;:[&quot;攻击&quot;]&#125;,&#123;&quot;name&quot;:&quot;怪物2&quot;,&quot;skills&quot;:[&quot;攻击&quot;,&quot;恢复&quot;]&#125;]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Json -&gt; Dictionary&lt;TKey,TValue&gt;</span></span><br><span class="line">Dictionary&lt;<span class="built_in">int</span>, Enemy&gt; enemies = JsonUtility.FromJson&lt;Serialization&lt;<span class="built_in">int</span>, Enemy&gt;&gt;(str).ToDictionary();</span><br></pre></td></tr></table></figure>
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: 'ecbf6316c9aa7a6bfd7a',
+			clientSecret: '5c875e5986ed75f4509d97acd16628b97f7506f1',
+			repo: 'tonychenn.github.io',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true  // Facebook-like distraction free mode
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">EditorPrefs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AD%98%E6%94%BE%E4%BD%8D%E7%BD%AE"><span class="post-toc-text">存放位置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="post-toc-text">注意</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">ScriptableObject</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Json</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2021
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

@@ -1,0 +1,65 @@
+<h2 id="开始菜单"><a class="header-anchor" href="#开始菜单">¶</a>开始菜单</h2>
+<p><img src="../assets/3.png" alt=""></p>
+<p>开始菜单包括左部侧边栏和菜单列表两部分，其数据结构示例如下。</p>
+<pre><code class="language-javascript">&quot;startMenu&quot;: {
+        &quot;sidebar&quot;: [
+            {
+                &quot;app&quot;: &quot;yl-browser&quot;,
+                &quot;title&quot;: &quot;浏览器&quot;,
+                &quot;params&quot;: {},
+                &quot;hash&quot;: &quot;&quot;
+            },
+            {
+                &quot;app&quot;: &quot;yl-system&quot;,
+                &quot;title&quot;: &quot;系统设置&quot;,
+                &quot;params&quot;: {},
+                &quot;hash&quot;: &quot;&quot;
+            }
+        ],
+        &quot;menu&quot;: {
+            &quot;itemPushed-85&quot;: {
+                &quot;app&quot;: &quot;yl-browser&quot;,
+                &quot;title&quot;: &quot;浏览器&quot;,
+                &quot;params&quot;: {},
+                &quot;hash&quot;: &quot;&quot;
+            },
+            &quot;itemPushed-89&quot;: {
+                &quot;app&quot;: &quot;yl-app-home&quot;,
+                &quot;title&quot;: &quot;YLUI 官网&quot;,
+                &quot;params&quot;: {},
+                &quot;hash&quot;: &quot;&quot;
+            },
+            &quot;itemPushed-96&quot;: {
+                &quot;app&quot;: &quot;yl-system&quot;,
+                &quot;title&quot;: &quot;系统设置&quot;,
+                &quot;params&quot;: {},
+                &quot;hash&quot;: &quot;&quot;
+            },
+            &quot;itemPushed-111&quot;: {
+                &quot;title&quot;: &quot;分组&quot;,
+                &quot;children&quot;: {
+                    &quot;itemPushed-87&quot;: {
+                        &quot;app&quot;: &quot;yl-server-import&quot;,
+                        &quot;title&quot;: &quot;立即同步&quot;,
+                        &quot;params&quot;: {},
+                        &quot;hash&quot;: &quot;&quot;
+                    },
+                    &quot;itemPushed-86&quot;: {
+                        &quot;app&quot;: &quot;yl-server-login&quot;,
+                        &quot;title&quot;: &quot;切换用户&quot;,
+                        &quot;params&quot;: {},
+                        &quot;hash&quot;: &quot;&quot;
+                    },
+                    &quot;itemPushed-88&quot;: {
+                        &quot;app&quot;: &quot;yl-app-store&quot;,
+                        &quot;title&quot;: &quot;应用商店&quot;,
+                        &quot;params&quot;: {},
+                        &quot;hash&quot;: &quot;&quot;
+                    }
+                }
+            }
+        }
+    }
+</code></pre>
+<p><code>app,title,params,hash</code> 属性想必不用多说。</p>
+<p>其中，对于每个菜单项，都有唯一的id标识，如<code>&quot;itemPushed-85&quot;</code>,<code>&quot;itemPushed-86&quot;</code>。菜单项可以用<code>children</code>字段表示子菜单，支持无限极分层菜单。</p>

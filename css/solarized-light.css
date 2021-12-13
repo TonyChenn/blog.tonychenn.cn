@@ -1,0 +1,78 @@
+figure .line{
+  color: rgba(255,255,255,0.54);
+}
+
+
+.comment,
+.quote {
+  color: #1cb456;
+}
+
+/* Solarized Green */
+.keyword,
+.selector-tag,
+.addition {
+  color: #c678dd;
+}
+
+/* Solarized Cyan */
+.number,
+.string,
+.meta .meta-string,
+.literal,
+.doctag,
+.regexp {
+  color: #859900;
+}
+
+/* Solarized Blue */
+.title,
+.section,
+.name,
+.selector-id,
+.selector-class {
+  color: #c678dd;
+}
+
+/* Solarized Yellow */
+.attribute,
+.attr,
+.variable,
+.template-variable,
+.class .title,
+.type {
+  color: #b58900;
+}
+
+/* Solarized Orange */
+.symbol,
+.bullet,
+.subst,
+.meta,
+.meta .keyword,
+.selector-attr,
+.selector-pseudo,
+.link {
+  color: #0086b3;
+}
+
+/* Solarized Red */
+.built_in,
+.deletion {
+  color: #dc322f;
+}
+
+.formula {
+  background: #eee8d5;
+}
+
+.emphasis {
+  font-style: italic;
+}
+
+.strong {
+  font-weight: bold;
+}
+.line{
+  color: black;
+}

@@ -1,0 +1,107 @@
+<h2 id="磁贴"><a class="header-anchor" href="#磁贴">¶</a>磁贴</h2>
+<p>磁贴是一种视觉冲击力很强的UI形式，但是其数据结构比较复杂，推荐用YLUI的可视化工具编辑。</p>
+<p><img src="../assets/2.png" alt=""></p>
+<pre><code class="language-javascript"> &quot;tiles&quot;: [
+        {
+            &quot;title&quot;: &quot;系统&quot;,
+            &quot;data&quot;: [
+                {
+                    &quot;x&quot;: 0,
+                    &quot;y&quot;: 0,
+                    &quot;w&quot;: 6,
+                    &quot;h&quot;: 3,
+                    &quot;app&quot;: &quot;yl-app-store&quot;,
+                    &quot;title&quot;: &quot;应用商店&quot;,
+                    &quot;i&quot;: &quot;91&quot;,
+                    &quot;params&quot;: {},
+                    &quot;hash&quot;: &quot;&quot;
+                },
+                {
+                    &quot;x&quot;: 0,
+                    &quot;y&quot;: 3,
+                    &quot;w&quot;: 2,
+                    &quot;h&quot;: 2,
+                    &quot;app&quot;: &quot;yl-system&quot;,
+                    &quot;title&quot;: &quot;系统设置&quot;,
+                    &quot;i&quot;: &quot;110&quot;,
+                    &quot;params&quot;: {},
+                    &quot;hash&quot;: &quot;&quot;
+                }
+            ]
+        },
+        {
+            &quot;title&quot;: &quot;工具&quot;,
+            &quot;data&quot;: [
+                {
+                    &quot;x&quot;: 0,
+                    &quot;y&quot;: 0,
+                    &quot;w&quot;: 2,
+                    &quot;h&quot;: 2,
+                    &quot;app&quot;: &quot;yl-calculator&quot;,
+                    &quot;title&quot;: &quot;计算器&quot;,
+                    &quot;i&quot;: &quot;109&quot;,
+                    &quot;params&quot;: {},
+                    &quot;hash&quot;: &quot;&quot;
+                }
+            ]
+        }
+    ]
+</code></pre>
+<p>磁贴本身由 x,y,w,h,app,title,i,params,hash描述</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>int</td>
+<td>左偏移</td>
+</tr>
+<tr>
+<td>y</td>
+<td>int</td>
+<td>上偏移</td>
+</tr>
+<tr>
+<td>w</td>
+<td>int</td>
+<td>宽度</td>
+</tr>
+<tr>
+<td>h</td>
+<td>int</td>
+<td>高度</td>
+</tr>
+<tr>
+<td>app</td>
+<td>string</td>
+<td>APP id</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>标题</td>
+</tr>
+<tr>
+<td>i</td>
+<td>int</td>
+<td>key，对所有磁贴唯一</td>
+</tr>
+<tr>
+<td>params</td>
+<td>json</td>
+<td>类似于桌面图标的params定义</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>string</td>
+<td>类似于桌面图标的hash定义</td>
+</tr>
+</tbody>
+</table>
+<p>而磁贴是按组归类的，如上文的“工具”，“系统”。</p>
