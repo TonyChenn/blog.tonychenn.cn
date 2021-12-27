@@ -15,6 +15,8 @@
     <meta property="og:title" content="cocos2dx-luaj与android交互 - 默然的小窝 | 默然的小窝">
     
     
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/1203/icon.jpg">
+    
 
     
 
@@ -53,10 +55,6 @@
 
     
     <!--全局变灰-->
-    
-        
-<link rel="stylesheet" href="/css/grey.css">
-
     
 
     <!--点击特效-->
@@ -252,7 +250,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/1203/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">cocos2dx-luaj与android交互</span></br>
@@ -284,16 +282,19 @@
 </script>
       
       
-      <h1>关于cocos2dx与Android系统的交互</h1>
+      <blockquote>
+<p><a href="https://tonychenn.cn/2021/12/27/cocos2dx-luaoc%E4%B8%8Eios%E4%BA%A4%E4%BA%92">cocos2dx-luaoc与ios交互</a>看这里</p>
+</blockquote>
+<h1>cocos2dx中lua调用java方法</h1>
 <p>在cocos中系统提供了<code>cocos.cocos2d.luaj</code>类，并且仅包含一个方法<code>callStaticMethod</code>，先记录怎么用。</p>
 <p>下面是截取luaj的源码。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> luaj = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> callJavaStaticMethod = LuaJavaBridge.callStaticMethod</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">checkArguments</span><span class="params">(args, sig)</span></span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(args) ~= <span class="string">&quot;table&quot;</span> <span class="keyword">then</span> args = &#123;&#125; <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> sig <span class="keyword">then</span> <span class="keyword">return</span> args, sig <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    sig = &#123;<span class="string">&quot;(&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(args) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> t = <span class="built_in">type</span>(v)</span><br><span class="line">        <span class="keyword">if</span> t == <span class="string">&quot;number&quot;</span> <span class="keyword">then</span></span><br><span class="line">            sig[#sig + <span class="number">1</span>] = <span class="string">&quot;F&quot;</span></span><br><span class="line">        <span class="keyword">elseif</span> t == <span class="string">&quot;boolean&quot;</span> <span class="keyword">then</span></span><br><span class="line">            sig[#sig + <span class="number">1</span>] = <span class="string">&quot;Z&quot;</span></span><br><span class="line">        <span class="keyword">elseif</span> t == <span class="string">&quot;function&quot;</span> <span class="keyword">then</span></span><br><span class="line">            sig[#sig + <span class="number">1</span>] = <span class="string">&quot;I&quot;</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            sig[#sig + <span class="number">1</span>] = <span class="string">&quot;Ljava/lang/String;&quot;</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    sig[#sig + <span class="number">1</span>] = <span class="string">&quot;)V&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> args, <span class="built_in">table</span>.<span class="built_in">concat</span>(sig)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- className    类名,即（包名.类名）</span></span><br><span class="line"><span class="comment">-- methodName   调用的方法名</span></span><br><span class="line"><span class="comment">-- args         传递的参数</span></span><br><span class="line"><span class="comment">-- sig          签名</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">luaj.callStaticMethod</span><span class="params">(className, methodName, args, sig)</span></span></span><br><span class="line">    <span class="keyword">local</span> args, sig = checkArguments(args, sig)</span><br><span class="line">    <span class="keyword">return</span> callJavaStaticMethod(className, methodName, args, sig)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> luaj</span><br></pre></td></tr></table></figure>
-<h1>关于sig参数</h1>
+<h2 id="关于sig参数"><a class="header-anchor" href="#关于sig参数">¶</a>关于sig参数</h2>
 <p>之前一直没搞明白，看到<code>checkArguments</code>方法才明白了。sig参数分两部分：</br><br>
 如：<code>()Ljava/lang/String;</code></br>括号内是<kbd>参数类型</kbd>，括号外是<kbd>返回值<br>
 类型</kbd>。</br>这个例子是一个没有参数，带一个其他类型返回值的签名。</p>
 <p>如果参数为空，返回值为空，则sig为 <code>()V</code></p>
-<h1>参数类型与sig对应表</h1>
+<h2 id="参数类型与sig对应表"><a class="header-anchor" href="#参数类型与sig对应表">¶</a>参数类型与sig对应表</h2>
 <table>
 <thead>
 <tr>
@@ -320,7 +321,7 @@
 </tr>
 </tbody>
 </table>
-<h1>使用方法</h1>
+<h2 id="使用方法"><a class="header-anchor" href="#使用方法">¶</a>使用方法</h2>
 <p>如下是一个调用AndroidToast的方法：</p>
 <ul>
 <li>lua调用java方法</li>
@@ -330,7 +331,12 @@
 <li>java 方法</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ShowToast</span><span class="params">(<span class="keyword">final</span> String msg)</span></span>&#123;</span><br><span class="line">    Log.d(<span class="string">&quot;cocos&quot;</span>, <span class="string">&quot;到java method 了&quot;</span>);</span><br><span class="line">    mContext.runOnUiThread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h1>java调用lua方法</h1>
+<p>同样cocos也为我们提供了<code>Cocos2dxLuaJavaBridge</code>类，包含了四个接口,每个接口的含义很清晰就不再赘述。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.cocos2dx.lib;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cocos2dxLuaJavaBridge</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">callLuaFunctionWithString</span><span class="params">(<span class="keyword">int</span> luaFunctionId, String value)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">callLuaGlobalFunctionWithString</span><span class="params">(String luaFunctionName, String value)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">retainLuaFunction</span><span class="params">(<span class="keyword">int</span> luaFunctionId)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">releaseLuaFunction</span><span class="params">(<span class="keyword">int</span> luaFunctionId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a class="header-anchor" href="#使用">¶</a>使用</h2>
+<p>如上面，假如lua向java侧传递了一个方法作为参数，java侧要如何进行调用呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行拍照，传递一个保存图片后的Callback方法</span></span><br><span class="line"><span class="comment">// luaSaveImgFunc lua 方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_takeCameraPic</span><span class="params">(<span class="keyword">int</span> luaSaveImgFunc)</span> </span>&#123;</span><br><span class="line">    luaSaveImageCallBack = luaSaveImgFunc;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 执行拍照完成后调用lua回调</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ExecLuaTakeImgCallBack</span><span class="params">(<span class="keyword">final</span> String msg)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(luaSaveImageCallBack != <span class="number">0</span>)&#123;</span><br><span class="line">        getInstance().mActivity.runOnGLThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 调用lua方法</span></span><br><span class="line">                Cocos2dxLuaJavaBridge.callLuaFunctionWithString(luaSaveImageCallBack, msg);</span><br><span class="line">                <span class="comment">// 释放方法引用</span></span><br><span class="line">                Cocos2dxLuaJavaBridge.releaseLuaFunction(luaSaveImageCallBack);</span><br><span class="line">                luaSaveImageCallBack = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     <div class="mdui-container">
         <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
@@ -391,7 +397,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">关于cocos2dx与Android系统的交互</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">关于sig参数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">参数类型与sig对应表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">使用方法</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">cocos2dx中lua调用java方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E4%BA%8Esig%E5%8F%82%E6%95%B0"><span class="post-toc-text">关于sig参数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B%E4%B8%8Esig%E5%AF%B9%E5%BA%94%E8%A1%A8"><span class="post-toc-text">参数类型与sig对应表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="post-toc-text">使用方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">java调用lua方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="post-toc-text">使用</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>
