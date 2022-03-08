@@ -15,6 +15,8 @@
     <meta property="og:title" content="cocos2dx-实现背景透明(android) - 默然的小窝 | 默然的小窝">
     
     
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0308/icon.jpg">
+    
 
     
 
@@ -181,7 +183,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -189,7 +191,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的小窝&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的小窝&title=about&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -197,7 +199,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -205,7 +207,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -213,7 +215,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -221,7 +223,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -229,7 +231,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -248,7 +250,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0308/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">cocos2dx-实现背景透明(android)</span></br>
@@ -282,11 +284,25 @@
       
       <h1>动机</h1>
 <p>在cocos2dx中实现android平台自定义相机。万里长征第一步：实现背景透明。<br>
-看下效果：</br><br>
-<img src="http://localhost/2021/1202/icon.jpg" alt="icon"></p>
-<font color="red">
-PS：
-事实证明，相机功能不需要修改背景为透明!!!,但也进行记录下吧</font>
+效果看顶部banner。</p>
+<h1>Android端</h1>
+<ol>
+<li>到Manimefest中，将AppActivity的主题设置为支持透明的：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:theme=&quot;@android:style/Theme.Translucent.NoTitleBar.Fullscreen&quot;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>设置GLView的clearColor的alpha值为0。根据情况设置吧，可以在c++上改，也可以在lua层改。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">// 修改AppDelegate.cpp中applicationDidFinishLaunching方法。</span><br><span class="line">Director::getInstance()-&gt;setClearColor(Color4F(0, 0, 0, 1));</span><br><span class="line"></span><br><span class="line">// lua 在需要透明的地方调用：</span><br><span class="line">cc.Director:getInstance():setClearColor(cc.c4f(0, 0, 0, 0))</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>如果在在屏幕上方出现一个白色条，那是<code>Cocos2dxEditText</code>(COCOS封装的EditBox,也是可以去掉的。游戏中用到了用EditBox代替即可。)去掉方法如下：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Cocos2dxActivity.java 注释掉下面几行</span></span><br><span class="line">- Cocos2dxEditBox edittext = <span class="keyword">new</span> Cocos2dxEditBox(<span class="keyword">this</span>);</span><br><span class="line">- edittext.setLayoutParams(edittext_layout_params);</span><br><span class="line">- mFrameLayout.addView(edittext);</span><br><span class="line">- <span class="keyword">this</span>.mGLSurfaceView.setCocos2dxEditText(edittext);</span><br></pre></td></tr></table></figure>
+<h1>iOS端</h1>
+<ol>
+<li>GLView设置透明和上面一样：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// C++</span><br><span class="line">// 修改AppDelegate.cpp中applicationDidFinishLaunching方法。</span><br><span class="line">Director::getInstance()-&gt;setClearColor(Color4F(0, 0, 0, 1));</span><br><span class="line"></span><br><span class="line">// lua 在需要透明的地方调用：</span><br><span class="line">cc.Director:getInstance():setClearColor(cc.c4f(0, 0, 0, 0))</span><br><span class="line"></span><br><span class="line">// oc</span><br><span class="line">cocos2d::Director::getInstance()-&gt;setClearColor(cocos2d::Color4F(0,0,0,0));</span><br></pre></td></tr></table></figure>
 
       
     <div class="mdui-container">
@@ -348,7 +364,7 @@ PS：
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">动机</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Android端</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">iOS端</span></a></li></ol> 
     </div>
   </aside> -->
 </div>
