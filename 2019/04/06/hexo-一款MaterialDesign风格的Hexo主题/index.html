@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>mdm - 默然的博客</title>
+
+    <meta property="og:url" content="https://tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="mdm - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0406/icon.jpg">
+    
+
+    
+      <meta property="og:description" content="一款Hexo炒鸡好看的MaterialDesign风格主题，确定不进来瞧瞧？">
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0406/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">mdm</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center mdui-shadow-2">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div class="mdui-typo">
+      <h1 align="center">一款Hexo端优美的MaterialDesign风格主题 MDM</h1>
+
+<h3 align="center">简洁，轻巧，麻麻再也不用担心打开博客速度慢了</h3>
+<br><br>
+
+<h1 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/HexoBlogWriteTool">Hexo 博文管理工具，麻麻再也不用担心忘记管理hexo博文的命令啦</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/BlogExportTool">CSDN博文导出工具</a></li>
+</ol>
+<h1 id="更新介绍："><a href="#更新介绍：" class="headerlink" title="更新介绍："></a>更新介绍：</h1><ul>
+<li>2021.3.25</li>
+</ul>
+<ol>
+<li>更新mdui到1.0.1并修复 日&#x2F;夜间模式，一键置顶</li>
+<li>美化 headerbar,文章详情部分</li>
+<li>支持图片LazyLoad</li>
+<li>界面布局优化</li>
+<li>美化代码框</li>
+</ol>
+<ul>
+<li><p>2021.1.1</p>
+</li>
+<li><p>升级hexo4.2.0后pwa无法使用, 解决方法看下面。</p>
+</li>
+<li><p>2020-11-12</p>
+</li>
+</ul>
+<ol>
+<li>解决在IOS设备Safari浏览器上布局错乱问题</li>
+</ol>
+<ul>
+<li>2020-10-31</li>
+</ul>
+<ol>
+<li>本地化支持</li>
+<li>取消缓存head.ejs,解决浏览器顶部Tab卡片中名称错误</li>
+<li>优化分享功能</li>
+</ol>
+<ul>
+<li>2020-6-20</li>
+</ul>
+<ol>
+<li>文章置顶</li>
+<li>显示更新日期</li>
+</ol>
+<ul>
+<li>2020-5-27：</li>
+</ul>
+<ol>
+<li>PWA支持</li>
+<li>点击特效</li>
+<li>分享</li>
+<li>打赏</li>
+</ol>
+<ul>
+<li>2020-4-10 :</li>
+</ul>
+<ol>
+<li>添加站点地图</li>
+<li>添加灰色(哀悼)模式</li>
+<li>添加谷歌广告开关</li>
+<li>支持Emoji表情</li>
+<li>添加Gitalk 评论方式</li>
+</ol>
+<ul>
+<li>2020-1-14 : 添加图片预览，优化夜间模式，文章代码排版。</li>
+</ul>
+<h1 id="art-演示"><a href="#art-演示" class="headerlink" title=":art:演示"></a>:art:演示</h1><p><a href="https://tonychenn.cn/">tonychenn.cn</a> 觉得不错，点个Star</p>
+<h1 id="pushpin-介绍"><a href="#pushpin-介绍" class="headerlink" title=":pushpin:介绍"></a>:pushpin:介绍</h1><ol>
+<li>响应式布局，适配移动端和PC端</li>
+<li>优美MaterialDesign设计</li>
+<li>轻巧极速加载</li>
+</ol>
+<h1 id="实现的功能"><a href="#实现的功能" class="headerlink" title="实现的功能"></a>实现的功能</h1><ol>
+<li>基本的博客展示，首页，标签页，归档页，关于页</li>
+<li>一言随机内容展示</li>
+<li>使用Valine文章评论, 新增Gitalk</li>
+<li>开启访问人数，次数统计</li>
+<li>视频博文的展示播放</li>
+<li>全局灰色模式，白天&#x2F;夜晚模式</li>
+</ol>
+<h1 id="computer-PC端"><a href="#computer-PC端" class="headerlink" title=":computer:PC端"></a>:computer:PC端</h1><p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0406/img1.jpg"><br><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0406/img2.jpg"><br><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0406/about.jpg"></p>
+<h1 id="iphone-移动端"><a href="#iphone-移动端" class="headerlink" title=":iphone:移动端"></a>:iphone:移动端</h1><p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0406/phone_main.jpg"><br><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0406/phone_tag.jpg"><br><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0406/phone_archives.jpg"></p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>本博客使用mdm主题，更多细节，自行查看<a href="Tonychenn.cn">TonyChenn.cn</a></p>
+<h1 id="cd-安装"><a href="#cd-安装" class="headerlink" title=":cd:安装"></a>:cd:安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/TonyChenn/hexo-theme-mdm</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> themes/mdm</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启站点地图模块"><a href="#开启站点地图模块" class="headerlink" title="开启站点地图模块"></a>开启站点地图模块</h2><ol>
+<li>安装sitemap<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//google</span><br><span class="line">$ npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line">//baidu</span><br><span class="line">$ npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure></li>
+<li>配置sitemap<br>主题根目录下_config.yml文件中启用下面<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 站点地图</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br><span class="line">baidusitemap:</span><br><span class="line">  path: baidusitemap.xml</span><br></pre></td></tr></table></figure></li>
+<li>重新生成部署<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="开启Emoji表情支持"><a href="#开启Emoji表情支持" class="headerlink" title="开启Emoji表情支持"></a>开启Emoji表情支持</h2><ol>
+<li>需要卸载旧的渲染器 &amp; 安装新的渲染器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm un hexo-renderer-marked --save </span><br><span class="line">$ npm i hexo-renderer-markdown-it --save</span><br><span class="line">$ npm install markdown-it-emoji --save</span><br></pre></td></tr></table></figure></li>
+<li>heox配置文件中添加<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line">markdown:</span><br><span class="line">  render:</span><br><span class="line">    html: <span class="literal">true</span></span><br><span class="line">    xhtmlOut: <span class="literal">false</span></span><br><span class="line">    breaks: <span class="literal">true</span></span><br><span class="line">    linkify: <span class="literal">true</span></span><br><span class="line">    typographer: <span class="literal">true</span></span><br><span class="line">    quotes: <span class="string">&#x27;“”‘’&#x27;</span></span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">    - markdown-it-emoji</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: <span class="string">&#x27;v&#x27;</span></span><br><span class="line">    permalink: <span class="literal">true</span></span><br><span class="line">    permalinkClass: header-anchor</span><br><span class="line">    permalinkSymbol: ¶</span><br></pre></td></tr></table></figure>
+<h2 id="文章置顶及自定义排序"><a href="#文章置顶及自定义排序" class="headerlink" title="文章置顶及自定义排序"></a>文章置顶及自定义排序</h2>请到Hexo项目下的<kbd>\node_modules\hexo-generator-index\lib\generator.js</kbd>找到该文件并打开。(js代码简单，不过多介绍，有需要修改的自行修改) 替换为如下内容：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pagination = <span class="built_in">require</span>(<span class="string">&#x27;hexo-pagination&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params">locals</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> config = <span class="variable language_">this</span>.<span class="property">config</span>;</span><br><span class="line">  <span class="keyword">var</span> posts = locals.<span class="property">posts</span>;</span><br><span class="line">  <span class="keyword">var</span> paginationDir = config.<span class="property">pagination_dir</span> || <span class="string">&#x27;page&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  posts.<span class="property">data</span> = posts.<span class="property">data</span>.<span class="title function_">sort</span>(<span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> a_time = (a.<span class="property">update_time</span> &amp;&amp; a.<span class="property">update_time</span>&gt;a.<span class="property">date</span>) ? a.<span class="property">update_time</span> : a.<span class="property">date</span>;</span><br><span class="line">      <span class="keyword">var</span> b_time = (b.<span class="property">update_time</span> &amp;&amp; b.<span class="property">update_time</span>&gt;b.<span class="property">date</span>) ? b.<span class="property">update_time</span> : b.<span class="property">date</span>;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span>(a.<span class="property">top</span> &amp;&amp; b.<span class="property">top</span>)  <span class="keyword">return</span> a.<span class="property">top</span> == b.<span class="property">top</span> ? b_time-<span class="attr">a_time</span>: b.<span class="property">top</span>-a.<span class="property">top</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(a.<span class="property">top</span>)  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(b.<span class="property">top</span>)  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">return</span> b_time - a_time;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">pagination</span>(<span class="string">&#x27;&#x27;</span>, posts, &#123;</span><br><span class="line">    <span class="attr">perPage</span>: config.<span class="property">index_generator</span>.<span class="property">per_page</span>,</span><br><span class="line">    <span class="attr">layout</span>: [<span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;archive&#x27;</span>],</span><br><span class="line">    <span class="attr">format</span>: paginationDir + <span class="string">&#x27;/%d/&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">      <span class="attr">__index</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="开启PWA"><a href="#开启PWA" class="headerlink" title="开启PWA"></a>开启PWA</h2>待补充</li>
+</ol>
+<h2 id="hexo升级4-2-0后PWA失效"><a href="#hexo升级4-2-0后PWA失效" class="headerlink" title="hexo升级4.2.0后PWA失效"></a>hexo升级4.2.0后PWA失效</h2><p>参考<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/4044">https://github.com/hexojs/hexo/issues/4044</a><br>在hexo-pwa插件没修复之前解决方案：打开<code>\node_modules\hexo-pwa\lib\serviceWorker.js</code> 修改下面内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">let</span> posts = <span class="variable language_">this</span>.<span class="property">locals</span>.<span class="property">cache</span>.<span class="property">posts</span>.<span class="property">data</span>;</span><br><span class="line">+ <span class="keyword">let</span> posts = locals.<span class="property">posts</span>.<span class="title function_">sort</span>(<span class="string">&#x27;-date&#x27;</span>).<span class="title function_">toArray</span>();</span><br></pre></td></tr></table></figure>
+
+<h1 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h1><p>Github: <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">https://github.com/TonyChenn/hexo-theme-mdm</a><br>觉得不错？点个小星星给我个鼓励吧 (<em>_</em>)<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0406/star.jpg"></p>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: 'ecbf6316c9aa7a6bfd7a',
+			clientSecret: '5c875e5986ed75f4509d97acd16628b97f7506f1',
+			repo: 'tonychenn.github.io',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true  // Facebook-like distraction free mode
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">一款Hexo端优美的MaterialDesign风格主题 MDM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link"><span class="post-toc-text">简洁，轻巧，麻麻再也不用担心打开博客速度慢了</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%8E%A8%E8%8D%90"><span class="post-toc-text">推荐</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%9B%B4%E6%96%B0%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="post-toc-text">更新介绍：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#art-%E6%BC%94%E7%A4%BA"><span class="post-toc-text">:art:演示</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pushpin-%E4%BB%8B%E7%BB%8D"><span class="post-toc-text">:pushpin:介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="post-toc-text">实现的功能</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#computer-PC%E7%AB%AF"><span class="post-toc-text">:computer:PC端</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iphone-%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="post-toc-text">:iphone:移动端</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="post-toc-text">案例</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cd-%E5%AE%89%E8%A3%85"><span class="post-toc-text">:cd:安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="post-toc-text">更新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%90%AF%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE%E6%A8%A1%E5%9D%97"><span class="post-toc-text">开启站点地图模块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%90%AFEmoji%E8%A1%A8%E6%83%85%E6%94%AF%E6%8C%81"><span class="post-toc-text">开启Emoji表情支持</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6%E5%8F%8A%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F"><span class="post-toc-text">文章置顶及自定义排序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%90%AFPWA"><span class="post-toc-text">开启PWA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hexo%E5%8D%87%E7%BA%A74-2-0%E5%90%8EPWA%E5%A4%B1%E6%95%88"><span class="post-toc-text">hexo升级4.2.0后PWA失效</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD-1"><span class="post-toc-text">下载</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                Tony Chenn&nbsp&nbsp2022
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

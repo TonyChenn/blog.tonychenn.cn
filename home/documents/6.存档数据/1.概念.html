@@ -1,0 +1,360 @@
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>类似于单机游戏的存档，存档数据记录了当前系统运行状态，并能随时还原为这一状态，便于用户将自己的桌面状态保存或上传到远程服务器上，并能随时同步还原。</p>
+<p>另外，如果开发者熟悉存档数据结构，能够通过编写程序批量修改存档数据。</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>存档数据以JSON格式存在，保证了数据传输过程中的可序列化。<br>如果用js对象转化为JSON字符串，请保证这种转化是完全可逆的。</p>
+<blockquote>
+<p>js对象可以被JSON.stringify转化为JSON字符串，但是如果js对象成员中有函数，无限嵌套，带方法的对象等复杂的成员，则它的数据很可能会丢失。合法的存档数据应该由一系列的键名-&gt;键值(字符串、数字)及层级关系组成，是可以无损序列化的。</p>
+</blockquote>
+<p>JSON数据的最外层形式如下，其中，<code>...</code>表示内部内容被省略。</p>
+<pre><code class="json">{
+  &quot;configs&quot;: {...},
+  &quot;apps&quot;: {...},
+  &quot;shortcuts&quot;: [...],
+  &quot;tiles&quot;:[...],
+  &quot;startMenu&quot;: {...}
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>键名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>configs</td>
+<td>运行配置</td>
+</tr>
+<tr>
+<td>apps</td>
+<td>应用程序池</td>
+</tr>
+<tr>
+<td>shortcuts</td>
+<td>桌面图标数据</td>
+</tr>
+<tr>
+<td>tiles</td>
+<td>磁贴数据</td>
+</tr>
+<tr>
+<td>startMenu</td>
+<td>开始菜单数据</td>
+</tr>
+</tbody></table>
+<h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><p>官方的存档数据basic.json可以渲染出一个简单的、标准的桌面，参考此文件可以基本理解存档数据的结构。</p>
+<p><img src="/../assets/1.png" alt="1523414358437"></p>
+<p>附<code>basic.json</code>代码（v1.0.0）</p>
+<pre><code class="json">{
+  &quot;configs&quot;: {
+    &quot;topTaskBar&quot;: false,
+    &quot;pathRes&quot;: &quot;./res&quot;,
+    &quot;sound&quot;: false,
+    &quot;shortcutsSortAuto&quot;: true,
+    &quot;wallpaper&quot;: &quot;./res/img/wallpapers/bg1.jpg&quot;,
+    &quot;wallpaperBlur&quot;: true,
+    &quot;wallpaperSlide&quot;: false,
+    &quot;wallpaperSlideRandom&quot;: true,
+    &quot;wallpaperSlideItv&quot;: 1,
+    &quot;wallpaperSlideTime&quot;: 1519442460788,
+    &quot;wallpaperSlideIndex&quot;: 8,
+    &quot;openMax&quot;: 9,
+    &quot;idCounter&quot;: 94,
+    &quot;themeColor&quot;: &quot;rgba(2,35,64,1)&quot;,
+    &quot;autoThemeColor&quot;: true,
+    &quot;wallpapers&quot;: [
+      {
+        &quot;image&quot;: &quot;./res/img/wallpapers/bg1.jpg&quot;,
+        &quot;preview&quot;: &quot;./res/img/wallpapers/bg1_1.jpg&quot;
+      },
+      {
+        &quot;image&quot;: &quot;./res/img/wallpapers/bg2.jpg&quot;,
+        &quot;preview&quot;: &quot;./res/img/wallpapers/bg2_1.jpg&quot;
+      },
+      {
+        &quot;image&quot;: &quot;./res/img/wallpapers/bg3.jpg&quot;,
+        &quot;preview&quot;: &quot;./res/img/wallpapers/bg3_1.jpg&quot;
+      },
+    ],
+    &quot;debug&quot;: false,
+    &quot;winBlur&quot;: true
+  },
+  &quot;apps&quot;: {
+    &quot;yl-system&quot;: {
+      &quot;addressBar&quot;: false,
+      &quot;autoRun&quot;: 0,
+      &quot;background&quot;: false,
+      &quot;badge&quot;: 0,
+      &quot;desc&quot;: &quot;YL-UI 系统设置面板&quot;,
+      &quot;icon&quot;: {
+        &quot;type&quot;: &quot;fa&quot;,
+        &quot;bg&quot;: &quot;gray&quot;,
+        &quot;content&quot;: &quot;gear&quot;
+      },
+      &quot;openMode&quot;: &quot;normal&quot;,
+      &quot;plugin&quot;: false,
+      &quot;position&quot;: {
+        &quot;x&quot;: &quot;(x-860)/2&quot;,
+        &quot;y&quot;: &quot;y*0.1&quot;,
+        &quot;left&quot;: true,
+        &quot;top&quot;: true,
+        &quot;autoOffset&quot;: false
+      },
+      &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+      &quot;resizable&quot;: true,
+      &quot;single&quot;: true,
+      &quot;size&quot;: {
+        &quot;width&quot;: &quot;860&quot;,
+        &quot;height&quot;: &quot;y*0.8&quot;
+      },
+      &quot;title&quot;: &quot;系统设置&quot;,
+      &quot;url&quot;: &quot;./res/apps/system/index.html&quot;,
+      &quot;customTile&quot;: &quot;&quot;
+    },
+    &quot;yl-color-picker&quot;: {
+      &quot;addressBar&quot;: false,
+      &quot;autoRun&quot;: 0,
+      &quot;background&quot;: false,
+      &quot;badge&quot;: 0,
+      &quot;desc&quot;: &quot;简单的取色器&quot;,
+      &quot;icon&quot;: {
+        &quot;type&quot;: &quot;fa&quot;,
+        &quot;bg&quot;: &quot;#3289c7&quot;,
+        &quot;content&quot;: &quot;eyedropper&quot;
+      },
+      &quot;openMode&quot;: &quot;normal&quot;,
+      &quot;plugin&quot;: false,
+      &quot;position&quot;: {
+        &quot;x&quot;: &quot;(x-207)/2&quot;,
+        &quot;y&quot;: &quot;(y-239)/2&quot;,
+        &quot;left&quot;: true,
+        &quot;top&quot;: true,
+        &quot;autoOffset&quot;: false
+      },
+      &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+      &quot;resizable&quot;: false,
+      &quot;single&quot;: true,
+      &quot;size&quot;: {
+        &quot;width&quot;: &quot;207&quot;,
+        &quot;height&quot;: &quot;239&quot;
+      },
+      &quot;title&quot;: &quot;取色器&quot;,
+      &quot;url&quot;: &quot;./res/apps/colorPicker/colorPicker.html&quot;,
+      &quot;customTile&quot;: &quot;&quot;
+    },
+    &quot;yl-browser&quot;: {
+      &quot;addressBar&quot;: true,
+      &quot;autoRun&quot;: 0,
+      &quot;background&quot;: false,
+      &quot;badge&quot;: 0,
+      &quot;desc&quot;: &quot;浏览器&quot;,
+      &quot;icon&quot;: {
+        &quot;type&quot;: &quot;fa&quot;,
+        &quot;content&quot;: &quot;internet-explorer&quot;,
+        &quot;bg&quot;: &quot;#3a55c2&quot;
+      },
+      &quot;openMode&quot;: &quot;normal&quot;,
+      &quot;plugin&quot;: false,
+      &quot;position&quot;: {
+        &quot;autoOffset&quot;: true,
+        &quot;left&quot;: true,
+        &quot;top&quot;: true,
+        &quot;x&quot;: &quot;x*0.1&quot;,
+        &quot;y&quot;: &quot;y*0.1&quot;
+      },
+      &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+      &quot;resizable&quot;: true,
+      &quot;single&quot;: false,
+      &quot;size&quot;: {
+        &quot;height&quot;: &quot;y*0.8&quot;,
+        &quot;width&quot;: &quot;x*0.8&quot;
+      },
+      &quot;title&quot;: &quot;浏览器&quot;,
+      &quot;url&quot;: &quot;./res/apps/browser/index.html&quot;,
+      &quot;customTile&quot;: &quot;&quot;
+    },
+    &quot;yl-server-import&quot;: {
+      &quot;addressBar&quot;: false,
+      &quot;autoRun&quot;: 0,
+      &quot;background&quot;: false,
+      &quot;badge&quot;: 0,
+      &quot;desc&quot;: &quot;&quot;,
+      &quot;icon&quot;: {
+        &quot;type&quot;: &quot;fa&quot;,
+        &quot;content&quot;: &quot;cloud&quot;,
+        &quot;bg&quot;: &quot;#4da85b&quot;
+      },
+      &quot;openMode&quot;: &quot;normal&quot;,
+      &quot;plugin&quot;: false,
+      &quot;position&quot;: {
+        &quot;autoOffset&quot;: true,
+        &quot;left&quot;: true,
+        &quot;top&quot;: true,
+        &quot;x&quot;: &quot;x*0.1&quot;,
+        &quot;y&quot;: &quot;y*0.1&quot;
+      },
+      &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+      &quot;resizable&quot;: true,
+      &quot;single&quot;: true,
+      &quot;size&quot;: {
+        &quot;height&quot;: &quot;y*0.8&quot;,
+        &quot;width&quot;: &quot;x*0.8&quot;
+      },
+      &quot;title&quot;: &quot;YLUI云服务-同步&quot;,
+      &quot;url&quot;: &quot;https://ylui.yuri2.cn/index.php/home/main/import&quot;,
+      &quot;customTile&quot;: &quot;&quot;
+    },
+    &quot;yl-server-login&quot;: {
+      &quot;addressBar&quot;: false,
+      &quot;autoRun&quot;: 0,
+      &quot;background&quot;: false,
+      &quot;badge&quot;: 0,
+      &quot;desc&quot;: &quot;&quot;,
+      &quot;icon&quot;: {
+        &quot;type&quot;: &quot;fa&quot;,
+        &quot;content&quot;: &quot;cloud&quot;,
+        &quot;bg&quot;: &quot;#4da85b&quot;
+      },
+      &quot;openMode&quot;: &quot;normal&quot;,
+      &quot;plugin&quot;: false,
+      &quot;position&quot;: {
+        &quot;autoOffset&quot;: true,
+        &quot;left&quot;: true,
+        &quot;top&quot;: true,
+        &quot;x&quot;: &quot;x*0.1&quot;,
+        &quot;y&quot;: &quot;y*0.1&quot;
+      },
+      &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+      &quot;resizable&quot;: true,
+      &quot;single&quot;: true,
+      &quot;size&quot;: {
+        &quot;height&quot;: &quot;y*0.8&quot;,
+        &quot;width&quot;: &quot;x*0.8&quot;
+      },
+      &quot;title&quot;: &quot;YLUI云服务-登录&quot;,
+      &quot;url&quot;: &quot;https://ylui.yuri2.cn/index.php/home/main/login&quot;,
+      &quot;customTile&quot;: &quot;&quot;
+    },
+    &quot;yl-app-store&quot;: {
+      &quot;addressBar&quot;: false,
+      &quot;autoRun&quot;: 0,
+      &quot;background&quot;: false,
+      &quot;badge&quot;: 0,
+      &quot;desc&quot;: &quot;&quot;,
+      &quot;icon&quot;: {
+        &quot;type&quot;: &quot;fa&quot;,
+        &quot;content&quot;: &quot;shopping-bag&quot;,
+        &quot;bg&quot;: &quot;#b36aba&quot;
+      },
+      &quot;openMode&quot;: &quot;normal&quot;,
+      &quot;plugin&quot;: false,
+      &quot;position&quot;: {
+        &quot;autoOffset&quot;: true,
+        &quot;left&quot;: true,
+        &quot;top&quot;: true,
+        &quot;x&quot;: &quot;x*0.1&quot;,
+        &quot;y&quot;: &quot;y*0.1&quot;
+      },
+      &quot;poweredBy&quot;: &quot;Yuri2&quot;,
+      &quot;resizable&quot;: true,
+      &quot;single&quot;: true,
+      &quot;size&quot;: {
+        &quot;height&quot;: &quot;y*0.8&quot;,
+        &quot;width&quot;: &quot;x*0.8&quot;
+      },
+      &quot;title&quot;: &quot;应用商店&quot;,
+      &quot;url&quot;: &quot;./res/apps/app-store/index.html&quot;,
+      &quot;customTile&quot;: &quot;&quot;
+    }
+  },
+  &quot;shortcuts&quot;: [
+    {
+      &quot;app&quot;: &quot;yl-browser&quot;,
+      &quot;title&quot;: &quot;浏览器&quot;,
+      &quot;params&quot;: {},
+      &quot;hash&quot;: &quot;&quot;
+    },
+    {
+      &quot;app&quot;: &quot;yl-server-login&quot;,
+      &quot;title&quot;: &quot;切换用户&quot;,
+      &quot;params&quot;: {},
+      &quot;hash&quot;: &quot;&quot;
+    },
+    {
+      &quot;app&quot;: &quot;yl-server-import&quot;,
+      &quot;title&quot;: &quot;立即同步&quot;,
+      &quot;params&quot;: {},
+      &quot;hash&quot;: &quot;&quot;
+    },
+    {
+      &quot;app&quot;: &quot;yl-app-store&quot;,
+      &quot;title&quot;: &quot;应用商店&quot;,
+      &quot;params&quot;: {},
+      &quot;hash&quot;: &quot;&quot;
+    }
+  ],
+  &quot;tiles&quot;: [
+    {
+      &quot;title&quot;: &quot;系统&quot;,
+      &quot;data&quot;: [
+        {
+          &quot;x&quot;: 0,
+          &quot;y&quot;: 0,
+          &quot;w&quot;: 6,
+          &quot;h&quot;: 3,
+          &quot;app&quot;: &quot;yl-app-store&quot;,
+          &quot;title&quot;: &quot;应用商店&quot;,
+          &quot;i&quot;: &quot;91&quot;,
+          &quot;params&quot;: {},
+          &quot;hash&quot;: &quot;&quot;
+        }
+      ]
+    }
+  ],
+  &quot;startMenu&quot;: {
+    &quot;sidebar&quot;: [
+      {
+        &quot;app&quot;: &quot;yl-browser&quot;,
+        &quot;title&quot;: &quot;浏览器&quot;,
+        &quot;params&quot;: {},
+        &quot;hash&quot;: &quot;&quot;
+      },
+      {
+        &quot;app&quot;: &quot;yl-system&quot;,
+        &quot;title&quot;: &quot;系统设置&quot;
+      }
+    ],
+    &quot;menu&quot;: {
+      &quot;itemPushed-85&quot;: {
+        &quot;app&quot;: &quot;yl-browser&quot;,
+        &quot;title&quot;: &quot;浏览器&quot;,
+        &quot;params&quot;: {},
+        &quot;hash&quot;: &quot;&quot;
+      },
+      &quot;itemPushed-86&quot;: {
+        &quot;app&quot;: &quot;yl-server-login&quot;,
+        &quot;title&quot;: &quot;切换用户&quot;,
+        &quot;params&quot;: {},
+        &quot;hash&quot;: &quot;&quot;
+      },
+      &quot;itemPushed-87&quot;: {
+        &quot;app&quot;: &quot;yl-server-import&quot;,
+        &quot;title&quot;: &quot;立即同步&quot;,
+        &quot;params&quot;: {},
+        &quot;hash&quot;: &quot;&quot;
+      },
+      &quot;itemPushed-88&quot;: {
+        &quot;app&quot;: &quot;yl-app-store&quot;,
+        &quot;title&quot;: &quot;应用商店&quot;,
+        &quot;params&quot;: {},
+        &quot;hash&quot;: &quot;&quot;
+      },
+      &quot;itemPushed-89&quot;: {
+        &quot;app&quot;: &quot;yl-system&quot;,
+        &quot;title&quot;: &quot;系统设置&quot;,
+        &quot;params&quot;: {},
+        &quot;hash&quot;: &quot;&quot;
+      }
+    }
+  }
+}
+</code></pre>

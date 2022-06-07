@@ -1,0 +1,5 @@
+{
+"vesion":105,
+"url":"https://raw.githubusercontent.com/TonyChenn/TonyChenn.github.io/master/candy/level.json",
+"goodsUrl":"https://raw.githubusercontent.com/TonyChenn/TonyChenn.github.io/master/candy/Shop.json"
+}

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>xLua-CSharp访问Lua(2) - 默然的博客</title>
+
+    <meta property="og:url" content="https://tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="xLua-CSharp访问Lua(2) - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1028/icon.jpg">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1028/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">xLua-CSharp访问Lua(2)</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center mdui-shadow-2">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div class="mdui-typo">
+      <h1 id="C-访问全局属性"><a href="#C-访问全局属性" class="headerlink" title="C#访问全局属性"></a>C#访问全局属性</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- lua代码</span></span><br><span class="line">name = <span class="string">&quot;TonyChenn&quot;</span></span><br><span class="line">url =<span class="string">&quot;tonychenn.cn&quot;</span></span><br><span class="line">age = <span class="number">23</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//访问字段</span></span><br><span class="line"><span class="built_in">string</span> name = luaEnv.Global.Get&lt;<span class="built_in">string</span>&gt;(<span class="string">&quot;name&quot;</span>);</span><br><span class="line"><span class="built_in">int</span> age = luaEnv.Global.Get&lt;<span class="built_in">int</span>&gt;(<span class="string">&quot;age&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="C-访问全局table"><a href="#C-访问全局table" class="headerlink" title="C#访问全局table"></a>C#访问全局table</h1><p>通过类,结构体，接口映射时，<b>类，结构体，接口中的字段，方法名应与lua中的字段，方法名保持一致</b>。</p>
+<h2 id="通过类和结构体映射"><a href="#通过类和结构体映射" class="headerlink" title="通过类和结构体映射"></a>通过类和结构体映射</h2><ol>
+<li>通过类和结构体是将lua中数据拷贝一份，修改后的字段值不会同步到table，反过来也不会。</li>
+<li>暂时没找到通过类（结构体）映射lua中方法，可通过下面接口的方式映射（有大佬知道的，下面留言告知下，谢谢）</li>
+<li>映射类不需要添加”CsharpCallLua”特性</li>
+<li>开销大，官方不建议使用</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">animal=&#123;name=<span class="string">&quot;Panda&quot;</span>, age = <span class="number">1</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animal:eat</span><span class="params">(food)</span></span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;吃&quot;</span>..food)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行lua表</span></span><br><span class="line">luaEnv.DoString(<span class="string">&quot;require &#x27;test&#x27;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//访问表</span></span><br><span class="line">luaEnv.DoString(<span class="string">&quot;print(&#x27;lua print: &#x27;..animal.name..&#x27; : &#x27;..animal.age)&quot;</span>);</span><br><span class="line">Animal animal = luaEnv.Global.Get&lt;Animal&gt;(<span class="string">&quot;animal&quot;</span>);</span><br><span class="line">print(<span class="string">&quot;修改前&quot;</span> + animal.name + <span class="string">&quot;\t&quot;</span> + animal.age);</span><br><span class="line">animal.age = <span class="number">99</span>;</span><br><span class="line">animal.name = <span class="string">&quot;tortoise&quot;</span>;</span><br><span class="line">print(<span class="string">&quot;修改后&quot;</span> + animal.name + <span class="string">&quot;\t&quot;</span> + animal.age);</span><br><span class="line">luaEnv.DoString(<span class="string">&quot;print(&#x27;lua print: &#x27;..animal.name..&#x27; : &#x27;..animal.age)&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LUA: lua print: Panda : 1</span><br><span class="line">修改前Panda	1</span><br><span class="line">修改后tortoise	99</span><br><span class="line">LUA: lua print: Panda : 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过接口映射"><a href="#通过接口映射" class="headerlink" title="通过接口映射"></a>通过接口映射</h2><ol>
+<li>通过接口会直接修改lua中数据</li>
+<li>需要添加“CSharpCallLua”特性，依赖xlua生成代码（如果没生成代码会抛<b>InvalidCastException</b>异常）<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lua代码与上面一样</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面是通过接口访问属性和方法</span></span><br><span class="line">luaEnv.DoString(<span class="string">&quot;print(&#x27;lua print: &#x27;..animal.name..&#x27; : &#x27;..animal.age)&quot;</span>);</span><br><span class="line">IAnimal animal = luaEnv.Global.Get&lt;IAnimal&gt;(<span class="string">&quot;animal&quot;</span>);</span><br><span class="line">print(<span class="string">&quot;修改前&quot;</span> + animal.name + <span class="string">&quot;\t&quot;</span> + animal.age);</span><br><span class="line">animal.eat(<span class="string">&quot;bamboo&quot;</span>);</span><br><span class="line">animal.age = <span class="number">99</span>;</span><br><span class="line">animal.name = <span class="string">&quot;tortoise&quot;</span>;</span><br><span class="line">print(<span class="string">&quot;修改后&quot;</span> + animal.name + <span class="string">&quot;\t&quot;</span> + animal.age);</span><br><span class="line">luaEnv.DoString(<span class="string">&quot;print(&#x27;lua print: &#x27;..animal.name..&#x27; : &#x27;..animal.age)&quot;</span>);</span><br><span class="line"></span><br><span class="line">[<span class="meta">CSharpCallLua</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IAnimal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="built_in">int</span> age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">eat</span>(<span class="params"><span class="built_in">string</span> food</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+输出结果<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LUA: lua print: Panda : 1</span><br><span class="line">修改前Panda	1</span><br><span class="line">LUA: 吃bamboo</span><br><span class="line">修改后tortoise	99</span><br><span class="line">LUA: lua print: tortoise : 99</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="映射到Dictionary-List"><a href="#映射到Dictionary-List" class="headerlink" title="映射到Dictionary,List"></a>映射到Dictionary,List</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">## 使用by ref方式：映射到LuaTable类</span><br><span class="line">不需要生成代码，但是比较慢，比映射到interface慢一个数量级，没有类型检查</span><br><span class="line">```csharp</span><br><span class="line">LuaTable table = luaEnv.Global.Get&lt;LuaTable&gt;(&quot;animal&quot;);</span><br><span class="line">string name = table.Get&lt;string&gt;(&quot;name&quot;);</span><br><span class="line">Debug.Log(name);</span><br><span class="line"></span><br><span class="line">//博主没找到在LuaTable中调用表中方法，尝试下面方法，会报“attempt to concatenate a nil value (local &#x27;food&#x27;)”就是拿到委托后执行传递的apple,在lua中没有接收到。待解决,有知道原因和解决方法的欢迎留言。</span><br><span class="line">//Action&lt;string&gt; action = table.Get&lt;Action&lt;string&gt;&gt;(&quot;eat&quot;);</span><br><span class="line">//action(&quot;apple&quot;);</span><br><span class="line"></span><br><span class="line">//action = null;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="C-访问全局方法"><a href="#C-访问全局方法" class="headerlink" title="C#访问全局方法"></a>C#访问全局方法</h1><h2 id="映射到Action，delegate"><a href="#映射到Action，delegate" class="headerlink" title="映射到Action，delegate"></a>映射到Action，delegate</h2><p>官方建议，性能好很多，类型安全，但是要生成代码。注意Action委托没有返回值，有返回值使用delegate，lua多个返回值可以使用C#的ref,out接收。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">eat</span><span class="params">(food)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;喜欢吃&quot;</span>..food)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(a,b)</span></span></span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">(a,b,c)</span></span></span><br><span class="line">    <span class="keyword">return</span> a+b+c, a+b, a+c, b+c</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">CSharpCallLua</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="built_in">int</span> <span class="title">AddDelegate</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> a_b, a_c, b_c;  <span class="comment">//a+b, a+c, b+c</span></span><br><span class="line">[<span class="meta">CSharpCallLua</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="built_in">int</span> <span class="title">TestDelegate</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b, <span class="built_in">int</span> c, <span class="keyword">out</span> <span class="built_in">int</span> a_b, <span class="keyword">out</span> <span class="built_in">int</span> a_c, <span class="keyword">out</span> <span class="built_in">int</span> b_c</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//action委托（不能包含返回值）</span></span><br><span class="line">Action&lt;<span class="built_in">string</span>&gt; action1 = luaEnv.Global.Get&lt;Action&lt;<span class="built_in">string</span>&gt;&gt;(<span class="string">&quot;eat&quot;</span>);</span><br><span class="line">action1(<span class="string">&quot;apple&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//delegate委托，一个返回值</span></span><br><span class="line">AddDelegate <span class="keyword">add</span> = luaEnv.Global.Get&lt;AddDelegate&gt;(<span class="string">&quot;add&quot;</span>);</span><br><span class="line"><span class="built_in">int</span> sum = <span class="keyword">add</span>(<span class="number">100</span>, <span class="number">200</span>);</span><br><span class="line">Debug.Log(sum);</span><br><span class="line"></span><br><span class="line"><span class="comment">//delegate多个返回值</span></span><br><span class="line">TestDelegate test = luaEnv.Global.Get&lt;TestDelegate&gt;(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="built_in">int</span> _sum = test(<span class="number">100</span>, <span class="number">200</span>, <span class="number">500</span>, <span class="keyword">out</span> a_b, <span class="keyword">out</span> a_c, <span class="keyword">out</span> b_c);</span><br><span class="line">Debug.Log(<span class="built_in">string</span>.Format(<span class="string">&quot;a+b+c=&#123;0&#125; a+b=&#123;1&#125; a+c=&#123;2&#125; b+c=&#123;3&#125;&quot;</span>, _sum, a_b, a_c, b_c));</span><br><span class="line"></span><br><span class="line">action1 = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">add</span> = <span class="literal">null</span>;</span><br><span class="line">test = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">luaEnv.Dispose();</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LUA: 喜欢吃apple</span><br><span class="line">300</span><br><span class="line">a+b+c=800 a+b=300 a+c=600 b+c=700</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="映射到LuaFunction"><a href="#映射到LuaFunction" class="headerlink" title="映射到LuaFunction"></a>映射到LuaFunction</h2><p>优缺点刚好和第一种相反。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个参数</span></span><br><span class="line">LuaFunction OneParam = luaEnv.Global.Get&lt;LuaFunction&gt;(<span class="string">&quot;eat&quot;</span>);</span><br><span class="line">OneParam.Call(<span class="string">&quot;Orange&quot;</span>);</span><br><span class="line"><span class="comment">//一个返回值</span></span><br><span class="line">LuaFunction ParamWithReturn = luaEnv.Global.Get&lt;LuaFunction&gt;(<span class="string">&quot;add&quot;</span>);</span><br><span class="line"><span class="built_in">object</span>[] sum = ParamWithReturn.Call(<span class="number">100</span>, <span class="number">99</span>);</span><br><span class="line">Debug.Log(sum[<span class="number">0</span>]);</span><br><span class="line"><span class="comment">//多个返回值</span></span><br><span class="line">LuaFunction MulitReturns = luaEnv.Global.Get&lt;LuaFunction&gt;(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="built_in">object</span>[] results = MulitReturns.Call(<span class="number">100</span>, <span class="number">200</span>, <span class="number">500</span>);</span><br><span class="line">Debug.Log(<span class="built_in">string</span>.Format(<span class="string">&quot;a+b+c=&#123;0&#125; a+b=&#123;1&#125; a+c=&#123;2&#125; b+c=&#123;3&#125;&quot;</span>, results[<span class="number">0</span>], results[<span class="number">1</span>], results[<span class="number">2</span>], results[<span class="number">3</span>]));</span><br></pre></td></tr></table></figure>
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: 'ecbf6316c9aa7a6bfd7a',
+			clientSecret: '5c875e5986ed75f4509d97acd16628b97f7506f1',
+			repo: 'tonychenn.github.io',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true  // Facebook-like distraction free mode
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-%E8%AE%BF%E9%97%AE%E5%85%A8%E5%B1%80%E5%B1%9E%E6%80%A7"><span class="post-toc-text">C#访问全局属性</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-%E8%AE%BF%E9%97%AE%E5%85%A8%E5%B1%80table"><span class="post-toc-text">C#访问全局table</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%9A%E8%BF%87%E7%B1%BB%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93%E6%98%A0%E5%B0%84"><span class="post-toc-text">通过类和结构体映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%9A%E8%BF%87%E6%8E%A5%E5%8F%A3%E6%98%A0%E5%B0%84"><span class="post-toc-text">通过接口映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%98%A0%E5%B0%84%E5%88%B0Dictionary-List"><span class="post-toc-text">映射到Dictionary,List</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-%E8%AE%BF%E9%97%AE%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95"><span class="post-toc-text">C#访问全局方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%98%A0%E5%B0%84%E5%88%B0Action%EF%BC%8Cdelegate"><span class="post-toc-text">映射到Action，delegate</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%98%A0%E5%B0%84%E5%88%B0LuaFunction"><span class="post-toc-text">映射到LuaFunction</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                Tony Chenn&nbsp&nbsp2022
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

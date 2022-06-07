@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>UGUI源码分析-Graphic(1) - 默然的博客</title>
+
+    <meta property="og:url" content="https://tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="UGUI源码分析-Graphic(1) - 默然的博客 | 默然的博客">
+    
+    
+
+    
+      <meta property="og:description" content="负责显示图像的基类Graphic">
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">UGUI源码分析-Graphic(1)</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center mdui-shadow-2">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div class="mdui-typo">
+      <p><code>Graphic</code>是一个抽象类，是<code>MaskableGraphic</code>的基类,而<code>MaskableGraphic</code>是Image,RawImage,Text的基类。负责显示界面。继承自<code>UIBehavior</code>类以及<code>ICanvasElement</code>接口。</p>
+<h1 id="重写UIBehavior的方法"><a href="#重写UIBehavior的方法" class="headerlink" title="重写UIBehavior的方法"></a>重写UIBehavior的方法</h1><h2 id="OnEnable"><a href="#OnEnable" class="headerlink" title="OnEnable"></a>OnEnable</h2><p>首先调用<code>CacheCanvas</code>方法，获取第一个处于激活状态的Canvas,然后赋值给<code>m_Canvas</code>,然后将m_Canvas注册进<code>GraphicRegistry</code>(之后再看注册进去的作用)，然后设置<code>s_WhiteTexture</code>（也就是mainTexture），最后调用<code>SetAllDirty()</code>: Layout,Material,Vertices(标记Dirty后会触发重新绘制)</p>
+<h2 id="OnDisable"><a href="#OnDisable" class="headerlink" title="OnDisable"></a>OnDisable</h2><p>从<code>GraphicRegistry</code>,<code>CanvasUpdateRegistry</code>取消注册，清空canvasRender,然后重建Layout。</p>
+<h2 id="OnDestroy"><a href="#OnDestroy" class="headerlink" title="OnDestroy"></a>OnDestroy</h2><p>删除 Mesh</p>
+<h2 id="OnRectTransformDimensionsChange"><a href="#OnRectTransformDimensionsChange" class="headerlink" title="OnRectTransformDimensionsChange"></a>OnRectTransformDimensionsChange</h2><p>当RectTransform参数发生变化后会调用这个方法。</br><br>如果正在重建就标记<code>顶点</code>为Dirty,否则标记顶点和Layout为Dirty。</p>
+<h2 id="OnBeforeTransformParentChanged"><a href="#OnBeforeTransformParentChanged" class="headerlink" title="OnBeforeTransformParentChanged"></a>OnBeforeTransformParentChanged</h2><p>取消从<code>GraphicRegistry</code>注册，标记重建Layout.</p>
+<h2 id="OnTransformParentChanged"><a href="#OnTransformParentChanged" class="headerlink" title="OnTransformParentChanged"></a>OnTransformParentChanged</h2><p>重新给<code>m_Canvas</code>赋值，从<code>GraphicRegistry</code>注册Canvas，然后<code>SetAllDirty()</code>。</p>
+<h2 id="OnDidApplyAnimationProperties"><a href="#OnDidApplyAnimationProperties" class="headerlink" title="OnDidApplyAnimationProperties"></a>OnDidApplyAnimationProperties</h2><p>当 animation 属性发生变化后出发，会<code>SetAllDirty()</code>。</p>
+<h2 id="OnCanvasHierarchyChanged"><a href="#OnCanvasHierarchyChanged" class="headerlink" title="OnCanvasHierarchyChanged"></a>OnCanvasHierarchyChanged</h2><p>Called when the state of the parent Canvas is changed. 如果当前Canvas不是第一个处于激活状态的Canvas，那么就取消注册之前的Canvas,然后重新注册新的Canvas。</p>
+<h1 id="实现ICanvasElement-接口的方法"><a href="#实现ICanvasElement-接口的方法" class="headerlink" title="实现ICanvasElement 接口的方法"></a>实现ICanvasElement 接口的方法</h1><h2 id="Rebuild-CanvasUpdate-update"><a href="#Rebuild-CanvasUpdate-update" class="headerlink" title="Rebuild(CanvasUpdate update)"></a>Rebuild(CanvasUpdate update)</h2><p>用来重建当前stage,会在渲染前调用，<br>如果 canvasRenderer&#x3D;&#x3D;null || canvasRenderer.cull(忽略渲染)就return掉。<br>符合条件就根据是否标记了<code>VertsDirty</code>或<code>MaterialDirty</code>而进行更新三角面和Material。</p>
+<h1 id="其他的一些方法"><a href="#其他的一些方法" class="headerlink" title="其他的一些方法"></a>其他的一些方法</h1><h2 id="UpdateGeometry"><a href="#UpdateGeometry" class="headerlink" title="UpdateGeometry()"></a>UpdateGeometry()</h2><p>根据<code>useLegacyMeshGeneration</code>不同而执行<code>DoLegacyMeshGeneration()</code>或者<code>DoMeshGeneration()</code>方法。</p>
+<ul>
+<li><p>DoLegacyMeshGeneration。 首先会调用<code>OnPopulateMesh()</code>添加四个顶点，以及两个三角面到VertexHelper(这就是创建一个基础的四边形，而四个顶点和两个三角面是必不可少的)这个方法会在Image等组件中重写，然后绘制出不同的东西。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnPopulateMesh</span>(<span class="params">VertexHelper vh</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> r = GetPixelAdjustedRect();</span><br><span class="line">    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector4(r.x, r.y, r.x + r.width, r.y + r.height);</span><br><span class="line"></span><br><span class="line">    Color32 color32 = color;</span><br><span class="line">    vh.Clear();</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.x, v.y), color32, <span class="keyword">new</span> Vector2(<span class="number">0f</span>, <span class="number">0f</span>));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.x, v.w), color32, <span class="keyword">new</span> Vector2(<span class="number">0f</span>, <span class="number">1f</span>));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.z, v.w), color32, <span class="keyword">new</span> Vector2(<span class="number">1f</span>, <span class="number">1f</span>));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.z, v.y), color32, <span class="keyword">new</span> Vector2(<span class="number">1f</span>, <span class="number">0f</span>));</span><br><span class="line"></span><br><span class="line">    vh.AddTriangle(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    vh.AddTriangle(<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后进行填充网格(FillMesh),这里要求顶点数不超过65000个。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FillMesh</span>(<span class="params">Mesh mesh</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    InitializeListIfRequired();</span><br><span class="line"></span><br><span class="line">    mesh.Clear();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (m_Positions.Count &gt;= <span class="number">65000</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentException(<span class="string">&quot;Mesh can not have more than 65000 vertices&quot;</span>);</span><br><span class="line"></span><br><span class="line">    mesh.SetVertices(m_Positions);</span><br><span class="line">    mesh.SetColors(m_Colors);</span><br><span class="line">    mesh.SetUVs(<span class="number">0</span>, m_Uv0S);</span><br><span class="line">    mesh.SetUVs(<span class="number">1</span>, m_Uv1S);</span><br><span class="line">    mesh.SetUVs(<span class="number">2</span>, m_Uv2S);</span><br><span class="line">    mesh.SetUVs(<span class="number">3</span>, m_Uv3S);</span><br><span class="line">    mesh.SetNormals(m_Normals);</span><br><span class="line">    mesh.SetTangents(m_Tangents);</span><br><span class="line">    mesh.SetTriangles(m_Indices, <span class="number">0</span>);</span><br><span class="line">    mesh.RecalculateBounds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之后会拿到所有继承<code>IMeshModifier</code>的组件然后全部通过<code>IMeshModifier.ModifyMesh()</code>进行修改Mesh信息。最后将Mesh提交给CanvasRenderer。</p>
+</li>
+<li><p>DoMeshGeneration() 其实和DoLegacyMeshGeneration差不多。</p>
+</li>
+</ul>
+<h2 id="UpdateMaterial"><a href="#UpdateMaterial" class="headerlink" title="UpdateMaterial()"></a>UpdateMaterial()</h2><p>更新<code>材质球</code>和<code>贴图</code>到CanvasRender。设置材质球时会获取所有的<code>IMaterialModifier</code>组件，然后遍历这些组件通过<code>IMaterialModifier.GetModifiedMaterial(currentMat)</code>的方式获取修改过的Material,然后返回。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">UpdateMaterial</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!IsActive())</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    canvasRenderer.materialCount = <span class="number">1</span>;</span><br><span class="line">    canvasRenderer.SetMaterial(materialForRendering, <span class="number">0</span>);</span><br><span class="line">    canvasRenderer.SetTexture(mainTexture);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CrossFadeColor"><a href="#CrossFadeColor" class="headerlink" title="CrossFadeColor()"></a>CrossFadeColor()</h2><p>在TweenRunner中开启协程，像NGUI的Tween动画。</p>
+<h2 id="Raycast"><a href="#Raycast" class="headerlink" title="Raycast()"></a>Raycast()</h2><ul>
+<li>首先说一下点击屏幕后如何判断是否点击到某和物体的原理：当点击屏幕，会发出一条由屏幕的点击位置射向屏幕后方的一条射线，检测这条射线是否射中某个GameObject,然后去响应对应事件即可。</li>
+</ul>
+<p>在<code>Raycast</code>方法中通过<code>ICanvasRaycastFilter.IsRaycastLocationValid</code>进行判断传入的射线是否有效。该方法在GraphicRaycaster中被调用。</p>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: 'ecbf6316c9aa7a6bfd7a',
+			clientSecret: '5c875e5986ed75f4509d97acd16628b97f7506f1',
+			repo: 'tonychenn.github.io',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true  // Facebook-like distraction free mode
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%87%8D%E5%86%99UIBehavior%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">重写UIBehavior的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnEnable"><span class="post-toc-text">OnEnable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDisable"><span class="post-toc-text">OnDisable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDestroy"><span class="post-toc-text">OnDestroy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnRectTransformDimensionsChange"><span class="post-toc-text">OnRectTransformDimensionsChange</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnBeforeTransformParentChanged"><span class="post-toc-text">OnBeforeTransformParentChanged</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnTransformParentChanged"><span class="post-toc-text">OnTransformParentChanged</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDidApplyAnimationProperties"><span class="post-toc-text">OnDidApplyAnimationProperties</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnCanvasHierarchyChanged"><span class="post-toc-text">OnCanvasHierarchyChanged</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0ICanvasElement-%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">实现ICanvasElement 接口的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rebuild-CanvasUpdate-update"><span class="post-toc-text">Rebuild(CanvasUpdate update)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="post-toc-text">其他的一些方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UpdateGeometry"><span class="post-toc-text">UpdateGeometry()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UpdateMaterial"><span class="post-toc-text">UpdateMaterial()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CrossFadeColor"><span class="post-toc-text">CrossFadeColor()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Raycast"><span class="post-toc-text">Raycast()</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                Tony Chenn&nbsp&nbsp2022
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

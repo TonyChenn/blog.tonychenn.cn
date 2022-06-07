@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>首页 - 默然的博客</title>
+
+    <meta property="og:url" content="https://tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="首页 - 默然的博客 | 默然的博客">
+    
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">默然的博客</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  
+
+<div id="recent-posts" class="mdui-center">
+
+  <h3 style="text-align: left;">全部文章</h3>
+  
+  
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0413/icon.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    CSharp-TCP聊天室
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+            <p id="summary" style="text-align:left;">
+                Winform实现聊天室，包含群发，一对一聊天，一对多聊天，包含客户端，服务器端两部分。
+            </p>
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2019-04-13
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2019/04/13/CSharp-TCP%E8%81%8A%E5%A4%A9%E5%AE%A4/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/clover.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    Hackintosh升级Mojave后花屏问题
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2019-04-05
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2019/04/05/Hackintosh-%E5%8D%87%E7%BA%A7Mojave%E5%90%8E%E8%8A%B1%E5%B1%8F%E9%97%AE%E9%A2%98/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+      <!--文章内容广告-->
+      <div id="post-item" class="mdui-shadow-2 mdui-center">
+    <!--广告-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    
+</div>  
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0614/mojave.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    Hackintosh-启动盘制作(一)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2019-02-27
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2019/02/27/Hackintosh-%E5%90%AF%E5%8A%A8%E7%9B%98%E5%88%B6%E4%BD%9C/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0105/icon.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    年终总结-2018
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2019-01-05
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2019/01/05/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93-2018/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/12.13/icon.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    Unity-入坑AssetBundle（一）
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2018-12-13
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2018/12/13/Unity-%E5%85%A5%E5%9D%91AssetBundle/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+      <!--文章内容广告-->
+      <div id="post-item" class="mdui-shadow-2 mdui-center">
+    <!--广告-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    
+</div>  
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.30/tcp.png" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    CSharp-基于TCP的Socket通信
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2018-11-30
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2018/11/30/CSharp-%E5%9F%BA%E4%BA%8ETCP%E7%9A%84Socket%E9%80%9A%E4%BF%A1/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.21/icon.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    正则表达式学习总结
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2018-11-21
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2018/11/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/icon.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    Python-酷狗音乐爬虫总结
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+            <p id="summary" style="text-align:left;">
+                输入音乐名称，下载音乐到本地
+            </p>
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2018-11-19
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2018/11/19/Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E9%9F%B3%E9%A2%91%E4%B8%8B%E8%BD%BD%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+      <!--文章内容广告-->
+      <div id="post-item" class="mdui-shadow-2 mdui-center">
+    <!--广告-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    
+</div>  
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.08/icon.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    xpath学习总结
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+            <p id="summary" style="text-align:left;">
+                简单粗暴的讲就是--在xml中用来查找信息的语言
+            </p>
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2018-11-08
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2018/11/08/XPath%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+    
+      
+
+<div id="post-item" class="mdui-shadow-2 mdui-center mdui-ripple mdui-hoverable">
+    <div class="mdui-card-media">
+        <img class="post-item-img" data-funlazy="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/github.jpg" width="100" height="50">
+        <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+            <div class="mdui-card-primary">
+                <div class="title_font float_left mdui-card-primary-title">
+                    Git-自从有了远程仓库，妈妈再也不用担心我的硬盘了
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="mdui-card-actions">
+        
+            <p id="summary" style="text-align:left;">
+                将本地Git仓库与Github绑定起来
+            </p>
+        
+        <div class="mdui-divider"></div>
+        <span class="info">
+        <i class="mdui-icon material-icons">&#xe923;</i>
+        2018-10-24
+        
+    </span>
+        <a class="info mdui-text-color-pink " href="/2018/10/24/Git-%E8%87%AA%E4%BB%8E%E6%9C%89%E4%BA%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%EF%BC%8C%E5%A6%88%E5%A6%88%E5%86%8D%E4%B9%9F%E4%B8%8D%E7%94%A8%E6%8B%85%E5%BF%83%E6%88%91%E7%9A%84%E7%A1%AC%E7%9B%98%E4%BA%86/" style="float:right;">去围观</a>
+    </div>
+</div>          
+    
+
+    
+
+  
+</div>
+
+
+<!--页码-->
+<div id="paginator">
+  <a class="extend prev" rel="prev" href="/page/6/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/">&gt;</a>
+</div>
+</br>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                Tony Chenn&nbsp&nbsp2022
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

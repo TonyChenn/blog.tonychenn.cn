@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>数据结构-二叉树的遍历（二） - 默然的博客</title>
+
+    <meta property="og:url" content="https://tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="数据结构-二叉树的遍历（二） - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.18/icon.jpg">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.18/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">数据结构-二叉树的遍历（二）</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center mdui-shadow-2">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div class="mdui-typo">
+      <p>对于树与二叉树前面概念部分，请移步：<a target="_blank" rel="noopener" href="https://tonychenn.github.io/2018/10/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%86%8D%E5%9B%9E%E9%A1%BE%EF%BC%88%E4%B8%80%EF%BC%89/">数据结构-树与二叉树再回顾（一）</a></p>
+<h1 id="什么是二叉树的遍历："><a href="#什么是二叉树的遍历：" class="headerlink" title="什么是二叉树的遍历："></a>什么是二叉树的遍历：</h1><p>从二叉树的根节点出发，按照某种方式依次访问二叉树中的所有节点，使每个节点都能被访问一次且只能访问一次。以下有四种遍历方式：</p>
+<h1 id="访问顺序"><a href="#访问顺序" class="headerlink" title="访问顺序"></a>访问顺序</h1><table>
+<thead>
+<tr>
+<th>遍历方式</th>
+<th>遍历顺序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>先序遍历</td>
+<td>1. 访问根节点</td>
+</tr>
+<tr>
+<td></td>
+<td>2. 先序遍历左子节点</td>
+</tr>
+<tr>
+<td></td>
+<td>3. 先序遍历右子节点</td>
+</tr>
+<tr>
+<td>中序遍历</td>
+<td>1. 中序遍历左子节点</td>
+</tr>
+<tr>
+<td></td>
+<td>2. 访问根节点</td>
+</tr>
+<tr>
+<td></td>
+<td>3. 中序遍历右子节点</td>
+</tr>
+<tr>
+<td>后序遍历</td>
+<td>1. 后序遍历左子节点</td>
+</tr>
+<tr>
+<td></td>
+<td>2. 后序遍历右子节点</td>
+</tr>
+<tr>
+<td></td>
+<td>3. 访问根节点</td>
+</tr>
+<tr>
+<td>层序遍历</td>
+<td>逐层从左到右依次遍历</td>
+</tr>
+</tbody></table>
+<h1 id="举个栗子："><a href="#举个栗子：" class="headerlink" title="举个栗子："></a>举个栗子：</h1><p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.18/show.jpg"></p>
+<p>对该完全二叉树(上图)使用不同遍历方式进行输出</p>
+<h1 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h1><p>对于一个二叉树，使用顺序结构对存储时，其存储方式是按照数组形式存储的，如下图<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.18/pic.jpg"></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">MyTree</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//保存二叉树的数据</span></span><br><span class="line">    <span class="keyword">private</span> T[] data;</span><br><span class="line">    <span class="comment">//计数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyTree</span>(<span class="params"><span class="built_in">int</span> size</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        data = <span class="keyword">new</span> T[size];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//添加数据</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">Add</span>(<span class="params">T item</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (count &gt;= data.Length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        data[count] = item;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FirstTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MiddleTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LastTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LayerTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 先序遍历</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;startIndex&quot;&gt;</span>开始遍历起点<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FirstTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//终止条件</span></span><br><span class="line">    <span class="keyword">if</span> (startIndex &gt;= count) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//startIndex是index</span></span><br><span class="line">    <span class="comment">//number是相当于编号</span></span><br><span class="line">    <span class="built_in">int</span> number = startIndex + <span class="number">1</span>;</span><br><span class="line">    Console.Write(data[startIndex]+<span class="string">&quot; &quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> leftChild = number * <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">int</span> rightChild = number*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    FirstTravel(leftChild - <span class="number">1</span>);</span><br><span class="line">    FirstTravel(rightChild - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 中序遍历</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;startIndex&quot;&gt;</span>开始遍历起点<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MiddleTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//终止条件</span></span><br><span class="line">    <span class="keyword">if</span> (startIndex &gt;= count) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//startIndex是index</span></span><br><span class="line">    <span class="comment">//number是相当于编号</span></span><br><span class="line">    <span class="built_in">int</span> number = startIndex + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span> leftChild = number * <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">int</span> rightChild = leftChild + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    MiddleTravel(leftChild<span class="number">-1</span>);</span><br><span class="line">    Console.Write(data[startIndex] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">    MiddleTravel(rightChild<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="后续遍历"><a href="#后续遍历" class="headerlink" title="后续遍历"></a>后续遍历</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 后序遍历</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;startIndex&quot;&gt;</span>开始遍历起点<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LastTravel</span>(<span class="params"><span class="built_in">int</span> startIndex=<span class="number">0</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//终止条件</span></span><br><span class="line">    <span class="keyword">if</span> (startIndex &gt;= count) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//startIndex是index</span></span><br><span class="line">    <span class="comment">//number是相当于编号</span></span><br><span class="line">    <span class="built_in">int</span> number = startIndex + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">int</span> leftChild = number * <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">int</span> rightChild = leftChild + <span class="number">1</span>;</span><br><span class="line">    LastTravel(leftChild<span class="number">-1</span>);</span><br><span class="line">    LastTravel(rightChild<span class="number">-1</span>);</span><br><span class="line">    Console.Write(data[startIndex]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 层序遍历</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;startIndex&quot;&gt;</span>开始遍历起点<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">LayerTravel</span>(<span class="params"><span class="built_in">int</span> startIndex = <span class="number">0</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.Write(data[i] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="看下遍历结果"><a href="#看下遍历结果" class="headerlink" title="看下遍历结果"></a>看下遍历结果</h2><p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.18/result.jpg" alt="result"></p>
+<h1 id="链式结构"><a href="#链式结构" class="headerlink" title="链式结构"></a>链式结构</h1><p>对于链式结构的先序，中序，后续遍历，过于简单，只需访问根节点的左孩子，右孩子即可，最近刷<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof">力扣</a>时遇到链式结构的层序遍历，与顺序结构的有所不同，记录下：</p>
+<h2 id="层序遍历-1"><a href="#层序遍历-1" class="headerlink" title="层序遍历"></a>层序遍历</h2><p>思想：</p>
+<ol>
+<li>通过使用队列（当然也可以使用列表模拟先进后出的特性），如果根节点不为空，则将根节点入队；</li>
+<li>从队列中取出一个节点(Temp);</li>
+<li>如果Temp的左孩子不为空，则将Temp的左子节点入队；</li>
+<li>如果Temp的右孩子不为空，则将Temp的右子节点入队；</li>
+<li>如果队列不为空就重复执行2-5步，直到队列为空；</li>
+</ol>
+<p>主要代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 将二叉树层序遍历然后保存到列表中返回</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="built_in">int</span>[] <span class="title">LevelOrder</span>(<span class="params">TreeNode root</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> Queue&lt;TreeNode&gt;();</span><br><span class="line">    List&lt;<span class="built_in">int</span>&gt; result = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        queue.Enqueue(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(queue.Count&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        TreeNode node = queue.Dequeue();</span><br><span class="line">        <span class="keyword">if</span>(node.left!=<span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            queue.Enqueue(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(node.right!=<span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            queue.Enqueue(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        result.Add(node.val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result.ToArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div align="right">TonyChenn<br>2018.10.18</div>
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: 'ecbf6316c9aa7a6bfd7a',
+			clientSecret: '5c875e5986ed75f4509d97acd16628b97f7506f1',
+			repo: 'tonychenn.github.io',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true  // Facebook-like distraction free mode
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%9A"><span class="post-toc-text">什么是二叉树的遍历：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E9%A1%BA%E5%BA%8F"><span class="post-toc-text">访问顺序</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%BE%E4%B8%AA%E6%A0%97%E5%AD%90%EF%BC%9A"><span class="post-toc-text">举个栗子：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="post-toc-text">顺序结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="post-toc-text">先序遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="post-toc-text">中序遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%8E%E7%BB%AD%E9%81%8D%E5%8E%86"><span class="post-toc-text">后续遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="post-toc-text">层序遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9C%8B%E4%B8%8B%E9%81%8D%E5%8E%86%E7%BB%93%E6%9E%9C"><span class="post-toc-text">看下遍历结果</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%93%BE%E5%BC%8F%E7%BB%93%E6%9E%84"><span class="post-toc-text">链式结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86-1"><span class="post-toc-text">层序遍历</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                Tony Chenn&nbsp&nbsp2022
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>
