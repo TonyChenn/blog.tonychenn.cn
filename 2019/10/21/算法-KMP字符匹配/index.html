@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,14 +276,18 @@
       
       
       <div class="mdui-typo">
-      <h1 id="什么是KMP算法"><a href="#什么是KMP算法" class="headerlink" title="什么是KMP算法"></a>什么是KMP算法</h1><p>通俗的讲：从一个字符串中找到包含第二个字符串的开始位置。如果存在返回索引位置，否则返回-1。</p>
-<h1 id="问题介绍："><a href="#问题介绍：" class="headerlink" title="问题介绍："></a>问题介绍：</h1><p>实现 strStr() 函数。给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
+      <h1>什么是KMP算法</h1>
+<p>通俗的讲：从一个字符串中找到包含第二个字符串的开始位置。如果存在返回索引位置，否则返回-1。</p>
+<h1>问题介绍：</h1>
+<p>实现 strStr() 函数。给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
 <p>示例：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//下面解题思路以此为例</span></span><br><span class="line">输入: haystack = <span class="string">&quot;abacaabacabac&quot;</span>, needle = <span class="string">&quot;abacab&quot;</span></span><br><span class="line">输出：<span class="number">5</span></span><br><span class="line"></span><br><span class="line">输入: haystack = <span class="string">&quot;aaaaa&quot;</span>, needle = <span class="string">&quot;bba&quot;</span></span><br><span class="line">输出: <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-strstr">来源：力扣（LeetCode）)</a></p>
-<h1 id="KMP算法思路"><a href="#KMP算法思路" class="headerlink" title="KMP算法思路"></a>KMP算法思路</h1><h2 id="先看个动态图"><a href="#先看个动态图" class="headerlink" title="先看个动态图"></a>先看个动态图</h2><p><img src="https://user-images.githubusercontent.com/15126694/36590961-5870c5d0-18cb-11e8-84b3-98e524051da1.gif"></p>
-<h2 id="首先制作一个前缀表-PrefixTable"><a href="#首先制作一个前缀表-PrefixTable" class="headerlink" title="首先制作一个前缀表(PrefixTable)"></a>首先制作一个前缀表(PrefixTable)</h2><p><strong>前缀表的构建对于KMP算法很重要，后面会说到作用，以及如何生成。</strong></p>
+<h1>KMP算法思路</h1>
+<h2 id="先看个动态图"><a class="header-anchor" href="#先看个动态图">¶</a>先看个动态图</h2>
+<p><img src="https://user-images.githubusercontent.com/15126694/36590961-5870c5d0-18cb-11e8-84b3-98e524051da1.gif" alt=""></p>
+<h2 id="首先制作一个前缀表-PrefixTable"><a class="header-anchor" href="#首先制作一个前缀表-PrefixTable">¶</a>首先制作一个前缀表(PrefixTable)</h2>
+<p><strong>前缀表的构建对于KMP算法很重要，后面会说到作用，以及如何生成。</strong></p>
 <p>needle 字符串的前缀表如下：</p>
 <table>
 <thead>
@@ -293,7 +297,8 @@
 <th>最大公共子串数</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>a</td>
 <td></td>
 <td>0</td>
@@ -323,7 +328,8 @@
 <td>ab</td>
 <td>2</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <table>
 <thead>
 <tr>
@@ -336,7 +342,8 @@
 <th>5</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>字符</td>
 <td>a</td>
 <td>b</td>
@@ -354,7 +361,8 @@
 <td>1</td>
 <td>2</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>将Prefix表所有数值后移一位，第一个值补为-1，如下：</p>
 <table>
 <thead>
@@ -368,7 +376,8 @@
 <th>5</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>字符</td>
 <td>a</td>
 <td>b</td>
@@ -386,18 +395,25 @@
 <td>0</td>
 <td>1</td>
 </tr>
-</tbody></table>
-<h2 id="KMP匹配思想："><a href="#KMP匹配思想：" class="headerlink" title="KMP匹配思想："></a>KMP匹配思想：</h2><ol>
-<li>开始匹配，刚开始i&#x3D;0,j&#x3D;0,needle[j]与haystack[i]进行比较，直到i&#x3D;5时，needle[5]与haystack[5]不相等，此时将i指向索引为prefix[5]的位置。<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1021/kmp_01.png"></li>
-<li>此时发现prefix[5]之前是匹配成功的，不用管，直接从索引为prefix[5]的位置继续往后比较，直到如图a-&gt;b匹配失败，就回到prefix[1]的位置<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1021/kmp_02.png"></li>
+</tbody>
+</table>
+<h2 id="KMP匹配思想："><a class="header-anchor" href="#KMP匹配思想：">¶</a>KMP匹配思想：</h2>
+<ol>
+<li>开始匹配，刚开始i=0,j=0,needle[j]与haystack[i]进行比较，直到i=5时，needle[5]与haystack[5]不相等，此时将i指向索引为prefix[5]的位置。<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1021/kmp_01.png" alt=""></li>
+<li>此时发现prefix[5]之前是匹配成功的，不用管，直接从索引为prefix[5]的位置继续往后比较，直到如图a-&gt;b匹配失败，就回到prefix[1]的位置<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1021/kmp_02.png" alt=""></li>
 <li>当出现prefix的值为-1时，那么i，j同时往后移动一位，继续上面的操作。</li>
 <li>当i的值小于等于(origin.Length - pattern.Length)时跳出上面的循环。</li>
 </ol>
-<h2 id="完整过程"><a href="#完整过程" class="headerlink" title="完整过程"></a>完整过程</h2><p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1021/kmp_3.png"></p>
-<h2 id="那么如何生成prefix表"><a href="#那么如何生成prefix表" class="headerlink" title="那么如何生成prefix表?"></a>那么如何生成prefix表?</h2><p>qaq 自己明白容易，讲出来挺难额…</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">int</span> <span class="title">KMP</span>(<span class="params"><span class="built_in">string</span> origin,<span class="built_in">string</span> pattern</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (origin.Length &lt; pattern.Length) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (pattern.Length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (origin == pattern) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span>[] prefix = <span class="keyword">new</span> <span class="built_in">int</span>[pattern.Length];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化Prefix表</span></span><br><span class="line">    <span class="built_in">int</span> pivit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; pattern.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pattern[pivit] == pattern[i])</span><br><span class="line">        &#123;</span><br><span class="line">            ++pivit;</span><br><span class="line">            prefix[i] = pivit;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pivit = <span class="number">0</span>;</span><br><span class="line">            prefix[i]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//prefix 数据后移一位，prefix[0] = -1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = prefix.Length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        prefix[i] = prefix[i - <span class="number">1</span>];</span><br><span class="line">    prefix[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//KMP查找</span></span><br><span class="line">    <span class="built_in">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> jndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (index &lt;= origin.Length - pattern.Length)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (jndex == pattern.Length<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> index = jndex;</span><br><span class="line">        <span class="keyword">if</span> (origin[index] == pattern[jndex] || prefix[index]==<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ++index;</span><br><span class="line">            ++jndex;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            jndex = prefix[jndex];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<h2 id="完整过程"><a class="header-anchor" href="#完整过程">¶</a>完整过程</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1021/kmp_3.png" alt=""></p>
+<h2 id="那么如何生成prefix表"><a class="header-anchor" href="#那么如何生成prefix表">¶</a>那么如何生成prefix表?</h2>
+<p>qaq 自己明白容易，讲出来挺难额…</p>
+<h1>代码实现</h1>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">int</span> <span class="title">KMP</span>(<span class="params"><span class="built_in">string</span> origin,<span class="built_in">string</span> pattern</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (origin.Length &lt; pattern.Length) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (pattern.Length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (origin == pattern) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">int</span>[] prefix = <span class="keyword">new</span> <span class="built_in">int</span>[pattern.Length];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化Prefix表</span></span><br><span class="line">    <span class="built_in">int</span> pivit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; pattern.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pattern[pivit] == pattern[i])</span><br><span class="line">        &#123;</span><br><span class="line">            ++pivit;</span><br><span class="line">            prefix[i] = pivit;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            pivit = <span class="number">0</span>;</span><br><span class="line">            prefix[i]=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//prefix 数据后移一位，prefix[0] = -1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = prefix.Length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        prefix[i] = prefix[i - <span class="number">1</span>];</span><br><span class="line">    prefix[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//KMP查找</span></span><br><span class="line">    <span class="built_in">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> jndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (index &lt;= origin.Length - pattern.Length)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (jndex == pattern.Length<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> index = jndex;</span><br><span class="line">        <span class="keyword">if</span> (origin[index] == pattern[jndex] || prefix[index]==<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ++index;</span><br><span class="line">            ++jndex;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            jndex = prefix[jndex];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>参考</h1>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95">维基百科</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.youtube.com/user/tpof314/videos">YouTube</a></li>
 </ul>
@@ -464,7 +480,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFKMP%E7%AE%97%E6%B3%95"><span class="post-toc-text">什么是KMP算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="post-toc-text">问题介绍：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#KMP%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="post-toc-text">KMP算法思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%88%E7%9C%8B%E4%B8%AA%E5%8A%A8%E6%80%81%E5%9B%BE"><span class="post-toc-text">先看个动态图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%A6%96%E5%85%88%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%89%8D%E7%BC%80%E8%A1%A8-PrefixTable"><span class="post-toc-text">首先制作一个前缀表(PrefixTable)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KMP%E5%8C%B9%E9%85%8D%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="post-toc-text">KMP匹配思想：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%8C%E6%95%B4%E8%BF%87%E7%A8%8B"><span class="post-toc-text">完整过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%82%A3%E4%B9%88%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90prefix%E8%A1%A8"><span class="post-toc-text">那么如何生成prefix表?</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">代码实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83"><span class="post-toc-text">参考</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是KMP算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">问题介绍：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">KMP算法思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%88%E7%9C%8B%E4%B8%AA%E5%8A%A8%E6%80%81%E5%9B%BE"><span class="post-toc-text">先看个动态图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%A6%96%E5%85%88%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%89%8D%E7%BC%80%E8%A1%A8-PrefixTable"><span class="post-toc-text">首先制作一个前缀表(PrefixTable)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KMP%E5%8C%B9%E9%85%8D%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="post-toc-text">KMP匹配思想：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%8C%E6%95%B4%E8%BF%87%E7%A8%8B"><span class="post-toc-text">完整过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%82%A3%E4%B9%88%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90prefix%E8%A1%A8"><span class="post-toc-text">那么如何生成prefix表?</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">代码实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">参考</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

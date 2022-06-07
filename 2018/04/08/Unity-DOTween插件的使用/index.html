@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,60 +276,53 @@
       
       
       <div class="mdui-typo">
-      <h1 id="1-添加插件，添加命名空间"><a href="#1-添加插件，添加命名空间" class="headerlink" title="1.添加插件，添加命名空间"></a>1.添加插件，添加命名空间</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using DG.Tweening;</span><br></pre></td></tr></table></figure>
+      <h1>1.添加插件，添加命名空间</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">using DG.Tweening;</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
-<th align="left">问题</th>
-<th align="left">解决方案</th>
+<th style="text-align:left">问题</th>
+<th style="text-align:left">解决方案</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">创建动画后，动画会自动播放</td>
-<td align="left">tweener.Pause();</td>
+<tbody>
+<tr>
+<td style="text-align:left">创建动画后，动画会自动播放</td>
+<td style="text-align:left">tweener.Pause();</td>
 </tr>
 <tr>
-<td align="left">播放完成后，动画默认自动销毁</td>
-<td align="left">tweener.SetAutoKill(false);</td>
+<td style="text-align:left">播放完成后，动画默认自动销毁</td>
+<td style="text-align:left">tweener.SetAutoKill(false);</td>
 </tr>
-</tbody></table>
-<h2 id="值的渐变"><a href="#值的渐变" class="headerlink" title="值的渐变"></a>值的渐变</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DoTween.To(()=&gt;current,x=&gt;current=x,target,time);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Simple-简单方式-："><a href="#Simple-简单方式-：" class="headerlink" title="Simple(简单方式)："></a>Simple(简单方式)：</h2><p>从当前位置经过time秒后移动到vector3的位置<br>使用Tweener对象得到动画</p>
+</tbody>
+</table>
+<h2 id="值的渐变"><a class="header-anchor" href="#值的渐变">¶</a>值的渐变</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DoTween.To(()=&gt;current,x=&gt;current=x,target,time);</span><br></pre></td></tr></table></figure>
+<h2 id="Simple-简单方式-："><a class="header-anchor" href="#Simple-简单方式-：">¶</a>Simple(简单方式)：</h2>
+<p>从当前位置经过time秒后移动到vector3的位置<br>
+使用Tweener对象得到动画</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Tweener tweener=transform.DOMove(vector3,time);	</span><br><span class="line">Tweener tweener=transform.DOLocalMove(vector3,time);</span><br><span class="line">tweener.SetAutoKill(<span class="literal">false</span>);			<span class="comment">//不让动画自动销毁</span></span><br><span class="line"><span class="comment">//正序播放</span></span><br><span class="line">transform.DoPlayForward();</span><br><span class="line"><span class="comment">//倒放动画</span></span><br><span class="line">transform.DOPlayBackwards();</span><br><span class="line"><span class="comment">//播放</span></span><br><span class="line">tweener.Play();</span><br><span class="line"><span class="comment">//暂停</span></span><br><span class="line">tweener.Pause();</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="DoTween—FromTween"><a href="#DoTween—FromTween" class="headerlink" title="DoTween—FromTween"></a>DoTween—FromTween</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">transform.DOMoveX(<span class="number">5</span>,<span class="number">1</span>);				<span class="comment">//从当前位置经过1秒后移动到5的位置</span></span><br><span class="line">transform.DOMoveX(<span class="number">5</span>,<span class="number">1</span>).<span class="keyword">from</span>();		        <span class="comment">//从目标位置移动到当前位置</span></span><br><span class="line">transform.DOMoveX(<span class="number">5</span>,<span class="number">1</span>).<span class="keyword">from</span>(<span class="literal">true</span>);		<span class="comment">//从目标位置移动5个单位</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="动画属性"><a href="#动画属性" class="headerlink" title="动画属性"></a>动画属性</h2><p>&#x2F;&#x2F;Ease是一个枚举类型</p>
+<h2 id="DoTween—FromTween"><a class="header-anchor" href="#DoTween—FromTween">¶</a>DoTween—FromTween</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">transform.DOMoveX(<span class="number">5</span>,<span class="number">1</span>);				<span class="comment">//从当前位置经过1秒后移动到5的位置</span></span><br><span class="line">transform.DOMoveX(<span class="number">5</span>,<span class="number">1</span>).<span class="keyword">from</span>();		        <span class="comment">//从目标位置移动到当前位置</span></span><br><span class="line">transform.DOMoveX(<span class="number">5</span>,<span class="number">1</span>).<span class="keyword">from</span>(<span class="literal">true</span>);		<span class="comment">//从目标位置移动5个单位</span></span><br></pre></td></tr></table></figure>
+<h2 id="动画属性"><a class="header-anchor" href="#动画属性">¶</a>动画属性</h2>
+<p>//Ease是一个枚举类型</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Tweener tweener=transform.DOMoveX(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">tweener.SetEase(Ease.InBack);				<span class="comment">//设置曲线</span></span><br><span class="line">tweener.SetLoop(num);					<span class="comment">//循环播放num次;</span></span><br><span class="line">tweener.OnComplete(Methord);				<span class="comment">//动画播放完成，执行Methord()事件;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="对话框，文字动画"><a href="#对话框，文字动画" class="headerlink" title="对话框，文字动画"></a>对话框，文字动画</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Private Text text;</span><br><span class="line">text.DOText(str_target,time);					<span class="comment">//从空白经过time秒后逐渐显示出来</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<h2 id="屏幕震动"><a href="#屏幕震动" class="headerlink" title="屏幕震动"></a>屏幕震动</h2><p>&#x2F;&#x2F;原理：对Camera进行操作(使其坐标随机移动)</p>
+<h2 id="对话框，文字动画"><a class="header-anchor" href="#对话框，文字动画">¶</a>对话框，文字动画</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Private Text text;</span><br><span class="line">text.DOText(str_target,time);					<span class="comment">//从空白经过time秒后逐渐显示出来</span></span><br></pre></td></tr></table></figure>
+<h2 id="屏幕震动"><a class="header-anchor" href="#屏幕震动">¶</a>屏幕震动</h2>
+<p>//原理：对Camera进行操作(使其坐标随机移动)</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform.DOShakePosition(time,<span class="built_in">float</span> num);		        <span class="comment">//num范围0-1</span></span><br><span class="line">transform.DOShakePosition(time,<span class="keyword">new</span> Vector3(<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>));		<span class="comment">//只在x,y轴震动</span></span><br></pre></td></tr></table></figure>
-
-
 <p>颜色和透明度</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Text text;</span><br><span class="line">text.DOColor(targetColor,time);		        <span class="comment">//从当前颜色经过time秒后变成targetColor</span></span><br><span class="line">text.DOFade(alpha,time);			<span class="comment">//从当前透明度经过time秒后变成alpha的透明度</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>&#x2F;&#x2F;可视化动画编辑<br>&#x2F;&#x2F;控件上添加组件 DOTweenAnimation<br>&#x2F;&#x2F;代码控制DOTweenAnimation上创建的动画</p>
+<p>//可视化动画编辑<br>
+//控件上添加组件 DOTweenAnimation<br>
+//代码控制DOTweenAnimation上创建的动画</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DoTweenAnimation dta;</span><br><span class="line">dta.Play();						<span class="comment">//播放</span></span><br><span class="line">dta.DoPlayForward();</span><br></pre></td></tr></table></figure>
-
-
-<p>&#x2F;&#x2F;路径编辑器</p>
-<p>&#x2F;&#x2F;控件上添加组件 DOTweenPath</p>
-<p>更多：访问DOTween官网：<a target="_blank" rel="noopener" href="http://dotween.demigiant.com/">http://dotween.demigiant.com</a></p>
-<p>&#96;&#96;&#96;<br>2018.4.8<br>TonyChen</p>
+<p>//路径编辑器</p>
+<p>//控件上添加组件 DOTweenPath</p>
+<p>更多：访问DOTween官网：<a target="_blank" rel="noopener" href="http://dotween.demigiant.com">http://dotween.demigiant.com</a></p>
+<pre><code>2018.4.8
+TonyChen</code></pre>
 
     </div>
 
@@ -393,7 +386,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E6%8F%92%E4%BB%B6%EF%BC%8C%E6%B7%BB%E5%8A%A0%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="post-toc-text">1.添加插件，添加命名空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%80%BC%E7%9A%84%E6%B8%90%E5%8F%98"><span class="post-toc-text">值的渐变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Simple-%E7%AE%80%E5%8D%95%E6%96%B9%E5%BC%8F-%EF%BC%9A"><span class="post-toc-text">Simple(简单方式)：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DoTween%E2%80%94FromTween"><span class="post-toc-text">DoTween—FromTween</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7"><span class="post-toc-text">动画属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86%EF%BC%8C%E6%96%87%E5%AD%97%E5%8A%A8%E7%94%BB"><span class="post-toc-text">对话框，文字动画</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%8F%E5%B9%95%E9%9C%87%E5%8A%A8"><span class="post-toc-text">屏幕震动</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">1.添加插件，添加命名空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%80%BC%E7%9A%84%E6%B8%90%E5%8F%98"><span class="post-toc-text">值的渐变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Simple-%E7%AE%80%E5%8D%95%E6%96%B9%E5%BC%8F-%EF%BC%9A"><span class="post-toc-text">Simple(简单方式)：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DoTween%E2%80%94FromTween"><span class="post-toc-text">DoTween—FromTween</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7"><span class="post-toc-text">动画属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86%EF%BC%8C%E6%96%87%E5%AD%97%E5%8A%A8%E7%94%BB"><span class="post-toc-text">对话框，文字动画</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%8F%E5%B9%95%E9%9C%87%E5%8A%A8"><span class="post-toc-text">屏幕震动</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -281,8 +281,10 @@
 <p><code>Sprite</code>选择图集中的图片：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0512/select_sprite.jpg" alt="simage"></p>
 <p>当切换图集后会将Sprite置空。</p>
-<h1 id="代码加载图片："><a href="#代码加载图片：" class="headerlink" title="代码加载图片："></a>代码加载图片：</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    SImage image = GetComponent&lt;SImage&gt;();</span><br><span class="line"></span><br><span class="line">    AssetDatabase.LoadAssetAtPath&lt;SpriteAtlas&gt;(<span class="string">&quot;Assets/UI/UIAtlas/common.spriteatlas&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式一</span></span><br><span class="line">    <span class="comment">//image.Sprite = sprite;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二</span></span><br><span class="line">    <span class="comment">//SpriteAtlas atlas = </span></span><br><span class="line">    <span class="comment">//image.Atlas = atlas;</span></span><br><span class="line">    <span class="comment">//image.SpriteName = &quot;icon_1&quot;;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式三</span></span><br><span class="line">    <span class="comment">//image.SetSprite(atlas, &quot;icon_1&quot;);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方式四</span></span><br><span class="line">    image.SetSprite(<span class="string">&quot;common&quot;</span>, <span class="string">&quot;icon_1&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>最后考虑：如果之前选择过图集，又通过<code>Sprite</code>属性赋值了一张精灵，但是这张精灵不在图集中，要不要显示出来？</p>
+<h1>代码加载图片：</h1>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    SImage image = GetComponent&lt;SImage&gt;();</span><br><span class="line"></span><br><span class="line">    AssetDatabase.LoadAssetAtPath&lt;SpriteAtlas&gt;(<span class="string">&quot;Assets/UI/UIAtlas/common.spriteatlas&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式一</span></span><br><span class="line">    <span class="comment">//image.Sprite = sprite;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二</span></span><br><span class="line">    <span class="comment">//SpriteAtlas atlas = </span></span><br><span class="line">    <span class="comment">//image.Atlas = atlas;</span></span><br><span class="line">    <span class="comment">//image.SpriteName = &quot;icon_1&quot;;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式三</span></span><br><span class="line">    <span class="comment">//image.SetSprite(atlas, &quot;icon_1&quot;);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方式四</span></span><br><span class="line">    image.SetSprite(<span class="string">&quot;common&quot;</span>, <span class="string">&quot;icon_1&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>补充</h1>
+<p>最后考虑：如果之前选择过图集，又通过<code>Sprite</code>属性赋值了一张精灵，但是这张精灵不在图集中，要不要显示出来？</p>
 
     </div>
 
@@ -346,7 +348,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%A3%E7%A0%81%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%EF%BC%9A"><span class="post-toc-text">代码加载图片：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%A1%A5%E5%85%85"><span class="post-toc-text">补充</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">代码加载图片：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">补充</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

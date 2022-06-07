@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -275,10 +275,8 @@
       
       <div class="mdui-typo">
       <center>VideoView播放视频</center>
-
 <p>MianActivity.java</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import android.widget.*;</span><br><span class="line">import android.view.View.*;</span><br><span class="line">import android.view.*;</span><br><span class="line">import android.net.*;</span><br><span class="line">import java.io.*;</span><br><span class="line">public class MainActivity extends Activity</span><br><span class="line">&#123;</span><br><span class="line">    private Button bn1,bn2,bn3;</span><br><span class="line">    private VideoView vv;</span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState)&#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        bn1=(Button) findViewById(R.id.mainButton1);</span><br><span class="line">        bn2=(Button) findViewById(R.id.mainButton2);</span><br><span class="line">        bn3=(Button) findViewById(R.id.mainButton3);</span><br><span class="line">        vv=(VideoView) findViewById(R.id.mainVideoView);</span><br><span class="line">        vv.setVideoURI(Uri.parse(&quot;[url]file:///sdcard/123.mp4&quot;));</span><br><span class="line">//视频的路径</span><br><span class="line">        vv.setMediaController(new MediaController(this));</span><br><span class="line">        bn1.setOnClickListener(new OnClickListener()&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View p1)&#123;</span><br><span class="line">            vv.start();</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        bn2.setOnClickListener(new OnClickListener()&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View p1)</span><br><span class="line">&#123;</span><br><span class="line">            vv.pause();</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        bn3.setOnClickListener(new OnClickListener()&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View p1)</span><br><span class="line">        &#123;</span><br><span class="line">            vv.stopPlayback();</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>main.xml</p>
 </blockquote>

@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,17 +276,27 @@
       
       
       <div class="mdui-typo">
-      <h1 id="问题介绍"><a href="#问题介绍" class="headerlink" title="问题介绍"></a>问题介绍</h1><p>昨天把EFI改坏进不去系统，今天替换以前备份的EFI,发现在开机第二阶段出现“八苹果”，并且解锁界面直接花的惨不忍睹。可以通过长按电源键3-4秒后恢复正常，但是不能每次都这样吧。所以经过爬贴问大佬，最终通过在Clover注入edid解决。</p>
-<h1 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h1><ul>
+      <h1>问题介绍</h1>
+<p>昨天把EFI改坏进不去系统，今天替换以前备份的EFI,发现在开机第二阶段出现“八苹果”，并且解锁界面直接花的惨不忍睹。可以通过长按电源键3-4秒后恢复正常，但是不能每次都这样吧。所以经过爬贴问大佬，最终通过在Clover注入edid解决。</p>
+<h1>详细步骤</h1>
+<ul>
 <li>进Windows下载 EDIDManger.exe(自行百度)，安装运行；</li>
 <li>选择Load EDID from Registry,之后不更改DisplayID,直接点击OK.</li>
 <li>点击Save edid report,并保存到桌面。</li>
-<li>用Notepad打开，并删除没用的消息，留下如下格式的内容：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">00FFFFFFFFFFFF004C2D</span><br><span class="line">2C0D564C50302E190103</span><br><span class="line">80341D782A5295A55654</span><br><span class="line">9D250E5054BB8C00B300</span><br><span class="line">81C0810081809500A9C0</span><br><span class="line">01010101023A80187138</span><br><span class="line">2D40582C450009252100</span><br><span class="line">001E000000FD0032481E</span><br><span class="line">5111000A202020202020</span><br><span class="line">000000FC004332344633</span><br><span class="line">39300A20202020200000</span><br><span class="line">00FF004854514A433030</span><br><span class="line">3037370A20200137</span><br></pre></td></tr></table></figure></li>
-<li>再删除每行间的换行，如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00FFFFFFFFFFFF004C2D2C0D564C50302E19010380341D782A5295A556549D250E5054BB8C00B30081C0810081809500A9C001010101023A801871382D40582C450009252100001E000000FD0032481E5111000A202020202020000000FC00433234463339300A2020202020000000FF004854514A4330303037370A20200137</span><br></pre></td></tr></table></figure></li>
-<li>切换到Mac,使用Clover Configerator注入edid<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0614/inject-edid.png"></li>
+<li>用Notepad打开，并删除没用的消息，留下如下格式的内容：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">00FFFFFFFFFFFF004C2D</span><br><span class="line">2C0D564C50302E190103</span><br><span class="line">80341D782A5295A55654</span><br><span class="line">9D250E5054BB8C00B300</span><br><span class="line">81C0810081809500A9C0</span><br><span class="line">01010101023A80187138</span><br><span class="line">2D40582C450009252100</span><br><span class="line">001E000000FD0032481E</span><br><span class="line">5111000A202020202020</span><br><span class="line">000000FC004332344633</span><br><span class="line">39300A20202020200000</span><br><span class="line">00FF004854514A433030</span><br><span class="line">3037370A20200137</span><br></pre></td></tr></table></figure>
+<ul>
+<li>再删除每行间的换行，如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00FFFFFFFFFFFF004C2D2C0D564C50302E19010380341D782A5295A556549D250E5054BB8C00B30081C0810081809500A9C001010101023A801871382D40582C450009252100001E000000FD0032481E5111000A202020202020000000FC00433234463339300A2020202020000000FF004854514A4330303037370A20200137</span><br></pre></td></tr></table></figure>
+<ul>
+<li>切换到Mac,使用Clover Configerator注入edid<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0614/inject-edid.png" alt=""></li>
 </ul>
 <p>完成。</p>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>请自行提取edid,使用别人分享的可能导致不开机！！！</p>
+<h1>注意</h1>
+<p>请自行提取edid,使用别人分享的可能导致不开机！！！</p>
 
     </div>
 
@@ -350,7 +360,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E4%BB%8B%E7%BB%8D"><span class="post-toc-text">问题介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AF%A6%E7%BB%86%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">详细步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="post-toc-text">注意</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">问题介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">详细步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">注意</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

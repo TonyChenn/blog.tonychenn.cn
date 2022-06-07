@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -278,8 +278,10 @@
       
       
       <div class="mdui-typo">
-      <h2 id="什么是Xpath"><a href="#什么是Xpath" class="headerlink" title="什么是Xpath?"></a>什么是Xpath?</h2><p>XPath 是一门在 XML 文档中查找信息的语，Xpath通过使用路径表达式，实现选取XML文档中的一个或多个节点集合。</p>
-<h2 id="选取节点"><a href="#选取节点" class="headerlink" title="选取节点"></a>选取节点</h2><table>
+      <h2 id="什么是Xpath"><a class="header-anchor" href="#什么是Xpath">¶</a>什么是Xpath?</h2>
+<p>XPath 是一门在 XML 文档中查找信息的语，Xpath通过使用路径表达式，实现选取XML文档中的一个或多个节点集合。</p>
+<h2 id="选取节点"><a class="header-anchor" href="#选取节点">¶</a>选取节点</h2>
+<table>
 <thead>
 <tr>
 <th>xpath</th>
@@ -287,33 +289,36 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>div</td>
 <td>xpath(‘div’)</td>
 <td>选取所有div节点</td>
 </tr>
 <tr>
-<td>&#x2F;</td>
-<td>xpath(‘&#x2F;‘)</td>
+<td>/</td>
+<td>xpath(‘/’)</td>
 <td>从根节点进行选取</td>
 </tr>
 <tr>
-<td>&#x2F;&#x2F;div</td>
-<td>xpath(‘&#x2F;&#x2F;div’)</td>
+<td>//div</td>
+<td>xpath(‘//div’)</td>
 <td>选取所有div节点，不考虑div的位置</td>
 </tr>
 <tr>
 <td>.</td>
-<td>xpath(‘.&#x2F;‘)</td>
+<td>xpath(‘./’)</td>
 <td>选取当前节点</td>
 </tr>
 <tr>
-<td>..</td>
-<td>xpath(‘..&#x2F;‘)</td>
+<td>…</td>
+<td>xpath(‘…/’)</td>
 <td>选取当前节点的父节点</td>
 </tr>
-</tbody></table>
-<h2 id="谓语"><a href="#谓语" class="headerlink" title="谓语"></a>谓语</h2><table>
+</tbody>
+</table>
+<h2 id="谓语"><a class="header-anchor" href="#谓语">¶</a>谓语</h2>
+<table>
 <thead>
 <tr>
 <th>xpath</th>
@@ -321,59 +326,65 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>&#x2F;div&#x2F;a[1]</td>
-<td>xpath(‘&#x2F;div&#x2F;a[1]’)</td>
+<tbody>
+<tr>
+<td>/div/a[1]</td>
+<td>xpath(‘/div/a[1]’)</td>
 <td>选取div节点下的第一个a节点</td>
 </tr>
 <tr>
-<td>&#x2F;div&#x2F;a[last]</td>
-<td>xpath(‘&#x2F;div&#x2F;a[last]’)</td>
+<td>/div/a[last]</td>
+<td>xpath(‘/div/a[last]’)</td>
 <td>选取div节点下的最后一个a节点</td>
 </tr>
 <tr>
-<td>&#x2F;div&#x2F;a[position&lt;3]</td>
-<td>xpath(‘&#x2F;div&#x2F;a[position&lt;3]’)</td>
+<td>/div/a[position&lt;3]</td>
+<td>xpath(‘/div/a[position&lt;3]’)</td>
 <td>选取div节点下的前2个节点</td>
 </tr>
 <tr>
 <td>@</td>
-<td>xpath(‘&#x2F;&#x2F;div[@id]’)</td>
+<td>xpath(‘//div[@id]’)</td>
 <td>选取所有含有id属性的div节点</td>
 </tr>
 <tr>
 <td></td>
-<td>xpath(“&#x2F;&#x2F;div[@id&#x3D;’main’]”)</td>
-<td>选取所有div节点中含有id&#x3D;’main’的节点</td>
+<td>xpath(“//div[@id=‘main’]”)</td>
+<td>选取所有div节点中含有id='main’的节点</td>
 </tr>
 <tr>
-<td>&#x2F;div[id&lt;7]&#x2F;a</td>
-<td>xpath(‘&#x2F;div[id&lt;7]&#x2F;a’)</td>
+<td>/div[id&lt;7]/a</td>
+<td>xpath(‘/div[id&lt;7]/a’)</td>
 <td>选取id值小于7的div节点下的所有a节点</td>
 </tr>
-</tbody></table>
-<h2 id="选取未知节点"><a href="#选取未知节点" class="headerlink" title="选取未知节点"></a>选取未知节点</h2><table>
+</tbody>
+</table>
+<h2 id="选取未知节点"><a class="header-anchor" href="#选取未知节点">¶</a>选取未知节点</h2>
+<table>
 <thead>
 <tr>
 <th>xpath</th>
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>‘&#x2F;div&#x2F;*’</td>
+<tbody>
+<tr>
+<td>‘/div/*’</td>
 <td>选取div节点下的所有子节点</td>
 </tr>
 <tr>
-<td>‘&#x2F;div[@*]’</td>
+<td>‘/div[@*]’</td>
 <td>选取所有含有属性的div节点</td>
 </tr>
-</tbody></table>
-<h2 id="多路径选择"><a href="#多路径选择" class="headerlink" title="多路径选择"></a>多路径选择</h2><blockquote>
+</tbody>
+</table>
+<h2 id="多路径选择"><a class="header-anchor" href="#多路径选择">¶</a>多路径选择</h2>
+<blockquote>
 <p>使用 ‘|’ 符号，选取若干路径</p>
 </blockquote>
 <figure class="highlight xpath"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xpath(xpath1 + <span class="string">&#x27;|&#x27;</span> + xpath2)</span><br></pre></td></tr></table></figure>
-
-<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><table>
+<h2 id="常用函数"><a class="header-anchor" href="#常用函数">¶</a>常用函数</h2>
+<table>
 <thead>
 <tr>
 <th>表达式</th>
@@ -381,30 +392,35 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>start-with</td>
-<td>xpath(“&#x2F;&#x2F;div[start-with(@id,’ma’)]”)</td>
+<td>xpath(“//div[start-with(@id,‘ma’)]”)</td>
 <td>选取id值以ma开头的div节点</td>
 </tr>
 <tr>
 <td>contains</td>
-<td>xpath(“&#x2F;&#x2F;div[contains(@id,’aa’)]”)</td>
+<td>xpath(“//div[contains(@id,‘aa’)]”)</td>
 <td>选取id值中包含aa的div节点</td>
 </tr>
 <tr>
 <td>and</td>
-<td>xpath(“div[contains(@id,’xx’) and contains(@class,’yy’)]”)</td>
+<td>xpath(“div[contains(@id,‘xx’) and contains(@class,‘yy’)]”)</td>
 <td></td>
 </tr>
 <tr>
 <td>text()</td>
-<td>xpath(“&#x2F;&#x2F;div[contains(text(),’zz’)]”)</td>
+<td>xpath(“//div[contains(text(),‘zz’)]”)</td>
 <td>选取节点文本包含ma的div节点</td>
 </tr>
-</tbody></table>
-<h2 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h2><p><a href="https://tonychenn.cn/2018/09/01/CSharp-%E4%BD%BF%E7%94%A8HtmlAgilityPack%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/">CSharp-使用HtmlAgilityPack实现网站爬虫总结</a></p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gongbing798930123/article/details/78955597">https://blog.csdn.net/gongbing798930123/article/details/78955597</a><br><br><a target="_blank" rel="noopener" href="https://www.runoob.com/xpath/xpath-examples.html">https://www.runoob.com/xpath/xpath-examples.html</a></p>
+</tbody>
+</table>
+<h2 id="案例："><a class="header-anchor" href="#案例：">¶</a>案例：</h2>
+<p><a href="https://tonychenn.cn/2018/09/01/CSharp-%E4%BD%BF%E7%94%A8HtmlAgilityPack%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/">CSharp-使用HtmlAgilityPack实现网站爬虫总结</a></p>
+<h2 id="参考："><a class="header-anchor" href="#参考：">¶</a>参考：</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gongbing798930123/article/details/78955597">https://blog.csdn.net/gongbing798930123/article/details/78955597</a><br>
+<br><a target="_blank" rel="noopener" href="https://www.runoob.com/xpath/xpath-examples.html">https://www.runoob.com/xpath/xpath-examples.html</a></p>
 </blockquote>
 <div align='right'>但愿日子清净，款款落落拱手相让的都是柔情。</div>
 <div align='right'>TonyChenn<br>2018/11/8</div>

@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -274,15 +274,23 @@
       
       
       <div class="mdui-typo">
-      <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>实现 pow(x, n) ，即计算 x 的 n 次幂函数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/powx-n/">（出自力扣）</a></p>
+      <h1>问题描述</h1>
+<p>实现 pow(x, n) ，即计算 x 的 n 次幂函数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/powx-n/">（出自力扣）</a></p>
 <ul>
 <li>-100.0 &lt; x &lt; 100.0</li>
 <li>n 是 32 位有符号整数，其数值范围是 [−231, 231 − 1] 。</li>
 </ul>
 <p>看到这个题目第一眼想到的就是暴力求解。但也有些疑惑感觉有陷阱…但也没发现问题所在，就暴力一把提交了，发现当指数太大时时间就超时了…</p>
-<h1 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h1><p>快速幂是一种计算一个数的n次方的算法，其时间复杂度为O(log n),暴力求解时间复杂度为O(n)。</p>
-<h1 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h1><p>计算a^n^&#x3D;a * a * a * … * a,共相乘n次。根据数学公式a^m+n^&#x3D;a^m^ * a^n^,将取幂的任务按照&#x3D;&#x3D; 二进制表示 &#x3D;&#x3D;拆分成更小的任务，举个例子：<br>计算 3^13^，其中13转化为二进制为(1101)<del>2</del>&#x3D;1 * 2^3^+1 * 2^2^+1 * 2^0^;<br>则 3^13^&#x3D;3^8^ * 3^4^ * 3^1^<br>那么：对于x^n^，n&#x3D;(n^0^ * n^1^ *… * n^t^) &#x3D; n<del>0</del> * 2^0^ + n<del>1</del> * 2^1^ + … + n<del>t</del> * 2^t^<br>则 x^n^ &#x3D; x^(n<del>0</del> 2^0^ + n<del>1</del> 2^1^ + … + n<del>t</del> 2^t^)^</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>递归，发现依旧超时…毕竟递归会有许多重复的操作。</p>
+<h1>快速幂</h1>
+<p>快速幂是一种计算一个数的n次方的算法，其时间复杂度为O(log n),暴力求解时间复杂度为O(n)。</p>
+<h1>算法描述</h1>
+<p>计算a<sup>n</sup>=a * a * a * … * a,共相乘n次。根据数学公式a<sup>m+n</sup>=a<sup>m</sup> * a<sup>n</sup>,将取幂的任务按照== 二进制表示 ==拆分成更小的任务，举个例子：<br>
+计算 3<sup>13</sup>，其中13转化为二进制为(1101)<sub>2</sub>=1 * 2<sup>3</sup>+1 * 2<sup>2</sup>+1 * 2<sup>0</sup>;<br>
+则 3<sup>13</sup>=3<sup>8</sup> * 3<sup>4</sup> * 3<sup>1</sup><br>
+那么：对于x<sup>n</sup>，n=(n<sup>0</sup> * n<sup>1</sup> *… * n<sup>t</sup>) = n<sub>0</sub> * 2<sup>0</sup> + n<sub>1</sub> * 2<sup>1</sup> + … + n<sub>t</sub> * 2<sup>t</sup><br>
+则 x<sup>n</sup> = x^(n<sub>0</sub> 2<sup>0</sup> + n<sub>1</sub> 2<sup>1</sup> + … + n<sub>t</sub> 2<sup>t</sup>)^</p>
+<h1>代码实现</h1>
+<p>递归，发现依旧超时…毕竟递归会有许多重复的操作。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">double</span> <span class="title">MyPow</span>(<span class="params"><span class="built_in">double</span> x, <span class="built_in">int</span> n</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span> || x == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">int</span> nn = Math.Abs(n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">double</span> result = MyPow(x, nn / <span class="number">2</span>) * MyPow(x, nn / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> (nn % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        result *= x;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">0</span> ? <span class="number">1f</span> / result : result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -347,7 +355,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82"><span class="post-toc-text">快速幂</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="post-toc-text">算法描述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">代码实现</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">快速幂</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">算法描述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">代码实现</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

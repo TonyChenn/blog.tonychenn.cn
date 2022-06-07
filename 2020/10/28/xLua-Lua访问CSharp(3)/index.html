@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -279,16 +279,18 @@
       <ol>
 <li>再Lua中没有关键字，所有CSharp相关的都在CS下。</li>
 </ol>
-<h1 id="访问构造方法，静态变量，方法"><a href="#访问构造方法，静态变量，方法" class="headerlink" title="访问构造方法，静态变量，方法"></a>访问构造方法，静态变量，方法</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> gameobject1 = CS.UnityEngine.GameObject()</span><br><span class="line"><span class="comment">-- 获取属性</span></span><br><span class="line"><span class="built_in">print</span>(gameobject1.name)</span><br><span class="line"><span class="comment">-- 设置属性</span></span><br><span class="line">gameobject1.name = <span class="string">&quot;GameObject1&quot;</span></span><br><span class="line"><span class="comment">-- 调用方法</span></span><br><span class="line">gameobject1:SetActive(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 构造方法</span></span><br><span class="line"><span class="keyword">local</span> gameobject2 = CS.UnityEngine.GameObject(<span class="string">&quot;GameObject2&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 调用静态方法</span></span><br><span class="line">CS.UnityEngine.Object.DontDestroyOnLoad(gameobject2)</span><br></pre></td></tr></table></figure>
-
-<h1 id="访问重载方法"><a href="#访问重载方法" class="headerlink" title="访问重载方法"></a>访问重载方法</h1><p>由于lua中对于所有数字都是’number’类型,所以lua只支持有限的重载，如参数个数不同。</p>
+<h1>访问构造方法，静态变量，方法</h1>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> gameobject1 = CS.UnityEngine.GameObject()</span><br><span class="line"><span class="comment">-- 获取属性</span></span><br><span class="line"><span class="built_in">print</span>(gameobject1.name)</span><br><span class="line"><span class="comment">-- 设置属性</span></span><br><span class="line">gameobject1.name = <span class="string">&quot;GameObject1&quot;</span></span><br><span class="line"><span class="comment">-- 调用方法</span></span><br><span class="line">gameobject1:SetActive(<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 构造方法</span></span><br><span class="line"><span class="keyword">local</span> gameobject2 = CS.UnityEngine.GameObject(<span class="string">&quot;GameObject2&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 调用静态方法</span></span><br><span class="line">CS.UnityEngine.Object.DontDestroyOnLoad(gameobject2)</span><br></pre></td></tr></table></figure>
+<h1>访问重载方法</h1>
+<p>由于lua中对于所有数字都是’number’类型,所以lua只支持有限的重载，如参数个数不同。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        UnityEngine.Debug.Log(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"><span class="built_in">string</span> name</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        UnityEngine.Debug.Log(<span class="string">&quot;Hello &quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> dog = CS.Animal()</span><br><span class="line">dog:SayHello()</span><br><span class="line">dog:SayHello(<span class="string">&quot;Cat&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> Direction</span><br><span class="line">&#123;</span><br><span class="line">    Left,Right,Buttom,Top,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>枚举</h1>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> Direction</span><br><span class="line">&#123;</span><br><span class="line">    Left,Right,Buttom,Top,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">tostring</span>(CS.Direction.Left))</span><br><span class="line"><span class="comment">-- 数字转枚举</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">tostring</span>(CS.Direction.__CastFrom(<span class="number">1</span>)))</span><br><span class="line"><span class="comment">-- 字符串转枚举</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">tostring</span>(CS.Direction.__CastFrom(<span class="string">&#x27;Buttom&#x27;</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 输出</span></span><br><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">LUA: Left: 0</span></span><br><span class="line"><span class="comment">LUA: Right: 1</span></span><br><span class="line"><span class="comment">LUA: Buttom: 2</span></span><br><span class="line"><span class="comment">--]]</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="访问委托"><a href="#访问委托" class="headerlink" title="访问委托"></a>访问委托</h1><h1 id="复杂类型与表的转换"><a href="#复杂类型与表的转换" class="headerlink" title="复杂类型与表的转换"></a>复杂类型与表的转换</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">A</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> num1;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> num2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">B</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> A a;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> num3;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">Add</span>(<span class="params">B b</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> b.a.num1 + b.a.num2 + b.num3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>访问委托</h1>
+<h1>复杂类型与表的转换</h1>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">A</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> num1;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> num2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">B</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> A a;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> num3;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">Add</span>(<span class="params">B b</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> b.a.num1 + b.a.num2 + b.num3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> _b = CS.B()</span><br><span class="line"><span class="keyword">local</span> result = _b:Add(&#123;a = &#123;num1=<span class="number">11</span>, num2 = <span class="number">12</span>&#125;, num3 = <span class="number">13</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -352,7 +354,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%EF%BC%8C%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%EF%BC%8C%E6%96%B9%E6%B3%95"><span class="post-toc-text">访问构造方法，静态变量，方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E9%87%8D%E8%BD%BD%E6%96%B9%E6%B3%95"><span class="post-toc-text">访问重载方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="post-toc-text">枚举</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E5%A7%94%E6%89%98"><span class="post-toc-text">访问委托</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%A4%8D%E6%9D%82%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">复杂类型与表的转换</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">访问构造方法，静态变量，方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">访问重载方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">枚举</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">访问委托</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">复杂类型与表的转换</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

@@ -1,11 +1,15 @@
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>类似于单机游戏的存档，存档数据记录了当前系统运行状态，并能随时还原为这一状态，便于用户将自己的桌面状态保存或上传到远程服务器上，并能随时同步还原。</p>
+<h2 id="概念"><a class="header-anchor" href="#概念">¶</a>概念</h2>
+<h3 id="定义"><a class="header-anchor" href="#定义">¶</a>定义</h3>
+<p>类似于单机游戏的存档，存档数据记录了当前系统运行状态，并能随时还原为这一状态，便于用户将自己的桌面状态保存或上传到远程服务器上，并能随时同步还原。</p>
 <p>另外，如果开发者熟悉存档数据结构，能够通过编写程序批量修改存档数据。</p>
-<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>存档数据以JSON格式存在，保证了数据传输过程中的可序列化。<br>如果用js对象转化为JSON字符串，请保证这种转化是完全可逆的。</p>
+<h3 id="结构"><a class="header-anchor" href="#结构">¶</a>结构</h3>
+<p>存档数据以JSON格式存在，保证了数据传输过程中的可序列化。<br>
+如果用js对象转化为JSON字符串，请保证这种转化是完全可逆的。</p>
 <blockquote>
 <p>js对象可以被JSON.stringify转化为JSON字符串，但是如果js对象成员中有函数，无限嵌套，带方法的对象等复杂的成员，则它的数据很可能会丢失。合法的存档数据应该由一系列的键名-&gt;键值(字符串、数字)及层级关系组成，是可以无损序列化的。</p>
 </blockquote>
 <p>JSON数据的最外层形式如下，其中，<code>...</code>表示内部内容被省略。</p>
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;configs&quot;: {...},
   &quot;apps&quot;: {...},
   &quot;shortcuts&quot;: [...],
@@ -20,7 +24,8 @@
 <th>意义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>configs</td>
 <td>运行配置</td>
 </tr>
@@ -40,11 +45,13 @@
 <td>startMenu</td>
 <td>开始菜单数据</td>
 </tr>
-</tbody></table>
-<h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><p>官方的存档数据basic.json可以渲染出一个简单的、标准的桌面，参考此文件可以基本理解存档数据的结构。</p>
-<p><img src="/../assets/1.png" alt="1523414358437"></p>
+</tbody>
+</table>
+<h3 id="快速上手"><a class="header-anchor" href="#快速上手">¶</a>快速上手</h3>
+<p>官方的存档数据basic.json可以渲染出一个简单的、标准的桌面，参考此文件可以基本理解存档数据的结构。</p>
+<p><img src="../assets/1.png" alt="1523414358437"></p>
 <p>附<code>basic.json</code>代码（v1.0.0）</p>
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;configs&quot;: {
     &quot;topTaskBar&quot;: false,
     &quot;pathRes&quot;: &quot;./res&quot;,

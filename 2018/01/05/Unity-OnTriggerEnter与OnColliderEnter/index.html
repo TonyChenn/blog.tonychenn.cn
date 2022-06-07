@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,13 +276,17 @@
       
       
       <div class="mdui-typo">
-      <h1 id="1-OnTriggerEnter与OnColliderEnter"><a href="#1-OnTriggerEnter与OnColliderEnter" class="headerlink" title="1.OnTriggerEnter与OnColliderEnter"></a>1.OnTriggerEnter与OnColliderEnter</h1><p>1）如果想实现两个刚体物理的实际碰撞效果时候用OnCollisionEnter，Unity引擎会自动处理刚体碰撞的效果。OnCollisionEnter方法必须是在两个碰撞物体都不勾选isTrigger的前提下才能进入。<br>2）如果想在两个物体碰撞后自己处理碰撞事件用OnTriggerEnter。只要勾选一个isTrigger那么就能进入OnTriggerEnter方法。</p>
-<h1 id="2-Object跟随鼠标移动而旋转"><a href="#2-Object跟随鼠标移动而旋转" class="headerlink" title="2.Object跟随鼠标移动而旋转"></a>2.Object跟随鼠标移动而旋转</h1> <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> minXRotation = <span class="number">-40</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> maxXRotation = <span class="number">40</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> minYRotation = <span class="number">-60</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> maxYRotation = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">float</span> xPosPrecent = Input.mousePosition.x / Screen.width;</span><br><span class="line">    <span class="built_in">float</span> yPosPrecent = Input.mousePosition.y / Screen.height;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> xAngle = -Mathf.Clamp(yPosPrecent * maxXRotation, minXRotation, maxXRotation);</span><br><span class="line">    <span class="built_in">float</span> yAngle = Mathf.Clamp(xPosPrecent * maxYRotation, minYRotation, maxYRotation);</span><br><span class="line">    <span class="keyword">this</span>.gameObject.transform.eulerAngles=<span class="keyword">new</span> Vector3(xAngle, yAngle, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      <h1>1.OnTriggerEnter与OnColliderEnter</h1>
+<p>1）如果想实现两个刚体物理的实际碰撞效果时候用OnCollisionEnter，Unity引擎会自动处理刚体碰撞的效果。OnCollisionEnter方法必须是在两个碰撞物体都不勾选isTrigger的前提下才能进入。<br>
+2）如果想在两个物体碰撞后自己处理碰撞事件用OnTriggerEnter。只要勾选一个isTrigger那么就能进入OnTriggerEnter方法。</p>
+<h1>2.Object跟随鼠标移动而旋转</h1>
+ <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> minXRotation = <span class="number">-40</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> maxXRotation = <span class="number">40</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> minYRotation = <span class="number">-60</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> maxYRotation = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">float</span> xPosPrecent = Input.mousePosition.x / Screen.width;</span><br><span class="line">    <span class="built_in">float</span> yPosPrecent = Input.mousePosition.y / Screen.height;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> xAngle = -Mathf.Clamp(yPosPrecent * maxXRotation, minXRotation, maxXRotation);</span><br><span class="line">    <span class="built_in">float</span> yAngle = Mathf.Clamp(xPosPrecent * maxYRotation, minYRotation, maxYRotation);</span><br><span class="line">    <span class="keyword">this</span>.gameObject.transform.eulerAngles=<span class="keyword">new</span> Vector3(xAngle, yAngle, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>Mathf.Clamp(value,min,max);</strong></p>
-<p>当旋转角度大于max，value&#x3D;max;</p>
-<p>当旋转角度小于min，value&#x3D;min;</p>
-<p>else value&#x3D;value;  </p>
-<p> Tony-Chen<br> <strong>留人间多少爱，迎浮世千重变，与有情人做快乐事，别问是劫是缘。</strong></p>
+<p>当旋转角度大于max，value=max;</p>
+<p>当旋转角度小于min，value=min;</p>
+<p>else value=value;</p>
+<p>Tony-Chen<br>
+<strong>留人间多少爱，迎浮世千重变，与有情人做快乐事，别问是劫是缘。</strong></p>
 
     </div>
 
@@ -346,7 +350,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-OnTriggerEnter%E4%B8%8EOnColliderEnter"><span class="post-toc-text">1.OnTriggerEnter与OnColliderEnter</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-Object%E8%B7%9F%E9%9A%8F%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E8%80%8C%E6%97%8B%E8%BD%AC"><span class="post-toc-text">2.Object跟随鼠标移动而旋转</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">1.OnTriggerEnter与OnColliderEnter</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">2.Object跟随鼠标移动而旋转</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -279,38 +279,46 @@
       <blockquote>
 <p>hotfix接入，请查看上一篇：<a href="https://tonychenn.cn/2021/10/12/xLua-Hotfix%E6%8E%A5%E5%85%A5(4)/">xLua-Hotfix接入(4)</a></p>
 </blockquote>
-<h1 id="修补各种类型的方法"><a href="#修补各种类型的方法" class="headerlink" title="修补各种类型的方法"></a>修补各种类型的方法</h1><h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><ol>
+<h1>修补各种类型的方法</h1>
+<h1>注意：</h1>
+<ol>
 <li>首次需要hotfix的类名，要加到<code>HotfixList</code>中。</li>
 <li>lua 要访问的类名</li>
 </ol>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">string</span> mName;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>; &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; mName = <span class="string">&quot;error&quot;</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span>(<span class="params"><span class="built_in">string</span> name</span>)</span> &#123; mName = name; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Congrate</span>()</span>&#123; Debug.Log(mName + <span class="string">&quot;打招呼&quot;</span>); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="普通方法"><a href="#普通方法" class="headerlink" title="普通方法"></a>普通方法</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;Congrate&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;inject success&#x27;</span>)</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="修复特殊的方法"><a href="#修复特殊的方法" class="headerlink" title="修复特殊的方法"></a>修复特殊的方法</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>构造函数的lua方法名是<code>.ctor</code>,此外构造函数的热补丁并不是替换，而是执行原有逻辑后再调用lua。</p>
+<h1>普通方法</h1>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;Congrate&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;inject success&#x27;</span>)</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
+<h1>修复特殊的方法</h1>
+<h2 id="构造函数"><a class="header-anchor" href="#构造函数">¶</a>构造函数</h2>
+<p>构造函数的lua方法名是<code>.ctor</code>,此外构造函数的热补丁并不是替换，而是执行原有逻辑后再调用lua。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;.ctor&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self, name)</span></span></span><br><span class="line">    <span class="built_in">self</span>.mName = <span class="string">&#x27;[[&#x27;</span>..name..<span class="string">&#x27;]]&#x27;</span></span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="索引器"><a href="#索引器" class="headerlink" title="索引器"></a>索引器</h2><p>索引器热修复对应lua方法是<code>get_Item</code>&#x2F;<code>set_Item</code>。</br><br>参数为：</p>
+<h2 id="索引器"><a class="header-anchor" href="#索引器">¶</a>索引器</h2>
+<p>索引器热修复对应lua方法是<code>get_Item</code>/<code>set_Item</code>。</br><br>
+参数为：</p>
 <ul>
 <li>get_Item(self, key)           返回value</li>
-<li>set_Item(self, key, value)<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;get_Item&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self, key)</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure></li>
+<li>set_Item(self, key, value)</li>
 </ul>
-<h2 id="get-x2F-set-属性"><a href="#get-x2F-set-属性" class="headerlink" title="get&#x2F;set 属性"></a>get&#x2F;set 属性</h2><p>get&#x2F;set属性的lua方法名对应是<code>get_属性名</code>&#x2F;<code>set_属性名</code>.</br><br>参数为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;get_Item&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self, key)</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="get-set-属性"><a class="header-anchor" href="#get-set-属性">¶</a>get/set 属性</h2>
+<p>get/set属性的lua方法名对应是<code>get_属性名</code>/<code>set_属性名</code>.</br><br>
+参数为：</p>
 <ul>
 <li>get_属性名(self)           返回value</li>
 <li>set_属性名(self, value)</li>
 </ul>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;get_Name&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">self</span>.mName</span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"></span><br><span class="line">xlua.hotfix(CS.Animal, <span class="string">&#x27;set_Name&#x27;</span>, <span class="function"><span class="keyword">function</span><span class="params">(self, value)</span></span></span><br><span class="line">    <span class="built_in">self</span>.mName = value</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="x2F-事件"><a href="#x2F-事件" class="headerlink" title="+&#x2F;- 事件"></a>+&#x2F;- 事件</h2><p>事件的+&#x2F;-操作对应lua的方法是：<code>add_事件名</code>&#x2F;<code>remove_事件名</code></p>
-<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>析构函数对应lua的方法名是<code>Finalize</code>, 传一个self参数.</p>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>泛型类型实例化后都是一个新的类型，不能直接对泛型打补丁，只能对实例化后的类型打补丁。</p>
-<h2 id="Unity协程"><a href="#Unity协程" class="headerlink" title="Unity协程"></a>Unity协程</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 待修复协程</span></span><br><span class="line"><span class="function">IEnumerator <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">3</span></span>)</span>;</span><br><span class="line">        Debug.Log(<span class="string">&quot;Wait for 3 seconds&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="事件"><a class="header-anchor" href="#事件">¶</a>+/- 事件</h2>
+<p>事件的+/-操作对应lua的方法是：<code>add_事件名</code>/<code>remove_事件名</code></p>
+<h2 id="析构函数"><a class="header-anchor" href="#析构函数">¶</a>析构函数</h2>
+<p>析构函数对应lua的方法名是<code>Finalize</code>, 传一个self参数.</p>
+<h2 id="泛型"><a class="header-anchor" href="#泛型">¶</a>泛型</h2>
+<p>泛型类型实例化后都是一个新的类型，不能直接对泛型打补丁，只能对实例化后的类型打补丁。</p>
+<h2 id="Unity协程"><a class="header-anchor" href="#Unity协程">¶</a>Unity协程</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 待修复协程</span></span><br><span class="line"><span class="function">IEnumerator <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">3</span></span>)</span>;</span><br><span class="line">        Debug.Log(<span class="string">&quot;Wait for 3 seconds&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--要在lua中配合C#协程函数  那么必使用它</span></span><br><span class="line">util = <span class="built_in">require</span>(<span class="string">&quot;xlua.util&quot;</span>)</span><br><span class="line">xlua.hotfix(CS.HotFixSubClass,&#123;</span><br><span class="line">    Start = <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">        <span class="keyword">return</span> util.cs_generator(<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">                <span class="built_in">coroutine</span>.<span class="built_in">yield</span>(CS.UnityEngine.WaitForSeconds(<span class="number">1</span>))</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;Wait for 1 seconds&#x27;</span>)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span>)</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="多方法修复-x2F-整个脚本代码修复"><a href="#多方法修复-x2F-整个脚本代码修复" class="headerlink" title="多方法修复&#x2F;整个脚本代码修复"></a>多方法修复&#x2F;整个脚本代码修复</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, &#123;</span><br><span class="line">    <span class="comment">-- 构造函数</span></span><br><span class="line">    [.ctor] = <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span> </span><br><span class="line"></span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    Start = <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    <span class="comment">-- 析构函数</span></span><br><span class="line">    Finalize=<span class="function"><span class="keyword">function</span><span class="params">(self)</span></span> </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
+<h2 id="多方法修复-整个脚本代码修复"><a class="header-anchor" href="#多方法修复-整个脚本代码修复">¶</a>多方法修复/整个脚本代码修复</h2>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">xlua.hotfix(CS.Animal, &#123;</span><br><span class="line">    <span class="comment">-- 构造函数</span></span><br><span class="line">    [.ctor] = <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span> </span><br><span class="line"></span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    Start = <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    <span class="comment">-- 析构函数</span></span><br><span class="line">    Finalize=<span class="function"><span class="keyword">function</span><span class="params">(self)</span></span> </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -374,7 +382,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BF%AE%E8%A1%A5%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">修补各种类型的方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="post-toc-text">注意：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95"><span class="post-toc-text">普通方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BF%AE%E5%A4%8D%E7%89%B9%E6%AE%8A%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">修复特殊的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="post-toc-text">构造函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="post-toc-text">索引器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#get-x2F-set-%E5%B1%9E%E6%80%A7"><span class="post-toc-text">get&#x2F;set 属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#x2F-%E4%BA%8B%E4%BB%B6"><span class="post-toc-text">+&#x2F;- 事件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="post-toc-text">析构函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="post-toc-text">泛型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unity%E5%8D%8F%E7%A8%8B"><span class="post-toc-text">Unity协程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%9A%E6%96%B9%E6%B3%95%E4%BF%AE%E5%A4%8D-x2F-%E6%95%B4%E4%B8%AA%E8%84%9A%E6%9C%AC%E4%BB%A3%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="post-toc-text">多方法修复&#x2F;整个脚本代码修复</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">修补各种类型的方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">注意：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">普通方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">修复特殊的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="post-toc-text">构造函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8"><span class="post-toc-text">索引器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#get-set-%E5%B1%9E%E6%80%A7"><span class="post-toc-text">get&#x2F;set 属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="post-toc-text">+&#x2F;- 事件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="post-toc-text">析构函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="post-toc-text">泛型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unity%E5%8D%8F%E7%A8%8B"><span class="post-toc-text">Unity协程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%9A%E6%96%B9%E6%B3%95%E4%BF%AE%E5%A4%8D-%E6%95%B4%E4%B8%AA%E8%84%9A%E6%9C%AC%E4%BB%A3%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="post-toc-text">多方法修复&#x2F;整个脚本代码修复</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

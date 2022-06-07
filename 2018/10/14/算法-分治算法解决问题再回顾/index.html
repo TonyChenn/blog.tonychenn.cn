@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,31 +276,36 @@
       
       
       <div class="mdui-typo">
-      <h1 id="什么是分治思想呢？"><a href="#什么是分治思想呢？" class="headerlink" title="什么是分治思想呢？"></a>什么是分治思想呢？</h1><p>对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）</p>
-<h1 id="分治法求最大子数组"><a href="#分治法求最大子数组" class="headerlink" title="分治法求最大子数组"></a>分治法求最大子数组</h1><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>现在呢有17天的股票价格数据，问在哪天买入，哪天卖出才能使收益最高？</p>
+      <h1>什么是分治思想呢？</h1>
+<p>对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）</p>
+<h1>分治法求最大子数组</h1>
+<h2 id="问题描述："><a class="header-anchor" href="#问题描述：">¶</a>问题描述：</h2>
+<p>现在呢有17天的股票价格数据，问在哪天买入，哪天卖出才能使收益最高？</p>
 <p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/problem.jpg" alt="problem"></p>
-<h2 id="解决方案一（暴力求解）"><a href="#解决方案一（暴力求解）" class="headerlink" title="解决方案一（暴力求解）"></a>解决方案一（暴力求解）</h2><p>逐个求解，比较获得最大值的那一组，实现过程省略，参考：我的博文<a target="_blank" rel="noopener" href="https://tonychenn.github.io/2017/11/02/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%A4%A7%E5%AD%97%E4%B8%B2%E5%92%8C/">算法-最大字串和</a></p>
-<h2 id="解决方案二（分治）"><a href="#解决方案二（分治）" class="headerlink" title="解决方案二（分治）"></a>解决方案二（分治）</h2><h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><ol>
+<h2 id="解决方案一（暴力求解）"><a class="header-anchor" href="#解决方案一（暴力求解）">¶</a>解决方案一（暴力求解）</h2>
+<p>逐个求解，比较获得最大值的那一组，实现过程省略，参考：我的博文<a target="_blank" rel="noopener" href="https://tonychenn.github.io/2017/11/02/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%A4%A7%E5%AD%97%E4%B8%B2%E5%92%8C/">算法-最大字串和</a></p>
+<h2 id="解决方案二（分治）"><a class="header-anchor" href="#解决方案二（分治）">¶</a>解决方案二（分治）</h2>
+<h3 id="思想"><a class="header-anchor" href="#思想">¶</a>思想</h3>
+<ol>
 <li>计算出每天的价格波动表如下：</li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/cal.jpg" alt="cal"></p>
 <ol start="2">
-<li>将数据从中间分为左右两部分。此时有三种情况：<ul>
+<li>将数据从中间分为左右两部分。此时有三种情况：
+<ul>
 <li>买入天数在左侧部分，卖出天数在左侧部分（此时与原问题相似，递归的解决）</li>
 <li>买入天数在右侧部分，卖出天数在右侧部分（此时与原问题相似，递归的解决）</li>
 <li>买入天数在左侧部分，卖出天数在右侧部分（可直接解决）</li>
 </ul>
 </li>
-<li>上代码<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//保存最大子数组数据</span></span><br><span class="line"><span class="keyword">struct</span> SubArray</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//买入天数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> startIndex;</span><br><span class="line">    <span class="comment">//卖出天数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> endIndex;</span><br><span class="line">    <span class="comment">//最大利润</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> total;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>上代码</li>
 </ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//保存最大子数组数据</span></span><br><span class="line"><span class="keyword">struct</span> SubArray</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//买入天数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> startIndex;</span><br><span class="line">    <span class="comment">//卖出天数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> endIndex;</span><br><span class="line">    <span class="comment">//最大利润</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> total;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> SubArray <span class="title">GetMaxSubArray</span>(<span class="params"><span class="built_in">int</span>[] array,<span class="built_in">int</span> start,<span class="built_in">int</span> end</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//递归的结束位置</span></span><br><span class="line">    <span class="keyword">if</span>(start==end)</span><br><span class="line">    &#123;</span><br><span class="line">        SubArray temp;</span><br><span class="line">        temp.startIndex = start;</span><br><span class="line">        temp.endIndex = end;</span><br><span class="line">        temp.total = array[start];</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//设置中点</span></span><br><span class="line">    <span class="built_in">int</span> mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">//买入天数在左侧部分，卖出天数在左侧部分</span></span><br><span class="line">    SubArray subArray1 = GetMaxSubArray(array, start, mid);</span><br><span class="line">    <span class="comment">//买入天数在右侧部分，卖出天数在右侧部分</span></span><br><span class="line">    SubArray subArray2 = GetMaxSubArray(array, mid + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//买入天数在左侧部分，卖出天数在右侧部分</span></span><br><span class="line">    <span class="comment">//左侧最大值</span></span><br><span class="line">    <span class="built_in">int</span> max1 = array[mid];</span><br><span class="line">    <span class="built_in">int</span> max1Temp = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> startIndex = mid;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = mid; i &gt;=start ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        max1Temp += array[i];</span><br><span class="line">        <span class="keyword">if</span> (max1Temp &gt; max1)</span><br><span class="line">        &#123;</span><br><span class="line">            max1 = max1Temp;</span><br><span class="line">            startIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//买入天数在左侧部分，卖出天数在右侧部分</span></span><br><span class="line">    <span class="comment">//右侧最大值</span></span><br><span class="line">    <span class="built_in">int</span> max2 = array[mid + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">int</span> max2Temp = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> endIndex = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = mid+<span class="number">1</span>; i &lt;end; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        max2Temp += array[i];</span><br><span class="line">        <span class="keyword">if</span>(max2Temp&gt;max2)</span><br><span class="line">        &#123;</span><br><span class="line">            max2 = max2Temp;</span><br><span class="line">            endIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SubArray subArray3;</span><br><span class="line">    subArray3.startIndex = startIndex;</span><br><span class="line">    subArray3.endIndex = endIndex;</span><br><span class="line">    subArray3.total = max1 + max2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (subArray1.total &gt;= subArray2.total &amp;&amp; subArray1.total &gt;= subArray3.total)</span><br><span class="line">        <span class="keyword">return</span> subArray1;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (subArray2.total &gt;= subArray1.total &amp;&amp; subArray2.total &gt;= subArray3.total)</span><br><span class="line">        <span class="keyword">return</span> subArray2;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> subArray3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span>[] priceArray = &#123; <span class="number">100</span>, <span class="number">113</span>, <span class="number">110</span>, <span class="number">85</span>, <span class="number">105</span>, <span class="number">102</span>, <span class="number">86</span>, <span class="number">63</span>, <span class="number">81</span>, <span class="number">101</span>, <span class="number">94</span>, <span class="number">106</span>, <span class="number">101</span>, <span class="number">79</span>, <span class="number">94</span> &#125;;</span><br><span class="line">    <span class="built_in">int</span>[] fluctuateArray = <span class="keyword">new</span> <span class="built_in">int</span>[priceArray.Length - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获得价格波动值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; fluctuateArray.Length; i++)</span><br><span class="line">        fluctuateArray[i] = priceArray[i + <span class="number">1</span>] - priceArray[i];</span><br><span class="line"></span><br><span class="line">    SubArray curr= GetMaxSubArray(fluctuateArray, <span class="number">0</span>, fluctuateArray.Length<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;买入天数：&quot;</span>+curr.startIndex + <span class="string">&quot; 卖出天数：&quot;</span> + curr.endIndex+<span class="number">1</span> + <span class="string">&quot; 最大利润:&quot;</span> + curr.total);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里似乎需要一个结果：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/result.jpg" alt="result"></p>
 <div align="right">TonyChenn</br>2018.10.17</div>
-
-
 
     </div>
 
@@ -364,7 +369,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E6%B2%BB%E6%80%9D%E6%83%B3%E5%91%A2%EF%BC%9F"><span class="post-toc-text">什么是分治思想呢？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%88%86%E6%B2%BB%E6%B3%95%E6%B1%82%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84"><span class="post-toc-text">分治法求最大子数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="post-toc-text">问题描述：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%88%E6%9A%B4%E5%8A%9B%E6%B1%82%E8%A7%A3%EF%BC%89"><span class="post-toc-text">解决方案一（暴力求解）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="post-toc-text">解决方案二（分治）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%9D%E6%83%B3"><span class="post-toc-text">思想</span></a></li></ol></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是分治思想呢？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">分治法求最大子数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="post-toc-text">问题描述：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%88%E6%9A%B4%E5%8A%9B%E6%B1%82%E8%A7%A3%EF%BC%89"><span class="post-toc-text">解决方案一（暴力求解）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="post-toc-text">解决方案二（分治）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%9D%E6%83%B3"><span class="post-toc-text">思想</span></a></li></ol></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

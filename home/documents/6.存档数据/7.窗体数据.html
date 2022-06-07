@@ -1,4 +1,5 @@
-<h3 id="窗体数据"><a href="#窗体数据" class="headerlink" title="窗体数据"></a>窗体数据</h3><p>首先，窗体数据是存在于运行时（runtime）的，它不需要保存到存档数据中，之所以把它放于此处，是因为它与APP的数据结构有很多相似之处（继承）。</p>
+<h3 id="窗体数据"><a class="header-anchor" href="#窗体数据">¶</a>窗体数据</h3>
+<p>首先，窗体数据是存在于运行时（runtime）的，它不需要保存到存档数据中，之所以把它放于此处，是因为它与APP的数据结构有很多相似之处（继承）。</p>
 <blockquote>
 <p>窗体和APP的关系正如windows进程与exe文件之间的关系。窗体依赖于APP存在，是它的运行状态。</p>
 </blockquote>
@@ -11,7 +12,8 @@
 <th>例子</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>addressBar</td>
 <td>显示地址栏</td>
 <td>true</td>
@@ -56,7 +58,8 @@
 <td>尺寸、位置、浮动层级</td>
 <td>{index: 12,position: Object,size: Object}</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>在阅读文档<code>7.3窗体API</code>后，你可以通过<code>getWinData</code>和<code>setWinData</code>方法动态地调整窗体的参数。</p>
 <blockquote>
 <p>窗体API中还有一些方法是间接调整窗体参数的，例如<code>hide</code>(最小化)实际上是改变了窗体的min属性。推荐使用间接的方法而不是直接调用<code>setWinData</code>来修改窗体数据。</p>

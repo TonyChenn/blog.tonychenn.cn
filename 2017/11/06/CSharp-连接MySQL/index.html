@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,14 +276,26 @@
       
       
       <div class="mdui-typo">
-      <h1 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h1><p> 下载MySql，安装好MySql Server，MySql For VisualStudio两项；<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/11.06/install.jpg"><br> 这是必不可少的｛&#x2F;滑稽｝不多说</p>
-<h1 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h1><p> 打开VisualStudio，创建一个窗体应用程序；<br> 在服务器资源管理器上创建连接：<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/11.06/Conntct.jpg"></p>
-<h1 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h1><p> 下载文件：MySql.Data.dll(资源尚在审核中……..)<br> 直接在NuGet上搜索MySQL添加即可<br> （没有此文件，下面无法找不到MySql.Data.MySqlClient 这个包）</p>
-<h1 id="第四步："><a href="#第四步：" class="headerlink" title="第四步："></a>第四步：</h1><p> 添加命名空间：using MySql.Data.MySqlClient;</p>
-<h1 id="连接文件："><a href="#连接文件：" class="headerlink" title="连接文件："></a>连接文件：</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> constr = <span class="string">&quot;server=localhost;User Id=root;password=*******;Database=DatabaseName&quot;</span>;</span><br><span class="line">MySqlConnection mycon = <span class="keyword">new</span> MySqlConnection(constr);</span><br><span class="line">mycon.Open();</span><br><span class="line">MySqlCommand mycmd = <span class="keyword">new</span> MySqlCommand(<span class="string">&quot;insert into lost(OBName,OBType,StuName) values(&#x27;校园卡&#x27;,&#x27;卡品&#x27;,&#x27;Jack&#x27;)&quot;</span>, mycon);</span><br><span class="line"><span class="keyword">if</span> (mycmd.ExecuteNonQuery() &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">   MessageBox.Show(<span class="string">&quot;数据插入成功！&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">mycon.Close();</span><br></pre></td></tr></table></figure>
-<p> ok，到此结束。</p>
-<p> 2017.11.6<br> Tony-Chen</p>
-<p> <strong>留人间多少爱，迎浮世千重变。</strong></p>
+      <h1>第一步：</h1>
+<p>下载MySql，安装好MySql Server，MySql For VisualStudio两项；<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/11.06/install.jpg" alt=""><br>
+这是必不可少的｛/滑稽｝不多说</p>
+<h1>第二步</h1>
+<p>打开VisualStudio，创建一个窗体应用程序；<br>
+在服务器资源管理器上创建连接：<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/11.06/Conntct.jpg" alt=""></p>
+<h1>第三步：</h1>
+<p>下载文件：MySql.Data.dll(资源尚在审核中………)<br>
+直接在NuGet上搜索MySQL添加即可<br>
+（没有此文件，下面无法找不到MySql.Data.MySqlClient 这个包）</p>
+<h1>第四步：</h1>
+<p>添加命名空间：using MySql.Data.MySqlClient;</p>
+<h1>连接文件：</h1>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> constr = <span class="string">&quot;server=localhost;User Id=root;password=*******;Database=DatabaseName&quot;</span>;</span><br><span class="line">MySqlConnection mycon = <span class="keyword">new</span> MySqlConnection(constr);</span><br><span class="line">mycon.Open();</span><br><span class="line">MySqlCommand mycmd = <span class="keyword">new</span> MySqlCommand(<span class="string">&quot;insert into lost(OBName,OBType,StuName) values(&#x27;校园卡&#x27;,&#x27;卡品&#x27;,&#x27;Jack&#x27;)&quot;</span>, mycon);</span><br><span class="line"><span class="keyword">if</span> (mycmd.ExecuteNonQuery() &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">   MessageBox.Show(<span class="string">&quot;数据插入成功！&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">mycon.Close();</span><br></pre></td></tr></table></figure>
+<p>ok，到此结束。</p>
+<p>2017.11.6<br>
+Tony-Chen</p>
+<p><strong>留人间多少爱，迎浮世千重变。</strong></p>
 
     </div>
 
@@ -347,7 +359,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A"><span class="post-toc-text">第一步：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="post-toc-text">第二步</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A"><span class="post-toc-text">第三步：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A"><span class="post-toc-text">第四步：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="post-toc-text">连接文件：</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">第一步：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">第二步</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">第三步：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">第四步：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">连接文件：</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

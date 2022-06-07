@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -274,10 +274,15 @@
       
       
       <div class="mdui-typo">
-      <h1 id="什么是DrawCall"><a href="#什么是DrawCall" class="headerlink" title="什么是DrawCall?"></a>什么是DrawCall?</h1><p>DrawCall就是CPU调用图像变成接口的命令，让GPU进行渲染的命令。</p>
-<h1 id="为什么DrawCall多了会影响帧率？"><a href="#为什么DrawCall多了会影响帧率？" class="headerlink" title="为什么DrawCall多了会影响帧率？"></a>为什么DrawCall多了会影响帧率？</h1><p>CPU与GPU的并行工作应用了<b>并行缓冲区</b>.与生产者-消费者模型类似。CPU提交DrawCall到缓冲区，GPU从缓冲区取数据。<br>效率上，CPU要向GPU发送许多数据，以及检查工作，而GPU渲染能力很强，所以GPU从缓冲区取命令的速度远远大于CPU发送命令的速度。所以DrawCall过多会导致CPU过载。</p>
-<h1 id="如何减少DrawCall"><a href="#如何减少DrawCall" class="headerlink" title="如何减少DrawCall?"></a>如何减少DrawCall?</h1><p>上面说DrawCall过多影响帧率是因为CPU处理数据，发送命令很耗时，所以可以通过合并一些DrawCall,进而减少DrawCall的总数量.</p>
-<h1 id="开发中减少DrawCall方法"><a href="#开发中减少DrawCall方法" class="headerlink" title="开发中减少DrawCall方法"></a>开发中减少DrawCall方法</h1><ol>
+      <h1>什么是DrawCall?</h1>
+<p>DrawCall就是CPU调用图像变成接口的命令，让GPU进行渲染的命令。</p>
+<h1>为什么DrawCall多了会影响帧率？</h1>
+<p>CPU与GPU的并行工作应用了<b>并行缓冲区</b>.与生产者-消费者模型类似。CPU提交DrawCall到缓冲区，GPU从缓冲区取数据。<br>
+效率上，CPU要向GPU发送许多数据，以及检查工作，而GPU渲染能力很强，所以GPU从缓冲区取命令的速度远远大于CPU发送命令的速度。所以DrawCall过多会导致CPU过载。</p>
+<h1>如何减少DrawCall?</h1>
+<p>上面说DrawCall过多影响帧率是因为CPU处理数据，发送命令很耗时，所以可以通过合并一些DrawCall,进而减少DrawCall的总数量.</p>
+<h1>开发中减少DrawCall方法</h1>
+<ol>
 <li>动态字体增加DrawCall</li>
 <li>一个界面减少图集数量（NGUI）</li>
 <li>图集不穿插（每个图集就是1个DrawCall）</li>
@@ -346,7 +351,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDrawCall"><span class="post-toc-text">什么是DrawCall?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88DrawCall%E5%A4%9A%E4%BA%86%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%B8%A7%E7%8E%87%EF%BC%9F"><span class="post-toc-text">为什么DrawCall多了会影响帧率？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91DrawCall"><span class="post-toc-text">如何减少DrawCall?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%BC%80%E5%8F%91%E4%B8%AD%E5%87%8F%E5%B0%91DrawCall%E6%96%B9%E6%B3%95"><span class="post-toc-text">开发中减少DrawCall方法</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是DrawCall?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">为什么DrawCall多了会影响帧率？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">如何减少DrawCall?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">开发中减少DrawCall方法</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

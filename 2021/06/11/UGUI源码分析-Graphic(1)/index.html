@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -277,31 +277,49 @@
       
       <div class="mdui-typo">
       <p><code>Graphic</code>是一个抽象类，是<code>MaskableGraphic</code>的基类,而<code>MaskableGraphic</code>是Image,RawImage,Text的基类。负责显示界面。继承自<code>UIBehavior</code>类以及<code>ICanvasElement</code>接口。</p>
-<h1 id="重写UIBehavior的方法"><a href="#重写UIBehavior的方法" class="headerlink" title="重写UIBehavior的方法"></a>重写UIBehavior的方法</h1><h2 id="OnEnable"><a href="#OnEnable" class="headerlink" title="OnEnable"></a>OnEnable</h2><p>首先调用<code>CacheCanvas</code>方法，获取第一个处于激活状态的Canvas,然后赋值给<code>m_Canvas</code>,然后将m_Canvas注册进<code>GraphicRegistry</code>(之后再看注册进去的作用)，然后设置<code>s_WhiteTexture</code>（也就是mainTexture），最后调用<code>SetAllDirty()</code>: Layout,Material,Vertices(标记Dirty后会触发重新绘制)</p>
-<h2 id="OnDisable"><a href="#OnDisable" class="headerlink" title="OnDisable"></a>OnDisable</h2><p>从<code>GraphicRegistry</code>,<code>CanvasUpdateRegistry</code>取消注册，清空canvasRender,然后重建Layout。</p>
-<h2 id="OnDestroy"><a href="#OnDestroy" class="headerlink" title="OnDestroy"></a>OnDestroy</h2><p>删除 Mesh</p>
-<h2 id="OnRectTransformDimensionsChange"><a href="#OnRectTransformDimensionsChange" class="headerlink" title="OnRectTransformDimensionsChange"></a>OnRectTransformDimensionsChange</h2><p>当RectTransform参数发生变化后会调用这个方法。</br><br>如果正在重建就标记<code>顶点</code>为Dirty,否则标记顶点和Layout为Dirty。</p>
-<h2 id="OnBeforeTransformParentChanged"><a href="#OnBeforeTransformParentChanged" class="headerlink" title="OnBeforeTransformParentChanged"></a>OnBeforeTransformParentChanged</h2><p>取消从<code>GraphicRegistry</code>注册，标记重建Layout.</p>
-<h2 id="OnTransformParentChanged"><a href="#OnTransformParentChanged" class="headerlink" title="OnTransformParentChanged"></a>OnTransformParentChanged</h2><p>重新给<code>m_Canvas</code>赋值，从<code>GraphicRegistry</code>注册Canvas，然后<code>SetAllDirty()</code>。</p>
-<h2 id="OnDidApplyAnimationProperties"><a href="#OnDidApplyAnimationProperties" class="headerlink" title="OnDidApplyAnimationProperties"></a>OnDidApplyAnimationProperties</h2><p>当 animation 属性发生变化后出发，会<code>SetAllDirty()</code>。</p>
-<h2 id="OnCanvasHierarchyChanged"><a href="#OnCanvasHierarchyChanged" class="headerlink" title="OnCanvasHierarchyChanged"></a>OnCanvasHierarchyChanged</h2><p>Called when the state of the parent Canvas is changed. 如果当前Canvas不是第一个处于激活状态的Canvas，那么就取消注册之前的Canvas,然后重新注册新的Canvas。</p>
-<h1 id="实现ICanvasElement-接口的方法"><a href="#实现ICanvasElement-接口的方法" class="headerlink" title="实现ICanvasElement 接口的方法"></a>实现ICanvasElement 接口的方法</h1><h2 id="Rebuild-CanvasUpdate-update"><a href="#Rebuild-CanvasUpdate-update" class="headerlink" title="Rebuild(CanvasUpdate update)"></a>Rebuild(CanvasUpdate update)</h2><p>用来重建当前stage,会在渲染前调用，<br>如果 canvasRenderer&#x3D;&#x3D;null || canvasRenderer.cull(忽略渲染)就return掉。<br>符合条件就根据是否标记了<code>VertsDirty</code>或<code>MaterialDirty</code>而进行更新三角面和Material。</p>
-<h1 id="其他的一些方法"><a href="#其他的一些方法" class="headerlink" title="其他的一些方法"></a>其他的一些方法</h1><h2 id="UpdateGeometry"><a href="#UpdateGeometry" class="headerlink" title="UpdateGeometry()"></a>UpdateGeometry()</h2><p>根据<code>useLegacyMeshGeneration</code>不同而执行<code>DoLegacyMeshGeneration()</code>或者<code>DoMeshGeneration()</code>方法。</p>
+<h1>重写UIBehavior的方法</h1>
+<h2 id="OnEnable"><a class="header-anchor" href="#OnEnable">¶</a>OnEnable</h2>
+<p>首先调用<code>CacheCanvas</code>方法，获取第一个处于激活状态的Canvas,然后赋值给<code>m_Canvas</code>,然后将m_Canvas注册进<code>GraphicRegistry</code>(之后再看注册进去的作用)，然后设置<code>s_WhiteTexture</code>（也就是mainTexture），最后调用<code>SetAllDirty()</code>: Layout,Material,Vertices(标记Dirty后会触发重新绘制)</p>
+<h2 id="OnDisable"><a class="header-anchor" href="#OnDisable">¶</a>OnDisable</h2>
+<p>从<code>GraphicRegistry</code>,<code>CanvasUpdateRegistry</code>取消注册，清空canvasRender,然后重建Layout。</p>
+<h2 id="OnDestroy"><a class="header-anchor" href="#OnDestroy">¶</a>OnDestroy</h2>
+<p>删除 Mesh</p>
+<h2 id="OnRectTransformDimensionsChange"><a class="header-anchor" href="#OnRectTransformDimensionsChange">¶</a>OnRectTransformDimensionsChange</h2>
+<p>当RectTransform参数发生变化后会调用这个方法。</br><br>
+如果正在重建就标记<code>顶点</code>为Dirty,否则标记顶点和Layout为Dirty。</p>
+<h2 id="OnBeforeTransformParentChanged"><a class="header-anchor" href="#OnBeforeTransformParentChanged">¶</a>OnBeforeTransformParentChanged</h2>
+<p>取消从<code>GraphicRegistry</code>注册，标记重建Layout.</p>
+<h2 id="OnTransformParentChanged"><a class="header-anchor" href="#OnTransformParentChanged">¶</a>OnTransformParentChanged</h2>
+<p>重新给<code>m_Canvas</code>赋值，从<code>GraphicRegistry</code>注册Canvas，然后<code>SetAllDirty()</code>。</p>
+<h2 id="OnDidApplyAnimationProperties"><a class="header-anchor" href="#OnDidApplyAnimationProperties">¶</a>OnDidApplyAnimationProperties</h2>
+<p>当 animation 属性发生变化后出发，会<code>SetAllDirty()</code>。</p>
+<h2 id="OnCanvasHierarchyChanged"><a class="header-anchor" href="#OnCanvasHierarchyChanged">¶</a>OnCanvasHierarchyChanged</h2>
+<p>Called when the state of the parent Canvas is changed. 如果当前Canvas不是第一个处于激活状态的Canvas，那么就取消注册之前的Canvas,然后重新注册新的Canvas。</p>
+<h1>实现ICanvasElement 接口的方法</h1>
+<h2 id="Rebuild-CanvasUpdate-update"><a class="header-anchor" href="#Rebuild-CanvasUpdate-update">¶</a>Rebuild(CanvasUpdate update)</h2>
+<p>用来重建当前stage,会在渲染前调用，<br>
+如果 canvasRenderer==null || canvasRenderer.cull(忽略渲染)就return掉。<br>
+符合条件就根据是否标记了<code>VertsDirty</code>或<code>MaterialDirty</code>而进行更新三角面和Material。</p>
+<h1>其他的一些方法</h1>
+<h2 id="UpdateGeometry"><a class="header-anchor" href="#UpdateGeometry">¶</a>UpdateGeometry()</h2>
+<p>根据<code>useLegacyMeshGeneration</code>不同而执行<code>DoLegacyMeshGeneration()</code>或者<code>DoMeshGeneration()</code>方法。</p>
 <ul>
-<li><p>DoLegacyMeshGeneration。 首先会调用<code>OnPopulateMesh()</code>添加四个顶点，以及两个三角面到VertexHelper(这就是创建一个基础的四边形，而四个顶点和两个三角面是必不可少的)这个方法会在Image等组件中重写，然后绘制出不同的东西。</p>
+<li>DoLegacyMeshGeneration。 首先会调用<code>OnPopulateMesh()</code>添加四个顶点，以及两个三角面到VertexHelper(这就是创建一个基础的四边形，而四个顶点和两个三角面是必不可少的)这个方法会在Image等组件中重写，然后绘制出不同的东西。</li>
+</ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnPopulateMesh</span>(<span class="params">VertexHelper vh</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> r = GetPixelAdjustedRect();</span><br><span class="line">    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector4(r.x, r.y, r.x + r.width, r.y + r.height);</span><br><span class="line"></span><br><span class="line">    Color32 color32 = color;</span><br><span class="line">    vh.Clear();</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.x, v.y), color32, <span class="keyword">new</span> Vector2(<span class="number">0f</span>, <span class="number">0f</span>));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.x, v.w), color32, <span class="keyword">new</span> Vector2(<span class="number">0f</span>, <span class="number">1f</span>));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.z, v.w), color32, <span class="keyword">new</span> Vector2(<span class="number">1f</span>, <span class="number">1f</span>));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(v.z, v.y), color32, <span class="keyword">new</span> Vector2(<span class="number">1f</span>, <span class="number">0f</span>));</span><br><span class="line"></span><br><span class="line">    vh.AddTriangle(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    vh.AddTriangle(<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后进行填充网格(FillMesh),这里要求顶点数不超过65000个。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FillMesh</span>(<span class="params">Mesh mesh</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    InitializeListIfRequired();</span><br><span class="line"></span><br><span class="line">    mesh.Clear();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (m_Positions.Count &gt;= <span class="number">65000</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentException(<span class="string">&quot;Mesh can not have more than 65000 vertices&quot;</span>);</span><br><span class="line"></span><br><span class="line">    mesh.SetVertices(m_Positions);</span><br><span class="line">    mesh.SetColors(m_Colors);</span><br><span class="line">    mesh.SetUVs(<span class="number">0</span>, m_Uv0S);</span><br><span class="line">    mesh.SetUVs(<span class="number">1</span>, m_Uv1S);</span><br><span class="line">    mesh.SetUVs(<span class="number">2</span>, m_Uv2S);</span><br><span class="line">    mesh.SetUVs(<span class="number">3</span>, m_Uv3S);</span><br><span class="line">    mesh.SetNormals(m_Normals);</span><br><span class="line">    mesh.SetTangents(m_Tangents);</span><br><span class="line">    mesh.SetTriangles(m_Indices, <span class="number">0</span>);</span><br><span class="line">    mesh.RecalculateBounds();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>之后会拿到所有继承<code>IMeshModifier</code>的组件然后全部通过<code>IMeshModifier.ModifyMesh()</code>进行修改Mesh信息。最后将Mesh提交给CanvasRenderer。</p>
-</li>
-<li><p>DoMeshGeneration() 其实和DoLegacyMeshGeneration差不多。</p>
-</li>
+<ul>
+<li>DoMeshGeneration() 其实和DoLegacyMeshGeneration差不多。</li>
 </ul>
-<h2 id="UpdateMaterial"><a href="#UpdateMaterial" class="headerlink" title="UpdateMaterial()"></a>UpdateMaterial()</h2><p>更新<code>材质球</code>和<code>贴图</code>到CanvasRender。设置材质球时会获取所有的<code>IMaterialModifier</code>组件，然后遍历这些组件通过<code>IMaterialModifier.GetModifiedMaterial(currentMat)</code>的方式获取修改过的Material,然后返回。</p>
+<h2 id="UpdateMaterial"><a class="header-anchor" href="#UpdateMaterial">¶</a>UpdateMaterial()</h2>
+<p>更新<code>材质球</code>和<code>贴图</code>到CanvasRender。设置材质球时会获取所有的<code>IMaterialModifier</code>组件，然后遍历这些组件通过<code>IMaterialModifier.GetModifiedMaterial(currentMat)</code>的方式获取修改过的Material,然后返回。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">UpdateMaterial</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!IsActive())</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    canvasRenderer.materialCount = <span class="number">1</span>;</span><br><span class="line">    canvasRenderer.SetMaterial(materialForRendering, <span class="number">0</span>);</span><br><span class="line">    canvasRenderer.SetTexture(mainTexture);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="CrossFadeColor"><a href="#CrossFadeColor" class="headerlink" title="CrossFadeColor()"></a>CrossFadeColor()</h2><p>在TweenRunner中开启协程，像NGUI的Tween动画。</p>
-<h2 id="Raycast"><a href="#Raycast" class="headerlink" title="Raycast()"></a>Raycast()</h2><ul>
+<h2 id="CrossFadeColor"><a class="header-anchor" href="#CrossFadeColor">¶</a>CrossFadeColor()</h2>
+<p>在TweenRunner中开启协程，像NGUI的Tween动画。</p>
+<h2 id="Raycast"><a class="header-anchor" href="#Raycast">¶</a>Raycast()</h2>
+<ul>
 <li>首先说一下点击屏幕后如何判断是否点击到某和物体的原理：当点击屏幕，会发出一条由屏幕的点击位置射向屏幕后方的一条射线，检测这条射线是否射中某个GameObject,然后去响应对应事件即可。</li>
 </ul>
 <p>在<code>Raycast</code>方法中通过<code>ICanvasRaycastFilter.IsRaycastLocationValid</code>进行判断传入的射线是否有效。该方法在GraphicRaycaster中被调用。</p>
@@ -368,7 +386,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%87%8D%E5%86%99UIBehavior%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">重写UIBehavior的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnEnable"><span class="post-toc-text">OnEnable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDisable"><span class="post-toc-text">OnDisable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDestroy"><span class="post-toc-text">OnDestroy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnRectTransformDimensionsChange"><span class="post-toc-text">OnRectTransformDimensionsChange</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnBeforeTransformParentChanged"><span class="post-toc-text">OnBeforeTransformParentChanged</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnTransformParentChanged"><span class="post-toc-text">OnTransformParentChanged</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDidApplyAnimationProperties"><span class="post-toc-text">OnDidApplyAnimationProperties</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnCanvasHierarchyChanged"><span class="post-toc-text">OnCanvasHierarchyChanged</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0ICanvasElement-%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">实现ICanvasElement 接口的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rebuild-CanvasUpdate-update"><span class="post-toc-text">Rebuild(CanvasUpdate update)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="post-toc-text">其他的一些方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UpdateGeometry"><span class="post-toc-text">UpdateGeometry()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UpdateMaterial"><span class="post-toc-text">UpdateMaterial()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CrossFadeColor"><span class="post-toc-text">CrossFadeColor()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Raycast"><span class="post-toc-text">Raycast()</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">重写UIBehavior的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnEnable"><span class="post-toc-text">OnEnable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDisable"><span class="post-toc-text">OnDisable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDestroy"><span class="post-toc-text">OnDestroy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnRectTransformDimensionsChange"><span class="post-toc-text">OnRectTransformDimensionsChange</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnBeforeTransformParentChanged"><span class="post-toc-text">OnBeforeTransformParentChanged</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnTransformParentChanged"><span class="post-toc-text">OnTransformParentChanged</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnDidApplyAnimationProperties"><span class="post-toc-text">OnDidApplyAnimationProperties</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OnCanvasHierarchyChanged"><span class="post-toc-text">OnCanvasHierarchyChanged</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">实现ICanvasElement 接口的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rebuild-CanvasUpdate-update"><span class="post-toc-text">Rebuild(CanvasUpdate update)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">其他的一些方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UpdateGeometry"><span class="post-toc-text">UpdateGeometry()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UpdateMaterial"><span class="post-toc-text">UpdateMaterial()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CrossFadeColor"><span class="post-toc-text">CrossFadeColor()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Raycast"><span class="post-toc-text">Raycast()</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

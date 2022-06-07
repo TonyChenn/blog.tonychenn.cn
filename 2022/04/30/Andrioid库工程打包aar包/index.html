@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -278,17 +278,23 @@
       
       
       <div class="mdui-typo">
-      <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>想做一个android 插件，方便以后使用，而不是一遍一遍造轮子。</p>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+      <h1>起因</h1>
+<p>想做一个android 插件，方便以后使用，而不是一遍一遍造轮子。</p>
+<h1>步骤</h1>
+<ol>
 <li>创建AndroidStudio工程，创建一个EmptyActivity，用来测试</li>
 <li>创建一个<code>Android Library</code>,用于写库的逻辑</li>
 <li>右侧<code>Gradle</code>窗口,选择<code>库工程名-&gt;Task-&gt;Build-&gt;build</code></li>
 <li>双击build,在<code>build/output/aar</code>文件夹下生成aar包</li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0430/03.jpg" alt="build"></p>
-<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><h2 id="Gradle窗口中的库没有任何选项"><a href="#Gradle窗口中的库没有任何选项" class="headerlink" title="Gradle窗口中的库没有任何选项"></a>Gradle窗口中的库没有任何选项</h2><p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0430/01.jpg"></p>
-<p>FAQ：File-&gt;Settings-&gt;Experimental下取消勾选:<br><code>Do not Gradle task list during Gradle sync</code></p>
-<p>然后同步工程<code>Sync Project</code>，即可<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0430/02.jpg"></p>
+<h1>遇到问题</h1>
+<h2 id="Gradle窗口中的库没有任何选项"><a class="header-anchor" href="#Gradle窗口中的库没有任何选项">¶</a>Gradle窗口中的库没有任何选项</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0430/01.jpg" alt=""></p>
+<p>FAQ：File-&gt;Settings-&gt;Experimental下取消勾选:<br>
+<code>Do not Gradle task list during Gradle sync</code></p>
+<p>然后同步工程<code>Sync Project</code>，即可<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2022/0430/02.jpg" alt=""></p>
 
     </div>
 
@@ -352,7 +358,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="post-toc-text">起因</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98"><span class="post-toc-text">遇到问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle%E7%AA%97%E5%8F%A3%E4%B8%AD%E7%9A%84%E5%BA%93%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E9%80%89%E9%A1%B9"><span class="post-toc-text">Gradle窗口中的库没有任何选项</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">起因</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">遇到问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle%E7%AA%97%E5%8F%A3%E4%B8%AD%E7%9A%84%E5%BA%93%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E9%80%89%E9%A1%B9"><span class="post-toc-text">Gradle窗口中的库没有任何选项</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

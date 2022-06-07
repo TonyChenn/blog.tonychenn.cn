@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,16 +276,38 @@
       
       
       <div class="mdui-typo">
-      <p>题目描述：<br> 首先有一串数字，共有n个，从n个数中找到连续子序列和的最大值；</p>
-<p> <strong>解法一：暴力破解法</strong><br> 看到这个问题时第一时间想到的就是暴力破解法，遍历所有子序列，最终得到最大值；<br> e.g.<br> 1 2 3 4 5 6 共有六个数<br> 所有组合为<br> 1，2，3，4，5，6<br> 1-2，1-3，1-4，1-5，1-6<br> 2-3，2-4，2-5，2-6<br> 3-4，3-5，3-6<br> 4-5，4-6<br> 5-6<br> 需要计算次数为：n(n+1)&#x2F;2;<br> 复杂度：n*n;</p>
-<p> 没什么难度，代码就不贴出来了；</p>
-<p> <strong>解法二：动态规划</strong><br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/11.02/001.jpg" alt="动态规划"></p>
-<p> 初始化变量temp&#x3D;0；<br> 最大值Sn&#x3D;0；<br> 首先输入n个数字;</p>
-<p> 当i&#x3D;&#x3D;0时，如果An[i]&lt;&#x3D;0时，temp[i]&#x3D;0,Sn&#x3D;0;<br> ****************An[i]&gt;0时，temp[i]&#x3D;An[i],Sn&#x3D;An[i];<br> 当i!&#x3D;0时，<br> ****************temp[i-1]&lt;&#x3D;0时：temp[i]&#x3D;An[i];<br> ****************temp[i-1]&gt;0时：temp[i]&#x3D;temp[i-1]+An[i];</p>
-<p> Sn[i]&#x3D;Max(Sn[i-1],temp[i]);</p>
-<p> 具体代码如下：</p>
+      <p>题目描述：<br>
+首先有一串数字，共有n个，从n个数中找到连续子序列和的最大值；</p>
+<p><strong>解法一：暴力破解法</strong><br>
+看到这个问题时第一时间想到的就是暴力破解法，遍历所有子序列，最终得到最大值；<br>
+e.g.<br>
+1 2 3 4 5 6 共有六个数<br>
+所有组合为<br>
+1，2，3，4，5，6<br>
+1-2，1-3，1-4，1-5，1-6<br>
+2-3，2-4，2-5，2-6<br>
+3-4，3-5，3-6<br>
+4-5，4-6<br>
+5-6<br>
+需要计算次数为：n(n+1)/2;<br>
+复杂度：n*n;</p>
+<p>没什么难度，代码就不贴出来了；</p>
+<p><strong>解法二：动态规划</strong><br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/11.02/001.jpg" alt="动态规划"></p>
+<p>初始化变量temp=0；<br>
+最大值Sn=0；<br>
+首先输入n个数字;</p>
+<p>当i==0时，如果An[i]&lt;=0时，temp[i]=0,Sn=0;<br>
+****************An[i]&gt;0时，temp[i]=An[i],Sn=An[i];<br>
+当i!=0时，<br>
+****************temp[i-1]&lt;=0时：temp[i]=An[i];<br>
+****************temp[i-1]&gt;0时：temp[i]=temp[i-1]+An[i];</p>
+<p>Sn[i]=Max(Sn[i-1],temp[i]);</p>
+<p>具体代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="type">int</span> Sn=<span class="number">0</span>;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    <span class="type">int</span> temp[n];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        cin&gt;&gt;a[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]&lt;=<span class="number">0</span>)</span><br><span class="line">                temp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                temp[<span class="number">0</span>]=a[<span class="number">0</span>];</span><br><span class="line">                Sn=a[<span class="number">0</span>];</span><br><span class="line">            &#125;               </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(temp[i<span class="number">-1</span>]&lt;=<span class="number">0</span>)</span><br><span class="line">                temp[i]=a[i];</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(temp[i<span class="number">-1</span>]&gt;<span class="number">0</span>)</span><br><span class="line">                temp[i]=a[i]+temp[i<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(Sn&lt;temp[i])</span><br><span class="line">                Sn=temp[i]; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;Sn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> Tony-Chen<br> 2017.11.2<br> <strong>安得与君绝决，免教生死作相思</strong></p>
+<p>Tony-Chen<br>
+2017.11.2<br>
+<strong>安得与君绝决，免教生死作相思</strong></p>
 
     </div>
 

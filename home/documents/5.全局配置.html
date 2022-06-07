@@ -1,4 +1,5 @@
-<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><p>全局配置文件定义于根目录下<code>configs.js</code>文件，它决定了整个系统的基本属性，原则上来说不推荐频繁修改。</p>
+<h2 id="全局配置"><a class="header-anchor" href="#全局配置">¶</a>全局配置</h2>
+<p>全局配置文件定义于根目录下<code>configs.js</code>文件，它决定了整个系统的基本属性，原则上来说不推荐频繁修改。</p>
 <blockquote>
 <p>其中 <code>lockedApps</code> 和 <code>trustedApps</code> 一定要认真按需填写。如果信任了有害的APP，可能会侵犯用户利益。</p>
 </blockquote>
@@ -10,7 +11,8 @@
 <th>默认值</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>softwareName</td>
 <td>项目名，展示到关于界面</td>
 <td>‘YLUI示例网站’</td>
@@ -88,12 +90,12 @@
 <tr>
 <td>lockedApps</td>
 <td>锁定应用列表，被锁定应用不会被覆盖或卸载</td>
-<td>[‘yl-system’,’yl-color-picker’,’yl-browser’,’yl-server’]</td>
+<td>[‘yl-system’,‘yl-color-picker’,‘yl-browser’,‘yl-server’]</td>
 </tr>
 <tr>
 <td>trustedApps</td>
 <td>可信应用列表，被信任应用有更高的操作权限</td>
-<td>[‘yl-server‘]</td>
+<td>['yl-server‘]</td>
 </tr>
 <tr>
 <td>debug</td>
@@ -115,4 +117,5 @@
 <td>语言数据，语言数据会根据语言配置，从文件自动加载，如需扩展请模仿默认语言文件添加</td>
 <td>{}</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>

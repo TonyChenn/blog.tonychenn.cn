@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -277,19 +277,22 @@
       
       <div class="mdui-typo">
       <p>想要将Unity中一段烟花特效应用到COCOS中，然额手残党做不出Unity中的效果。那就只能将Unity中效果录制下来再由美术同鞋帮忙搞成COCOS支持播放的动画形式。下面是通过Unity将相机拍摄的内容转换成透明图片存储起来的原理和过程。</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ol>
+<h1>原理</h1>
+<ol>
 <li>创建RenderTexture,将相机内容映射到RenderTexture上。</li>
 <li>创建一张Texture2D,然后读取创建RenderTexture上的内容。</li>
 <li>将Texture2D转为png图，保存。</li>
 </ol>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ol>
+<h1>注意</h1>
+<ol>
 <li>需要将Camera的<kbd>ClearFlag</kbd>设置为<code>SkyBox</code>或者<code>Solid Color</code></li>
 <li>如果不需要录制背景，请将：<kbd>Background</kbd>的<code>alpha</code>值改为0</li>
 </ol>
-<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>代码如下：</p>
+<h1>具体实现</h1>
+<p>代码如下：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SnapScreen</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 待截图的目标摄像机</span></span><br><span class="line">    [<span class="meta">SerializeField</span>] Camera camera;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Header(<span class="string">&quot;拍摄频率(单位秒)&quot;</span>)</span>]</span><br><span class="line">    [<span class="meta">Range(0, 1)</span>]</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="built_in">float</span> frequency = <span class="number">0.02f</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> RenderTexture renderTexture;</span><br><span class="line">    <span class="keyword">private</span> Texture2D texture2D;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> counter = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">bool</span> startSnap = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">string</span> folder = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SnapScreen instence = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        folder=Application.dataPath + <span class="string">&quot;/pic&quot;</span>;</span><br><span class="line">        <span class="comment">// 在这里修改RenderTexture大小</span></span><br><span class="line">        renderTexture = <span class="keyword">new</span> RenderTexture(<span class="number">1280</span>, <span class="number">720</span>, <span class="number">32</span>);</span><br><span class="line">        <span class="comment">// 图片大小</span></span><br><span class="line">        texture2D = <span class="keyword">new</span> Texture2D(<span class="number">1280</span>, <span class="number">720</span>, TextureFormat.ARGB32, <span class="literal">false</span>);</span><br><span class="line">        camera.targetTexture = renderTexture;</span><br><span class="line">        instence = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 截取一张图片</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">snapCameraShort</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        RenderTexture.active = renderTexture;</span><br><span class="line">        texture2D.ReadPixels(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, renderTexture.width, renderTexture.height), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        texture2D.Apply();</span><br><span class="line">        RenderTexture.active = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">byte</span>[] bytes = texture2D.EncodeToPNG();</span><br><span class="line">        <span class="built_in">string</span> index = <span class="built_in">string</span>.Format(<span class="string">&quot;&#123;0:d3&#125;&quot;</span>, counter);</span><br><span class="line">        <span class="keyword">if</span> (!Directory.Exists(folder))</span><br><span class="line">            Directory.CreateDirectory(folder);</span><br><span class="line">        File.WriteAllBytes(<span class="string">$&quot;<span class="subst">&#123;folder&#125;</span>/<span class="subst">&#123;index&#125;</span>.png&quot;</span>, bytes);</span><br><span class="line">        </span><br><span class="line">        ++counter;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 截取序列帧动画</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">snapAnim</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(startSnap)</span><br><span class="line">        &#123;</span><br><span class="line">            InvokeRepeating(<span class="string">&quot;snapCameraShort&quot;</span>,<span class="number">0</span>, frequency);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (IsInvoking(<span class="string">&quot;snapCameraShort&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                CancelInvoke(<span class="string">&quot;snapCameraShort&quot;</span>);</span><br><span class="line"></span><br><span class="line">                Debug.Log(<span class="string">$&quot;截取成功，位于：<span class="subst">&#123;instence.folder&#125;</span>&quot;</span>);</span><br><span class="line">                Application.OpenURL(<span class="string">$&quot;file:///<span class="subst">&#123;instence.folder&#125;</span>&quot;</span>);</span><br><span class="line">                UnityEditor.AssetDatabase.Refresh();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> UNITY_EDITOR</span></span><br><span class="line">    [<span class="meta">UnityEditor.MenuItem(<span class="string">&quot;Tools/截取一张相机内容 &amp;n&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">snapOnePicTool</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!Application.isPlaying)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.LogError(<span class="string">&quot;需要运行才能拍摄&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        instence.counter = <span class="number">1</span>;</span><br><span class="line">        instence.snapCameraShort();</span><br><span class="line">        Debug.Log(<span class="string">$&quot;截取成功，位于：<span class="subst">&#123;instence.folder&#125;</span>&quot;</span>);</span><br><span class="line">        Application.OpenURL(<span class="string">$&quot;file:///<span class="subst">&#123;instence.folder&#125;</span>&quot;</span>);</span><br><span class="line">        UnityEditor.AssetDatabase.Refresh();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">UnityEditor.MenuItem(<span class="string">&quot;Tools/录制相机动画 &amp;m&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">snapAnimTool</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!Application.isPlaying)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.LogError(<span class="string">&quot;需要运行才能拍摄&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        instence.startSnap = !instence.startSnap;</span><br><span class="line">        instence.counter = <span class="number">1</span>;</span><br><span class="line">        instence.snapAnim();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="看个效果图吧"><a href="#看个效果图吧" class="headerlink" title="看个效果图吧"></a>看个效果图吧</h1><p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/1013/fire.png" alt="fire"></p>
+<h1>看个效果图吧</h1>
+<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/1013/fire.png" alt="fire"></p>
 
     </div>
 
@@ -353,7 +356,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8E%9F%E7%90%86"><span class="post-toc-text">原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="post-toc-text">注意</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">具体实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%9C%8B%E4%B8%AA%E6%95%88%E6%9E%9C%E5%9B%BE%E5%90%A7"><span class="post-toc-text">看个效果图吧</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">注意</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">具体实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">看个效果图吧</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

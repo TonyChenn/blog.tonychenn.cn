@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,11 +276,14 @@
       
       
       <div class="mdui-typo">
-      <h1 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h1><p>在最开始客户端(Client)和服务端(Server)都处于<code>CLOSED</code>状态。</p>
+      <h1>TCP三次握手</h1>
+<p>在最开始客户端(Client)和服务端(Server)都处于<code>CLOSED</code>状态。</p>
 <p>Server首先创建传输控制块<code>TCB</code>,等待客户端连接，进入监听<code>LISTEN</code>状态。</p>
-<p>第一次握手：Client创建传输控制块<code>TCB</code>，然后向Server发出请求连接报文<code>SYN</code>，且此时SYN&#x3D;1，同时选择初始序列号为seq&#x3D;x。Client进入同步已发送状态(SYN-SEND)。<span style="color:red;">TCP规定，SYN&#x3D;1的报文段不能携带数据，但需要消耗掉一个序号。</span></p>
+<p>第一次握手：Client创建传输控制块<code>TCB</code>，然后向Server发出请求连接报文<code>SYN</code>，且此时SYN=1，同时选择初始序列号为seq=x。Client进入同步已发送状态(SYN-SEND)。<span style="color:red;">TCP规定，SYN=1的报文段不能携带数据，但需要消耗掉一个序号。</span></p>
 <p>第二次握手：Server收到Client发来的SYN,进入同步已接收状态(SYN-RECEIVED)。然后向客户端发送</p>
-<h1 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h1><h1 id="服务器端："><a href="#服务器端：" class="headerlink" title="服务器端："></a>服务器端：</h1><ol>
+<h1>TCP四次挥手</h1>
+<h1>服务器端：</h1>
+<ol>
 <li>创建套接字</li>
 <li>绑定IP地址及端口号</li>
 <li>设置最大连接数</li>
@@ -289,15 +292,14 @@
 <li>关闭连接</li>
 </ol>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Socket tcpServer = <span class="keyword">new</span> Socket(AddressFamily.InterNetwork, </span><br><span class="line">                                SocketType.Stream, </span><br><span class="line">                                ProtocolType.Tcp);</span><br><span class="line">tcpServer.Bind(</span><br><span class="line">    <span class="keyword">new</span> IPEndPoint(IPAddress.Parse(<span class="string">&quot;192.168.124.33&quot;</span>), <span class="number">3366</span>));</span><br><span class="line">tcpServer.Listen(<span class="number">10</span>);</span><br><span class="line">Console.WriteLine(<span class="string">&quot;Server is Running...&quot;</span>);</span><br><span class="line"></span><br><span class="line">Socket client = tcpServer.Accept();</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发送消息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SendMsg</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">byte</span>[] data = Encoding.UTF8.GetBytes(msg);</span><br><span class="line">    clientSocket.Send(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接收消息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GetMsg</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//检测连接是否断开</span></span><br><span class="line">        <span class="keyword">if</span>(clientSocket.Poll(<span class="number">10</span>,SelectMode.SelectRead))</span><br><span class="line">        &#123;</span><br><span class="line">            clientSocket.Close();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">int</span> length = clientSocket.Receive(data);</span><br><span class="line">        <span class="built_in">string</span> msg = Encoding.UTF8.GetString(data, <span class="number">0</span>, length)</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;收到消息：&quot;</span> + msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="客户端："><a href="#客户端：" class="headerlink" title="客户端："></a>客户端：</h1><ol>
+<h1>客户端：</h1>
+<ol>
 <li>创建套接字</li>
 <li>连接指定IP地址，端口号</li>
-<li>通信<br>4.关闭连接</li>
+<li>通信<br>
+4.关闭连接</li>
 </ol>
 <div align="right">TonyChenn<br> </div>
     </div>
@@ -362,7 +364,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="post-toc-text">TCP三次握手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="post-toc-text">TCP四次挥手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%EF%BC%9A"><span class="post-toc-text">服务器端：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9A"><span class="post-toc-text">客户端：</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">TCP三次握手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">TCP四次挥手</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">服务器端：</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">客户端：</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -278,32 +278,44 @@
       
       
       <div class="mdui-typo">
-      <h1 id="第一次使用的配置"><a href="#第一次使用的配置" class="headerlink" title="第一次使用的配置"></a>第一次使用的配置</h1><ol>
-<li><p>当然要注册github账号了;</p>
-</li>
-<li><p>由于本地Git仓库与Github仓库是通过SSH加密的，所以需要创建一个SSH Key;</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例如我的：</span></span><br><span class="line"><span class="comment">//ssh-keygen -t rsa -C &quot;852454151@qq.com&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>打开用户主目录，找到<b>.ssh</b>文件夹，打开里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/create.jpg"><br> 登陆Github配置SSH Keys(位置在：右上角头像-&gt;Setting-&gt;SSH and GPG keys-&gt;New SSH Key),将id_rsa.pub内容粘贴到key中;</p>
-</li>
-<li><p>登陆Github,创建一个新的repository<br><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/resign.jpg"></p>
-</li>
-<li><p>关联远程库</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将用户名，仓库名改成你自己的</span></span><br><span class="line">git remote add origin git@github.com:tonychenn/BlogSource.git</span><br></pre></td></tr></table></figure></li>
+      <h1>第一次使用的配置</h1>
+<ol>
+<li>当然要注册github账号了;</li>
+<li>由于本地Git仓库与Github仓库是通过SSH加密的，所以需要创建一个SSH Key;</li>
 </ol>
-<h1 id="推送本地仓库文件到Github"><a href="#推送本地仓库文件到Github" class="headerlink" title="推送本地仓库文件到Github"></a>推送本地仓库文件到Github</h1><p>(第一次推送此处可能会出错，到文章下面招解决方案)</p>
-<p>关联后，使用命令  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例如我的：</span></span><br><span class="line"><span class="comment">//ssh-keygen -t rsa -C &quot;852454151@qq.com&quot;</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>
+<p>打开用户主目录，找到<b>.ssh</b>文件夹，打开里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/create.jpg" alt=""><br>
+登陆Github配置SSH Keys(位置在：右上角头像-&gt;Setting-&gt;SSH and GPG keys-&gt;New SSH Key),将id_rsa.pub内容粘贴到key中;</p>
+</li>
+<li>
+<p>登陆Github,创建一个新的repository<br>
+<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/resign.jpg" alt=""></p>
+</li>
+<li>
+<p>关联远程库</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将用户名，仓库名改成你自己的</span></span><br><span class="line">git remote add origin git@github.com:tonychenn/BlogSource.git</span><br></pre></td></tr></table></figure>
+<h1>推送本地仓库文件到Github</h1>
+<p>(第一次推送此处可能会出错，到文章下面招解决方案)</p>
+<p>关联后，使用命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master </span><br></pre></td></tr></table></figure>
-<p>第一次推送master分支的所有内容；</br><br>此后，每次本地提交后，只要有必要，就可以使用命令 </p>
+<p>第一次推送master分支的所有内容；</br><br>
+此后，每次本地提交后，只要有必要，就可以使用命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 <p>推送最新修改；</p>
 <p>此时就能在Github上看到推送上去的readme.txt文件啦</p>
-<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/see.jpg"></p>
-<h1 id="克隆Github仓库文件到本地"><a href="#克隆Github仓库文件到本地" class="headerlink" title="克隆Github仓库文件到本地"></a>克隆Github仓库文件到本地</h1><p>本地文件夹 gitbush 执行 <code>git clone https://github.com/TonyChenn/BlogSource.git</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/pull.jpg"></p>
-<h1 id="遇到错误"><a href="#遇到错误" class="headerlink" title="遇到错误"></a>遇到错误</h1><div class="note danger no-icon"><p>failed to push some refs to 'git@github.com:.../....git</p></div>
+<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/see.jpg" alt=""></p>
+<h1>克隆Github仓库文件到本地</h1>
+<p>本地文件夹 gitbush 执行 <code>git clone https://github.com/TonyChenn/BlogSource.git</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.24/pull.jpg" alt=""></p>
+<h1>遇到错误</h1>
+<div class="note danger no-icon"><p>failed to push some refs to 'git@github.com:.../....git</p></div>
 <b>原因及解决方案：</b>
 出现错误的主要原因是：github中的README.md文件不在本地代码目录中
-
 <p><b>解决：</b>通过:<code>git pull --rebase origin master </code>进行代码合并</p>
 <div align="right">TonyChenn<br>2018-10-24</div>
     </div>
@@ -368,7 +380,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="post-toc-text">第一次使用的配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%96%87%E4%BB%B6%E5%88%B0Github"><span class="post-toc-text">推送本地仓库文件到Github</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%8B%E9%9A%86Github%E4%BB%93%E5%BA%93%E6%96%87%E4%BB%B6%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="post-toc-text">克隆Github仓库文件到本地</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%81%87%E5%88%B0%E9%94%99%E8%AF%AF"><span class="post-toc-text">遇到错误</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">第一次使用的配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">推送本地仓库文件到Github</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">克隆Github仓库文件到本地</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">遇到错误</span></a></li></ol> 
     </div>
   </aside> -->
 </div>
