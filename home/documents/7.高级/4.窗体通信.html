@@ -2,10 +2,10 @@
 <h3 id="YLApp-onReady-cb"><a class="header-anchor" href="#YLApp-onReady-cb">¶</a>YLApp.onReady(cb)</h3>
 <p><em>cb fucntion 回调函数</em></p>
 <p>完成基本通信对接后触发的回调。任何涉及到窗体通信和窗体主动调用的API都应该放在<code>cb</code>处。</p>
-<h3 id="YLApp-id"><a class="header-anchor" href="#YLApp-id">¶</a><a href="http://YLApp.id">YLApp.id</a></h3>
+<h3 id="YLApp-id-v2"><a class="header-anchor" href="#YLApp-id-v2">¶</a><a href="http://YLApp.id">YLApp.id</a></h3>
 <p>YLApp 属性，string类型， 只读；</p>
 <p>当前窗体的id，由YLUI随机分配，在YLApp.onReady有效时被初始化。</p>
-<h3 id="YLApp-onEvent-cb"><a class="header-anchor" href="#YLApp-onEvent-cb">¶</a>YLApp.onEvent(cb)</h3>
+<h3 id="YLApp-onEvent-cb-v3"><a class="header-anchor" href="#YLApp-onEvent-cb-v3">¶</a>YLApp.onEvent(cb)</h3>
 <p><em>cb fucntion 回调函数</em></p>
 <p>接受到YLUI事件时触发，cb为事件处理函数。</p>
 <pre><code class="language-javascript">YLApp.onEvent(function (msg) {
@@ -49,7 +49,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="YLApp-emit-event-data-target"><a class="header-anchor" href="#YLApp-emit-event-data-target">¶</a>YLApp.emit(event,data,target)</h3>
+<h3 id="YLApp-emit-event-data-target-v2"><a class="header-anchor" href="#YLApp-emit-event-data-target-v2">¶</a>YLApp.emit(event,data,target)</h3>
 <p><em>event string 事件名</em></p>
 <p><em>data mixed 数据</em></p>
 <p><em>target string|array|true 广播对象</em></p>
