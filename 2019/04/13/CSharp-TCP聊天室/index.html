@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -322,7 +322,7 @@
 </tbody>
 </table>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//转发消息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BroadCastMsg</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    RemoveLogOutUser();</span><br><span class="line">    <span class="built_in">string</span>[] data = msg.Split(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="keyword">switch</span>(data[<span class="number">0</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Online&quot;</span>:</span><br><span class="line">            <span class="keyword">foreach</span> (Client item <span class="keyword">in</span> clientList)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (item.IsConnected)</span><br><span class="line">                    item.SendMsg(EventType.Online + <span class="string">&quot;:&quot;</span> + SerializeUser());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;OneToOne&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;BroadCast&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Exit&quot;</span>:</span><br><span class="line">            <span class="keyword">foreach</span> (Client client <span class="keyword">in</span> clientList)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (client.IsConnected)</span><br><span class="line">                    client.SendMsg(msg);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="客户端-v2"><a class="header-anchor" href="#客户端-v2">¶</a>客户端</h2>
+<h2 id="客户端"><a class="header-anchor" href="#客户端">¶</a>客户端</h2>
 <h3 id="界面设计"><a class="header-anchor" href="#界面设计">¶</a>界面设计</h3>
 <p>待补充</p>
 <h3 id="登录"><a class="header-anchor" href="#登录">¶</a>登录</h3>
@@ -401,7 +401,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">前言:</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="post-toc-text">服务器端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E5%8C%85%E6%8B%AC%E4%B8%8A%E7%BA%BF%EF%BC%8C%E4%B8%8B%E7%BA%BF%EF%BC%8C%E5%B9%BF%E6%92%AD%E6%B6%88%E6%81%AF%EF%BC%8C%E4%B8%80%E5%AF%B9%E4%B8%80%E6%B6%88%E6%81%AF%EF%BC%8C"><span class="post-toc-text">事件类型包括上线，下线，广播消息，一对一消息，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B0%81%E8%A3%85%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%B1%BB%EF%BC%8C%E5%8C%85%E5%90%AB%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A5%97%E6%8E%A5%E5%AD%97%EF%BC%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%EF%BC%8C%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E3%80%82"><span class="post-toc-text">封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BAtcp%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BC%80%E5%90%AF%E7%BA%BF%E7%A8%8B%E7%9B%91%E5%90%AC%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BD%93%E6%9C%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E5%90%8E%EF%BC%8C%E5%B0%86%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AD%98%E5%85%A5%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8%E4%B8%AD%E3%80%82%E6%AF%8F%E6%AC%A1%E5%90%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E6%97%B6%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E6%9C%89%E6%96%AD%E5%BC%80%E7%9A%84%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%9C%89%E5%B0%B1%E4%BB%8E%E5%88%97%E8%A1%A8%E4%B8%AD%E7%A7%BB%E9%99%A4"><span class="post-toc-text">创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BD%93%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8A%E7%BA%BF%E5%90%8E%E4%BC%9A%E7%BB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%91%E9%80%81%E4%B8%80%E4%B8%AA%E4%B8%8A%E7%BA%BF%E5%8F%A3%E4%BB%A4%EF%BC%8C%E5%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A3%80%E6%B5%8B%E5%88%B0%E8%AF%A5%E5%8F%A3%E4%BB%A4%E5%90%8E%E9%80%9A%E7%9F%A5%E6%89%80%E6%9C%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9B%B4%E6%96%B0%E5%9C%A8%E7%BA%BF%E5%88%97%E8%A1%A8%EF%BC%8C%E5%B9%B6%E6%8A%8A%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E5%88%97%E8%A1%A8%E5%8F%91%E7%BB%99%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="post-toc-text">当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-v2"><span class="post-toc-text">客户端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1"><span class="post-toc-text">界面设计</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%99%BB%E5%BD%95"><span class="post-toc-text">登录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%8B%E7%BA%BF%EF%BC%8C%E5%91%8A%E8%AF%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%B7%B1%E8%A6%81%E4%B8%8B%E7%BA%BF%E4%BA%86%EF%BC%8C%E7%84%B6%E5%90%8E%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5"><span class="post-toc-text">下线，告诉服务器自己要下线了，然后关闭连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%B9%E6%8E%A5%E6%94%B6%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%91%E6%9D%A5%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86%E5%8F%8A%E5%93%8D%E5%BA%94"><span class="post-toc-text">对接收到服务器端发来消息的处理及响应</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="post-toc-text">发送消息</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">完整代码</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">前言:</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="post-toc-text">服务器端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E5%8C%85%E6%8B%AC%E4%B8%8A%E7%BA%BF%EF%BC%8C%E4%B8%8B%E7%BA%BF%EF%BC%8C%E5%B9%BF%E6%92%AD%E6%B6%88%E6%81%AF%EF%BC%8C%E4%B8%80%E5%AF%B9%E4%B8%80%E6%B6%88%E6%81%AF%EF%BC%8C"><span class="post-toc-text">事件类型包括上线，下线，广播消息，一对一消息，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B0%81%E8%A3%85%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%B1%BB%EF%BC%8C%E5%8C%85%E5%90%AB%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A5%97%E6%8E%A5%E5%AD%97%EF%BC%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%EF%BC%8C%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E3%80%82"><span class="post-toc-text">封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BAtcp%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BC%80%E5%90%AF%E7%BA%BF%E7%A8%8B%E7%9B%91%E5%90%AC%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BD%93%E6%9C%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E5%90%8E%EF%BC%8C%E5%B0%86%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AD%98%E5%85%A5%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8%E4%B8%AD%E3%80%82%E6%AF%8F%E6%AC%A1%E5%90%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E6%97%B6%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E6%9C%89%E6%96%AD%E5%BC%80%E7%9A%84%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%9C%89%E5%B0%B1%E4%BB%8E%E5%88%97%E8%A1%A8%E4%B8%AD%E7%A7%BB%E9%99%A4"><span class="post-toc-text">创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BD%93%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8A%E7%BA%BF%E5%90%8E%E4%BC%9A%E7%BB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%91%E9%80%81%E4%B8%80%E4%B8%AA%E4%B8%8A%E7%BA%BF%E5%8F%A3%E4%BB%A4%EF%BC%8C%E5%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A3%80%E6%B5%8B%E5%88%B0%E8%AF%A5%E5%8F%A3%E4%BB%A4%E5%90%8E%E9%80%9A%E7%9F%A5%E6%89%80%E6%9C%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9B%B4%E6%96%B0%E5%9C%A8%E7%BA%BF%E5%88%97%E8%A1%A8%EF%BC%8C%E5%B9%B6%E6%8A%8A%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E5%88%97%E8%A1%A8%E5%8F%91%E7%BB%99%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="post-toc-text">当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="post-toc-text">客户端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1"><span class="post-toc-text">界面设计</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%99%BB%E5%BD%95"><span class="post-toc-text">登录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%8B%E7%BA%BF%EF%BC%8C%E5%91%8A%E8%AF%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%B7%B1%E8%A6%81%E4%B8%8B%E7%BA%BF%E4%BA%86%EF%BC%8C%E7%84%B6%E5%90%8E%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5"><span class="post-toc-text">下线，告诉服务器自己要下线了，然后关闭连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%B9%E6%8E%A5%E6%94%B6%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%91%E6%9D%A5%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86%E5%8F%8A%E5%93%8D%E5%BA%94"><span class="post-toc-text">对接收到服务器端发来消息的处理及响应</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="post-toc-text">发送消息</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">完整代码</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

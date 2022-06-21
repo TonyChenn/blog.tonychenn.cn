@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -286,7 +286,7 @@
 </ol>
 <p>MenuItem有三个重载方法如下:</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MenuItem(<span class="built_in">string</span> itemName)</span><br><span class="line">MenuItem(<span class="built_in">string</span> itemName, <span class="built_in">bool</span> isValidateFunction);</span><br><span class="line">MenuItem(<span class="built_in">string</span> itemName, <span class="built_in">bool</span> isValidateFunction, <span class="built_in">int</span> priority)</span><br></pre></td></tr></table></figure>
-<h3 id="菜单的路径和名字-itemName-v2"><a class="header-anchor" href="#菜单的路径和名字-itemName-v2">¶</a>菜单的路径和名字(itemName)</h3>
+<h3 id="菜单的路径和名字-itemName"><a class="header-anchor" href="#菜单的路径和名字-itemName">¶</a>菜单的路径和名字(itemName)</h3>
 <p>菜单按钮出现的位置可以根据itemName设置的路径来控制，从路径的第一级目录到倒数第二级都是目录,最后一级为按钮。如下面方法对应菜单图：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;Test/Test1/Test2/DoTestAction&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DoTest</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;do it&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1119/menu.jpg" alt="menu"></p>
@@ -318,14 +318,14 @@
 </tbody>
 </table>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;GameObject/拓展工具1&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MyItemMenu1</span>()</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;Assets/工具1&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MyItemMenu1</span>()</span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;CONTEXT/工具1&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MyItemMenu1</span>()</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="是否启用-isValidateFunction-v2"><a class="header-anchor" href="#是否启用-isValidateFunction-v2">¶</a>是否启用(isValidateFunction)</h3>
+<h3 id="是否启用-isValidateFunction"><a class="header-anchor" href="#是否启用-isValidateFunction">¶</a>是否启用(isValidateFunction)</h3>
 <p>用来检测是否可以执行这个菜单。该方法需返回bool类型：<br>
 示例如下：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;Test/Test1/Test2/DoTestAction&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DoTest</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;do it&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;Test/Test1/Test2/DoTestAction&quot;</span>,true)</span>]</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">bool</span> <span class="title">Check</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO Check</span></span><br><span class="line">    <span class="comment">//true 允许执行</span></span><br><span class="line">    <span class="comment">//false 不允许</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="菜单显示优先级-v2"><a class="header-anchor" href="#菜单显示优先级-v2">¶</a>菜单显示优先级</h3>
+<h3 id="菜单显示优先级"><a class="header-anchor" href="#菜单显示优先级">¶</a>菜单显示优先级</h3>
 <p>通常情况下自上而下排序，优先级默认都为1000，更改优先级就可进行排序</br>(<strong>Tips：相邻两个优先级相差大于11后会显示一条分割线</strong>)</p>
 <p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/1119/unsort.png" alt=""></p>
-<h2 id="给菜单添加快捷键-v2"><a class="header-anchor" href="#给菜单添加快捷键-v2">¶</a>给菜单添加快捷键</h2>
+<h2 id="给菜单添加快捷键"><a class="header-anchor" href="#给菜单添加快捷键">¶</a>给菜单添加快捷键</h2>
 <p>字符对应热键表</p>
 <table>
 <thead>
@@ -435,7 +435,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">创建菜单(MenuItem)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%8F%9C%E5%8D%95%E7%9A%84%E8%B7%AF%E5%BE%84%E5%92%8C%E5%90%8D%E5%AD%97-itemName-v2"><span class="post-toc-text">菜单的路径和名字(itemName)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%98%AF%E5%90%A6%E5%90%AF%E7%94%A8-isValidateFunction-v2"><span class="post-toc-text">是否启用(isValidateFunction)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%8F%9C%E5%8D%95%E6%98%BE%E7%A4%BA%E4%BC%98%E5%85%88%E7%BA%A7-v2"><span class="post-toc-text">菜单显示优先级</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%99%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E5%BF%AB%E6%8D%B7%E9%94%AE-v2"><span class="post-toc-text">给菜单添加快捷键</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">创建菜单(ContextMenu,ContextMenuItem)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">选择游戏物体与操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%93%8D%E4%BD%9C%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93"><span class="post-toc-text">操作当前选中的游戏物体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84GameObject"><span class="post-toc-text">获取当前选中的GameObject</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">创建菜单(MenuItem)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%8F%9C%E5%8D%95%E7%9A%84%E8%B7%AF%E5%BE%84%E5%92%8C%E5%90%8D%E5%AD%97-itemName"><span class="post-toc-text">菜单的路径和名字(itemName)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%98%AF%E5%90%A6%E5%90%AF%E7%94%A8-isValidateFunction"><span class="post-toc-text">是否启用(isValidateFunction)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%8F%9C%E5%8D%95%E6%98%BE%E7%A4%BA%E4%BC%98%E5%85%88%E7%BA%A7"><span class="post-toc-text">菜单显示优先级</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%99%E8%8F%9C%E5%8D%95%E6%B7%BB%E5%8A%A0%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="post-toc-text">给菜单添加快捷键</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">创建菜单(ContextMenu,ContextMenuItem)</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">选择游戏物体与操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%93%8D%E4%BD%9C%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84%E6%B8%B8%E6%88%8F%E7%89%A9%E4%BD%93"><span class="post-toc-text">操作当前选中的游戏物体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E9%80%89%E4%B8%AD%E7%9A%84GameObject"><span class="post-toc-text">获取当前选中的GameObject</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>
