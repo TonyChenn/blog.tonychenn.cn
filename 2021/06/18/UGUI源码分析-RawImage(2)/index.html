@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -284,28 +284,28 @@
 </ol>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyImage</span> : <span class="title">MaskableGraphic</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] Texture m_Texture;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">override</span> Texture mainTexture =&gt; <span class="keyword">base</span>.mainTexture;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此时挂载到一个空的GameObject上，给贴图赋值后的效果如下：<br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/001.jpg" alt="1"></p>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/001.jpg" alt="1"></p>
 <ol start="2">
 <li>可以看到MyImage只是渲染出默认的白色，并没有显示我们想要的效果。毕竟我们并没有设置贴图…下面重写下mainTexture属性：</li>
 </ol>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">override</span> Texture mainTexture</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">get</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果贴图是空的</span></span><br><span class="line">        <span class="keyword">if</span> (m_Texture == <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//首先从材质球里看看有没有贴图，有的话就用</span></span><br><span class="line">            <span class="keyword">if</span>(material!=<span class="literal">null</span> &amp;&amp; material.mainTexture != <span class="literal">null</span>)</span><br><span class="line">                <span class="keyword">return</span> material.mainTexture;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//材质球里也没有，那就还显示上面的“白图”吧</span></span><br><span class="line">            <span class="keyword">return</span> s_WhiteTexture;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将我们指定的贴图返回</span></span><br><span class="line">        <span class="keyword">return</span> m_Texture;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顺便也给 m_Texture(privite类型)封装一下，在其他地方可以直接赋值</span></span><br><span class="line"><span class="keyword">public</span> Texture texture</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">get</span> &#123; <span class="keyword">return</span> m_Texture; &#125;</span><br><span class="line">    <span class="keyword">set</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果新贴图和原来的比较没变化，就不做处理</span></span><br><span class="line">        <span class="keyword">if</span> (m_Texture == <span class="keyword">value</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//有变化要更新m_Texture,然后标记 Material和Vert为Dirty</span></span><br><span class="line">        <span class="comment">//标记Dirty的作用是，标记下次渲染要重新绘制。</span></span><br><span class="line">        m_Texture = <span class="keyword">value</span>;</span><br><span class="line">        SetMaterialDirty();</span><br><span class="line">        SetVerticesDirty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>看图，已经可以将图片显示出来了：</br><br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/002.jpg" alt=""></p>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/002.jpg" alt=""></p>
 <ol start="3">
 <li>RawImage还有一个改变UV偏移的功能，UV值的改变对显示的影响，直接看图吧，比较直观：</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/uv_xy.gif" alt="uv_xy"><br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/uv_wh.gif" alt="uv_wh"><br>
+<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/uv_xy.gif" alt="uv_xy"><br>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/uv_wh.gif" alt="uv_wh"><br>
 </br>坐标系:</br><br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/uv.jpg" alt="uv"><br>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/uv.jpg" alt="uv"><br>
 </br>下面也尝试实现这个功能：先加上UV字段，然后封装一波：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyImage</span> : <span class="title">MaskableGraphic</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] Texture m_Texture;</span><br><span class="line">    [<span class="meta">SerializeField</span>] Rect m_UV;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Rect UV_Rect</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> m_UV; &#125;</span><br><span class="line">        <span class="keyword">set</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            <span class="keyword">if</span> (m_UV == <span class="keyword">value</span>) <span class="keyword">return</span>;</span><br><span class="line">            m_UV = <span class="keyword">value</span>;</span><br><span class="line">            <span class="comment">//更新顶点</span></span><br><span class="line">            SetVerticesDirty();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// .... 省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>重新绘制顶点也少不了，安排上：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnPopulateMesh</span>(<span class="params">VertexHelper vh</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//清空一波顶点</span></span><br><span class="line">    vh.Clear();</span><br><span class="line">    <span class="keyword">if</span> (m_Texture == <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//通过调用基类中GetPixelAdjustedRect方法获取绘制范围</span></span><br><span class="line">    <span class="comment">//下面可以看到他包含的数据，xy坐标，宽高等信息</span></span><br><span class="line">    Rect info = GetPixelAdjustedRect();</span><br><span class="line">    <span class="built_in">float</span> x_width = info.x + info.width;</span><br><span class="line">    <span class="built_in">float</span> y_heigh = info.y + info.height;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加顶点</span></span><br><span class="line">    <span class="comment">//参数：坐标点，颜色，UV</span></span><br><span class="line">    <span class="comment">//Image的Color属性就是这里设置起作用的</span></span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(info.x, info.y), color, <span class="keyword">new</span> Vector2(m_UV.xMin, m_UV.yMin));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(info.x, y_heigh), color, <span class="keyword">new</span> Vector2(m_UV.xMin, m_UV.yMax));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(x_width, y_heigh), color, <span class="keyword">new</span> Vector2(m_UV.xMax, m_UV.yMax));</span><br><span class="line">    vh.AddVert(<span class="keyword">new</span> Vector3(x_width, info.y), color, <span class="keyword">new</span> Vector2(m_UV.xMax, m_UV.yMin));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加两个三角面</span></span><br><span class="line">    vh.AddTriangle(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    vh.AddTriangle(<span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>原理图：</br><br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/draw.jpg" alt="draw"></p>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/draw.jpg" alt="draw"></p>
 <p>GetPixelAdjustedRect中存储的信息：</br><br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/info.jpg" alt="GetPixelAdjustedRect"></p>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0618/info.jpg" alt="GetPixelAdjustedRect"></p>
 <p>这样一个差不多的RawImage所包含的功能就实现了。</p>
 <ul>
 <li>Material是怎么改变?<br>

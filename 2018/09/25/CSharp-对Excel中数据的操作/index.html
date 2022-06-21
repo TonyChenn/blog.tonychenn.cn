@@ -15,7 +15,7 @@
     <meta property="og:title" content="CSharp-对Excel中数据的操作 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/09.25/excel.jpg">
+        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/09.25/excel.jpg">
     
 
     
@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -245,7 +245,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/09.25/excel.jpg)">
+<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/09.25/excel.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">CSharp-对Excel中数据的操作</span></br>
@@ -282,7 +282,7 @@
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//老</span></span><br><span class="line"><span class="built_in">string</span> conStr = <span class="string">&quot;Provider=Microsoft.Jet.OLEDB.4.0;&quot;</span> + <span class="string">&quot;Data Source=&quot;</span> + fileName + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;;Extended Properties=\&quot;Excel 8.0;HDR=YES;IMEX=1\&quot;&quot;</span>;</span><br><span class="line"><span class="comment">//新</span></span><br><span class="line"><span class="built_in">string</span> conStr=<span class="string">&quot;Provider=Microsoft.ACE.OLEDB.12.0;&quot;</span> + <span class="string">&quot;Data Source=&quot;</span> + fileName + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;;Extended Properties=\&quot;Excel 12.0;HDR=YES;IMEX=1\&quot;&quot;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> fileName = <span class="string">&quot;装备信息.xls&quot;</span>;</span><br><span class="line"><span class="comment">//连接字符串</span></span><br><span class="line"><span class="built_in">string</span> conStr = <span class="string">&quot;Provider=Microsoft.Jet.OLEDB.4.0;&quot;</span> + <span class="string">&quot;Data Source=&quot;</span> + fileName + <span class="string">&quot;;&quot;</span> + <span class="string">&quot;;Extended Properties=\&quot;Excel 8.0;HDR=YES;IMEX=1\&quot;&quot;</span>;</span><br><span class="line"><span class="comment">//创建连接对象</span></span><br><span class="line">OleDbConnection connection = <span class="keyword">new</span> OleDbConnection(conStr);</span><br><span class="line"><span class="comment">//打开连接</span></span><br><span class="line">connection.Open();</span><br><span class="line"><span class="comment">//SQL 语句</span></span><br><span class="line"><span class="built_in">string</span> sql = <span class="string">&quot;select * from [Sheet1$]&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询适配器</span></span><br><span class="line">OleDbDataAdapter adapter = <span class="keyword">new</span> OleDbDataAdapter(sql, connection);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建数据集</span></span><br><span class="line">DataSet ds = <span class="keyword">new</span> DataSet();</span><br><span class="line"><span class="comment">//填充数据到数据集</span></span><br><span class="line">adapter.Fill(ds);</span><br><span class="line"><span class="comment">//关闭连接</span></span><br><span class="line">connection.Close();</span><br><span class="line"></span><br><span class="line"><span class="comment">//到此拿到了从Excel中的数据</span></span><br><span class="line"><span class="comment">//解析数据</span></span><br><span class="line"><span class="comment">//获取数据集中所有的表格</span></span><br><span class="line">DataTableCollection tableCollection= ds.Tables;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当前只有一张表</span></span><br><span class="line"><span class="comment">//拿到这张表</span></span><br><span class="line">DataTable table = tableCollection[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取表格中的数据</span></span><br><span class="line"><span class="comment">//获取表格中的每一行</span></span><br><span class="line">DataRowCollection rows= table.Rows;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span>输出数据</span></span><br><span class="line"><span class="keyword">foreach</span> (DataRow row <span class="keyword">in</span> rows)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.Write(<span class="string">&quot;&#123;0&#125;&quot;</span>,row[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    Console.WriteLine();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出内容：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/09.25/result.jpg" alt=""></p>
+<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/09.25/result.jpg" alt=""></p>
 <blockquote>
 <p>参考：SikiC#高级课程</p>
 </blockquote>

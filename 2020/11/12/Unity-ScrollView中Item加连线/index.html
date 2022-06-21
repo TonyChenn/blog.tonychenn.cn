@@ -15,7 +15,7 @@
     <meta property="og:title" content="Unity-ScrollView中Item加连线 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/icon.jpg">
+        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/icon.jpg">
     
 
     
@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -245,7 +245,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/icon.jpg)">
+<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Unity-ScrollView中Item加连线</span></br>
@@ -280,7 +280,7 @@
       <div class="mdui-typo">
       <h1>目的</h1>
 <p>制作的一个培养模块，需要一级一级的升，UI上需要根据配表读取Item的位置，将Item显示出来，同时将两个Item直接用连线连接起来。效果图如下:<br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/scrollwithline.gif" alt=""></p>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/scrollwithline.gif" alt=""></p>
 <h1>实现原理</h1>
 <ol>
 <li>计算两个Item之间的距离作为连线的长度</li>
@@ -298,7 +298,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 连线</span></span><br><span class="line"><span class="comment">-- tLength -&gt; 要连线Item的个数</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, tLength<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">    <span class="comment">-- 距离，中点，角度</span></span><br><span class="line">    <span class="keyword">local</span> distance, centerPos, rotate = <span class="built_in">self</span>:PointInfo(<span class="built_in">self</span>._cachedItemsPos[i], <span class="built_in">self</span>._cachedItemsPos[i+<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">local</span> trans = <span class="built_in">self</span>._cachedLines[i]:GetComponent(<span class="string">&quot;RectTransform&quot;</span>)</span><br><span class="line">    trans.sizeDelta = Vector2(distance, trans.sizeDelta.y)</span><br><span class="line">    <span class="built_in">self</span>._cachedLines[i].transform.localPosition = centerPos</span><br><span class="line">    <span class="built_in">self</span>._cachedLines[i].transform.right = rotate</span><br><span class="line">    CUIHelper.SetActive(<span class="built_in">self</span>._cachedLines[i], <span class="literal">true</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <h1>遇到问题</h1>
 <p>由于里面Item的位置是自定义的，Line也是自定义位置，旋转，大小的，所以再UGUI中的ScrollView中不能使用<code>HorizontalLayoutGroup</code>或者<code>VerticalLayoutGroup</code>以及<code>GridLayoutGroup</code>,但是不使用这些控件会导致ScrollView没办法滚动，原因是滚动区域的大小与所有Item的大小不一致。如下图所示：<br>
-<img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/cantscroll.jpg" alt="cantscroll"></p>
+<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2020/1112/cantscroll.jpg" alt="cantscroll"></p>
 <p>既然无法自动改变滚动区域大小，那就手动设置下滚动区域大小即可。</p>
 
     </div>

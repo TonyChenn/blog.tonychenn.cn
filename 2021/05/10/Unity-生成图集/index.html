@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://tonychenn.cn/favicon.ico&url=https://tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//NextFramework/SUGUI-SMask.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -293,7 +293,7 @@
 <p>本文介绍Unity最新的SpriteAtlas方式。</p>
 </blockquote>
 <h2 id="SpriteAtlas的一些属性说明"><a class="header-anchor" href="#SpriteAtlas的一些属性说明">¶</a>SpriteAtlas的一些属性说明</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0510/spriteatlas.png" alt="spriteatlas.png"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0510/spriteatlas.png" alt="spriteatlas.png"></p>
 <ul>
 <li><strong>Type</strong> 有两种：Master，Variant(变体)，变体图集会复制原有图集，然后根据比例系数进行缩放，进而对不同分辨率的设备进行适配。</li>
 <li><strong>Include in Build</strong> 勾选后会在编辑器模式下，运行后会自动加载纹理。如果不勾选则不会自动加载，并触发<code>SpriteAtlasManager.atlasRequested</code>事件。在事件中手动填充纹理，否则显示为白色方块。</li>
@@ -312,7 +312,7 @@
 <h2 id="一键创建所有图集"><a class="header-anchor" href="#一键创建所有图集">¶</a>一键创建所有图集</h2>
 <p>这里，我将每个图集创建一个文件夹，把对应精灵放进去，以图集的名称命名，然后放到<code>Asssts/UI/UIAtlas/</code>目录下。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> 下面拓展方法GetRelativePath() 是用来将绝对路径转化为以Assets开头的相对路径。</span></span><br><span class="line"></span><br><span class="line">[<span class="meta">MenuItem(<span class="string">&quot;Tools/GenAtlas&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">CreateAtlas</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> atlasPath = <span class="string">&quot;Asssts/UI/UIAtlas/&quot;</span>;</span><br><span class="line">    <span class="comment">//图集</span></span><br><span class="line">    <span class="keyword">var</span> foldersArray = FolderHelper.GetSubFolders(PathConfig.UIAtlasFolder);</span><br><span class="line">    <span class="keyword">if</span> (foldersArray != <span class="literal">null</span> &amp;&amp; foldersArray.Length &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        List&lt;Object&gt; spriteList = <span class="keyword">new</span> List&lt;Object&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>, iMax = foldersArray.Length; i &lt; iMax; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            spriteList.Clear();</span><br><span class="line">            <span class="comment">//添加 文件 方式</span></span><br><span class="line">            <span class="built_in">string</span>[] textureGUIDs = AssetDatabase.FindAssets(<span class="string">&quot;t:texture&quot;</span>, <span class="keyword">new</span> <span class="built_in">string</span>[] &#123; foldersArray[i].FullName.GetRelativePath() &#125;);</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">var</span> guid <span class="keyword">in</span> textureGUIDs)</span><br><span class="line">            &#123;</span><br><span class="line">                Sprite sp = AssetDatabase.LoadAssetAtPath&lt;Sprite&gt;(AssetDatabase.GUIDToAssetPath(guid));</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sp != <span class="literal">null</span>)</span><br><span class="line">                    spriteList.Add(sp);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (spriteList.Count &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">string</span> atlasName = <span class="string">$&quot;<span class="subst">&#123;atlasPath&#125;</span>/<span class="subst">&#123;foldersArray[i].Name&#125;</span>.spriteatlas&quot;</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> atlas = mGenAtlas();</span><br><span class="line">                atlas.Add(spriteList.ToArray());</span><br><span class="line"></span><br><span class="line">                AssetDatabase.CreateAsset(atlas, atlasName);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//设置AssetBundle名</span></span><br><span class="line">                AssetDatabase.Refresh();</span><br><span class="line">                ABTool.Singlton.SetAssetBundleName(atlasName,</span><br><span class="line">                    <span class="built_in">string</span>.Format(<span class="string">&quot;ui/uiatlas/&#123;0&#125;&quot;</span>, foldersArray[i].Name));</span><br><span class="line"></span><br><span class="line">                AssetDatabase.SaveAssets();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//添加文件夹方式</span></span><br><span class="line">            <span class="comment">//var obj = AssetDatabase.LoadAssetAtPath($&quot;&#123;atlasPath&#125;/&#123;foldersArray[i].Name&#125;&quot;, typeof(object));</span></span><br><span class="line">            <span class="comment">//atlas.Add(new[] &#123; obj &#125;);</span></span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(<span class="string">&quot;&lt;color=&#x27;green&#x27;&gt;图集生成成功！&lt;/color&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0510/genatlas.png" alt="genatlas"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0510/genatlas.png" alt="genatlas"></p>
 
     </div>
 
