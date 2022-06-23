@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -275,7 +275,7 @@
       
       <div class="mdui-typo">
       <h1>效果图如下：</h1>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_blur.jpg" alt="cocos2dx_shader_blur.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/master/2022/0614/cocos2dx_shader_blur.jpg" alt="cocos2dx_shader_blur.jpg"></p>
 <h1>片源着色器</h1>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// blur.frag</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> GL_ES</span></span><br><span class="line">precision mediump <span class="type">float</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">varying vec4 v_fragmentColor;</span><br><span class="line">varying vec2 v_texCoord;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 贴图尺寸</span></span><br><span class="line">uniform vec2 resolution;</span><br><span class="line"><span class="comment">// 模糊半径</span></span><br><span class="line">uniform <span class="type">float</span> blurRadius;</span><br><span class="line"></span><br><span class="line">vec4 <span class="title function_">blur</span><span class="params">(vec2)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	vec4 col = blur(v_texCoord);</span><br><span class="line">	gl_FragColor = vec4(col) * v_fragmentColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vec4 <span class="title function_">blur</span><span class="params">(vec2 p)</span></span><br><span class="line">&#123;</span><br><span class="line">    vec4 col = vec4(<span class="number">0</span>);</span><br><span class="line">    <span class="type">float</span> r = blurRadius;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 单位尺寸</span></span><br><span class="line">    vec2 unit = <span class="number">1.0</span> / resolution.xy;</span><br><span class="line">    <span class="comment">// 步长</span></span><br><span class="line">    <span class="type">float</span> step = r / <span class="number">5.0</span>;</span><br><span class="line">    <span class="comment">// 总权重</span></span><br><span class="line">    <span class="type">float</span> allWeight = <span class="number">0.0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">float</span> x = -r; x &lt; r; x += step)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">float</span> y = -r; y &lt; r; y += step)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 权重</span></span><br><span class="line">            <span class="type">float</span> weight = (r - <span class="built_in">abs</span>(x)) * (r - <span class="built_in">abs</span>(y));</span><br><span class="line">            <span class="comment">// 当前像素颜色 * 权重</span></span><br><span class="line">            col += texture2D(CC_Texture0, p + vec2(x * unit.x, y * unit.y)) * weight;</span><br><span class="line">            allWeight += weight;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> col / allWeight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>

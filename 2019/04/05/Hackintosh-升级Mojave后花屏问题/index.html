@@ -15,7 +15,7 @@
     <meta property="og:title" content="Hackintosh升级Mojave后花屏问题 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/clover.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0405/clover.jpg">
     
 
     
@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -243,7 +243,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/clover.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0405/clover.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Hackintosh升级Mojave后花屏问题</span></br>
@@ -284,15 +284,15 @@
 <h2 id="查看ig-platform-id"><a class="header-anchor" href="#查看ig-platform-id">¶</a>查看ig-platform-id</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ioreg -l | grep ig-platform-id</span><br></pre></td></tr></table></figure>
 <p>可以看到我的ig-platform-id是：0600260a</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/ig.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0405/ig.jpg" alt=""></p>
 <h2 id="查看当前加载的Framebuffer"><a class="header-anchor" href="#查看当前加载的Framebuffer">¶</a>查看当前加载的Framebuffer</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kextstat | grep -y AppleIntel</span><br></pre></td></tr></table></figure>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/framebuffer.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0405/framebuffer.jpg" alt=""></p>
 <p>找到含有&quot;Framebuffer&quot;的一项，我的是：AppleIntelFramebufferAzul</p>
 <p>在/System/Library/Extensions/文件夹下找到含有AppleIntelFramebufferAzul.kext的驱动，右键显示包内容，在 /Contents/MacOS 下将 kext 的文件拷贝到桌面，并在AppStore下载HexFriend打开该文件，如下：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/find.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0405/find.jpg" alt=""></p>
 <p>commond+F进行查找上面的ig-platform-id：直到找到连续的一组，并且下一组是：01030303：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2019/0405/find1.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2019/0405/find1.jpg" alt=""></p>
 <p>复制01030303及后面的四组，然后添加到config.plist的Kernel and Kext Pathes-&gt;KextsToPatch中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Name：           AppleIntelFramebufferAzul</span><br><span class="line">Find：           01030303 00000002 00003001 00006000 00000060</span><br><span class="line">Replace：        01030303 00000002 00003001 00009000 00000080</span><br><span class="line">Comment：        随意</span><br></pre></td></tr></table></figure>
 <h2 id="重建缓存，重启，完成。"><a class="header-anchor" href="#重建缓存，重启，完成。">¶</a>重建缓存，重启，完成。</h2>

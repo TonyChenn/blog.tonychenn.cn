@@ -15,7 +15,7 @@
     <meta property="og:title" content="cocos2dx-luaoc与ios交互 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/1227/icon.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2021/1227/icon.jpg">
     
 
     
@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -245,7 +245,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/1227/icon.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2021/1227/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">cocos2dx-luaoc与ios交互</span></br>
@@ -282,7 +282,7 @@
 <h1>cocos2dx中lua调用oc</h1>
 <p>同样cocos也为我们提供了<code>cocos.cocos2d.luaoc</code>类，也仅包含一个方法：<code>callStaticMethod</code>，与luaj相比只少了一个sig参数，源码如下：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> luaoc = &#123;&#125;</span><br><span class="line"><span class="keyword">local</span> callStaticMethod = LuaObjcBridge.callStaticMethod</span><br><span class="line"></span><br><span class="line"><span class="comment">-- className    类名,即（包名.类名）</span></span><br><span class="line"><span class="comment">-- methodName   调用的方法名</span></span><br><span class="line"><span class="comment">-- args         传递的参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">luaoc.callStaticMethod</span><span class="params">(className, methodName, args)</span></span></span><br><span class="line">    <span class="keyword">local</span> ok, ret = callStaticMethod(className, methodName, args)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ok <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> msg = <span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;luaoc.callStaticMethod(\&quot;%s\&quot;, \&quot;%s\&quot;, \&quot;%s\&quot;) - error: [%s] &quot;</span>,</span><br><span class="line">                className, methodName, <span class="built_in">tostring</span>(args), <span class="built_in">tostring</span>(ret))</span><br><span class="line">        <span class="keyword">if</span> ret == <span class="number">-1</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">print</span>(msg .. <span class="string">&quot;INVALID PARAMETERS&quot;</span>)</span><br><span class="line">        <span class="keyword">elseif</span> ret == <span class="number">-2</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">print</span>(msg .. <span class="string">&quot;CLASS NOT FOUND&quot;</span>)</span><br><span class="line">        <span class="keyword">elseif</span> ret == <span class="number">-3</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">print</span>(msg .. <span class="string">&quot;METHOD NOT FOUND&quot;</span>)</span><br><span class="line">        <span class="keyword">elseif</span> ret == <span class="number">-4</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">print</span>(msg .. <span class="string">&quot;EXCEPTION OCCURRED&quot;</span>)</span><br><span class="line">        <span class="keyword">elseif</span> ret == <span class="number">-5</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">print</span>(msg .. <span class="string">&quot;INVALID METHOD SIGNATURE&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">print</span>(msg .. <span class="string">&quot;UNKNOWN&quot;</span>)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> ok, ret</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> luaoc</span><br></pre></td></tr></table></figure>
-<h2 id="使用-v2"><a class="header-anchor" href="#使用-v2">¶</a>使用</h2>
+<h2 id="使用-v3"><a class="header-anchor" href="#使用-v3">¶</a>使用</h2>
 <ul>
 <li>oc 方法</li>
 </ul>
@@ -357,7 +357,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">cocos2dx中lua调用oc</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8-v2"><span class="post-toc-text">使用</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">cocos2dx中lua调用oc</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8-v3"><span class="post-toc-text">使用</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

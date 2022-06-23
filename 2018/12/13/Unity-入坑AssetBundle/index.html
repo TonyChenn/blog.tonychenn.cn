@@ -15,7 +15,7 @@
     <meta property="og:title" content="Unity-入坑AssetBundle（一） - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/12.13/icon.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/12.13/icon.jpg">
     
 
     
@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -243,7 +243,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/12.13/icon.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/12.13/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Unity-入坑AssetBundle（一）</span></br>
@@ -323,13 +323,13 @@
 <h2 id="WWW的方式从服务器加载（逐渐被淘汰）"><a class="header-anchor" href="#WWW的方式从服务器加载（逐渐被淘汰）">¶</a>WWW的方式从服务器加载（逐渐被淘汰）</h2>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">Use3w</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    WWW www = WWW.LoadFromCacheOrDownload(<span class="string">@&quot;file:///&quot;</span> + path,<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//WWW www = WWW.LoadFromCacheOrDownload(@&quot;https://&quot; + url);</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> www;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrEmpty(www.error))</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    AssetBundle abPack = www.assetBundle;</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过上面的方法，就可以实现将打包到AB包的预制体实例化出来了，但是出现了问题，预制体处于材质丢失状态，所以我们需要将预制体所依赖的贴图，材质等加载到内存中。<b>那么问题来了，每个预制体上有1-n个各种类型的素材，三五个还好能手动添加到内存，但是多了这样就不行了！！</b>那就引出了minifest文件：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/12.13/minifest.jpg" alt="minifest"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/12.13/minifest.jpg" alt="minifest"></p>
 <p>打开查看：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/12.13/open.jpg" alt="open"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/12.13/open.jpg" alt="open"></p>
 <p>里面包含了cubewall的所有依赖库，下面就是加载minifest文件，在加载所有依赖文件：</p>
 <h1>加载minifest和依赖文件</h1>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> _LoadMinifest(<span class="built_in">string</span> path)</span><br><span class="line">&#123;</span><br><span class="line">    AssetBundle AB = AssetBundle.LoadFromFile(path);</span><br><span class="line">    <span class="keyword">var</span> minifest = AB.LoadAsset&lt;AssetBundleManifest&gt;(<span class="string">&quot;AssetBundleManifest&quot;</span>);</span><br><span class="line">    <span class="comment">//获取所有cubewall.u3d的依赖的名称</span></span><br><span class="line">    <span class="built_in">string</span>[] names = minifest.GetAllDependencies(<span class="string">&quot;cubewall.u3d&quot;</span>);</span><br><span class="line">    <span class="comment">//加载所有cubewall.u3d的依赖</span></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> names)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(item);</span><br><span class="line">        AssetBundle.LoadFromFile(Application.dataPath + <span class="string">&quot;/AssetBundles/&quot;</span> + item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/12.13/show.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/12.13/show.jpg" alt=""></p>
 <h1>卸载AssetBundle</h1>
 <p>当一些资源使用过后不会再使用的资源，我们就可以将他们卸载了，从而减少内存对的使用，当然当资源还需要使用就被卸载就会导致资源丢失。所以何时卸载资源就是一个问题了！</p>
 <h2 id="卸载所有资源，即使资源还正在使用也依然会被卸载"><a class="header-anchor" href="#卸载所有资源，即使资源还正在使用也依然会被卸载">¶</a>卸载所有资源，即使资源还正在使用也依然会被卸载</h2>

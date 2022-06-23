@@ -15,7 +15,7 @@
     <meta property="og:title" content="Python-酷狗音乐爬虫总结 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/icon.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/icon.jpg">
     
 
     
@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -245,7 +245,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/icon.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Python-酷狗音乐爬虫总结</span></br>
@@ -287,15 +287,15 @@
 </ol>
 <h2 id="获取搜索音乐列表Json"><a class="header-anchor" href="#获取搜索音乐列表Json">¶</a>获取搜索音乐列表Json</h2>
 <p>通过网页解析网页从而拿到音乐数据。我们知道在酷狗中搜索歌曲时会访问一个固定的网址+搜索内容获取数据，如：<a target="_blank" rel="noopener" href="https://www.kugou.com/yy/html/search.html#searchType=song&amp;searchKeyWord=%E5%8D%A1%E8%B7%AF%E9%87%8C">https://www.kugou.com/yy/html/search.html#searchType=song&amp;searchKeyWord=卡路里</a></p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/kaluli.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/kaluli.jpg" alt=""></p>
 <p>找到网页请求的Json数据，然后解析出来：老规矩F12。嗯，找到了：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/json.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/json.jpg" alt=""></p>
 <p>看下地址,<a target="_blank" rel="noopener" href="https://songsearch.kugou.com/song_search_v2?callback=jQuery112407293972860894198_1542616202354&amp;keyword=%E5%8D%A1%E8%B7%AF%E9%87%8C&amp;page=1&amp;pagesize=30&amp;userid=-1&amp;clientver=&amp;platform=WebFilter&amp;tag=em&amp;filter=2&amp;iscorrection=1&amp;privilege_filter=0&amp;_=1542616202356">https://songsearch.kugou.com/song_search_v2?callback=jQuery112407293972860894198_1542616202354&amp;keyword=卡路里&amp;page=1&amp;pagesize=30&amp;userid=-1&amp;clientver=&amp;platform=WebFilter&amp;tag=em&amp;filter=2&amp;iscorrection=1&amp;privilege_filter=0&amp;_=1542616202356</a>我们就可以通过此链接获取无门需要搜索歌曲的列表。但是分析下这个文件还是没有找到播放音乐的url,额…继续找…</p>
 <h2 id="获取歌曲信息Json"><a class="header-anchor" href="#获取歌曲信息Json">¶</a>获取歌曲信息Json</h2>
 <p>点开一个音乐播放的条目，F12分析：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/f12.jpg" alt="f12"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/f12.jpg" alt="f12"></p>
 <p>竟然不存在音频文件，但事实音乐已经开始播放了，并且自动播放的。那只能说明播放音乐的url依然不再这里，老办法，查找json文件：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/find.jpg" alt="find"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/find.jpg" alt="find"></p>
 <p>嗯，没看错，就是在这里，那么获取这个的json的url是什么呢？怎么得到呢？</p>
 <p>看链接：<a target="_blank" rel="noopener" href="https://www.kugou.com/song/#hash=BEDD046FB30A0C443CD6F854574B065E&amp;album_id=9175221">https://www.kugou.com/song/#hash=BEDD046FB30A0C443CD6F854574B065E&amp;album_id=9175221</a> 也是一个固定的字符串与hash，album_id 组成的。那问题就变成了如何获取hash 和 album_id. 还记得之前获取的音乐列表的信息吗，当时只看懂了<b>SongName</b>,仔细对比查看：</p>
 <blockquote>
@@ -307,16 +307,16 @@ AlbumID 对应 album_id</p>
 <ul>
 <li>音乐列表json处理：</li>
 </ul>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/dojson.jpg" alt="dojson"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/dojson.jpg" alt="dojson"></p>
 <ul>
 <li>音乐详细信息的Json处理：</li>
 </ul>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/dojson2.jpg" alt="dojson2"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/dojson2.jpg" alt="dojson2"></p>
 <h2 id="代码实现："><a class="header-anchor" href="#代码实现：">¶</a>代码实现：</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将不规范的Json字符串，通过截取，返回规范的json数据</span></span><br><span class="line"><span class="comment"># 返回歌曲列表的Json</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_song_list_json</span>(<span class="params">unjson</span>):</span><br><span class="line">    start_index = unjson.index(<span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">    end_index = unjson.rindex(<span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">    unjson = unjson[start_index: end_index]</span><br><span class="line"></span><br><span class="line">    end_index = unjson.rindex(<span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">    <span class="comment"># 此句过后，content为正常的Json文件</span></span><br><span class="line">    str_json = unjson[<span class="number">0</span>:end_index] + <span class="string">&#x27;]&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> str_json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回每首歌曲的信息Json</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_music_info_json</span>(<span class="params">unjson</span>):</span><br><span class="line">    start_index = unjson.index(<span class="string">&#x27;&#123;&#x27;</span>)</span><br><span class="line">    end_index = unjson.rindex(<span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">    unjson = unjson[start_index: end_index]</span><br><span class="line">    start_index = unjson.index(<span class="string">&#x27;&#123;&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">    unjson = unjson[start_index: -<span class="number">1</span>]+<span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> unjson</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回播放Url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_play_url</span>(<span class="params">filehash, <span class="built_in">id</span>=<span class="number">0</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;https://www.kugou.com/song/#hash=&#x27;</span> + filehash+<span class="string">&#x27;&amp;album_id=&#x27;</span>+<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回下载Url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_download_api</span>(<span class="params">callback, <span class="built_in">hash</span>, <span class="built_in">id</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;https://wwwapi.kugou.com/yy/index.php?r=play/getdata&amp;callback=&#x27;</span>+callback+<span class="string">&#x27;&amp;hash=&#x27;</span>+<span class="built_in">hash</span></span><br><span class="line"></span><br><span class="line">song_name = <span class="built_in">input</span>(<span class="string">&quot;请输入歌曲名称：&quot;</span>)</span><br><span class="line"><span class="comment"># 获取一条不正常的Json</span></span><br><span class="line">url = <span class="string">&#x27;https://songsearch.kugou.com/song_search_v2?callback=jQuery1124043482941576795797_1542458757544&amp;keyword=&#123;0&#125;&amp;page=1&amp;pagesize=30&amp;userid=-1&amp;clientver=&amp;platform=WebFilter&amp;tag=em&amp;filter=2&amp;iscorrection=1&amp;privilege_filter=0&amp;_=1542458757546&#x27;</span>.<span class="built_in">format</span>(song_name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面将不正常的json改正常</span></span><br><span class="line"><span class="comment"># 获取不正常Json内容</span></span><br><span class="line">content = requests.get(url).text</span><br><span class="line"><span class="comment"># 获取Callback码</span></span><br><span class="line">callback_end_index = content.index(<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">callback = content[<span class="number">0</span>: callback_end_index]</span><br><span class="line"></span><br><span class="line">content = get_song_list_json(content)</span><br><span class="line"></span><br><span class="line"><span class="comment">#解析json，返回音乐列表</span></span><br><span class="line">music_list = json.loads(content)</span><br><span class="line">imforlist = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示获取到的歌曲信息,并存放在imforlist列表中</span></span><br><span class="line">num = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> music_list:</span><br><span class="line">    imforlist.append(item)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(num)+<span class="string">&#x27;. &#x27;</span> + <span class="built_in">dict</span>(item)[<span class="string">&#x27;SongName&#x27;</span>])</span><br><span class="line">    num = <span class="built_in">int</span>(num)+<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入下载编号，下载对应歌曲</span></span><br><span class="line"><span class="built_in">id</span> = <span class="built_in">input</span>(<span class="string">&#x27;请输入下载编号：&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">int</span>(<span class="built_in">id</span>) &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">int</span>(<span class="built_in">id</span>) &lt;= <span class="built_in">int</span>(num):</span><br><span class="line">    item = <span class="built_in">dict</span>(imforlist[<span class="built_in">int</span>(<span class="built_in">id</span>)-<span class="number">1</span>])</span><br><span class="line">    download_api = get_download_api(callback, item[<span class="string">&#x27;FileHash&#x27;</span>], item[<span class="string">&#x27;AlbumID&#x27;</span>])</span><br><span class="line">    unjson = requests.get(download_api).text</span><br><span class="line">    download_url = re.findall(<span class="string">r&#x27;&quot;play_url&quot;:&quot;(.*?)&quot;&#x27;</span>, unjson)</span><br><span class="line">    download_url = <span class="built_in">str</span>(download_url[<span class="number">0</span>]).replace(<span class="string">&quot;\/&quot;</span>, <span class="string">&quot;/&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(download_url)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="built_in">str</span>(<span class="built_in">id</span>)+<span class="string">&#x27;.mp3&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(requests.get(download_url).content)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;下载成功&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="运行结果"><a class="header-anchor" href="#运行结果">¶</a>运行结果</h2>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/result1.jpg" alt="result1"></p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/11.19/result2.jpg" alt="result2"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/result1.jpg" alt="result1"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/11.19/result2.jpg" alt="result2"></p>
 <blockquote>
 <p>仅供学习使用，用于商业用途，本人不负责！</p>
 </blockquote>

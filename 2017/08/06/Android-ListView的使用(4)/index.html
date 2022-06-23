@@ -15,7 +15,7 @@
     <meta property="og:title" content="Android-ListView的使用(4) - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/android/listview.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/android/listview.jpg">
     
 
     
@@ -178,7 +178,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -186,7 +186,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -194,7 +194,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -202,7 +202,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -210,7 +210,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -226,7 +226,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -245,7 +245,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/android/listview.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/android/listview.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Android-ListView的使用(4)</span></br>
@@ -303,7 +303,7 @@
 <p>在NewsActivity中进行初始化数据，并绑定适配器，核心代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;News&gt; newsList=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="comment">//向newsList加数据</span></span><br><span class="line">InitData();</span><br><span class="line"><span class="comment">// 上下文   template    数据</span></span><br><span class="line">NewsAdapter adapter=<span class="keyword">new</span> <span class="title class_">NewsAdapter</span>(getApplicationContext(),R.layout.news_item,newsList);</span><br><span class="line">myListView.setAdapter(adapter);</span><br></pre></td></tr></table></figure>
 <p>到此即可实现带图片的ListView,看看效果图吧：<br>
-<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/0806/listview.jpg" alt="listview"></p>
+<img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2017/0806/listview.jpg" alt="listview"></p>
 <h1>ListView的优化</h1>
 <ol>
 <li>在上面创建适配器的时候，每次都会重调用<kbd>getView</kbd>中每次都要重新获取布局，当滚动屏幕快时，就达到了性能的瓶颈。解决方法是：使用<kbd>getView</kbd>方法中的convertView进行缓存，下次直接使用。</li>
@@ -315,7 +315,7 @@
 <p>通过<kbd>setOnItemClickListener</kbd>给所有item添加点击事件，点击Itemh后再WebView中打开新闻详细内容。核心代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">myListView.setOnItemClickListener(<span class="keyword">new</span> <span class="title class_">AdapterView</span>.OnItemClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onItemClick</span><span class="params">(AdapterView&lt;?&gt; adapterView, View view, <span class="type">int</span> i, <span class="type">long</span> l)</span> &#123;</span><br><span class="line">        News item=newsList.get(i);</span><br><span class="line">        Intent intent=<span class="keyword">new</span> <span class="title class_">Intent</span>(getApplicationContext(),WebViewActivity.class);</span><br><span class="line">        intent.putExtra(<span class="string">&quot;url&quot;</span>,item.getUrl());</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>再看下：<br>
-<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2017/0806/previous.gif" alt="previous"></p>
+<img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2017/0806/previous.gif" alt="previous"></p>
 
     </div>
 

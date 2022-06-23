@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -275,11 +275,11 @@
       
       <div class="mdui-typo">
       <p>上次说到Unity新的图集工具之后，就想着能不能像NGUI那样选择图及后，可以只选择图集内的图片呢？这样就可以很好的避免在拼界面过程中不同图集的穿插，减少DrawCall。于是参考了下NGUI,对UGUI的Image组件进行重新封装了下。先看下效果图：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0512/simage.jpg" alt="simage"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2021/0512/simage.jpg" alt="simage"></p>
 <p>其中<code>Atlas</code>按钮可以用来选择图集。将项目中的所有图集列举出来，右侧<code>选择</code>按钮进行选取。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0512/select_atlas.jpg" alt="simage"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2021/0512/select_atlas.jpg" alt="simage"></p>
 <p><code>Sprite</code>选择图集中的图片：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2021/0512/select_sprite.jpg" alt="simage"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2021/0512/select_sprite.jpg" alt="simage"></p>
 <p>当切换图集后会将Sprite置空。</p>
 <h1>代码加载图片：</h1>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    SImage image = GetComponent&lt;SImage&gt;();</span><br><span class="line"></span><br><span class="line">    AssetDatabase.LoadAssetAtPath&lt;SpriteAtlas&gt;(<span class="string">&quot;Assets/UI/UIAtlas/common.spriteatlas&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式一</span></span><br><span class="line">    <span class="comment">//image.Sprite = sprite;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二</span></span><br><span class="line">    <span class="comment">//SpriteAtlas atlas = </span></span><br><span class="line">    <span class="comment">//image.Atlas = atlas;</span></span><br><span class="line">    <span class="comment">//image.SpriteName = &quot;icon_1&quot;;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式三</span></span><br><span class="line">    <span class="comment">//image.SetSprite(atlas, &quot;icon_1&quot;);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方式四</span></span><br><span class="line">    image.SetSprite(<span class="string">&quot;common&quot;</span>, <span class="string">&quot;icon_1&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

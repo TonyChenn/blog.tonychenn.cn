@@ -15,7 +15,7 @@
     <meta property="og:title" content="算法-蛇形填数 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/icon.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/10.14/icon.jpg">
     
 
     
@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -243,7 +243,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/icon.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/10.14/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">算法-蛇形填数</span></br>
@@ -276,7 +276,7 @@
       
       
       <div class="mdui-typo">
-      <p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/snakenum.jpg" alt="Snake num"><br>
+      <p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/10.14/snakenum.jpg" alt="Snake num"><br>
 思路：</p>
 <p>输入n；<br>
 构建一个n*n的矩阵，初始化所有值为为0</p>
@@ -288,12 +288,12 @@ a[0][n-1]=1;<br>
 <strong>此时进行填数时，是从（0，n-1）的位置开始的，所以切记此时初始化i,j变量：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">0</span>,j=n<span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
 <p>进行循环填数关键代码如下：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/snakenum_1.bmp" alt="snake num"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/10.14/snakenum_1.bmp" alt="snake num"></p>
 <p>由上面分析图可知从最后一列向下进行填数，如果到达第n个位置，或者是遇到下一个值得内容不是0时，证明之前已经填过数了，结束当前循环填数；</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从a[0][n-1]=1;开始，如果i小于n-1 或者 a[0][n-1]下面（即a[1][n-1]）不为0时，结束当前填数</span></span><br><span class="line"><span class="comment">//向下</span></span><br><span class="line"><span class="keyword">while</span> (i&lt;n<span class="number">-1</span> &amp;&amp; !a[i+<span class="number">1</span>][j])   a[++i][j]=++flag;  </span><br><span class="line"><span class="comment">//向左</span></span><br><span class="line"><span class="keyword">while</span> (j<span class="number">-1</span>&gt;=<span class="number">0</span> &amp;&amp; !a[i][j<span class="number">-1</span>])  a[i][--j]=++flag; </span><br><span class="line"><span class="comment">//向上 </span></span><br><span class="line"><span class="keyword">while</span> (i<span class="number">-1</span>&gt;=<span class="number">0</span> &amp;&amp; !a[i<span class="number">-1</span>][j])  a[--i][j]=++flag; </span><br><span class="line"><span class="comment">//向右 </span></span><br><span class="line"><span class="keyword">while</span> (j&lt;n<span class="number">-1</span> &amp;&amp; !a[i][j+<span class="number">1</span>])   a[i][++j]=++flag;</span><br></pre></td></tr></table></figure>
 <p>完整代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, i, j, flag=<span class="number">0</span>;  </span><br><span class="line">    cin&gt;&gt;n; </span><br><span class="line">    <span class="type">int</span> a[n][n]; </span><br><span class="line">    <span class="comment">//这句话就是将a[n][n]所有值赋为0；</span></span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="built_in">sizeof</span>(a));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这句话好玩</span></span><br><span class="line">    <span class="comment">//简单点就是</span></span><br><span class="line">    <span class="comment">// int i=0,j=n-1;</span></span><br><span class="line">    <span class="comment">// int a[i][j]=1;</span></span><br><span class="line">    <span class="comment">// int flag=1;</span></span><br><span class="line">    flag=a[i=<span class="number">0</span>][j=n<span class="number">-1</span>]=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//共有 n*n个空格，直到添的数字小于n*n时，填充完毕</span></span><br><span class="line">    <span class="keyword">while</span>(flag&lt;n*n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (i+<span class="number">1</span>&lt;n &amp;&amp; !a[i+<span class="number">1</span>][j])   a[++i][j]=++flag;  </span><br><span class="line">        <span class="keyword">while</span> (j<span class="number">-1</span>&gt;=<span class="number">0</span> &amp;&amp; !a[i][j<span class="number">-1</span>])  a[i][--j]=++flag;  </span><br><span class="line">        <span class="keyword">while</span> (i<span class="number">-1</span>&gt;=<span class="number">0</span> &amp;&amp; !a[i<span class="number">-1</span>][j])  a[--i][j]=++flag;  </span><br><span class="line">        <span class="keyword">while</span> (j+<span class="number">1</span>&lt;n &amp;&amp; !a[i][j+<span class="number">1</span>])   a[i][++j]=++flag;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="comment">//输出</span></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;n; ++i)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span> (j=<span class="number">0</span>; j&lt;n; ++j)  </span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;<span class="built_in">setw</span>(<span class="number">3</span>)&lt;&lt;a[i][j];  </span><br><span class="line">        &#125;  </span><br><span class="line">        cout&lt;&lt;endl;  </span><br><span class="line">    &#125;     </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/2018/10.14/snackresult.png" alt="20171014155952317.png"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/10.14/snackresult.png" alt="20171014155952317.png"></p>
 <p>结束：<br>
 Tony-Chen<br>
 2017.10.14</p>

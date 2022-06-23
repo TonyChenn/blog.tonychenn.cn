@@ -15,7 +15,7 @@
     <meta property="og:title" content="cocos2dx-shader外发光与呼吸效果 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_glow_breathe.gif">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/master/2022/0614/cocos2dx_shader_glow_breathe.gif">
     
 
     
@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -243,7 +243,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_glow_breathe.gif)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/master/2022/0614/cocos2dx_shader_glow_breathe.gif)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">cocos2dx-shader外发光与呼吸效果</span></br>
@@ -286,17 +286,17 @@
 </ol>
 <ul>
 <li>通过周期性调整像素的alpha值即可实现呼吸效果<br>
-<img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_glow.jpg" alt=""></li>
+<img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/master/2022/0614/cocos2dx_shader_glow.jpg" alt=""></li>
 </ul>
 <h1>shader</h1>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// glow.fsh</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> GL_ES</span></span><br><span class="line">precision mediump <span class="type">float</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">varying vec4 v_fragmentColor;</span><br><span class="line">varying vec2 v_texCoord;</span><br><span class="line"></span><br><span class="line">uniform vec2 resolution; <span class="comment">// 纹理大小（宽和高）范围是0~1</span></span><br><span class="line">uniform vec3 glow_color;    <span class="comment">// 发光颜色</span></span><br><span class="line">uniform <span class="type">float</span> glow_expand; <span class="comment">// 发光强度</span></span><br><span class="line">uniform <span class="type">float</span> glow_range;  <span class="comment">// 发光范围</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">float</span> sampleNum = <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">float</span> AsNotAlpha = <span class="number">0.3</span>;  <span class="comment">// 0.0 - 1.0</span></span><br><span class="line"><span class="comment">// 思路：先过滤不透明点，然后按照角度找到这个范围内不透明的点的“不透明程度”，不透明程度越高，发光越多</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">debug</span><span class="params">(<span class="type">float</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//vec4 col = texture2D(CC_Texture0, v_texCoord.xy);</span></span><br><span class="line">    <span class="comment">// if (v_texCoord.x &gt; 0.5 &amp;&amp; v_texCoord.y &gt; 0.5) </span></span><br><span class="line">    &#123;</span><br><span class="line">        gl_FragColor = vec4(x/<span class="number">255.0</span>, x/<span class="number">255.0</span>, x/<span class="number">255.0</span>, <span class="number">1.1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取像素周围不透明点的数量</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getStrokeCount</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    vec2 unit = <span class="number">1.0</span> / resolution.xy;<span class="comment">//单位坐标</span></span><br><span class="line">    <span class="type">float</span> r = glow_range;</span><br><span class="line">    <span class="type">float</span> step = r / sampleNum;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//遍历一个矩形，当前的坐标为中心点，遍历矩形中每个像素点的颜色</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">float</span> x = -r; x &lt; r; x += step)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">float</span> y = -r; y &lt; r; y += step)</span><br><span class="line">        &#123;</span><br><span class="line">            vec4 col = texture2D(CC_Texture0, v_texCoord + vec2(x * unit.x, y * unit.y));</span><br><span class="line">            <span class="keyword">if</span>(col.a &gt; AsNotAlpha)</span><br><span class="line">            &#123;</span><br><span class="line">                count = count + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    vec4 myC = texture2D(CC_Texture0, v_texCoord);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (myC.a &gt; AsNotAlpha)</span><br><span class="line">    &#123;</span><br><span class="line">        gl_FragColor = v_fragmentColor * myC;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取像素周围不透明点的数量</span></span><br><span class="line">    <span class="type">int</span> strokeCount = getStrokeCount();</span><br><span class="line">    </span><br><span class="line">    <span class="type">float</span> totalSample = (sampleNum * sampleNum * <span class="number">2</span>);</span><br><span class="line">    <span class="type">float</span> limit = totalSample * <span class="number">0.8</span>;</span><br><span class="line">    <span class="keyword">if</span> (strokeCount &gt; limit)  <span class="comment">//四周围至少有一个点是不透明的，这个点要设成描边颜色</span></span><br><span class="line">    &#123;</span><br><span class="line">        myC.rgb = glow_color * glow_expand;</span><br><span class="line">        myC.a = (strokeCount ) * glow_expand / totalSample;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        myC.rgb = glow_color * strokeCount * glow_expand / limit;</span><br><span class="line">        myC.a = (strokeCount ) * glow_expand / totalSample;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    gl_FragColor = v_fragmentColor * myC;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1>实现呼吸效果</h1>
 <p>原理是通过<code>scheduleUpdate</code>的方式，然后设置alpha的值做周期性变化,即：sin 或 cos,如下图:</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/master/2022/0614/math_sin_cos.webp" alt="math_sin_cos.webp"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/master/2022/0614/math_sin_cos.webp" alt="math_sin_cos.webp"></p>
 <p>但是alpha值不可能是负数，所以对sin(time)去一个绝对值即可。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logo:scheduleUpdate(<span class="function"><span class="keyword">function</span><span class="params">(delta)</span></span></span><br><span class="line">    <span class="built_in">time</span> = <span class="built_in">time</span> + delta</span><br><span class="line">    <span class="keyword">local</span> sin_value = <span class="built_in">math</span>.<span class="built_in">abs</span>(<span class="built_in">math</span>.<span class="built_in">sin</span>(<span class="built_in">time</span>))</span><br><span class="line">    glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, sin_value)</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
 <p>最终效果:</p>
-<p><img src="https://fastly.jsdelivr.net/gh/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_glow_breathe.gif" alt="cocos2dx_shader_glow_breathe.gif"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/master/2022/0614/cocos2dx_shader_glow_breathe.gif" alt="cocos2dx_shader_glow_breathe.gif"></p>
 
     </div>
 
