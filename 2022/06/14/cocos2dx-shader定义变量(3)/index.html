@@ -259,7 +259,7 @@
 <link rel="stylesheet" href="/css/post.css">
 
 
-  <div class="article article-bg mdui-center mdui-shadow-2">
+  <div class="article article-bg mdui-center">
     <div class="article-info">
       <!--文章内容广告-->
       
@@ -275,7 +275,7 @@
 </script>
       
       
-      <div class="mdui-typo">
+      <div>
       <h1>实现目标</h1>
 <p>传递颜色变量到Shader，使图片渲染出不同的颜色，如下：</p>
 <p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_color.png" alt="cocos2dx_shader_color"></p>
@@ -292,32 +292,27 @@
 </thead>
 <tbody>
 <tr>
-<td>vec2</td>
-<td>setUniformVec2(k, v)</td>
-<td></td>
-</tr>
-<tr>
-<td>vec3</td>
-<td>setUniformVec3(k, v)</td>
-<td></td>
-</tr>
-<tr>
-<td>vec4</td>
-<td>setUniformVec4(k, v)</td>
-<td></td>
-</tr>
-<tr>
 <td>int</td>
 <td>setUniformInt(k, v)</td>
+<td>1-4个整型变量</td>
+</tr>
+<tr>
+<td>ivec2, ivec3, ivec4</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>float</td>
 <td>setUniformFloat(k, v)</td>
+<td>1-4个浮点数</td>
+</tr>
+<tr>
+<td>vec2, vec3, vec4</td>
+<td>setUniformVec2(k, v)</td>
 <td></td>
 </tr>
 <tr>
-<td></td>
+<td>bool</td>
 <td>setUniformTexture(k, v)</td>
 <td></td>
 </tr>
@@ -384,7 +379,7 @@
 	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
 
-	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+	<div class="article article-bg talk-info mdui-center">
 		<h2>评论</h2>
 		<div id="gitalk-container"></div>
 	</div>

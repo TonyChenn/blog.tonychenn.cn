@@ -259,7 +259,7 @@
 <link rel="stylesheet" href="/css/post.css">
 
 
-  <div class="article article-bg mdui-center mdui-shadow-2">
+  <div class="article article-bg mdui-center">
     <div class="article-info">
       <!--文章内容广告-->
       
@@ -275,7 +275,7 @@
 </script>
       
       
-      <div class="mdui-typo">
+      <div>
       <h1>步骤</h1>
 <ul>
 <li>实现外发光</li>
@@ -297,7 +297,8 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logo:scheduleUpdate(<span class="function"><span class="keyword">function</span><span class="params">(delta)</span></span></span><br><span class="line">    <span class="built_in">time</span> = <span class="built_in">time</span> + delta</span><br><span class="line">    <span class="keyword">local</span> sin_value = <span class="built_in">math</span>.<span class="built_in">abs</span>(<span class="built_in">math</span>.<span class="built_in">sin</span>(<span class="built_in">time</span>))</span><br><span class="line">    glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, sin_value)</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
 <p>最终效果:</p>
 <p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0614/cocos2dx_shader_glow_breathe.gif" alt="cocos2dx_shader_glow_breathe.gif"></p>
-
+<p>完整lua</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> logo = <span class="built_in">self</span>.holder:getChildByName(<span class="string">&quot;Sprite_start_logo&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> size = logo:getTexture():getContentSizeInPixels()</span><br><span class="line"></span><br><span class="line">glProgramState:setUniformVec2(<span class="string">&quot;resolution&quot;</span>, &#123;x = size.width, y = size.height&#125;)</span><br><span class="line">glProgramState:setUniformVec3(<span class="string">&quot;glow_color&quot;</span>, cc.vec3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>))</span><br><span class="line">glProgramState:setUniformFloat(<span class="string">&quot;glow_range&quot;</span>, <span class="number">10</span>)</span><br><span class="line">glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">time</span> = <span class="number">0</span></span><br><span class="line">logo:scheduleUpdate(<span class="function"><span class="keyword">function</span><span class="params">(delta)</span></span></span><br><span class="line">    <span class="built_in">time</span> = <span class="built_in">time</span> + delta</span><br><span class="line">    <span class="keyword">local</span> sin_value = <span class="built_in">math</span>.<span class="built_in">sin</span>(<span class="built_in">time</span>)</span><br><span class="line">    glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, <span class="built_in">math</span>.<span class="built_in">abs</span>(sin_value))</span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"></span><br><span class="line">logo:setGLProgramState(glProgramState)</span><br></pre></td></tr></table></figure>
     </div>
 
       
@@ -337,7 +338,7 @@
 	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.13.0/js/md5.min.js"></script>
 
-	<div class="article article-bg talk-info mdui-center mdui-shadow-2">
+	<div class="article article-bg talk-info mdui-center">
 		<h2>评论</h2>
 		<div id="gitalk-container"></div>
 	</div>
