@@ -8,14 +8,14 @@
     <meta name="baidu-site-verification" content="5EmnBCPDrY" />
     
 
-    <title>Android-双击返回键退出程序 - 默然的博客</title>
+    <title>Unity划时代的CSharp热更-HybirdCLR - 默然的博客</title>
 
     <meta property="og:url" content="https://blog.tonychenn.cn">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Android-双击返回键退出程序 - 默然的博客 | 默然的博客">
+    <meta property="og:title" content="Unity划时代的CSharp热更-HybirdCLR - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/03.16/icon.jpg">
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/icon.jpg">
     
 
     
@@ -243,10 +243,10 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/03.16/icon.jpg)">
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
-            <span class="header_title">Android-双击返回键退出程序</span></br>
+            <span class="header_title">Unity划时代的CSharp热更-HybirdCLR</span></br>
             <p id="hitokoto">一言加载中...</p>
         </div>
     </div>
@@ -276,10 +276,55 @@
       
       
       <div>
-      <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
-<p>在Android中为防止不小心点击到返回键就退出软件，所以通常软件都会使用点击返回键时显示一个Toast消息“再点击一次退出”，当在指定时间内再次点击按钮时退出程序</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">Activity</span> &#123; </span><br><span class="line">    <span class="meta">@Override</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span>&#123; </span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState); setContentView(R.layout.main);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="variable">Current</span> <span class="operator">=</span><span class="number">0</span>;</span><br><span class="line">    <span class="comment">//记录上次按下返回的时间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onBackPressed</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (System.currentTimeMillis()- Current &gt;<span class="number">2000</span>)&#123;</span><br><span class="line">            Current=System.currentTimeMillis();</span><br><span class="line">            Toast.makeText(<span class="built_in">this</span>,<span class="string">&quot;再点击一次推出&quot;</span>,<span class="number">0</span>).show();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            finish();</span><br><span class="line">            System.exit(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//如果当前时间大于上次记录的时间2秒，那么点一次时弹出Toast消息，如果小于2s,那么退出程序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Tony-Chen 2018.3.16</p>
+      <h1>前言</h1>
+<p>从第一次在知乎听说<code>huatuo(现改名HybridCLR)</code>已经过去好多个月了，官方宣称<code>特性完整、零成本、高性能、低内存的近乎完美的Unity全平台原生c#热更方案</code>的口号直接吸引了我，单当时还没有应用到线上的项目，也是一直处于观望的态度。前几天再次看到时，PC/android/ios 均已跑通，并有项目正式上线android/ios。且多位业内大佬也是对其大为赞赏并称其为“划时代的热更解决方案”，紧跟大佬脚步，遂决定深入了解学习下怎么用。</p>
+<h1>目前热更新解决方案</h1>
+<ul>
+<li>lua：xLua, toLua, sLua,…(百花齐放)</li>
+<li>CSharp热更：ILRuntime</li>
+<li>il2cpp: HybridCLR</li>
+</ul>
+<h1>Mono vs IL2CPP</h1>
+<p>详细查看<a href="">Unity中mono与il2cpp</a></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/mono_il2cpp.png" alt="mono_il2cpp"></p>
+<h2 id="优缺点"><a class="header-anchor" href="#优缺点">¶</a>优缺点</h2>
+<ol>
+<li>c++运行效率高，速度快</li>
+<li>mono编译速度快</li>
+<li>c++跨平台能力强，移植方便</li>
+<li>c++是AOT</li>
+</ol>
+<h1>HybridCLR</h1>
+<h2 id="特点"><a class="header-anchor" href="#特点">¶</a>特点</h2>
+<ol>
+<li>
+<p>近乎完整实现了<a target="_blank" rel="noopener" href="https://www.ecma-international.org/publications-and-standards/standards/ecma-335/">ECMA-335规范</a>除了 下文中&quot;限制和注意事项&quot; 之外的特性都支持。</p>
+</li>
+<li>
+<p>零学习和使用成本。 HybridCLR将纯AOT runtime增强为完整的runtime，使得热更新代码与AOT代码无缝工作。脚本类与AOT类在同一个运行时内，可以随意写继承、反射、多线程(volatile、ThreadStatic、Task、async)之类的代码。不需要额外写任何特殊代码、没有代码生成，也没有什么特殊限制。</p>
+</li>
+<li>
+<p>执行高效。实现了一个极其高效的寄存器解释器，所有指标都大幅优于其他热更新方案。<a target="_blank" rel="noopener" href="https://focus-creative-games.github.io/hybridclr/benchmark/#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A">性能测试报告</a></p>
+</li>
+<li>
+<p>内存高效。 热更新脚本中定义的类跟普通c#类占用一样的内存空间，远优于其他热更新方案。<a target="_blank" rel="noopener" href="https://focus-creative-games.github.io/hybridclr/benchmark/#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%8A%A5%E5%91%8A">内存占用报告</a></p>
+</li>
+<li>
+<p>原生支持hotfix修复AOT部分代码。几乎不增加任何开发和运行开销。</p>
+</li>
+</ol>
+<h2 id="为什么可以实现热更？"><a class="header-anchor" href="#为什么可以实现热更？">¶</a>为什么可以实现热更？</h2>
+<p>引用下官方的回答：</p>
+<blockquote>
+<p>HybridCLR扩充了il2cpp的代码，使它由纯AOT runtime变成‘AOT+Interpreter’ 混合runtime，进而原生支持动态加载assembly，使得基于il2cpp backend打包的游戏不仅能在Android平台，也能在IOS、Consoles等限制了JIT的平台上高效地以AOT+interpreter混合模式执行。从底层彻底支持了热更新。</p>
+</blockquote>
+<p>通俗的讲就是，加载dll时判断类型，如果是AOT类型就通过<code>IL2CPP AOT</code>执行，否则通过<code>IL2CPP Interpreter</code>执行。<br>
+<img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/architecture.jpg" alt=""></p>
+<h1>为什么是划时代的热更新解决方案？</h1>
+<p>参考烟雨大神描述</p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/desc.jpg" alt=""></p>
+<h1>参考</h1>
+<p><a target="_blank" rel="noopener" href="https://focus-creative-games.github.io/hybridclr">官方文档</a></p>
 
     </div>
 
@@ -343,7 +388,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">目前热更新解决方案</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Mono vs IL2CPP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="post-toc-text">优缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">HybridCLR</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%B9%E7%82%B9"><span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E7%83%AD%E6%9B%B4%EF%BC%9F"><span class="post-toc-text">为什么可以实现热更？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">为什么是划时代的热更新解决方案？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">参考</span></a></li></ol> 
     </div>
   </aside> -->
 </div>
