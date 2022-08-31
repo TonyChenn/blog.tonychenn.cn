@@ -322,7 +322,7 @@
 </ul>
 <p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/il.png" alt="il"></p>
 <h2 id="IL2CPP"><a class="header-anchor" href="#IL2CPP">¶</a>IL2CPP</h2>
-<p>il2cpp就是将上面生成的IL代码转换成C<ins>代码，然后通过不同平台的il2cpp虚拟机去编译执行转译好的C</ins>代码。为什么需要有<code>il2cpp VM（虚拟机）</code>来执行C<ins>呢？那是因为在C</ins>中本身是不支持C#中的一些“骚操作”的，如：反射，GC，泛型，虚函数，接口，线程管理等，而这些就是<code>il2cpp VM</code>要做的事情，而对于其他代码则是交给原生的c++执行了。</p>
+<p>il2cpp就是将上面生成的IL代码转换成<code>C++</code>代码，然后通过不同平台的il2cpp虚拟机去编译执行转译好的<code>C++</code>代码。为什么需要有<code>il2cpp VM（虚拟机）</code>来执行<code>C++</code>呢？那是因为在<code>C++</code>中本身是不支持C#中的一些“骚操作”的，如：反射，GC，泛型，虚函数，接口，线程管理等，而这些就是<code>il2cpp VM</code>要做的事情，而对于其他代码则是交给原生的<code>c++</code>执行了。</p>
 <p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0706/il2cpp.png" alt="il2cpp"></p>
 
     </div>
