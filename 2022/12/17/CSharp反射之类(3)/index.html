@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>CSharp反射之类(3) - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSharp反射之类(3) - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0829/icon.jpg">
+    
+
+    
+      <meta property="og:description" content="反射，反射，程序员的快乐！！！">
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                <a href="/" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/home" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
+                    桌面
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/tags" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/archives" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                <a href="/about" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                首页
+            </a>
+        
+            <a href="/home" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                桌面
+            </a>
+        
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                标签
+            </a>
+        
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                归档
+            </a>
+        
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs">
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2022/0829/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">CSharp反射之类(3)</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <blockquote>
+<p>本篇文章暂<strong>不介绍</strong>反射获取：非<code>public</code> 修饰的<code>方法、字段、属性</code>等。</p>
+</blockquote>
+<p>前置类</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> ID = <span class="number">1001</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span>()</span> &#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span>(<span class="params"><span class="built_in">string</span> name, <span class="built_in">int</span> age</span>)</span> &#123; Name = name; Age = age; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Speak</span>()</span> &#123; Console.WriteLine(<span class="string">&quot;沉默中...&quot;</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Speak</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span> &#123; Console.WriteLine(Name + <span class="string">&quot; says: &quot;</span> + msg); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">Calculate</span>()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> MSG = <span class="string">&quot;hello!&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> Exp &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">Calculate</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b</span>)</span> &#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RefMethod1</span>(<span class="params"><span class="built_in">int</span> a, <span class="keyword">ref</span> <span class="built_in">int</span> b</span>)</span> &#123; b = a + <span class="number">1</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RefMethod2</span>(<span class="params"><span class="keyword">ref</span> <span class="built_in">int</span> a, <span class="keyword">ref</span> <span class="built_in">int</span> b</span>)</span> &#123; </span><br><span class="line">        <span class="built_in">int</span> temp = a; a = b; b = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Cat</span>:<span class="title">Animal</span>&#123; <span class="function"><span class="keyword">public</span> <span class="title">Cat</span>() : <span class="title">base</span>()</span> &#123; &#125; &#125;</span><br></pre></td></tr></table></figure>
+<h1>判断是类，获取基类</h1>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;IsClass: &quot;</span> + <span class="keyword">typeof</span>(Cat).IsClass);</span><br><span class="line"><span class="comment">//&gt; IsClass: True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取基类</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;BaseClass: &quot;</span> + <span class="keyword">typeof</span>(Cat).BaseType);</span><br><span class="line"><span class="comment">//&gt; BaseClass: Demo.Animal</span></span><br></pre></td></tr></table></figure>
+<h1>成员</h1>
+<p>成员是指：除了Assembly,Module外所有的类型，如：构造方法，方法，属性，字段，委托等所有的集合。</p>
+<h1>反射创建对象</h1>
+<p>方式多多，这里记录两种方式</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Type type = <span class="keyword">typeof</span>(Animal);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式一（无参，两个参数）</span></span><br><span class="line"><span class="keyword">var</span> kitty1 = (Animal)Activator.CreateInstance(type);</span><br><span class="line"><span class="keyword">var</span> kitty2 = (Animal)Activator.CreateInstance(type, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="string">&quot;Kitty&quot;</span>, <span class="number">3</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二 通过构造方法(无参，两个参数)</span></span><br><span class="line">ConstructorInfo constructor0 = type.GetConstructor(Type.EmptyTypes);</span><br><span class="line">ConstructorInfo constructor2 = type.GetConstructor(<span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">string</span>), <span class="keyword">typeof</span>(Int32) &#125;);</span><br><span class="line"><span class="keyword">var</span> tom1 = constructor0.Invoke(<span class="keyword">new</span> <span class="built_in">object</span>[] &#123; &#125;) <span class="keyword">as</span> Animal;</span><br><span class="line"><span class="keyword">var</span> tom2 = constructor2.Invoke(<span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="string">&quot;Tom&quot;</span>, <span class="number">3</span> &#125;) <span class="keyword">as</span> Animal;</span><br></pre></td></tr></table></figure>
+<h1>类的属性</h1>
+<p>通过<code>GetProperty</code>、<code>GetProperties</code>获取一个或多个属性。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取属性(非静态)</span></span><br><span class="line"><span class="keyword">var</span> ageProperty = <span class="keyword">typeof</span>(Animal).GetProperty(<span class="string">&quot;Age&quot;</span>);</span><br><span class="line"><span class="comment">// 获取属性的值(非静态)</span></span><br><span class="line">Animal dog = <span class="keyword">new</span> Animal();</span><br><span class="line">Console.WriteLine(ageProperty.GetValue(dog));</span><br><span class="line">ageProperty.SetValue(dog, <span class="number">999</span>);</span><br><span class="line">Console.WriteLine(ageProperty.GetValue(dog));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态属性</span></span><br><span class="line"><span class="keyword">var</span> property = <span class="keyword">typeof</span>(Animal).GetProperty(<span class="string">&quot;Exp&quot;</span>);</span><br><span class="line">Console.WriteLine(property.GetValue(<span class="literal">null</span>, <span class="literal">null</span>));</span><br><span class="line">property.SetValue(<span class="literal">null</span>, <span class="number">999</span>);</span><br><span class="line">Console.WriteLine(property.GetValue(<span class="literal">null</span>));</span><br></pre></td></tr></table></figure>
+<h1>类的字段</h1>
+<p>通过<code>GetField</code>、<code>GetFields</code>获取一个或多个字段。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 公有非静态</span></span><br><span class="line">FieldInfo[] fields = type.GetFields();      <span class="comment">// 获取所有字段</span></span><br><span class="line"></span><br><span class="line">Animal bird = <span class="keyword">new</span> Animal();</span><br><span class="line">FieldInfo field = type.GetField(<span class="string">&quot;ID&quot;</span>);     <span class="comment">// 获取某个字段</span></span><br><span class="line">Console.WriteLine(field.GetValue(bird));   <span class="comment">// 获取字段的值</span></span><br><span class="line">field.SetValue(bird, <span class="number">999</span>);                 <span class="comment">// 设置字段的值</span></span><br><span class="line">Console.WriteLine(field.GetValue(bird));   </span><br><span class="line"></span><br><span class="line"><span class="comment">// 公有静态</span></span><br><span class="line"><span class="keyword">var</span> field = <span class="keyword">typeof</span>(Animal).GetField(<span class="string">&quot;MSG1&quot;</span>);</span><br><span class="line">Console.WriteLine(field.GetValue(<span class="literal">null</span>));</span><br><span class="line">field.SetValue(<span class="literal">null</span>, <span class="string">&quot;hi&quot;</span>);</span><br><span class="line">Console.WriteLine(field.GetValue(<span class="literal">null</span>));</span><br></pre></td></tr></table></figure>
+<h1>类中的方法</h1>
+<p>通过<code>GetMethod</code>、<code>GetMethods</code>获取一个或多个方法。特殊的有构造方法，使用<code>GetConstructor</code>获取。</p>
+<h2 id="构造方法"><a class="header-anchor" href="#构造方法">¶</a>构造方法</h2>
+<p>上面通过反射创建对象时有记录到，不再赘述。</p>
+<h2 id="非静态方法"><a class="header-anchor" href="#非静态方法">¶</a>非静态方法</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Animal bird = <span class="keyword">new</span> Animal();</span><br><span class="line"><span class="comment">// 无参方法</span></span><br><span class="line"><span class="keyword">var</span> method0 = <span class="keyword">typeof</span>(Animal).GetMethod(<span class="string">&quot;Speak&quot;</span>, Type.EmptyTypes);</span><br><span class="line">method0.Invoke(bird,<span class="keyword">new</span> Type[] &#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有参数方法</span></span><br><span class="line"><span class="keyword">var</span> method1 = <span class="keyword">typeof</span>(Animal).GetMethod(<span class="string">&quot;Speak&quot;</span>, <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">string</span>) &#125;);</span><br><span class="line">method1.Invoke(bird, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="string">&quot;早上好&quot;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有返回值</span></span><br><span class="line"><span class="keyword">var</span> method2 = <span class="keyword">typeof</span>(Animal).GetMethod(<span class="string">&quot;Calculate&quot;</span>, Type.EmptyTypes);</span><br><span class="line"><span class="built_in">object</span> result = method2.Invoke(bird, <span class="keyword">new</span> Type[] &#123; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分参数含有ref</span></span><br><span class="line"><span class="built_in">object</span>[] objs = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="number">100</span>, <span class="literal">null</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> method4 = <span class="keyword">typeof</span>(Animal).GetMethod(<span class="string">&quot;refMethod1&quot;</span>);</span><br><span class="line">method4.Invoke(bird, objs);</span><br><span class="line">Console.WriteLine(objs[<span class="number">0</span>]+<span class="string">&quot; : &quot;</span>+ objs[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">//&gt; 100 : 101</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//所有参数含有ref</span></span><br><span class="line"><span class="built_in">object</span>[] objs = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="number">0</span>, <span class="number">99</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> method3 = <span class="keyword">typeof</span>(Animal).GetMethod(<span class="string">&quot;RefMethod2&quot;</span>);</span><br><span class="line">method3.Invoke(bird, objs);</span><br><span class="line">Console.WriteLine(objs[<span class="number">0</span>]+<span class="string">&quot; : &quot;</span>+ objs[<span class="number">1</span>]);</span><br><span class="line"><span class="comment">//&gt; 99 : 0</span></span><br></pre></td></tr></table></figure>
+<h2 id="静态方法"><a class="header-anchor" href="#静态方法">¶</a>静态方法</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有返回值</span></span><br><span class="line"><span class="keyword">var</span> method4 = <span class="keyword">typeof</span>(Animal).GetMethod(<span class="string">&quot;Calculate&quot;</span>, <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(Int32), <span class="keyword">typeof</span>(Int32) &#125;);</span><br><span class="line"><span class="built_in">object</span> sum = method4.Invoke(<span class="literal">null</span>, <span class="keyword">new</span> <span class="built_in">object</span>[]&#123; <span class="number">100</span>, <span class="number">100</span> &#125;);</span><br><span class="line">Console.WriteLine(sum.ToString());</span><br></pre></td></tr></table></figure>
+<h1>泛型类</h1>
+<p>泛型可以当作普通的类进行使用，但是实例化泛型时必须<strong>指定泛型类型</strong>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyClass</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyClass</span>()</span> &#123; Console.WriteLine(<span class="string">&quot;执行构造方法&quot;</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowInfo</span>(<span class="params">T a</span>)</span> &#123; Console.WriteLine(a); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 获取泛型类型(两种方式效果相同)</span></span><br><span class="line">        Type type = <span class="keyword">typeof</span>(MyClass&lt;<span class="built_in">int</span>&gt;);</span><br><span class="line">        Type type = <span class="keyword">typeof</span>(MyClass&lt;&gt;).MakeGenericType(<span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">int</span>) &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 实例化对象(两种方式效果相同)</span></span><br><span class="line">        <span class="keyword">var</span> obj = Activator.CreateInstance(type);</span><br><span class="line">        ConstructorInfo method = <span class="keyword">typeof</span>(MyClass&lt;<span class="built_in">int</span>&gt;).GetConstructor(Type.EmptyTypes);</span><br><span class="line">        <span class="keyword">var</span> obj = method.Invoke(<span class="keyword">new</span> <span class="built_in">object</span>[] &#123; &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用泛型方法</span></span><br><span class="line">        MethodInfo method = <span class="keyword">typeof</span>(MyClass&lt;<span class="built_in">int</span>&gt;).GetMethod(<span class="string">&quot;ShowInfo&quot;</span>);</span><br><span class="line">        method.Invoke(obj, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="number">100</span> &#125;);</span><br><span class="line">        <span class="comment">//&gt; 执行构造方法</span></span><br><span class="line">        <span class="comment">//&gt; 100</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里对泛型绑定了<code>int</code>类型，可以通过<code>GetGenericTypeDefinition</code>去除泛型与参数类型的绑定。下面举例重新绑定为string类型。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(type.FullName);</span><br><span class="line">Type _type = type.GetGenericTypeDefinition();</span><br><span class="line">Console.WriteLine(_type.FullName);</span><br><span class="line"><span class="comment">//&gt; Study.MyClass`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</span></span><br><span class="line"><span class="comment">//&gt; Study.MyClass`1</span></span><br><span class="line"></span><br><span class="line">Type new_type = _type.MakeGenericType(<span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">string</span>) &#125;);</span><br><span class="line"><span class="keyword">var</span> o2 = Activator.CreateInstance(new_type);</span><br><span class="line"><span class="keyword">var</span> method2 = new_type.GetMethod(<span class="string">&quot;ShowInfo&quot;</span>);</span><br><span class="line">method2.Invoke(o2, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="string">&quot;hello&quot;</span> &#125;);</span><br><span class="line"><span class="comment">//&gt; 执行构造方法</span></span><br><span class="line"><span class="comment">//&gt; hello</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: 'ecbf6316c9aa7a6bfd7a',
+			clientSecret: '5c875e5986ed75f4509d97acd16628b97f7506f1',
+			repo: 'tonychenn.github.io',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true  // Facebook-like distraction free mode
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">判断是类，获取基类</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">成员</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">反射创建对象</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">类的属性</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">类的字段</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">类中的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="post-toc-text">构造方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="post-toc-text">非静态方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="post-toc-text">静态方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">泛型类</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                Tony Chenn&nbsp&nbsp2022
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>
