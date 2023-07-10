@@ -176,7 +176,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -184,7 +184,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=friends&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -192,7 +192,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=friends&url=https://blog.tonychenn.cn//friends/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -200,7 +200,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=friends&url=https://blog.tonychenn.cn//friends/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//friends/index.html&text=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//friends/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -224,7 +224,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//friends/index.html&title=friends" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,22 +276,13 @@
       
       
       <div>
-      <h1>什么是OpenGL/DirectX</h1>
-<p>OpenGL/DirectX 是图像应用编程接口，用来渲染二维，三维图形。如果没有 OpenGL/DirectX 想要访问GPU是很麻烦的，可能要和各种寄存器，显存打交道。OpenGL/DirectX将上层应用程序与底层GPU之间架起一座“桥梁”。</p>
-<p>当应用程序通过上面编程接口后，这些接口会依次向<b>显卡驱动</b>发送渲染命令。<b>显卡驱动</b>会将OpenGL/DirectX中的函数翻译成GPU能懂的语言，实现与GPU的通讯。<b>显卡驱动</b>同时也会将纹理等数据转换为GPU支持的格式。</p>
-<h2 id="HLSL，GLSL，CG的关系"><a class="header-anchor" href="#HLSL，GLSL，CG的关系">¶</a>HLSL，GLSL，CG的关系</h2>
-<p>HLSL，GLSL，CG是三种常见的着色器语言，用来编写着色器。这些语言会被编译为与机器无关的汇编语言（中间语言），中间语言再交给显卡翻译为真正的机器语言，即GPU可以理解的语言。</p>
-<h2 id="三者区别"><a class="header-anchor" href="#三者区别">¶</a>三者区别</h2>
-<p><b>HLSL</b>基于DirectX,由微软控制，在版本相同时，不同平台编译的结果是一样的，但几乎只支持微软家产品，如: Windows,Xbox 360,PS3等。</p>
-<p><b>GLSL</b>基于OpenGL,优点在于跨平台性，只要显卡驱动支持即可正常工作，可以在Windows,Mac,Linux,移动平台工作。但是由于OpenGL不提供着色器编译器，而是由显卡驱动完成着色器编译，导致GLSL的编译结果取决于不用的显卡硬件厂商，进而导致编译结果不尽相同。</p>
-<p><b>CG</b>基于Nvidia，真正意义上的跨平台。根据不同的平台生成不同的中间语言。(Unity中首选，会编译成HLSL或GLSL)</p>
-<h1>什么是渲染管线？</h1>
+      <h1>什么是渲染管线？</h1>
 <p>将素材通过一系列的加工最终显示在屏幕上，一系列的加工如同流水线一般。</p>
 <h1>渲染管线</h1>
 <p>渲染管线的工作是将一个三维场景出发，渲染成一张二维图像。这个过程由CPU,GPU共同完成。渲染流程分三个阶段：</p>
 <p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2020/0926/shader_pipline.jpg" alt="shader_pip_line"></p>
 <h2 id="应用阶段"><a class="header-anchor" href="#应用阶段">¶</a>应用阶段</h2>
-<p>应用阶段分三个任务（CPU负责实现）</p>
+<p>在应用阶段开发者具有绝对的控制权。应用阶段分三个任务（CPU负责实现）</p>
 <ol>
 <li>准备好场景数据。如场景所有GameObject信息，光照信息等。将数据加载到显存中。</li>
 </ol>
@@ -314,6 +305,26 @@
 <li><b>调用DrawCall。</b>DrawCall是一个渲染命令，由CPU发起，GPU接收。这个命令只会只想一个需要渲染的图元列表。当GPU收到DrawCall后，会根据渲染状态和顶点数据进行计算（<a href="#GPU%E6%B5%81%E6%B0%B4%E7%BA%BF">GPU的流水线</a>），最终显示到屏幕上。</li>
 </ol>
 <h1>GPU流水线</h1>
+<p>CPU向GPU传递渲染命令后，GPU经过一系列操作把图元显示在屏幕上。GPU阶段开发者没有绝对的控制权，即：无法控制这两个阶段的实现细节，但在不同的阶段会有不同的可配置性和可编程性。<br>
+<img src="http://localhost/2023/q1/shader_geometry.jpg" alt=""></p>
+<h2 id="顶点着色器-几何阶段"><a class="header-anchor" href="#顶点着色器-几何阶段">¶</a>顶点着色器(几何阶段)</h2>
+<ul>
+<li>通常用于顶点的空间变换，顶点着色等功能。（完全可编程）</li>
+<li>数据来:CPU。每个输入进来的顶点都会调用一次顶点着色器。</li>
+<li>顶点着色器不可创建、销毁任何顶点。</li>
+<li>任务</li>
+</ul>
+<ol>
+<li>坐标变换。最基本必须完成的变换：从模型空间转换到齐次裁剪空间。</li>
+<li>逐顶点光照。</li>
+</ol>
+<h2 id="裁剪-几何阶段"><a class="header-anchor" href="#裁剪-几何阶段">¶</a>裁剪(几何阶段)</h2>
+<p>对于一个片元，在相机可视范围内就传递到下一个阶段，不在可视范围就舍弃掉，对于部分在可视范围内就需要对片元进行裁剪，只传递可视部分。（可配置）</p>
+<h2 id="屏幕映射-几何阶段"><a class="header-anchor" href="#屏幕映射-几何阶段">¶</a>屏幕映射(几何阶段)</h2>
+<p>把输入的三维坐标转换为二维屏幕坐标。（OpenGL左下角原点，DX左上角原点）</p>
+<h2 id="三角形设置-光栅化阶段"><a class="header-anchor" href="#三角形设置-光栅化阶段">¶</a>三角形设置(光栅化阶段)</h2>
+<h2 id="片元着色器。"><a class="header-anchor" href="#片元着色器。">¶</a>片元着色器。</h2>
+<p>完全可编程。用于逐片元的着色操作。</p>
 
     </div>
 
@@ -377,7 +388,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是OpenGL&#x2F;DirectX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HLSL%EF%BC%8CGLSL%EF%BC%8CCG%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="post-toc-text">HLSL，GLSL，CG的关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E8%80%85%E5%8C%BA%E5%88%AB"><span class="post-toc-text">三者区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是渲染管线？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">渲染管线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E9%98%B6%E6%AE%B5"><span class="post-toc-text">应用阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">几何阶段(GPU)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">光栅化阶段(GPU)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">CPU与GPU的通信</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">GPU流水线</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是渲染管线？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">渲染管线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E9%98%B6%E6%AE%B5"><span class="post-toc-text">应用阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">几何阶段(GPU)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">光栅化阶段(GPU)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">CPU与GPU的通信</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">GPU流水线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">顶点着色器(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A3%81%E5%89%AA-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">裁剪(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%8F%E5%B9%95%E6%98%A0%E5%B0%84-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">屏幕映射(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E8%AE%BE%E7%BD%AE-%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="post-toc-text">三角形设置(光栅化阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%87%E5%85%83%E7%9D%80%E8%89%B2%E5%99%A8%E3%80%82"><span class="post-toc-text">片元着色器。</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>
