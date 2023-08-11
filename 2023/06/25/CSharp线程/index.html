@@ -174,7 +174,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -182,7 +182,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="http://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cn/favicon.ico&url=https://blog.tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -190,7 +190,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="http://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="http://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -206,7 +206,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -214,7 +214,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -222,7 +222,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -276,6 +276,38 @@
       <div>
       <p>在CSharp中，使用Thread类进行创建和管理线程，通过这种方式创建的线程受CLR管理，由GC来分配和回收内存，因此也叫托管线程。</p>
 <p>关于线程和进程：一个应用程序有至少一个进程；一个进程至少有一个线程。</p>
+<h1>进程与线程</h1>
+<ul>
+<li>
+<p>进程。程序在运行时所占用的计算资源称之为进程。进程之间相互独立，所以进程之间通信会比较困难。</p>
+</li>
+<li>
+<p>线程。线程是程序执行的最小单位。线程也包含自己的计算资源。在一个进程中可以有一个到多个线程。</p>
+</li>
+<li>
+<p>多线程。指一个进程中多个线程并发执行。</p>
+</li>
+</ul>
+<h1>同步与异步的区别</h1>
+<ul>
+<li>
+<p>同步是只在一个线程中(主线程)从上向下按照顺序执行，每次只有执行完毕才会继续往下执行。</p>
+</li>
+<li>
+<p>异步指在主线程运行过程中，开一个新的线程(子线程)去执行耗时的操作，主线程不会等待子线程的计算结果直接继续执行下去。</p>
+</li>
+</ul>
+<h1>CSharp中的多线程</h1>
+<p>在C#中 <code>Thread</code> <a target="_blank" rel="noopener" href="http://xn--0iv490c.Net">类是.Net</a> CLR对线程对象的抽象封装。多线程是操作系统提供的，Thread向操作系统申请线程。</p>
+<h1>异步多线程的特点</h1>
+<ol>
+<li>不会卡死主线程，更好的用户体验。</li>
+<li>多个线程比单个线程处理速度快。系统资源换性能，非线性减少处理时间。</li>
+<li>多个线程开始、结束 的先后顺序不固定。</li>
+</ol>
+<h1>BeginInvoke</h1>
+<p>method.Invoke() 主线程同步执行method方法。使用BeginInvoke()可以在子线程中异步调用方法,BeginInvoke()包含两个参数:返回一个IAsyncResult的结果。下面是如何处理异步的回调</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> MainThreadID = Thread.CurrentThreadManagedThreadId;</span><br><span class="line"><span class="keyword">var</span> MainThread = Thread.CurrentThread;</span><br><span class="line">Console.WriteLine(<span class="string">$&quot;主线程线程ID:<span class="subst">&#123;MainThreadID&#125;</span>&quot;</span>);</span><br><span class="line">Action test = () =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;当前线程为：<span class="subst">&#123;Thread.CurrentThread.ManagedThreadId&#125;</span>&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 方式一 AsyncCallback</span></span><br><span class="line">IAsyncResult asyncResult = test.BeginInvok((state) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;异步执行结束，当前线程为：<span class="subst">&#123;Thread.CurrentThread.ManagedThreadId&#125;</span>&quot;</span>);</span><br><span class="line">&#125;, <span class="literal">null</span>);</span><br><span class="line"><span class="comment">// &gt;主线程线程ID: 1</span></span><br><span class="line"><span class="comment">// &gt;当前线程为：3</span></span><br><span class="line"><span class="comment">// &gt;异步执行结束，当前线程为：3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二</span></span><br><span class="line">IAsyncResult asyncResult = test.BeginInvoke(<span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line"><span class="keyword">while</span> (!asyncResult.IsCompleted)</span><br><span class="line">&#123;</span><br><span class="line">    Thread.Sleep(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br><span class="line">Console.WriteLine(<span class="string">$&quot;异步执行结束，当前线程为：<span class="subst">&#123;Thread.CurrentThread.ManagedThreadId&#125;</span>&quot;</span>);</span><br><span class="line"><span class="comment">// &gt;主线程线程ID: 1</span></span><br><span class="line"><span class="comment">// &gt;当前线程为：3</span></span><br><span class="line"><span class="comment">// &gt;异步执行结束，当前线程为：1</span></span><br></pre></td></tr></table></figure>
 <h1>获取进程信息</h1>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = <span class="keyword">new</span> Thread(() =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;线程ID: <span class="subst">&#123;Thread.CurrentThread.ManagedThreadId&#125;</span>&quot;</span>);</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;线程名称: <span class="subst">&#123;Thread.CurrentThread.Name&#125;</span>&quot;</span>);</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;线程执行状态: <span class="subst">&#123;Thread.CurrentThread.IsAlive&#125;</span>&quot;</span>);</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;是后台线程: <span class="subst">&#123;Thread.CurrentThread.IsBackground&#125;</span>&quot;</span>);</span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;在线程池中: <span class="subst">&#123;Thread.CurrentThread.IsThreadPoolThread&#125;</span>&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">thread.Name = <span class="string">&quot;子线程&quot;</span>;</span><br><span class="line">thread.Start();</span><br></pre></td></tr></table></figure>
 <h1>创建线程</h1>
@@ -393,7 +425,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">获取进程信息</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">创建线程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ThreadStart"><span class="post-toc-text">ThreadStart</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ParameterizedThreadStart"><span class="post-toc-text">ParameterizedThreadStart</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lambda"><span class="post-toc-text">Lambda</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">线程状态与切换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%91%E7%9C%A0%E4%B8%8E%E9%98%BB%E5%A1%9E"><span class="post-toc-text">线程的休眠与阻塞</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%BB%88%E6%AD%A2%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="post-toc-text">线程的终止与恢复</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">线程的优先级</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">处理线程的异常</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">同步与异步的区别</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">CSharp中的多线程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">异步多线程的特点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">BeginInvoke</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">获取进程信息</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">创建线程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ThreadStart"><span class="post-toc-text">ThreadStart</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ParameterizedThreadStart"><span class="post-toc-text">ParameterizedThreadStart</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lambda"><span class="post-toc-text">Lambda</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">线程状态与切换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%91%E7%9C%A0%E4%B8%8E%E9%98%BB%E5%A1%9E"><span class="post-toc-text">线程的休眠与阻塞</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%BB%88%E6%AD%A2%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="post-toc-text">线程的终止与恢复</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">线程的优先级</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">处理线程的异常</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

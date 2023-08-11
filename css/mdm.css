@@ -110,6 +110,8 @@ figure table .gutter pre{
 
 #summary {
     color: #424242;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
 }
 
 
