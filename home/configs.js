@@ -4,7 +4,7 @@ YL.static = {
   iconBtnStart: 'html5', //主图标
   author: 'tonychenn',//作者
   contactInformation: 'null',//联系方式
-  officialWebsite: 'https://tonychenn.cn',//软件官网
+  officialWebsite: 'https:blog.//tonychenn.cn',//软件官网
   welcome: 'YLUI 强力驱动',//加载完毕控制台提示信息
   copyrightDetail: 'null',//版权详细信息
   otherStatements: '',//其他信息（可留空）
