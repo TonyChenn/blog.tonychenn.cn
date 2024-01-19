@@ -187,7 +187,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -195,7 +195,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -203,7 +203,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -211,7 +211,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -219,7 +219,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -227,7 +227,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -235,7 +235,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -287,43 +287,56 @@
       
       
       <div>
-      <h1 id="元表元方法"><a href="#元表元方法" class="headerlink" title="元表元方法"></a>元表元方法</h1><p>lua中每个值都可以拥有元表（但不一定有）。元表也是普通表，只是用来记录数据在某些特定条件下的操作行为。如: 对表进行相加操作时，lua会判断是否存在<code>__add</code>的元方法，并对其进行调用。可以通过<code>setmetatable(table,metatable)</code>的方式设置元表。通过<code>getmetatable(table)</code>获取元表。</p>
+      <h1>元表元方法</h1>
+<p>lua中每个值都可以拥有元表（但不一定有）。元表也是普通表，只是用来记录数据在某些特定条件下的操作行为。如: 对表进行相加操作时，lua会判断是否存在<code>__add</code>的元方法，并对其进行调用。可以通过<code>setmetatable(table,metatable)</code>的方式设置元表。通过<code>getmetatable(table)</code>获取元表。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 两个表相加</span></span><br><span class="line">t1, t2 = &#123;num = <span class="number">1</span>&#125;, &#123;num = <span class="number">2</span>&#125;</span><br><span class="line">mt = &#123; <span class="built_in">__add</span> = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span></span> <span class="keyword">return</span> &#123;num = a.num + b.num&#125; <span class="keyword">end</span> &#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t1, mt)</span><br><span class="line"><span class="built_in">setmetatable</span>(t2, mt)</span><br><span class="line"></span><br><span class="line">t3 = t1 + t2</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;result = &quot;</span>..t3.num)</span><br><span class="line"><span class="comment">-- &gt; result = 3</span></span><br></pre></td></tr></table></figure>
-
 <p>数学计算相关部分元方法的key如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__add: +(加)        __sub: -(减)        __mul: x(乘)</span><br><span class="line">__div: ÷(除)        __mod: %(取余)      __unm: -(相反数)</span><br><span class="line">__concat: ..(连接)  __eq: ==(相等)      __lt: &lt;(小于)</span><br><span class="line">__le: &gt;(大于)       __pow: ^(乘幂)</span><br></pre></td></tr></table></figure>
-
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<h2 id="注意"><a class="header-anchor" href="#注意">¶</a>注意</h2>
+<ol>
 <li>如果两个表具有相同的元方法，那在执行此计算时没有问题。</li>
-<li>如果两个表具有不同的元方法：<ul>
+<li>如果两个表具有不同的元方法：
+<ul>
 <li>第一个值有元表，以第一个为准</li>
 <li>第一个没，第二个有元表，以第二个为准</li>
 <li>都没有：无法计算，报错</li>
 </ul>
 </li>
 </ol>
-<h1 id="一些特殊的元方法"><a href="#一些特殊的元方法" class="headerlink" title="一些特殊的元方法"></a>一些特殊的元方法</h1><h2 id="tostring"><a href="#tostring" class="headerlink" title="__tostring"></a>__tostring</h2><p>用来修改表的输出行为。</p>
+<h1>一些特殊的元方法</h1>
+<h2 id="tostring"><a class="header-anchor" href="#tostring">¶</a>__tostring</h2>
+<p>用来修改表的输出行为。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;<span class="number">200</span>,<span class="number">300</span>,<span class="number">400</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__tostring</span> = <span class="function"><span class="keyword">function</span><span class="params">(table)</span></span></span><br><span class="line">    <span class="keyword">local</span> result = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(<span class="built_in">table</span>) <span class="keyword">do</span></span><br><span class="line">        result = result .. k .. <span class="string">&quot; : &quot;</span> .. v..<span class="string">&quot;\n&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; 1 : 200</span></span><br><span class="line"><span class="comment">--&gt; 2 : 300</span></span><br><span class="line"><span class="comment">--&gt; 3 : 400</span></span><br><span class="line"><span class="comment">--&gt; </span></span><br></pre></td></tr></table></figure>
-<h2 id="index"><a href="#index" class="headerlink" title="__index"></a>__index</h2><p>**–&gt;用于查询访问&lt;–**。当通过<code>key</code>访问表中数据时，如果表中这个key是没有值的，那么在<code>__index</code>元方法存在时就会访问元方法。</p>
+<h2 id="index"><a class="header-anchor" href="#index">¶</a>__index</h2>
+<p><strong>–&gt;用于查询访问&lt;–</strong>。当通过<code>key</code>访问表中数据时，如果表中这个key是没有值的，那么在<code>__index</code>元方法存在时就会访问元方法。</p>
 <ul>
-<li>如果<code>__index</code>元方法是一张表。就会从这张表中取数据<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;name = <span class="string">&quot;tom&quot;</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = &#123; name = <span class="string">&quot;default&quot;</span>, age = <span class="number">0</span> &#125;&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.name)</span><br><span class="line"><span class="built_in">print</span>(t.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; tom</span></span><br><span class="line"><span class="comment">--&gt; 0</span></span><br></pre></td></tr></table></figure></li>
-<li>如果<code>__index</code>元方法是一个function。那么就会调用此方法。<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span><span class="params">(table, key)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;表中不存在key：&quot;</span>..key)  </span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.count)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; 表中不存在key：count</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br></pre></td></tr></table></figure></li>
+<li>如果<code>__index</code>元方法是一张表。就会从这张表中取数据</li>
 </ul>
-<h2 id="newindex"><a href="#newindex" class="headerlink" title="__newindex"></a>__newindex</h2><p>**–&gt;用于更新修改&lt;–**。当对一个当前不存在的key赋值时，如果存在<code>__newindex</code>元方法，会调用此元方法而不是直接赋值。同样<code>__newindex</code>可以是方法也可以是一个表。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;name = <span class="string">&quot;tom&quot;</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = &#123; name = <span class="string">&quot;default&quot;</span>, age = <span class="number">0</span> &#125;&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.name)</span><br><span class="line"><span class="built_in">print</span>(t.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; tom</span></span><br><span class="line"><span class="comment">--&gt; 0</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>是一个方法。</p>
+<li>如果<code>__index</code>元方法是一个function。那么就会调用此方法。</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span><span class="params">(table, key)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;表中不存在key：&quot;</span>..key)  </span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.count)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; 表中不存在key：count</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br></pre></td></tr></table></figure>
+<h2 id="newindex"><a class="header-anchor" href="#newindex">¶</a>__newindex</h2>
+<p><strong>–&gt;用于更新修改&lt;–</strong>。当对一个当前不存在的key赋值时，如果存在<code>__newindex</code>元方法，会调用此元方法而不是直接赋值。同样<code>__newindex</code>可以是方法也可以是一个表。</p>
+<ul>
+<li>是一个方法。</li>
+</ul>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;k1 = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__newindex</span> = <span class="function"><span class="keyword">function</span><span class="params">(_table, k, v)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请不要尝试给&quot;</span>..k..<span class="string">&quot;赋值&quot;</span>)</span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.k1)</span><br><span class="line">t.k2 = <span class="string">&quot;Kitty&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t.k2)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; Tom</span></span><br><span class="line"><span class="comment">--&gt; 请不要尝试给k2赋值</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果是表。添加的数据会添加在元方法的表中(如下的mt中)，而不是t中。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;k1 = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">mt = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__newindex</span> = mt&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.k1)</span><br><span class="line">t.k2 = <span class="string">&quot;Kitty&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t.k2)</span><br><span class="line"><span class="built_in">print</span>(mt.k2)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; Tom</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br><span class="line"><span class="comment">--&gt; Kitty</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="忽略元表"><a href="#忽略元表" class="headerlink" title="忽略元表"></a>忽略元表</h2><p>当我们需要忽略<code>__index</code>和<code>__newindex</code>时。</p>
 <ul>
-<li>可以通过<code>rawget</code>函数忽略__index元方法，存粹的调用表中的值。使用<code>rawset</code>函数忽略__newindex元方法，纯粹的给表赋值。<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;name = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">mt1 = &#123;age = <span class="number">0</span>&#125;</span><br><span class="line">mt2 = <span class="function"><span class="keyword">function</span><span class="params">(t, k, v)</span></span> <span class="built_in">print</span>(<span class="string">&quot;不许赋值！&quot;</span>) <span class="keyword">end</span></span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = mt1 ,<span class="built_in">__newindex</span> = mt2&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">rawget</span>(t, <span class="string">&quot;age&quot;</span>))</span><br><span class="line"><span class="built_in">rawset</span>(t, <span class="string">&quot;age&quot;</span>, <span class="number">999</span>)</span><br><span class="line"><span class="built_in">print</span>(t.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br><span class="line"><span class="comment">--&gt; 999</span></span><br></pre></td></tr></table></figure></li>
+<li>如果是表。添加的数据会添加在元方法的表中(如下的mt中)，而不是t中。</li>
 </ul>
-<h2 id="一个出自网络的例子"><a href="#一个出自网络的例子" class="headerlink" title="一个出自网络的例子"></a>一个出自网络的例子</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> smartMan=&#123;name=<span class="string">&quot;none&quot;</span>&#125;</span><br><span class="line"><span class="keyword">local</span> other = &#123;name = <span class="string">&quot;大家好&quot;</span>&#125; </span><br><span class="line"><span class="keyword">local</span> t1=&#123;&#125;</span><br><span class="line"><span class="keyword">local</span> mt = &#123; <span class="built_in">__index</span> = smartMan, <span class="built_in">__newindex</span> = other&#125; </span><br><span class="line"><span class="built_in">setmetatable</span>(t1, mt); </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;other的名字,赋值前:&quot;</span> .. other.name); </span><br><span class="line">t1.name = <span class="string">&quot;小偷&quot;</span>; </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;other的名字,赋值后:&quot;</span> .. other.name); </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;t1的名字:&quot;</span> .. t1.name); </span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; other的名字,赋值前:大家好</span></span><br><span class="line"><span class="comment">--&gt; other的名字,赋值后:小偷</span></span><br><span class="line"><span class="comment">--&gt; t1的名字:none</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="call"><a href="#call" class="headerlink" title="__call"></a>__call</h2><p>把表当作方法调用时会被调用。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;k1 = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">mt = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__newindex</span> = mt&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.k1)</span><br><span class="line">t.k2 = <span class="string">&quot;Kitty&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t.k2)</span><br><span class="line"><span class="built_in">print</span>(mt.k2)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; Tom</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br><span class="line"><span class="comment">--&gt; Kitty</span></span><br></pre></td></tr></table></figure>
+<h2 id="忽略元表"><a class="header-anchor" href="#忽略元表">¶</a>忽略元表</h2>
+<p>当我们需要忽略<code>__index</code>和<code>__newindex</code>时。</p>
+<ul>
+<li>可以通过<code>rawget</code>函数忽略__index元方法，存粹的调用表中的值。使用<code>rawset</code>函数忽略__newindex元方法，纯粹的给表赋值。</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;name = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">mt1 = &#123;age = <span class="number">0</span>&#125;</span><br><span class="line">mt2 = <span class="function"><span class="keyword">function</span><span class="params">(t, k, v)</span></span> <span class="built_in">print</span>(<span class="string">&quot;不许赋值！&quot;</span>) <span class="keyword">end</span></span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = mt1 ,<span class="built_in">__newindex</span> = mt2&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">rawget</span>(t, <span class="string">&quot;age&quot;</span>))</span><br><span class="line"><span class="built_in">rawset</span>(t, <span class="string">&quot;age&quot;</span>, <span class="number">999</span>)</span><br><span class="line"><span class="built_in">print</span>(t.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br><span class="line"><span class="comment">--&gt; 999</span></span><br></pre></td></tr></table></figure>
+<h2 id="一个出自网络的例子"><a class="header-anchor" href="#一个出自网络的例子">¶</a>一个出自网络的例子</h2>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> smartMan=&#123;name=<span class="string">&quot;none&quot;</span>&#125;</span><br><span class="line"><span class="keyword">local</span> other = &#123;name = <span class="string">&quot;大家好&quot;</span>&#125; </span><br><span class="line"><span class="keyword">local</span> t1=&#123;&#125;</span><br><span class="line"><span class="keyword">local</span> mt = &#123; <span class="built_in">__index</span> = smartMan, <span class="built_in">__newindex</span> = other&#125; </span><br><span class="line"><span class="built_in">setmetatable</span>(t1, mt); </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;other的名字,赋值前:&quot;</span> .. other.name); </span><br><span class="line">t1.name = <span class="string">&quot;小偷&quot;</span>; </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;other的名字,赋值后:&quot;</span> .. other.name); </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;t1的名字:&quot;</span> .. t1.name); </span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; other的名字,赋值前:大家好</span></span><br><span class="line"><span class="comment">--&gt; other的名字,赋值后:小偷</span></span><br><span class="line"><span class="comment">--&gt; t1的名字:none</span></span><br></pre></td></tr></table></figure>
+<h2 id="call"><a class="header-anchor" href="#call">¶</a>__call</h2>
+<p>把表当作方法调用时会被调用。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__call</span> = <span class="function"><span class="keyword">function</span><span class="params">(self, data)</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello &quot;</span>..data</span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t(<span class="string">&quot;jobs&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; hello jobs</span></span><br></pre></td></tr></table></figure>
     </div>
 
@@ -377,7 +390,8 @@
 			owner: 'tonychenn',
 			admin: ['tonychenn'],
 			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
-			distractionFreeMode: true  // Facebook-like distraction free mode
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
 		})
 		gitalk.render('gitalk-container')
 	</script>
@@ -387,7 +401,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%83%E8%A1%A8%E5%85%83%E6%96%B9%E6%B3%95"><span class="post-toc-text">元表元方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="post-toc-text">注意</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%9A%84%E5%85%83%E6%96%B9%E6%B3%95"><span class="post-toc-text">一些特殊的元方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tostring"><span class="post-toc-text">__tostring</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#index"><span class="post-toc-text">__index</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#newindex"><span class="post-toc-text">__newindex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BF%BD%E7%95%A5%E5%85%83%E8%A1%A8"><span class="post-toc-text">忽略元表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E5%87%BA%E8%87%AA%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="post-toc-text">一个出自网络的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#call"><span class="post-toc-text">__call</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">元表元方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="post-toc-text">注意</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">一些特殊的元方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tostring"><span class="post-toc-text">__tostring</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#index"><span class="post-toc-text">__index</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#newindex"><span class="post-toc-text">__newindex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BF%BD%E7%95%A5%E5%85%83%E8%A1%A8"><span class="post-toc-text">忽略元表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E5%87%BA%E8%87%AA%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="post-toc-text">一个出自网络的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#call"><span class="post-toc-text">__call</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

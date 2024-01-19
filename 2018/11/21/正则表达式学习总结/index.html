@@ -189,7 +189,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -197,7 +197,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -205,7 +205,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -213,7 +213,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -221,7 +221,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -229,7 +229,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -237,7 +237,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -289,15 +289,18 @@
       
       
       <div>
-      <h2 id="什么是正则表达式？"><a href="#什么是正则表达式？" class="headerlink" title="什么是正则表达式？"></a>什么是正则表达式？</h2><p>用一个字符串来描述一个特征，然后去验证另外一个字符串是否符合这个特征。如验证输入的邮箱格式是否规范；查找字符串；等。</p>
-<h2 id="简单匹配"><a href="#简单匹配" class="headerlink" title="简单匹配"></a>简单匹配</h2><table>
+      <h2 id="什么是正则表达式？"><a class="header-anchor" href="#什么是正则表达式？">¶</a>什么是正则表达式？</h2>
+<p>用一个字符串来描述一个特征，然后去验证另外一个字符串是否符合这个特征。如验证输入的邮箱格式是否规范；查找字符串；等。</p>
+<h2 id="简单匹配"><a class="header-anchor" href="#简单匹配">¶</a>简单匹配</h2>
+<table>
 <thead>
 <tr>
 <th>pattern</th>
 <th>describe</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>?</td>
 <td>0-1个字符</td>
 </tr>
@@ -351,7 +354,7 @@
 </tr>
 <tr>
 <td>[aqz^]</td>
-<td>匹配’a’,’q’,’z’,’^’字符</td>
+<td>匹配’a’,‘q’,‘z’,'^'字符</td>
 </tr>
 <tr>
 <td>^</td>
@@ -361,12 +364,21 @@
 <td>$</td>
 <td>匹配结尾</td>
 </tr>
-</tbody></table>
-<h2 id="匹配-Python-为例"><a href="#匹配-Python-为例" class="headerlink" title="匹配(Python 为例)"></a>匹配(Python 为例)</h2><ol>
-<li>匹配电话号码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = <span class="string">&#x27;^0\d&#123;2,3&#125;-?\d&#123;7,8&#125;$&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;010-1234567&#x27;</span></span><br><span class="line">result = re.<span class="keyword">match</span>(pattern,<span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># result</span></span><br><span class="line"><span class="comment"># &lt;re.Match object; span=(0, 12), match=&#x27;010-22301889&#x27;&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>匹配包含的所有特定字符<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = <span class="string">r&#x27;\wa\w&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;fapjachahahhac&#x27;</span></span><br><span class="line">result = re.findall(pattern, <span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line"><span class="comment"># [&#x27;fap&#x27;, &#x27;jac&#x27;, &#x27;hah&#x27;, &#x27;hac&#x27;]</span></span><br></pre></td></tr></table></figure></li>
-<li>拆分：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = <span class="string">r&#x27;\s+&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;hello Tony   , Sweet Wednesday&#x27;</span></span><br><span class="line">result = re.split(pattern, <span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#result:</span></span><br><span class="line"><span class="comment"># [&#x27;hello&#x27;, &#x27;Tony&#x27;, &#x27;,&#x27;, &#x27;Sweet&#x27;, &#x27;Wednesday&#x27;]</span></span><br></pre></td></tr></table></figure></li>
+</tbody>
+</table>
+<h2 id="匹配-Python-为例"><a class="header-anchor" href="#匹配-Python-为例">¶</a>匹配(Python 为例)</h2>
+<ol>
+<li>匹配电话号码</li>
 </ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = <span class="string">&#x27;^0\d&#123;2,3&#125;-?\d&#123;7,8&#125;$&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;010-1234567&#x27;</span></span><br><span class="line">result = re.<span class="keyword">match</span>(pattern,<span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># result</span></span><br><span class="line"><span class="comment"># &lt;re.Match object; span=(0, 12), match=&#x27;010-22301889&#x27;&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>匹配包含的所有特定字符</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = <span class="string">r&#x27;\wa\w&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;fapjachahahhac&#x27;</span></span><br><span class="line">result = re.findall(pattern, <span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line"><span class="comment"># [&#x27;fap&#x27;, &#x27;jac&#x27;, &#x27;hah&#x27;, &#x27;hac&#x27;]</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>拆分：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = <span class="string">r&#x27;\s+&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;hello Tony   , Sweet Wednesday&#x27;</span></span><br><span class="line">result = re.split(pattern, <span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#result:</span></span><br><span class="line"><span class="comment"># [&#x27;hello&#x27;, &#x27;Tony&#x27;, &#x27;,&#x27;, &#x27;Sweet&#x27;, &#x27;Wednesday&#x27;]</span></span><br></pre></td></tr></table></figure>
 <div align='right'>TonyChenn<br>2018.11.21</div>
     </div>
 
@@ -420,7 +432,8 @@
 			owner: 'tonychenn',
 			admin: ['tonychenn'],
 			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
-			distractionFreeMode: true  // Facebook-like distraction free mode
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
 		})
 		gitalk.render('gitalk-container')
 	</script>

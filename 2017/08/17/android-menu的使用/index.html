@@ -189,7 +189,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -197,7 +197,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -205,7 +205,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//archives/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -213,7 +213,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//archives/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -221,7 +221,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//archives/index.html&text=" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -229,7 +229,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//archives/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -237,7 +237,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//archives/index.html&title=" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -289,13 +289,14 @@
       
       
       <div>
-      <p> 首先创建一个空白Activity<br> 在工程的res&#x2F;目录下创建menu 文件夹，文件夹下并创建一个Menu resource file文件，在里面添加菜单的条目，并添加ID：</p>
+      <p>首先创建一个空白Activity<br>
+在工程的res/目录下创建menu 文件夹，文件夹下并创建一个Menu resource file文件，在里面添加菜单的条目，并添加ID：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/add_item&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">&quot;添加&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/move_item&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">&quot;删除&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p> 然后在Activity 中重写<strong>onCreateOptionsMenu</strong>方法，把刚才写的menu添加进来，即可实现菜单的显示</p>
+<p>然后在Activity 中重写<strong>onCreateOptionsMenu</strong>方法，把刚才写的menu添加进来，即可实现菜单的显示</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> &#123;</span><br><span class="line">        getMenuInflater().inflate(R.menu.main,menu);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p> 菜单显示后就通过重写<strong>onOptionsItemSelected</strong>方法，来实现菜单条目的点击事件</p>
+<p>菜单显示后就通过重写<strong>onOptionsItemSelected</strong>方法，来实现菜单条目的点击事件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">onOptionsItemSelected</span><span class="params">(MenuItem item)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (item.getItemId())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.add_item:</span><br><span class="line">                Toast.makeText(<span class="built_in">this</span>,<span class="string">&quot;add&quot;</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.move_item:</span><br><span class="line">                Toast.makeText(<span class="built_in">this</span>,<span class="string">&quot;move&quot;</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2017/08.17/002.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2017/08.17/002.jpg" alt=""></p>
 
     </div>
 
@@ -349,7 +350,8 @@
 			owner: 'tonychenn',
 			admin: ['tonychenn'],
 			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
-			distractionFreeMode: true  // Facebook-like distraction free mode
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
 		})
 		gitalk.render('gitalk-container')
 	</script>
