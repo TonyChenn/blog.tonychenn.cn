@@ -15,7 +15,7 @@
     <meta property="og:title" content="Unity-Shader笔记之渲染管线(一) - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2020/0925/icon.jpg">
+        <meta property="og:image" content="https://img.tonychenn.cn/2020/0925/icon.jpg">
     
 
     
@@ -93,9 +93,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -114,9 +111,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -157,8 +154,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -256,7 +253,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2020/0925/icon.jpg)">
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2020/0925/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Unity-Shader笔记之渲染管线(一)</span></br>
@@ -289,39 +286,31 @@
       
       
       <div>
-      <h1>什么是渲染管线？</h1>
-<p>将素材通过一系列的加工最终显示在屏幕上，一系列的加工如同流水线一般。</p>
-<h1>渲染管线</h1>
-<p>渲染管线的工作是将一个三维场景出发，渲染成一张二维图像。这个过程由CPU,GPU共同完成。渲染流程分三个阶段：</p>
-<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2020/0926/shader_pipline.jpg" alt="shader_pip_line"></p>
-<h2 id="应用阶段"><a class="header-anchor" href="#应用阶段">¶</a>应用阶段</h2>
-<p>在应用阶段开发者具有绝对的控制权。应用阶段分三个任务（CPU负责实现）</p>
+      <h1 id="什么是渲染管线？"><a href="#什么是渲染管线？" class="headerlink" title="什么是渲染管线？"></a>什么是渲染管线？</h1><p>将素材通过一系列的加工最终显示在屏幕上，一系列的加工如同流水线一般。</p>
+<h1 id="渲染管线"><a href="#渲染管线" class="headerlink" title="渲染管线"></a>渲染管线</h1><p>渲染管线的工作是将一个三维场景出发，渲染成一张二维图像。这个过程由CPU,GPU共同完成。渲染流程分三个阶段：</p>
+<p><img src="https://img.tonychenn.cn/2020/0926/shader_pipline.jpg" alt="shader_pip_line"></p>
+<h2 id="应用阶段"><a href="#应用阶段" class="headerlink" title="应用阶段"></a>应用阶段</h2><p>在应用阶段开发者具有绝对的控制权。应用阶段分三个任务（CPU负责实现）</p>
 <ol>
-<li>准备好场景数据。如场景所有GameObject信息，光照信息等。将数据加载到显存中。</li>
-</ol>
+<li><p>准备好场景数据。如场景所有GameObject信息，光照信息等。将数据加载到显存中。</p>
 <blockquote>
 <p>硬盘-&gt; RAM -&gt; 显存</p>
 </blockquote>
-<ol start="2">
-<li>为了提高渲染性能，将相机不可见的物体剔除，这样就不用交给几何阶段处理了。</li>
-<li>设置每个模型的渲染状态，如使用的材质，纹理，Shader等。输出渲染所需的几何信息，即：<b>渲染图元</b>,渲染图元可以是点，线，三角面等。这些渲染图元将会传递到下一个阶段。(调用DrawCall)</li>
+</li>
+<li><p>为了提高渲染性能，将相机不可见的物体剔除，这样就不用交给几何阶段处理了。</p>
+</li>
+<li><p>设置每个模型的渲染状态，如使用的材质，纹理，Shader等。输出渲染所需的几何信息，即：<b>渲染图元</b>,渲染图元可以是点，线，三角面等。这些渲染图元将会传递到下一个阶段。(调用DrawCall)</p>
+</li>
 </ol>
-<h2 id="几何阶段-GPU"><a class="header-anchor" href="#几何阶段-GPU">¶</a>几何阶段(GPU)</h2>
-<p>几何阶段是用于处理所有要绘制的集合相关的事情。将上个阶段传递的渲染图元进行逐顶点，多边形进行处理。输出屏幕空间的二维顶点坐标，以及每个顶点的深度值，主色等相关信息，然后传递给光栅化阶段。这一阶段在GPU上进行。</p>
-<h2 id="光栅化阶段-GPU"><a class="header-anchor" href="#光栅化阶段-GPU">¶</a>光栅化阶段(GPU)</h2>
-<p>光栅化阶段会将上一阶段传递过来的数据生成对应屏幕上的像素，并渲染出最终图像。这一阶段也是在GPU上进行。</p>
-<h1>CPU与GPU的通信</h1>
-<p>渲染管线的起点是CPU,即应用阶段。应用阶段分为三个任务：</p>
+<h2 id="几何阶段-GPU"><a href="#几何阶段-GPU" class="headerlink" title="几何阶段(GPU)"></a>几何阶段(GPU)</h2><p>几何阶段是用于处理所有要绘制的集合相关的事情。将上个阶段传递的渲染图元进行逐顶点，多边形进行处理。输出屏幕空间的二维顶点坐标，以及每个顶点的深度值，主色等相关信息，然后传递给光栅化阶段。这一阶段在GPU上进行。</p>
+<h2 id="光栅化阶段-GPU"><a href="#光栅化阶段-GPU" class="headerlink" title="光栅化阶段(GPU)"></a>光栅化阶段(GPU)</h2><p>光栅化阶段会将上一阶段传递过来的数据生成对应屏幕上的像素，并渲染出最终图像。这一阶段也是在GPU上进行。</p>
+<h1 id="CPU与GPU的通信"><a href="#CPU与GPU的通信" class="headerlink" title="CPU与GPU的通信"></a>CPU与GPU的通信</h1><p>渲染管线的起点是CPU,即应用阶段。应用阶段分为三个任务：</p>
 <ol>
 <li><b>把数据加载到显存中。</b>所有的渲染需要从<b>硬盘(HDD)</b>加载到<b>内存(RAM)</b>中，然后网格和纹理等数据又被加载到显存中，因为大多数显卡不能直接访问RAM,而且显卡读取显存速度也很快。当数据加载到显存后，RAM中一些CPU不再访问的数据即可移除掉了。但是之后还要使用的数据不能移除掉，毕竟从HDD加载到RAM还是很耗时的。之后通过CPU设置渲染状态进而指导GPU进行渲染。</li>
-<li><b>设置渲染状态。</b>渲染状态就是定义了场景中的网格该被如何渲染。如使用哪些顶点/片元着色器，光源属性，材质等。之后CPU调用DrawCall命令告诉GPU开始渲染。</li>
+<li><b>设置渲染状态。</b>渲染状态就是定义了场景中的网格该被如何渲染。如使用哪些顶点&#x2F;片元着色器，光源属性，材质等。之后CPU调用DrawCall命令告诉GPU开始渲染。</li>
 <li><b>调用DrawCall。</b>DrawCall是一个渲染命令，由CPU发起，GPU接收。这个命令只会只想一个需要渲染的图元列表。当GPU收到DrawCall后，会根据渲染状态和顶点数据进行计算（<a href="#GPU%E6%B5%81%E6%B0%B4%E7%BA%BF">GPU的流水线</a>），最终显示到屏幕上。</li>
 </ol>
-<h1>GPU流水线</h1>
-<p>CPU向GPU传递渲染命令后，GPU经过一系列操作把图元显示在屏幕上。GPU阶段开发者没有绝对的控制权，即：无法控制这两个阶段的实现细节，但在不同的阶段会有不同的可配置性和可编程性。<br>
-<img src="http://localhost/2023/q1/shader_geometry.jpg" alt=""></p>
-<h2 id="顶点着色器-几何阶段"><a class="header-anchor" href="#顶点着色器-几何阶段">¶</a>顶点着色器(几何阶段)</h2>
-<ul>
+<h1 id="GPU流水线"><a href="#GPU流水线" class="headerlink" title="GPU流水线"></a>GPU流水线</h1><p>CPU向GPU传递渲染命令后，GPU经过一系列操作把图元显示在屏幕上。GPU阶段开发者没有绝对的控制权，即：无法控制这两个阶段的实现细节，但在不同的阶段会有不同的可配置性和可编程性。<br><img src="http://localhost/2023/q1/shader_geometry.jpg"></p>
+<h2 id="顶点着色器-几何阶段"><a href="#顶点着色器-几何阶段" class="headerlink" title="顶点着色器(几何阶段)"></a>顶点着色器(几何阶段)</h2><ul>
 <li>通常用于顶点的空间变换，顶点着色等功能。（完全可编程）</li>
 <li>数据来:CPU。每个输入进来的顶点都会调用一次顶点着色器。</li>
 <li>顶点着色器不可创建、销毁任何顶点。</li>
@@ -331,13 +320,9 @@
 <li>坐标变换。最基本必须完成的变换：从模型空间转换到齐次裁剪空间。</li>
 <li>逐顶点光照。</li>
 </ol>
-<h2 id="裁剪-几何阶段"><a class="header-anchor" href="#裁剪-几何阶段">¶</a>裁剪(几何阶段)</h2>
-<p>对于一个片元，在相机可视范围内就传递到下一个阶段，不在可视范围就舍弃掉，对于部分在可视范围内就需要对片元进行裁剪，只传递可视部分。（可配置）</p>
-<h2 id="屏幕映射-几何阶段"><a class="header-anchor" href="#屏幕映射-几何阶段">¶</a>屏幕映射(几何阶段)</h2>
-<p>把输入的三维坐标转换为二维屏幕坐标。（OpenGL左下角原点，DX左上角原点）</p>
-<h2 id="三角形设置-光栅化阶段"><a class="header-anchor" href="#三角形设置-光栅化阶段">¶</a>三角形设置(光栅化阶段)</h2>
-<h2 id="片元着色器。"><a class="header-anchor" href="#片元着色器。">¶</a>片元着色器。</h2>
-<p>完全可编程。用于逐片元的着色操作。</p>
+<h2 id="裁剪-几何阶段"><a href="#裁剪-几何阶段" class="headerlink" title="裁剪(几何阶段)"></a>裁剪(几何阶段)</h2><p>对于一个片元，在相机可视范围内就传递到下一个阶段，不在可视范围就舍弃掉，对于部分在可视范围内就需要对片元进行裁剪，只传递可视部分。（可配置）</p>
+<h2 id="屏幕映射-几何阶段"><a href="#屏幕映射-几何阶段" class="headerlink" title="屏幕映射(几何阶段)"></a>屏幕映射(几何阶段)</h2><p>把输入的三维坐标转换为二维屏幕坐标。（OpenGL左下角原点，DX左上角原点）</p>
+<h2 id="三角形设置-光栅化阶段"><a href="#三角形设置-光栅化阶段" class="headerlink" title="三角形设置(光栅化阶段)"></a>三角形设置(光栅化阶段)</h2><h2 id="片元着色器。"><a href="#片元着色器。" class="headerlink" title="片元着色器。"></a>片元着色器。</h2><p>完全可编程。用于逐片元的着色操作。</p>
 
     </div>
 
@@ -402,7 +387,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是渲染管线？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">渲染管线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E9%98%B6%E6%AE%B5"><span class="post-toc-text">应用阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">几何阶段(GPU)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">光栅化阶段(GPU)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">CPU与GPU的通信</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">GPU流水线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">顶点着色器(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A3%81%E5%89%AA-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">裁剪(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%8F%E5%B9%95%E6%98%A0%E5%B0%84-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">屏幕映射(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E8%AE%BE%E7%BD%AE-%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="post-toc-text">三角形设置(光栅化阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%87%E5%85%83%E7%9D%80%E8%89%B2%E5%99%A8%E3%80%82"><span class="post-toc-text">片元着色器。</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%EF%BC%9F"><span class="post-toc-text">什么是渲染管线？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF"><span class="post-toc-text">渲染管线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E9%98%B6%E6%AE%B5"><span class="post-toc-text">应用阶段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">几何阶段(GPU)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5-GPU"><span class="post-toc-text">光栅化阶段(GPU)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CPU%E4%B8%8EGPU%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="post-toc-text">CPU与GPU的通信</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#GPU%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="post-toc-text">GPU流水线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">顶点着色器(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A3%81%E5%89%AA-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">裁剪(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%8F%E5%B9%95%E6%98%A0%E5%B0%84-%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="post-toc-text">屏幕映射(几何阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E8%AE%BE%E7%BD%AE-%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="post-toc-text">三角形设置(光栅化阶段)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%87%E5%85%83%E7%9D%80%E8%89%B2%E5%99%A8%E3%80%82"><span class="post-toc-text">片元着色器。</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

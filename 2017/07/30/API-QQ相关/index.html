@@ -91,9 +91,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -112,9 +109,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -155,8 +152,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -292,7 +289,7 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://q2.qlogo.cn/headimg_dl?bs=QQ号&amp;dst_uin=QQ号&amp;dst_uin=QQ号&amp;;dst_uin=QQ号&amp;spec=100&amp;url_enc=0&amp;referer=bu_interface&amp;term_type=PC</span><br></pre></td></tr></table></figure>
 <p>e.g.博主本人的：</p>
-<p><a target="_blank" rel="noopener" href="https://q2.qlogo.cn/headimg_dl?bs=852454151&amp;dst_uin=852454151&amp;dst_uin=852454151&amp;;dst_uin=852454151&amp;spec=100&amp;url_enc=0&amp;referer=bu_interface&amp;term_type=PC">https://q2.qlogo.cn/headimg_dl?bs=852454151&amp;dst_uin=852454151&amp;dst_uin=852454151&amp;;dst_uin=852454151&amp;spec=100&amp;url_enc=0&amp;referer=bu_interface&amp;term_type=PC</a></p>
+<p><a target="_blank" rel="noopener" href="https://q2.qlogo.cn/headimg_dl?bs=852454151&dst_uin=852454151&dst_uin=852454151&;dst_uin=852454151&spec=100&url_enc=0&referer=bu_interface&term_type=PC">https://q2.qlogo.cn/headimg_dl?bs=852454151&amp;dst_uin=852454151&amp;dst_uin=852454151&amp;;dst_uin=852454151&amp;spec=100&amp;url_enc=0&amp;referer=bu_interface&amp;term_type=PC</a></p>
 <ol start="2">
 <li>获取QQ空间头像</li>
 </ol>
@@ -303,7 +300,8 @@
 <li>第三方软件打开QQ发送消息</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;mqqwpa://im/chat?chat_type=wpa&amp;uin=852454151&amp;version=1&quot;</span>;</span><br><span class="line"><span class="keyword">try</span> &#123; </span><br><span class="line">  startActivity(<span class="keyword">new</span> <span class="title class_">Intent</span>(Intent._ACTION_VIEW_, Uri.parse(url)));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">  Toast.makeText(<span class="built_in">this</span>,<span class="string">&quot;本机未安装QQ&quot;</span>,Toast._LENGTH_SHORT_).show(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>更多API,待添加…</p>
+<p>更多API,待添加…
+  </p>
 
     </div>
 

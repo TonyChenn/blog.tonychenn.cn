@@ -15,7 +15,7 @@
     <meta property="og:title" content="Unity在Perference中添加模块设置 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/Q3/custom_setting_unit.jpg">
+        <meta property="og:image" content="https://img.tonychenn.cn/2023/Q3/custom_setting_unit.jpg">
     
 
     
@@ -93,9 +93,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -114,9 +111,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -157,8 +154,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -256,7 +253,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/Q3/custom_setting_unit.jpg)">
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2023/Q3/custom_setting_unit.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Unity在Perference中添加模块设置</span></br>
@@ -289,10 +286,10 @@
       
       
       <div>
-      <p>在Editor/Perferences…下添加自己的模块设置界面。</p>
+      <p>在Editor&#x2F;Perferences…下添加自己的模块设置界面。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">Preferences</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> UNITY_2019_1_OR_NEWER</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MarkownSettings</span> : <span class="title">SettingsProvider</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MarkownSettings</span>(<span class="params"><span class="built_in">string</span> path, SettingsScope scopes = SettingsScope.User, IEnumerable&lt;<span class="built_in">string</span>&gt; keywords = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function">            : <span class="title">base</span>(<span class="params">path, scopes, keywords</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 自定义GUI</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnGUI</span>(<span class="params"><span class="built_in">string</span> searchContext</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.Button(<span class="string">&quot;测试&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">SettingsProvider</span>]</span><br><span class="line">    <span class="function"><span class="keyword">static</span> SettingsProvider <span class="title">MarkdownPreferences</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MarkownSettings(<span class="string">&quot;Preferences/Markdown&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        [<span class="meta">PreferenceItem( <span class="string">&quot;Markdown&quot;</span> )</span>]</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>效果图：<br>
-<img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/Q3/custom_setting_unit.jpg" alt=""></p>
+
+<p>效果图：<br><img src="https://img.tonychenn.cn/2023/Q3/custom_setting_unit.jpg"></p>
 
     </div>
 

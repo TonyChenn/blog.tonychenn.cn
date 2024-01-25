@@ -91,9 +91,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -112,9 +109,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -155,8 +152,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -287,18 +284,13 @@
       
       
       <div>
-      <h1>前言</h1>
-<p>对于游戏多渠道出包，不可能每个都单独接入sdk重新出包。业内多数都是先出一个<code>母包</code>，然后将母包解包后，然后根据渠道将所需的<code>jar/aar</code>或其文件放入包体中，然后重新打包为<code>渠道包</code>并重新签名。</p>
-<h2 id="apk的构成"><a class="header-anchor" href="#apk的构成">¶</a>apk的构成</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assets/                 -- 静态资源文件</span><br><span class="line">res/</span><br><span class="line">lib/                    -- 依赖库</span><br><span class="line">classes.dex             -- 编译后的代码文件</span><br><span class="line">AndroidManifest.xml     -- AndroidManifest</span><br></pre></td></tr></table></figure>
-<h1>apktool 解包与重签名</h1>
-<h2 id="下载地址"><a class="header-anchor" href="#下载地址">¶</a>下载地址</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/iBotPeaches/Apktool">【github】</a><br>
-<a target="_blank" rel="noopener" href="https://apktool.org/">【官网】</a></p>
-<h2 id="常用命令"><a class="header-anchor" href="#常用命令">¶</a>常用命令</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解包 origin.apk</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成文件夹 `origin`，文件夹中内容就是解包后的内容，自行根据需要进行处理。</span></span><br><span class="line">java -jar apktool_2.7.0.jar d origin.apk</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重新打包</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将`origin`文件夹重新build为未签名的apk</span></span><br><span class="line">java -jar apktool_2.7.0.jar b D:\...\origin -o unsign.apk</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">对齐</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TargetSDK 30+ 要求apk必须进行4字节对齐，否则无法安装</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zipalign 在 &#123;AndroidSDK&#125;\build-tools\xx.0.0 目录下</span></span><br><span class="line">zipalign.exe -v -p 4 unsign.apk D:\...\align.apk (win)</span><br><span class="line">zipalign -v -p 4 unsign.apk ~/.../align.apk (mac)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">对齐验证</span></span><br><span class="line">zipalign.exe -c -v 4 D:\...\align.apk (win)</span><br><span class="line">zipalign -c -v 4 ~/.../align.apk (mac)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重签名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">apksigner.jar 在 &#123;AndroidSDK&#125;\build-tools\xx.0.0\lib 目录下</span></span><br><span class="line">java -jar apksigner.jar sign</span><br><span class="line">--ks S-Project.keystore</span><br><span class="line">--ks-key-alias S-Project.keystore</span><br><span class="line">--ks-pass pass:xxxxxxxxx</span><br><span class="line">--ks-pass pass:xxxxxxxxx</span><br><span class="line">--out D:\...\signed.apk D:\...\align.apk</span><br></pre></td></tr></table></figure>
-<h1>如何创建keystore?</h1>
-<p><a href="https://blog.tonychenn.cn/2018/02/06/Android-%E7%94%9F%E6%88%90keystore%E5%AF%86%E9%92%A5/">Android-生成keystore密钥</a></p>
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于游戏多渠道出包，不可能每个都单独接入sdk重新出包。业内多数都是先出一个<code>母包</code>，然后将母包解包后，然后根据渠道将所需的<code>jar/aar</code>或其文件放入包体中，然后重新打包为<code>渠道包</code>并重新签名。</p>
+<h2 id="apk的构成"><a href="#apk的构成" class="headerlink" title="apk的构成"></a>apk的构成</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assets/                 -- 静态资源文件</span><br><span class="line">res/</span><br><span class="line">lib/                    -- 依赖库</span><br><span class="line">classes.dex             -- 编译后的代码文件</span><br><span class="line">AndroidManifest.xml     -- AndroidManifest</span><br></pre></td></tr></table></figure>
+
+<h1 id="apktool-解包与重签名"><a href="#apktool-解包与重签名" class="headerlink" title="apktool 解包与重签名"></a>apktool 解包与重签名</h1><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/iBotPeaches/Apktool">【github】</a><br><a target="_blank" rel="noopener" href="https://apktool.org/">【官网】</a></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解包 origin.apk</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成文件夹 `origin`，文件夹中内容就是解包后的内容，自行根据需要进行处理。</span></span><br><span class="line">java -jar apktool_2.7.0.jar d origin.apk</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重新打包</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将`origin`文件夹重新build为未签名的apk</span></span><br><span class="line">java -jar apktool_2.7.0.jar b D:\...\origin -o unsign.apk</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">对齐</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TargetSDK 30+ 要求apk必须进行4字节对齐，否则无法安装</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">zipalign 在 &#123;AndroidSDK&#125;\build-tools\xx.0.0 目录下</span></span><br><span class="line">zipalign.exe -v -p 4 unsign.apk D:\...\align.apk (win)</span><br><span class="line">zipalign -v -p 4 unsign.apk ~/.../align.apk (mac)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">对齐验证</span></span><br><span class="line">zipalign.exe -c -v 4 D:\...\align.apk (win)</span><br><span class="line">zipalign -c -v 4 ~/.../align.apk (mac)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重签名</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">apksigner.jar 在 &#123;AndroidSDK&#125;\build-tools\xx.0.0\lib 目录下</span></span><br><span class="line">java -jar apksigner.jar sign</span><br><span class="line">--ks S-Project.keystore</span><br><span class="line">--ks-key-alias S-Project.keystore</span><br><span class="line">--ks-pass pass:xxxxxxxxx</span><br><span class="line">--ks-pass pass:xxxxxxxxx</span><br><span class="line">--out D:\...\signed.apk D:\...\align.apk</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何创建keystore"><a href="#如何创建keystore" class="headerlink" title="如何创建keystore?"></a>如何创建keystore?</h1><p><a href="https://blog.tonychenn.cn/2018/02/06/Android-%E7%94%9F%E6%88%90keystore%E5%AF%86%E9%92%A5/">Android-生成keystore密钥</a></p>
 
     </div>
 
@@ -363,7 +355,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#apk%E7%9A%84%E6%9E%84%E6%88%90"><span class="post-toc-text">apk的构成</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">apktool 解包与重签名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="post-toc-text">下载地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="post-toc-text">常用命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">如何创建keystore?</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#apk%E7%9A%84%E6%9E%84%E6%88%90"><span class="post-toc-text">apk的构成</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#apktool-%E8%A7%A3%E5%8C%85%E4%B8%8E%E9%87%8D%E7%AD%BE%E5%90%8D"><span class="post-toc-text">apktool 解包与重签名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="post-toc-text">下载地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="post-toc-text">常用命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BAkeystore"><span class="post-toc-text">如何创建keystore?</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

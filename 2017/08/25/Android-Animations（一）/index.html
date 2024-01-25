@@ -93,9 +93,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -114,9 +111,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -157,8 +154,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -289,28 +286,25 @@
       
       
       <div>
-      <p><strong>1.Alpha 淡入淡出效果</strong><br>
-<strong>2.Scale 缩放效果</strong><br>
-<strong>3.Rotate 旋转效果</strong><br>
-<strong>4.Translate 移动效果</strong></p>
+      <p> <strong>1.Alpha 淡入淡出效果</strong><br> <strong>2.Scale 缩放效果</strong><br> <strong>3.Rotate 旋转效果</strong><br> <strong>4.Translate 移动效果</strong></p>
 <span id="more"></span>
-<p><strong>使用步骤：</strong></p>
+<p> <strong>使用步骤：</strong>   </p>
 <ol>
-<li>创建AnimationSet对象；_</li>
-<li>根据需求建立相应Animation 对象；_</li>
-<li>根据动画需求，为Animation对象设置相应数据；_</li>
-<li>将Animation对象添加到AnimationSet对象中；_</li>
+<li>创建AnimationSet对象；_   </li>
+<li>根据需求建立相应Animation 对象；_   </li>
+<li>根据动画需求，为Animation对象设置相应数据；_   </li>
+<li>将Animation对象添加到AnimationSet对象中；_   </li>
 <li>使用控件对象开始执行AnimationSet；_</li>
 </ol>
-<p><strong>通用属性：</strong></p>
+<p> <strong>通用属性：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>setDuration(<span class="type">long</span> durationMills)       </span><br><span class="line"><span class="comment">//------------------------设置动画持续时间</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>setFillAfter(<span class="type">boolean</span> fillAfter)</span><br><span class="line">    <span class="comment">//............true-------动画执行后，停留在执行结束位置</span></span><br><span class="line">    <span class="comment">//............false------动画执行后，返回到执行前的位置</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>setFillBefore(<span class="type">boolean</span> fillBefore)</span><br><span class="line"><span class="comment">//............true-------动画执行前，返回到执行前的位置</span></span><br><span class="line"><span class="comment">//............false------动画执行前，停留在执行结束位置</span></span><br><span class="line"><span class="number">4.</span>setStartOffSet(<span class="type">long</span> startOffSet)</span><br><span class="line"><span class="comment">//--------------设置动画执行前等待时间</span></span><br><span class="line"></span><br><span class="line"><span class="number">5.</span>SetRepeatCount(<span class="type">int</span> repeatCount)</span><br><span class="line"><span class="comment">//-------------------设置动画重复次数</span></span><br></pre></td></tr></table></figure>
-<p><strong>1.淡入淡出动画</strong></p>
+<p> <strong>1.淡入淡出动画</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建AnimationSet对象</span></span><br><span class="line">AnimationSet animationSet=<span class="keyword">new</span> <span class="title class_">AnimationSet</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">//创建AlphaAnimation对象</span></span><br><span class="line"><span class="comment">//1 0 fromAlpha 1-&gt; toAlpha 0</span></span><br><span class="line">AlphaAnimation alphaAnimation=<span class="keyword">new</span> <span class="title class_">AlphaAnimation</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"><span class="comment">//动画执行时间</span></span><br><span class="line">alphaAnimation.setDuration(<span class="number">1000</span>);</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">animationSet.addAnimation(alphaAnimation);</span><br><span class="line">img.startAnimation(animationSet);</span><br></pre></td></tr></table></figure>
-<p><strong>2.缩放效果</strong></p>
+<p> <strong>2.缩放效果</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">AnimationSet animationSet=<span class="keyword">new</span> <span class="title class_">AnimationSet</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 8个参数</span></span><br><span class="line"><span class="comment">* 1.X轴从多大</span></span><br><span class="line"><span class="comment">* 2.X轴缩小到多大</span></span><br><span class="line"><span class="comment">* 3.Y轴多大</span></span><br><span class="line"><span class="comment">* 4.Y轴缩小到多大</span></span><br><span class="line"><span class="comment">* 5.6.7.8.......</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">ScaleAnimation scaleAnimation=<span class="keyword">new</span> <span class="title class_">ScaleAnimation</span>(<span class="number">1</span>,<span class="number">0.1f</span>,</span><br><span class="line">               <span class="number">1</span>,<span class="number">0.1f</span>,</span><br><span class="line">               Animation.RELATIVE_TO_SELF,<span class="number">0.5f</span>,</span><br><span class="line">               Animation.RELATIVE_TO_SELF,<span class="number">0.5f</span>);</span><br><span class="line">animationSet.addAnimation(scaleAnimation);</span><br><span class="line">animationSet.setDuration(<span class="number">1000</span>);</span><br><span class="line">img.startAnimation(animationSet);</span><br></pre></td></tr></table></figure>
-<p><strong>3.旋转效果</strong></p>
+<p> <strong>3.旋转效果</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">AnimationSet animationSet=<span class="keyword">new</span> <span class="title class_">AnimationSet</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 6个参数</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 1.从哪个角度开始</span></span><br><span class="line"><span class="comment">* 2.到那个角度结束</span></span><br><span class="line"><span class="comment">* 3.X轴的坐标值      Animation.RELATIVE_TO_SELF         旋转的圆心在自身</span></span><br><span class="line"><span class="comment">*                  Animation.RELATIVE_TO_PARENT       旋转圆心在父控件上</span></span><br><span class="line"><span class="comment">* 4.（1f）自身或父控件X坐标1倍</span></span><br><span class="line"><span class="comment">* 5.Y轴的坐标值</span></span><br><span class="line"><span class="comment">* 6.</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">RotateAnimation rotateAnimation=<span class="keyword">new</span> <span class="title class_">RotateAnimation</span>(<span class="number">0</span>,<span class="number">360</span>,</span><br><span class="line">        Animation.RELATIVE_TO_PARENT,<span class="number">1f</span>,</span><br><span class="line">        Animation.RELATIVE_TO_PARENT,<span class="number">0f</span>);</span><br><span class="line">rotateAnimation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animationSet.addAnimation(rotateAnimation);</span><br><span class="line">img.startAnimation(animationSet);</span><br></pre></td></tr></table></figure>
-<p>4.移动效果</p>
+<p> 4.移动效果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">AnimationSet animationSet=<span class="keyword">new</span> <span class="title class_">AnimationSet</span>(<span class="literal">true</span>);</span><br><span class="line">TranslateAnimation translateAnimation=<span class="keyword">new</span> <span class="title class_">TranslateAnimation</span>(</span><br><span class="line">        Animation.RELATIVE_TO_SELF,<span class="number">0f</span>,</span><br><span class="line">        Animation.RELATIVE_TO_SELF,<span class="number">0.5f</span>,</span><br><span class="line">        Animation.RELATIVE_TO_SELF,<span class="number">0f</span>,</span><br><span class="line">        Animation.RELATIVE_TO_SELF,<span class="number">1.0f</span>);</span><br><span class="line">translateAnimation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animationSet.addAnimation(translateAnimation);</span><br><span class="line">img.startAnimation(animationSet);</span><br></pre></td></tr></table></figure>
 
     </div>

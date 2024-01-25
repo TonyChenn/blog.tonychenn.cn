@@ -15,7 +15,7 @@
     <meta property="og:title" content="Unity添加自定义文件类型支持 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/Q3/custom_default_asset_data.jpg">
+        <meta property="og:image" content="https://img.tonychenn.cn/2023/Q3/custom_default_asset_data.jpg">
     
 
     
@@ -93,9 +93,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -114,9 +111,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -157,8 +154,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -256,7 +253,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/Q3/custom_default_asset_data.jpg)">
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2023/Q3/custom_default_asset_data.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Unity添加自定义文件类型支持</span></br>
@@ -290,23 +287,21 @@
       
       <div>
       <p>Unity本身也支持大量的文件类型导入器，不受Unity识别的文件会被识别未 DefaultAsset 类型。但是总会有自定义文件类型的需求，又想再Inspector面板看到预览。</p>
-<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/q3/custom_default_asset_data.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/q3/custom_default_asset_folder.jpg" alt=""></p>
+<p><img src="https://img.tonychenn.cn/2023/q3/custom_default_asset_data.jpg"></p>
+<p><img src="https://img.tonychenn.cn/2023/q3/custom_default_asset_folder.jpg"></p>
 <p>博主找到两种解决方案：</p>
 <ol>
-<li><s>使用自定义导入器。但是不支持StreammingAsset目录下文件。本篇暂不讲述。</s></li>
+<li><del>使用自定义导入器。但是不支持StreammingAsset目录下文件。本篇暂不讲述。</del></li>
 <li>使用自定义Inspector对DefaultAsset 重写。但是如果有多种重写文件，就回出现有的规则会失效。也可能是代码写的有问题。解决方案嘛，当然是依旧用反射。</li>
 </ol>
-<h1>使用</h1>
-<ol>
-<li>提供接口<code>ICustomDefaultAssetInspector</code>，包含两个方法需要实现，如下：</li>
-</ol>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ol>
+<li><p>提供接口<code>ICustomDefaultAssetInspector</code>，包含两个方法需要实现，如下：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICustomDefaultAssetInspector</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 是否可以绘制</span></span><br><span class="line">	<span class="function"><span class="built_in">bool</span> <span class="title">CanDraw</span>(<span class="params"><span class="built_in">string</span> path</span>)</span>;</span><br><span class="line">    <span class="comment">// GUI 绘制</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Draw</span>(<span class="params"><span class="built_in">string</span> path</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>需要重写Inspector面板的文件类型，创建一个类并实现上面接口,这里以<code>.lua</code>文件做实例：</li>
+</li>
+<li><p>需要重写Inspector面板的文件类型，创建一个类并实现上面接口,这里以<code>.lua</code>文件做实例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LuaInspector</span> : <span class="title">ICustomDefaultAssetInspector</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">CanDraw</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> path.EndsWith(<span class="string">&quot;.lua&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Draw</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">string</span> text = File.ReadAllText(path);</span><br><span class="line">		GUILayout.TextArea(text);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LuaInspector</span> : <span class="title">ICustomDefaultAssetInspector</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">CanDraw</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> path.EndsWith(<span class="string">&quot;.lua&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Draw</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">string</span> text = File.ReadAllText(path);</span><br><span class="line">		GUILayout.TextArea(text);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2023/q3/custom_default_asset_lua.jpg" alt=""></p>
+<p><img src="https://img.tonychenn.cn/2023/q3/custom_default_asset_lua.jpg"></p>
 <p>反射内容写过系列文件，也不再赘述了，自行理解吧</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">CanEditMultipleObjects, CustomEditor(typeof(DefaultAsset))</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomDefaultAssetInspector</span> : <span class="title">Editor</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> Type[] STRING_TYPE = <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">string</span>) &#125;;</span><br><span class="line">	Dictionary&lt;<span class="built_in">object</span>, Type&gt; dict = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">object</span>, Type&gt;();</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		dict.Clear();</span><br><span class="line"></span><br><span class="line">		Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; assemblies.Length; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			Type[] classArray = assemblies[i].GetTypes();</span><br><span class="line">			<span class="keyword">foreach</span> (Type clazz <span class="keyword">in</span> classArray)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (clazz.IsInterface || clazz.IsAbstract) <span class="keyword">continue</span>;</span><br><span class="line">				<span class="keyword">foreach</span> (Type _interface <span class="keyword">in</span> clazz.GetInterfaces())</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (_interface == <span class="keyword">typeof</span>(ICustomDefaultAssetInspector))</span><br><span class="line">					&#123;</span><br><span class="line">						dict[Activator.CreateInstance(clazz)] = clazz;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnInspectorGUI</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnInspectorGUI();</span><br><span class="line">		<span class="built_in">string</span> path = AssetDatabase.GetAssetPath(Selection.activeInstanceID);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> dict)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">object</span> _ins = item.Key;</span><br><span class="line">			Type clazz = item.Value;</span><br><span class="line"></span><br><span class="line">			MethodInfo method1 = clazz.GetMethod(<span class="string">&quot;CanDraw&quot;</span>, STRING_TYPE);</span><br><span class="line">			<span class="built_in">bool</span> canDraw = (<span class="built_in">bool</span>)method1.Invoke(_ins, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; path &#125;);</span><br><span class="line">			<span class="keyword">if</span> (canDraw)</span><br><span class="line">			&#123;</span><br><span class="line">				MethodInfo method2 = clazz.GetMethod(<span class="string">&quot;Draw&quot;</span>, STRING_TYPE);</span><br><span class="line">				method2.Invoke(_ins, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; path &#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
@@ -372,7 +367,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">使用</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="post-toc-text">使用</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

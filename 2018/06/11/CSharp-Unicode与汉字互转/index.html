@@ -15,7 +15,7 @@
     <meta property="og:title" content="CSharp-Unicode与汉字互转 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/06.11/icon.jpg">
+        <meta property="og:image" content="https://img.tonychenn.cn/2018/06.11/icon.jpg">
     
 
     
@@ -95,9 +95,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -116,9 +113,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -159,8 +156,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -258,7 +255,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/06.11/icon.jpg)">
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2018/06.11/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">CSharp-Unicode与汉字互转</span></br>
@@ -292,11 +289,9 @@
       
       <div>
       <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">UnicodeToString</span>(<span class="params"><span class="built_in">string</span> unicode</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="comment">//正则匹配</span></span><br><span class="line">    Regex reg = <span class="keyword">new</span> Regex(<span class="string">@&quot;(?i)//u([0-9a-f]&#123;4&#125;)&quot;</span>);</span><br><span class="line">    result = reg.Replace(unicode, <span class="built_in">delegate</span> (Match m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ((<span class="built_in">char</span>)Convert.ToInt32(m.Groups[<span class="number">1</span>].Value, <span class="number">16</span>)).ToString();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2.将汉字转话为Unicode</p>
+<p> 2.将汉字转话为Unicode</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">StringToUnicode</span>(<span class="params"><span class="built_in">string</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">byte</span>[] bytes = Encoding.Unicode.GetBytes(<span class="keyword">value</span>);</span><br><span class="line">    StringBuilder str= <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; bytes.Length; i += <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 取两个字符，每个字符都是右对齐。</span></span><br><span class="line">        str.AppendFormat(<span class="string">&quot;u&#123;0&#125;&#123;1&#125;&quot;</span>, bytes[i + <span class="number">1</span>].ToString(<span class="string">&quot;x&quot;</span>).PadLeft(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>), bytes[i].ToString(<span class="string">&quot;x&quot;</span>).PadLeft(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str.ToString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>TonyChen<br>
-2018.6.11<br>
-Sometimes you got to run before you can walk———-先做再说</p>
+<p> TonyChen<br> 2018.6.11<br> Sometimes you got to run before you can walk———-先做再说</p>
 
     </div>
 

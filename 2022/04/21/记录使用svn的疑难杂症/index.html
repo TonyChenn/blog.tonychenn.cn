@@ -91,9 +91,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -112,9 +109,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -155,8 +152,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -287,12 +284,10 @@
       
       
       <div>
-      <h1>mac下</h1>
-<h3 id="svn-Can’t-remove-file-xxx-svn-xxx-Operation-not-permitted"><a class="header-anchor" href="#svn-Can’t-remove-file-xxx-svn-xxx-Operation-not-permitted">¶</a>svn: Can’t remove file xxx/.svn/xxx Operation not permitted.</h3>
-<p>提示用<code>svn cleanup</code>但是无效，即使加上<code>sudo</code>依然没权限，解决方案：<br></p>
+      <h1 id="mac下"><a href="#mac下" class="headerlink" title="mac下"></a>mac下</h1><h3 id="svn-Can’t-remove-file-xxx-svn-xxx-Operation-not-permitted"><a href="#svn-Can’t-remove-file-xxx-svn-xxx-Operation-not-permitted" class="headerlink" title="svn: Can’t remove file xxx&#x2F;.svn&#x2F;xxx Operation not permitted."></a>svn: Can’t remove file xxx&#x2F;.svn&#x2F;xxx Operation not permitted.</h3><p>提示用<code>svn cleanup</code>但是无效，即使加上<code>sudo</code>依然没权限，解决方案：<br></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> .svn</span><br><span class="line">chflags -R nouchg ./</span><br></pre></td></tr></table></figure>
-<h3 id="修改文件夹的所属用户"><a class="header-anchor" href="#修改文件夹的所属用户">¶</a>修改文件夹的所属用户</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chown</span> -R $(<span class="built_in">whoami</span>) folder_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 ls -l 查看所属用户</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改文件夹的所属用户"><a href="#修改文件夹的所属用户" class="headerlink" title="修改文件夹的所属用户"></a>修改文件夹的所属用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chown</span> -R $(<span class="built_in">whoami</span>) folder_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 ls -l 查看所属用户</span></span><br></pre></td></tr></table></figure>
     </div>
 
       
@@ -356,7 +351,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">mac下</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#svn-Can%E2%80%99t-remove-file-xxx-svn-xxx-Operation-not-permitted"><span class="post-toc-text">svn: Can’t remove file xxx&#x2F;.svn&#x2F;xxx Operation not permitted.</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E6%89%80%E5%B1%9E%E7%94%A8%E6%88%B7"><span class="post-toc-text">修改文件夹的所属用户</span></a></li></ol></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#mac%E4%B8%8B"><span class="post-toc-text">mac下</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#svn-Can%E2%80%99t-remove-file-xxx-svn-xxx-Operation-not-permitted"><span class="post-toc-text">svn: Can’t remove file xxx&#x2F;.svn&#x2F;xxx Operation not permitted.</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E6%89%80%E5%B1%9E%E7%94%A8%E6%88%B7"><span class="post-toc-text">修改文件夹的所属用户</span></a></li></ol></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

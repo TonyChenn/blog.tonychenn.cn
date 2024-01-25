@@ -15,7 +15,7 @@
     <meta property="og:title" content="Android中的权限 - 默然的博客 | 默然的博客">
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/03.16/icon.jpg">
+        <meta property="og:image" content="https://img.tonychenn.cn/2018/03.16/icon.jpg">
     
 
     
@@ -93,9 +93,6 @@
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 <!--header_bar-->
-
-
-
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
     <div class="mdui-toolbar mdui-color-indigo">  
         <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
@@ -114,9 +111,9 @@
             
                 <li class="mdui-menu-item">
                     
-                    <a href="/desktop" class="mdui-ripple"  target='_blank'>
-                    <i class="mdui-menu-item-icon mdui-icon material-icons">desktop_windows</i>
-                    桌面
+                    <a href="/site" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
                 </a>
                 </li>
                 <li class="mdui-divider"></li>
@@ -157,8 +154,8 @@
             </a>
         
             
-            <a href="/desktop" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
-                桌面
+            <a href="/site" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
             </a>
         
             
@@ -256,7 +253,7 @@
 <!--Header-->
 
 
-<div class="header" style="background-image: url(https://raw.githubusercontent.com/TonyChenn/BlogPicture/master/2018/03.16/icon.jpg)">
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2018/03.16/icon.jpg)">
     <div class="mdui-card-media" style="overflow: hidden;">
         <div class="header-content">
             <span class="header_title">Android中的权限</span></br>
@@ -289,19 +286,16 @@
       
       
       <div>
-      <h1>权限的一些介绍</h1>
-<p>在android开发过程中，使用到一些功能时，需要在manifest文件中添加权限清单。在app安装时候也会在安装界面上显示出来用以告知需要使用什么权限。用户想要使用就必须接受所有权限。而好多APP却是不管用户有没有用到，先申请了再说。这就导致了app滥用权限，收集个人信息等问题。</p>
+      <h1 id="权限的一些介绍"><a href="#权限的一些介绍" class="headerlink" title="权限的一些介绍"></a>权限的一些介绍</h1><p>在android开发过程中，使用到一些功能时，需要在manifest文件中添加权限清单。在app安装时候也会在安装界面上显示出来用以告知需要使用什么权限。用户想要使用就必须接受所有权限。而好多APP却是不管用户有没有用到，先申请了再说。这就导致了app滥用权限，收集个人信息等问题。</p>
 <p>为了解决这个问题，自Android6.0(API 22)以后，对于一些危险权限，开发者不但要将权限清单放到Manifest文件中，还需要在需要使用时动态申请运行时权限。如：只有在打开相机的时候才会申请相机权限。这样用户即使不同意某些权限，也是可以正常使用app的。</p>
-<h1>危险权限列表</h1>
-<table>
+<h1 id="危险权限列表"><a href="#危险权限列表" class="headerlink" title="危险权限列表"></a>危险权限列表</h1><table>
 <thead>
 <tr>
 <th>权限组</th>
 <th>权限</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>CALENDAR(通讯录)</td>
 <td>READ_CALENDAR</td>
 </tr>
@@ -397,10 +391,8 @@
 <td></td>
 <td>WRITE_EXTERNAL_STORAGE</td>
 </tr>
-</tbody>
-</table>
-<h1>动态申请权限</h1>
-<p>转这里：<a href="https://blog.tonychenn.cn/2017/10/16/Android-%E5%8A%A8%E6%80%81%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90/">Android-动态申请权限</a></p>
+</tbody></table>
+<h1 id="动态申请权限"><a href="#动态申请权限" class="headerlink" title="动态申请权限"></a>动态申请权限</h1><p>转这里：<a href="https://blog.tonychenn.cn/2017/10/16/Android-%E5%8A%A8%E6%80%81%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90/">Android-动态申请权限</a></p>
 <p>TonyChen</p>
 <p>2018.3.16</p>
 
@@ -467,7 +459,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">权限的一些介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">危险权限列表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">动态申请权限</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%9D%83%E9%99%90%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%8B%E7%BB%8D"><span class="post-toc-text">权限的一些介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8D%B1%E9%99%A9%E6%9D%83%E9%99%90%E5%88%97%E8%A1%A8"><span class="post-toc-text">危险权限列表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8A%A8%E6%80%81%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90"><span class="post-toc-text">动态申请权限</span></a></li></ol> 
     </div>
   </aside> -->
 </div>
