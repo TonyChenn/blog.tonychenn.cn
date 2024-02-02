@@ -287,22 +287,27 @@
       
       <div>
       <p>前段时间在UWP中需要解析网页上Html文档，找到了<a target="_blank" rel="noopener" href="https://html-agility-pack.net/">HtmlAgilityPack</a>这个工具，网上也给与很高的评价。学习过后总结一下HtmlAgilityPack的使用；</p>
-<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>HtmlAgilityPack是<a target="_blank" rel="noopener" href="https://htmlagilitypack.codeplex.com/">codeplex里的一款开源库</a>，是一个灵活的html解析器，支持通过简单XPATH 或 XSLT来读和写DOM，最新版本支持LINQ。</p>
-<h2 id="Xpath"><a href="#Xpath" class="headerlink" title="Xpath"></a>Xpath</h2><blockquote>
+<h2 id="工具简介"><a class="header-anchor" href="#工具简介">¶</a>工具简介</h2>
+<p>HtmlAgilityPack是<a target="_blank" rel="noopener" href="https://htmlagilitypack.codeplex.com">codeplex里的一款开源库</a>，是一个灵活的html解析器，支持通过简单XPATH 或 XSLT来读和写DOM，最新版本支持LINQ。</p>
+<h2 id="Xpath"><a class="header-anchor" href="#Xpath">¶</a>Xpath</h2>
+<blockquote>
 <p>移步：<a href="/2018/11/08/XPath%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">xpath学习总结</a></p>
 </blockquote>
-<h2 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//from file</span></span><br><span class="line"><span class="keyword">var</span> htmlDoc=<span class="keyword">new</span> HtmlDocument();</span><br><span class="line">htmlDoc.Load(filePath);</span><br><span class="line"></span><br><span class="line"><span class="comment">//from String</span></span><br><span class="line"><span class="keyword">var</span> htmlDoc=<span class="keyword">new</span> HtmlDocument();</span><br><span class="line">htmlDoc.LoadHtml(html);</span><br><span class="line"></span><br><span class="line"><span class="comment">//from web</span></span><br><span class="line"><span class="keyword">var</span> client=<span class="keyword">new</span> HtmlWeb();</span><br><span class="line"><span class="keyword">var</span> htmlDoc=web.Load(url);</span><br><span class="line"><span class="comment">// htmlDoc=await web.LoadFromWebAsync(url);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//from WebBrowser</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Select-Node-Nodes"><a href="#Select-Node-Nodes" class="headerlink" title="Select Node(Nodes)"></a>Select Node(Nodes)</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//select nodes</span></span><br><span class="line"><span class="keyword">var</span> Node=htmlDoc.DocumentNode.SelectNodes(XPath);</span><br><span class="line"></span><br><span class="line"><span class="comment">//select single node</span></span><br><span class="line"><span class="keyword">var</span> Node =htmlDoc.DocumentNode.SelectSingleNode(XPath);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Manipulation-操作"><a href="#Manipulation-操作" class="headerlink" title="Manipulation(操作)"></a>Manipulation(操作)</h2><h3 id="Properties-属性"><a href="#Properties-属性" class="headerlink" title="Properties(属性)"></a>Properties(属性)</h3><table>
+<h2 id="Parser"><a class="header-anchor" href="#Parser">¶</a>Parser</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//from file</span></span><br><span class="line"><span class="keyword">var</span> htmlDoc=<span class="keyword">new</span> HtmlDocument();</span><br><span class="line">htmlDoc.Load(filePath);</span><br><span class="line"></span><br><span class="line"><span class="comment">//from String</span></span><br><span class="line"><span class="keyword">var</span> htmlDoc=<span class="keyword">new</span> HtmlDocument();</span><br><span class="line">htmlDoc.LoadHtml(html);</span><br><span class="line"></span><br><span class="line"><span class="comment">//from web</span></span><br><span class="line"><span class="keyword">var</span> client=<span class="keyword">new</span> HtmlWeb();</span><br><span class="line"><span class="keyword">var</span> htmlDoc=web.Load(url);</span><br><span class="line"><span class="comment">// htmlDoc=await web.LoadFromWebAsync(url);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//from WebBrowser</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Select-Node-Nodes"><a class="header-anchor" href="#Select-Node-Nodes">¶</a>Select Node(Nodes)</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//select nodes</span></span><br><span class="line"><span class="keyword">var</span> Node=htmlDoc.DocumentNode.SelectNodes(XPath);</span><br><span class="line"></span><br><span class="line"><span class="comment">//select single node</span></span><br><span class="line"><span class="keyword">var</span> Node =htmlDoc.DocumentNode.SelectSingleNode(XPath);</span><br></pre></td></tr></table></figure>
+<h2 id="Manipulation-操作"><a class="header-anchor" href="#Manipulation-操作">¶</a>Manipulation(操作)</h2>
+<h3 id="Properties-属性"><a class="header-anchor" href="#Properties-属性">¶</a>Properties(属性)</h3>
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>InnerHtml</td>
 <td>获取或设置对象的开始和结束标记之间的HTML</td>
 </tr>
@@ -318,15 +323,18 @@
 <td>ParentNode</td>
 <td>获取此节点的父节点</td>
 </tr>
-</tbody></table>
-<h3 id="Methords"><a href="#Methords" class="headerlink" title="Methords"></a>Methords</h3><table>
+</tbody>
+</table>
+<h3 id="Methords"><a class="header-anchor" href="#Methords">¶</a>Methords</h3>
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>AppendChild()</td>
 <td>添加到当前节点的最后一个子节点的后面</td>
 </tr>
@@ -370,15 +378,18 @@
 <td>ReplaceChild(newNode,oldNode)</td>
 <td>替换节点</td>
 </tr>
-</tbody></table>
-<h2 id="Traversing（遍历）"><a href="#Traversing（遍历）" class="headerlink" title="Traversing（遍历）"></a>Traversing（遍历）</h2><table>
+</tbody>
+</table>
+<h2 id="Traversing（遍历）"><a class="header-anchor" href="#Traversing（遍历）">¶</a>Traversing（遍历）</h2>
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>ChildNodes</td>
 <td>获取节点的所有子节点</td>
 </tr>
@@ -398,13 +409,16 @@
 <td>ParentNode</td>
 <td>获取此节点的父节点</td>
 </tr>
-</tbody></table>
-<h2 id="读取节点的内容"><a href="#读取节点的内容" class="headerlink" title="读取节点的内容:"></a>读取节点的内容:</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> html =</span><br><span class="line">      <span class="string">@&quot;&lt;td class=texte width=&#x27;50%&#x27;&gt;</span></span><br><span class="line"><span class="string">	        &lt;div align=right&gt;Name:&lt;B&gt;&lt;/B&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td width = &#x27;50%&#x27;&#x27;</span></span><br><span class="line"><span class="string">	        &lt;input class=box value = John&gt;</span></span><br><span class="line"><span class="string">	        &lt;input class=box value = Tony&gt;</span></span><br><span class="line"><span class="string">	        &lt;input class=box value = Jams&gt;</span></span><br><span class="line"><span class="string">        &lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;tr Align = center &gt;&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> htmlDoc = <span class="keyword">new</span> HtmlDocument();</span><br><span class="line">    htmlDoc.LoadHtml(html);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取第一个td标签中div子标签中的值</span></span><br><span class="line">    <span class="keyword">var</span> str = htmlDoc.DocumentNode.SelectSingleNode(<span class="string">&quot;//td/div&quot;</span>).InnerText;</span><br><span class="line">    <span class="comment">//获取第二个td标签中input子标签的value属性的值</span></span><br><span class="line">    <span class="comment">//var str = htmlDoc.DocumentNode.SelectSingleNode(&quot;//td/input&quot;).Attributes[&quot;value&quot;].Value;</span></span><br><span class="line">    <span class="keyword">if</span>(str!=<span class="literal">null</span>)</span><br><span class="line">        Console.WriteLine(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改节点的值"><a href="#修改节点的值" class="headerlink" title="修改节点的值"></a>修改节点的值</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改节点的值</span></span><br><span class="line"><span class="comment">//before</span></span><br><span class="line"><span class="keyword">var</span> node= htmlDoc.DocumentNode.SelectSingleNode(<span class="string">&quot;//td/input&quot;</span>);</span><br><span class="line">Console.WriteLine(node.Attributes[<span class="string">&quot;value&quot;</span>].Value);</span><br><span class="line"><span class="comment">//after</span></span><br><span class="line">node.SetAttributeValue(<span class="string">&quot;value&quot;</span>, <span class="string">&quot;new name&quot;</span>);</span><br><span class="line">Console.WriteLine(node.Attributes[<span class="string">&quot;value&quot;</span>].Value);</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://html-agility-pack.net/">HtmlAgilityPack 官网</a><br><br><a target="_blank" rel="noopener" href="https://replay923.github.io/2018/08/01/HtmlAgilityPack/">C＃网站爬取心得</a></p>
+</tbody>
+</table>
+<h2 id="读取节点的内容"><a class="header-anchor" href="#读取节点的内容">¶</a>读取节点的内容:</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> html =</span><br><span class="line">      <span class="string">@&quot;&lt;td class=texte width=&#x27;50%&#x27;&gt;</span></span><br><span class="line"><span class="string">	        &lt;div align=right&gt;Name:&lt;B&gt;&lt;/B&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td width = &#x27;50%&#x27;&#x27;</span></span><br><span class="line"><span class="string">	        &lt;input class=box value = John&gt;</span></span><br><span class="line"><span class="string">	        &lt;input class=box value = Tony&gt;</span></span><br><span class="line"><span class="string">	        &lt;input class=box value = Jams&gt;</span></span><br><span class="line"><span class="string">        &lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;tr Align = center &gt;&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> htmlDoc = <span class="keyword">new</span> HtmlDocument();</span><br><span class="line">    htmlDoc.LoadHtml(html);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取第一个td标签中div子标签中的值</span></span><br><span class="line">    <span class="keyword">var</span> str = htmlDoc.DocumentNode.SelectSingleNode(<span class="string">&quot;//td/div&quot;</span>).InnerText;</span><br><span class="line">    <span class="comment">//获取第二个td标签中input子标签的value属性的值</span></span><br><span class="line">    <span class="comment">//var str = htmlDoc.DocumentNode.SelectSingleNode(&quot;//td/input&quot;).Attributes[&quot;value&quot;].Value;</span></span><br><span class="line">    <span class="keyword">if</span>(str!=<span class="literal">null</span>)</span><br><span class="line">        Console.WriteLine(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="修改节点的值"><a class="header-anchor" href="#修改节点的值">¶</a>修改节点的值</h2>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改节点的值</span></span><br><span class="line"><span class="comment">//before</span></span><br><span class="line"><span class="keyword">var</span> node= htmlDoc.DocumentNode.SelectSingleNode(<span class="string">&quot;//td/input&quot;</span>);</span><br><span class="line">Console.WriteLine(node.Attributes[<span class="string">&quot;value&quot;</span>].Value);</span><br><span class="line"><span class="comment">//after</span></span><br><span class="line">node.SetAttributeValue(<span class="string">&quot;value&quot;</span>, <span class="string">&quot;new name&quot;</span>);</span><br><span class="line">Console.WriteLine(node.Attributes[<span class="string">&quot;value&quot;</span>].Value);</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a class="header-anchor" href="#参考">¶</a>参考</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://html-agility-pack.net/">HtmlAgilityPack 官网</a><br><br>
+<a target="_blank" rel="noopener" href="https://replay923.github.io/2018/08/01/HtmlAgilityPack/">C＃网站爬取心得</a></p>
 </blockquote>
 <div align='right'>TonyChenn<br>2018/9/1</div>
 
