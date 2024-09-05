@@ -286,17 +286,14 @@
       
       
       <div>
-      <h1>List<T></h1>
-<blockquote>
+      <h1 id="List"><a href="#List" class="headerlink" title="List"></a>List<T></h1><blockquote>
 <p>官方源码地址：<a target="_blank" rel="noopener" href="https://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs">https://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs</a></p>
 </blockquote>
-<h2 id="关键点"><a class="header-anchor" href="#关键点">¶</a>关键点</h2>
-<ol>
+<h2 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h2><ol>
 <li>继承了<code>IList，IReadOnlyList</code>接口</li>
 <li>底层使用数据结构为泛型数组，基于数组结构，所以不适合频繁的删除，插入，操作。</li>
 <li><code>Count</code>表示数据长度，<code>Capacity</code>表示数组长度大小。</li>
-<li>添加数据动态扩容：
-<ul>
+<li>添加数据动态扩容：<ul>
 <li>默认容量为0</li>
 <li>容量不足时，首次扩容到4，后续扩容至原来的2倍</li>
 </ul>
@@ -305,12 +302,9 @@
 <li>查找使用线性查找，效率：O(n)</li>
 <li>线程不安全的，并没有对多线程下做任何锁或其他同步操作</li>
 </ol>
-<h2 id="优点"><a class="header-anchor" href="#优点">¶</a>优点</h2>
-<p>相比ArrayList，在初始化时需要指定泛型类型，避免装箱拆箱操作。通用性比较强。</p>
-<h2 id="缺点"><a class="header-anchor" href="#缺点">¶</a>缺点</h2>
-<p>内存分配方式不合理，当多次添加数据时，每次扩容都会造成空间浪费，增大GC压力。所以在使用时指定一个合适的容量较少扩容操作。</p>
-<h2 id="结论"><a class="header-anchor" href="#结论">¶</a>结论</h2>
-<p>List 是一个兼容性比较好的组件，但 List 在效率方面并没有做优化，线程也并不安全，需要加锁机制来保证线程的安全性。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>相比ArrayList，在初始化时需要指定泛型类型，避免装箱拆箱操作。通用性比较强。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>内存分配方式不合理，当多次添加数据时，每次扩容都会造成空间浪费，增大GC压力。所以在使用时指定一个合适的容量较少扩容操作。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>List 是一个兼容性比较好的组件，但 List 在效率方面并没有做优化，线程也并不安全，需要加锁机制来保证线程的安全性。</p>
 
     </div>
 
@@ -375,7 +369,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">List</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9"><span class="post-toc-text">关键点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E7%82%B9"><span class="post-toc-text">优点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="post-toc-text">缺点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="post-toc-text">结论</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#List"><span class="post-toc-text">List</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9"><span class="post-toc-text">关键点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E7%82%B9"><span class="post-toc-text">优点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="post-toc-text">缺点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="post-toc-text">结论</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

@@ -284,31 +284,19 @@
       
       
       <div>
-      <h1>什么是OpenGL/DirectX</h1>
-<p>OpenGL/DirectX 是图像应用编程接口，用来渲染二维，三维图形。如果没有 OpenGL/DirectX 想要访问GPU是很麻烦的，可能要和各种寄存器，显存打交道。OpenGL/DirectX将上层应用程序与底层GPU之间架起一座“桥梁”。</p>
-<p>当应用程序通过上面编程接口后，这些接口会依次向<b>显卡驱动</b>发送渲染命令。<b>显卡驱动</b>会将OpenGL/DirectX中的函数翻译成GPU能懂的语言，实现与GPU的通讯。<b>显卡驱动</b>同时也会将纹理等数据转换为GPU支持的格式。</p>
-<h1>HLSL，GLSL，CG的关系</h1>
-<p>HLSL，GLSL，CG是三种常见的着色器语言，用来编写着色器。这些语言会被编译为与机器无关的汇编语言（中间语言），中间语言再交给显卡翻译为真正的机器语言，即GPU可以理解的语言。</p>
-<h2 id="三者区别"><a class="header-anchor" href="#三者区别">¶</a>三者区别</h2>
-<p><b>HLSL</b>基于DirectX,由微软控制，在版本相同时，不同平台编译的结果是一样的，但几乎只支持微软家产品，如: Windows,Xbox 360,PS3等。</p>
+      <h1 id="什么是OpenGL-DirectX"><a href="#什么是OpenGL-DirectX" class="headerlink" title="什么是OpenGL&#x2F;DirectX"></a>什么是OpenGL&#x2F;DirectX</h1><p>OpenGL&#x2F;DirectX 是图像应用编程接口，用来渲染二维，三维图形。如果没有 OpenGL&#x2F;DirectX 想要访问GPU是很麻烦的，可能要和各种寄存器，显存打交道。OpenGL&#x2F;DirectX将上层应用程序与底层GPU之间架起一座“桥梁”。</p>
+<p>当应用程序通过上面编程接口后，这些接口会依次向<b>显卡驱动</b>发送渲染命令。<b>显卡驱动</b>会将OpenGL&#x2F;DirectX中的函数翻译成GPU能懂的语言，实现与GPU的通讯。<b>显卡驱动</b>同时也会将纹理等数据转换为GPU支持的格式。</p>
+<h1 id="HLSL，GLSL，CG的关系"><a href="#HLSL，GLSL，CG的关系" class="headerlink" title="HLSL，GLSL，CG的关系"></a>HLSL，GLSL，CG的关系</h1><p>HLSL，GLSL，CG是三种常见的着色器语言，用来编写着色器。这些语言会被编译为与机器无关的汇编语言（中间语言），中间语言再交给显卡翻译为真正的机器语言，即GPU可以理解的语言。</p>
+<h2 id="三者区别"><a href="#三者区别" class="headerlink" title="三者区别"></a>三者区别</h2><p><b>HLSL</b>基于DirectX,由微软控制，在版本相同时，不同平台编译的结果是一样的，但几乎只支持微软家产品，如: Windows,Xbox 360,PS3等。</p>
 <p><b>GLSL</b>基于OpenGL,优点在于跨平台性，只要显卡驱动支持即可正常工作，可以在Windows,Mac,Linux,移动平台工作。但是由于OpenGL不提供着色器编译器，而是由显卡驱动完成着色器编译，导致GLSL的编译结果取决于不用的显卡硬件厂商，进而导致编译结果不尽相同。</p>
 <p><b>CG</b>基于Nvidia，真正意义上的跨平台。根据不同的平台生成不同的中间语言。(Unity中首选，会编译成HLSL或GLSL)</p>
-<h1>DrawCall</h1>
-<p>DrawCall就是CPU调用图像编程接口让GPU进行渲染的命令。DrawCall造成性能问题的元凶是<strong>CPU</strong>。</p>
-<h1>为什么DrawCall多了会影响帧率？</h1>
-<p>CPU与GPU的并行工作应用了<b>并行缓冲区</b>.与生产者-消费者模型类似。CPU提交DrawCall到缓冲区，GPU从缓冲区取数据。<br>
-效率上，CPU要向GPU发送许多数据，以及检查工作，而GPU渲染能力很强，所以GPU从缓冲区取命令的速度远远大于CPU发送命令的速度。所以DrawCall过多会导致CPU过载。</p>
-<h1>如何减少DrawCall?</h1>
-<p>上面说DrawCall过多影响帧率是因为CPU处理数据，发送命令很耗时，所以可以通过合并一些DrawCall,进而减少DrawCall的总数量.</p>
-<h1>开发中减少DrawCall方法</h1>
-<ol>
+<h1 id="DrawCall"><a href="#DrawCall" class="headerlink" title="DrawCall"></a>DrawCall</h1><p>DrawCall就是CPU调用图像编程接口让GPU进行渲染的命令。DrawCall造成性能问题的元凶是<strong>CPU</strong>。</p>
+<h1 id="为什么DrawCall多了会影响帧率？"><a href="#为什么DrawCall多了会影响帧率？" class="headerlink" title="为什么DrawCall多了会影响帧率？"></a>为什么DrawCall多了会影响帧率？</h1><p>CPU与GPU的并行工作应用了<b>并行缓冲区</b>.与生产者-消费者模型类似。CPU提交DrawCall到缓冲区，GPU从缓冲区取数据。<br>效率上，CPU要向GPU发送许多数据，以及检查工作，而GPU渲染能力很强，所以GPU从缓冲区取命令的速度远远大于CPU发送命令的速度。所以DrawCall过多会导致CPU过载。</p>
+<h1 id="如何减少DrawCall"><a href="#如何减少DrawCall" class="headerlink" title="如何减少DrawCall?"></a>如何减少DrawCall?</h1><p>上面说DrawCall过多影响帧率是因为CPU处理数据，发送命令很耗时，所以可以通过合并一些DrawCall,进而减少DrawCall的总数量.</p>
+<h1 id="开发中减少DrawCall方法"><a href="#开发中减少DrawCall方法" class="headerlink" title="开发中减少DrawCall方法"></a>开发中减少DrawCall方法</h1><ol>
 <li>避免使用过多材质。尽量在不同网格之间共用相同材质。</li>
 <li>减少使用大量很小的网格。不可避免时考虑是否可以合并。</li>
 </ol>
-<p>// 3. 动态字体增加DrawCall<br>
-// 4. 一个界面减少图集数量（NGUI）<br>
-// 5. 图集不穿插（每个图集就是1个DrawCall）<br>
-// 6. UI上的Shader特效会增加1个DrawCall</p>
 
     </div>
 
@@ -373,7 +361,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是OpenGL&#x2F;DirectX</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">HLSL，GLSL，CG的关系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E8%80%85%E5%8C%BA%E5%88%AB"><span class="post-toc-text">三者区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">DrawCall</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">为什么DrawCall多了会影响帧率？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">如何减少DrawCall?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">开发中减少DrawCall方法</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFOpenGL-DirectX"><span class="post-toc-text">什么是OpenGL&#x2F;DirectX</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HLSL%EF%BC%8CGLSL%EF%BC%8CCG%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="post-toc-text">HLSL，GLSL，CG的关系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E8%80%85%E5%8C%BA%E5%88%AB"><span class="post-toc-text">三者区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DrawCall"><span class="post-toc-text">DrawCall</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88DrawCall%E5%A4%9A%E4%BA%86%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%B8%A7%E7%8E%87%EF%BC%9F"><span class="post-toc-text">为什么DrawCall多了会影响帧率？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91DrawCall"><span class="post-toc-text">如何减少DrawCall?</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%BC%80%E5%8F%91%E4%B8%AD%E5%87%8F%E5%B0%91DrawCall%E6%96%B9%E6%B3%95"><span class="post-toc-text">开发中减少DrawCall方法</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

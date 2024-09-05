@@ -284,32 +284,25 @@
       
       
       <div>
-      <p>这一篇，写一下Interpolator的使用方法</p>
-<p><strong>Interpolator 定义了动画的变化速率，在Animations框架当中定义了以下几种Interpolator,在xml的set标签中使用；</strong></p>
-<p><strong>xml中实现：</strong></p>
+      <p> 这一篇，写一下Interpolator的使用方法</p>
+<p> <strong>Interpolator 定义了动画的变化速率，在Animations框架当中定义了以下几种Interpolator,在xml的set标签中使用；</strong></p>
+<p> <strong>xml中实现：</strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>Activity中实现：</strong></p>
+<p> <strong>Activity中实现：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AnimationSet aninationSet=<span class="keyword">new</span> <span class="title class_">AnimationSet</span>(<span class="literal">true</span>);</span><br><span class="line">animationSet.setInterpolator(<span class="keyword">new</span> <span class="title class_">AccelerateInterpolator</span>());</span><br></pre></td></tr></table></figure>
 <ul>
-<li>
-<p>AccelerateDecelerateInterpolator：在动画开始和结束的时候速率改变比较慢，中间时候加速；</p>
+<li><p>AccelerateDecelerateInterpolator：在动画开始和结束的时候速率改变比较慢，中间时候加速；</p>
 </li>
-<li>
-<p>AccelerateInterpolator：在动画开始时候速率改变比较慢，然后开始加速；</p>
+<li><p>AccelerateInterpolator：在动画开始时候速率改变比较慢，然后开始加速；</p>
 </li>
-<li>
-<p>CycleInterpolator：动画循环播放特定次数，速率改变沿着正弦曲线；</p>
+<li><p>CycleInterpolator：动画循环播放特定次数，速率改变沿着正弦曲线；</p>
 </li>
-<li>
-<p>DecelerateInterpolator：在动画开始的时候速率改变比较快，然后开始减速；</p>
+<li><p>DecelerateInterpolator：在动画开始的时候速率改变比较快，然后开始减速；</p>
 </li>
-<li>
-<p>LinearInterpolator：动画以均匀的速率改变</p>
+<li><p>LinearInterpolator：动画以均匀的速率改变</p>
 </li>
 </ul>
-<p>在需要多个动画叠加时：<br>
-在xml文件的set标签中添加：<br>
-android:shareInterpolator=”true” //共享动画效果</p>
+<p> 在需要多个动画叠加时：<br> 在xml文件的set标签中添加：<br> android:shareInterpolator&#x3D;”true” &#x2F;&#x2F;共享动画效果</p>
 
     </div>
 

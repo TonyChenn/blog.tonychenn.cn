@@ -284,55 +284,42 @@
       
       
       <div>
-      <h1>iOS应用的程序状态</h1>
-<h2 id="正常启动一个app时"><a class="header-anchor" href="#正常启动一个app时">¶</a>正常启动一个app时</h2>
-<ol>
+      <h1 id="iOS应用的程序状态"><a href="#iOS应用的程序状态" class="headerlink" title="iOS应用的程序状态"></a>iOS应用的程序状态</h1><h2 id="正常启动一个app时"><a href="#正常启动一个app时" class="headerlink" title="正常启动一个app时"></a>正常启动一个app时</h2><ol>
 <li>not running: app未启动时处于<b>未运行状态</b></li>
-<li>inactive: 启动app后进入<b>未激活状态</b>
-<ul>
+<li>inactive: 启动app后进入<b>未激活状态</b><ul>
 <li><code>application:willFinishLaunchingWithOptions</code>: 应用启动未进入状态保存的回调</li>
 <li><code>application:didFinishLaunchingWithOptions</code>: 基本的准备已经完成，可以启动的回调</li>
 </ul>
 </li>
-<li>active: 激活状态
-<ul>
+<li>active: 激活状态<ul>
 <li><code>applicationDidBecomeActive</code>: app已经切换到active状态后的回调</li>
 </ul>
 </li>
 </ol>
-<h2 id="切换到后台再切换到前台"><a class="header-anchor" href="#切换到后台再切换到前台">¶</a>切换到后台再切换到前台</h2>
-<ol>
-<li>active -&gt; inactive
-<ul>
+<h2 id="切换到后台再切换到前台"><a href="#切换到后台再切换到前台" class="headerlink" title="切换到后台再切换到前台"></a>切换到后台再切换到前台</h2><ol>
+<li>active -&gt; inactive<ul>
 <li><code>applicationWillResignActive</code>: app将要从前台切换到后台的回调</li>
 </ul>
 </li>
-<li>background: 后台状态
-<ul>
+<li>background: 后台状态<ul>
 <li><code>applicationDidEnterBackground</code>: app已经进入后台的回调</li>
 </ul>
 </li>
-<li>inactive -&gt; active
-<ul>
+<li>inactive -&gt; active<ul>
 <li><code>applicationWillEnterForeground</code>: app将要从后台切换到前台的回调</li>
 <li><code>applicationDidBecomeActive</code>: app已经切换到active状态后的回调</li>
 </ul>
 </li>
 </ol>
-<h2 id="来回切换应用-锁屏解锁"><a class="header-anchor" href="#来回切换应用-锁屏解锁">¶</a>来回切换应用/锁屏解锁</h2>
-<ul>
-<li>换到另一个app/锁屏：由状态<code>active</code>切换到<code>inactive</code>，此时调用<code>applicationWillResignActive</code></li>
-<li>换到此app/解锁：由状态<code>inactive</code>切换到<code>running</code>，此时调用<code>applicationDidEnterBackground</code></li>
+<h2 id="来回切换应用-锁屏解锁"><a href="#来回切换应用-锁屏解锁" class="headerlink" title="来回切换应用&#x2F;锁屏解锁"></a>来回切换应用&#x2F;锁屏解锁</h2><ul>
+<li>换到另一个app&#x2F;锁屏：由状态<code>active</code>切换到<code>inactive</code>，此时调用<code>applicationWillResignActive</code></li>
+<li>换到此app&#x2F;解锁：由状态<code>inactive</code>切换到<code>running</code>，此时调用<code>applicationDidEnterBackground</code></li>
 </ul>
-<h2 id="应用终止"><a class="header-anchor" href="#应用终止">¶</a>应用终止</h2>
-<ul>
+<h2 id="应用终止"><a href="#应用终止" class="headerlink" title="应用终止"></a>应用终止</h2><ul>
 <li><code>applicationWillTerminate</code>: app将要结束时的回调</li>
 </ul>
-<h1>使用应用状态的回调</h1>
-<h2 id="在AppDelegate中使用"><a class="header-anchor" href="#在AppDelegate中使用">¶</a>在AppDelegate中使用</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</span><br><span class="line">    NSLog(@&quot;进入后台&quot;);</span><br><span class="line">&#125;</span><br><span class="line">- (void)applicationWillEnterForeground:(UIApplication *)application &#123;</span><br><span class="line">    NSLog(@&quot;进入前台&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用通知"><a class="header-anchor" href="#使用通知">¶</a>使用通知</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self </span><br><span class="line">    selector:@selector(enterBackground)</span><br><span class="line">    name:UIApplicationDidEnterBackgroundNotification</span><br><span class="line">    object:nil];</span><br><span class="line"></span><br><span class="line">- (void)enterBackground&#123;</span><br><span class="line">    NSLog(@&quot;进入后台&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self </span><br><span class="line">    selector:@selector(enterForeground) </span><br><span class="line">    name:UIApplicationDidBecomeActiveNotification </span><br><span class="line">    object:nil];</span><br><span class="line"></span><br><span class="line">- (void)enterForeground&#123;</span><br><span class="line">    NSLog(@&quot;回到app&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用应用状态的回调"><a href="#使用应用状态的回调" class="headerlink" title="使用应用状态的回调"></a>使用应用状态的回调</h1><h2 id="在AppDelegate中使用"><a href="#在AppDelegate中使用" class="headerlink" title="在AppDelegate中使用"></a>在AppDelegate中使用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</span><br><span class="line">    NSLog(@&quot;进入后台&quot;);</span><br><span class="line">&#125;</span><br><span class="line">- (void)applicationWillEnterForeground:(UIApplication *)application &#123;</span><br><span class="line">    NSLog(@&quot;进入前台&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用通知"><a href="#使用通知" class="headerlink" title="使用通知"></a>使用通知</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self </span><br><span class="line">    selector:@selector(enterBackground)</span><br><span class="line">    name:UIApplicationDidEnterBackgroundNotification</span><br><span class="line">    object:nil];</span><br><span class="line"></span><br><span class="line">- (void)enterBackground&#123;</span><br><span class="line">    NSLog(@&quot;进入后台&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self </span><br><span class="line">    selector:@selector(enterForeground) </span><br><span class="line">    name:UIApplicationDidBecomeActiveNotification </span><br><span class="line">    object:nil];</span><br><span class="line"></span><br><span class="line">- (void)enterForeground&#123;</span><br><span class="line">    NSLog(@&quot;回到app&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
       
@@ -396,7 +383,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">iOS应用的程序状态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AAapp%E6%97%B6"><span class="post-toc-text">正常启动一个app时</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0%E5%90%8E%E5%8F%B0%E5%86%8D%E5%88%87%E6%8D%A2%E5%88%B0%E5%89%8D%E5%8F%B0"><span class="post-toc-text">切换到后台再切换到前台</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9D%A5%E5%9B%9E%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8-%E9%94%81%E5%B1%8F%E8%A7%A3%E9%94%81"><span class="post-toc-text">来回切换应用&#x2F;锁屏解锁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E7%BB%88%E6%AD%A2"><span class="post-toc-text">应用终止</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">使用应用状态的回调</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9C%A8AppDelegate%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="post-toc-text">在AppDelegate中使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E7%9F%A5"><span class="post-toc-text">使用通知</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS%E5%BA%94%E7%94%A8%E7%9A%84%E7%A8%8B%E5%BA%8F%E7%8A%B6%E6%80%81"><span class="post-toc-text">iOS应用的程序状态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AAapp%E6%97%B6"><span class="post-toc-text">正常启动一个app时</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0%E5%90%8E%E5%8F%B0%E5%86%8D%E5%88%87%E6%8D%A2%E5%88%B0%E5%89%8D%E5%8F%B0"><span class="post-toc-text">切换到后台再切换到前台</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9D%A5%E5%9B%9E%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8-%E9%94%81%E5%B1%8F%E8%A7%A3%E9%94%81"><span class="post-toc-text">来回切换应用&#x2F;锁屏解锁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E7%BB%88%E6%AD%A2"><span class="post-toc-text">应用终止</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E7%9A%84%E5%9B%9E%E8%B0%83"><span class="post-toc-text">使用应用状态的回调</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9C%A8AppDelegate%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="post-toc-text">在AppDelegate中使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E7%9F%A5"><span class="post-toc-text">使用通知</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>
