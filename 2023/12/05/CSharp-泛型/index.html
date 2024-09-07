@@ -284,61 +284,81 @@
       
       
       <div>
-      <h1 id="历史背景"><a href="#历史背景" class="headerlink" title="历史背景"></a>历史背景</h1><p>泛型(Generic) 是C# 2 提出的新功能，并非语法糖。</p>
+      <h1>历史背景</h1>
+<p>泛型(Generic) 是C# 2 提出的新功能，并非语法糖。</p>
 <p>在 C# 1 时代没有泛型。想要保存一组数据，并将其内容打印出来。可以使用：</p>
 <ul>
-<li><p>数组<br>使用数组需要首先规划好数组的大小。如果超过数组大小显限制需要开辟新的空间并将数据复制过去，比较麻烦。</p>
+<li>
+<p>数组<br>
+使用数组需要首先规划好数组的大小。如果超过数组大小显限制需要开辟新的空间并将数据复制过去，比较麻烦。</p>
 </li>
-<li><p>ArrayList<br>解决了手动扩容问题，但为了通用性底层使用了object类型的数组。但又抛出了新的问题：</p>
+<li>
+<p>ArrayList<br>
+解决了手动扩容问题，但为了通用性底层使用了object类型的数组。但又抛出了新的问题：</p>
 <ol>
 <li>object类型装箱拆箱比较浪费性能。</li>
 <li>如果类型不匹配，在操作数据的时候很可能出现异常。</li>
 </ol>
 </li>
-<li><p>CollectionBase<br>StringCollection是派生自 CollectionBase。虽然解决了性能问题，但对开发者来说，不同数据类型都要手动写一个对应的工具类。增加了开发和维护的工作量。</p>
+<li>
+<p>CollectionBase<br>
+StringCollection是派生自 CollectionBase。虽然解决了性能问题，但对开发者来说，不同数据类型都要手动写一个对应的工具类。增加了开发和维护的工作量。</p>
 </li>
 </ul>
 <p>对此 C# 1 束手无策。</p>
-<h1 id="泛型的出现"><a href="#泛型的出现" class="headerlink" title="泛型的出现"></a>泛型的出现</h1><p>泛型出现的目的是：实现使用同一个方法，满足不同参数做相同的事情。</p>
+<h1>泛型的出现</h1>
+<p>泛型出现的目的是：实现使用同一个方法，满足不同参数做相同的事情。</p>
 <p>优势是：相较object类型，无需装箱拆箱操作，无性能损失。</p>
-<h1 id="泛型的原理"><a href="#泛型的原理" class="headerlink" title="泛型的原理"></a>泛型的原理</h1><p>泛型将参数类型的声明推迟到方法调用的时候。依赖.net framework 2.0 的编译器与JIT。<br>在代码编译期间将给泛型加个占位符。看下如下编译后的IL代码：</p>
+<h1>泛型的原理</h1>
+<p>泛型将参数类型的声明推迟到方法调用的时候。<a target="_blank" rel="noopener" href="http://xn--xsqs81m.net">依赖.net</a> framework 2.0 的编译器与JIT。<br>
+在代码编译期间将给泛型加个占位符。看下如下编译后的IL代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.class public auto ansi beforefieldinit ClassLibrary1.CustomList`1&lt;T&gt;</span><br><span class="line">	extends [System.Runtime]System.Object</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    // Fields</span><br><span class="line">    .field private !T[] data</span><br><span class="line"></span><br><span class="line">    // Methods</span><br><span class="line">    .method public hidebysig </span><br><span class="line">    instance void Add ( !T item ) cil managed </span><br><span class="line">    &#123; ... &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>List&lt;T&gt;</code> 转换成了 <code>CustomList</code>1&lt;T&gt;&#96;。其中：</p>
+<p><code>List&lt;T&gt;</code> 转换成了 <code>CustomList</code>1&lt;T&gt;`。其中：</p>
 <ul>
 <li>数字’1’：值泛型的度为1。</li>
 <li>T：类型占位符。</li>
 </ul>
 <p>只有在运行的时候根据T的不同类型填充进去在进行执行，这依赖JIT。</p>
-<p>但是对于Unity il2cpp。没有jit怎么办？<br>答：编译器在编译过程中会收集所有 T <strong>用到的类型</strong>(没用到的就回被剪裁掉)。然后生成对应的cpp方法。</p>
-<h1 id="泛型的应用"><a href="#泛型的应用" class="headerlink" title="泛型的应用"></a>泛型的应用</h1><ol>
+<p>但是对于Unity il2cpp。没有jit怎么办？<br>
+答：编译器在编译过程中会收集所有 T <strong>用到的类型</strong>(没用到的就回被剪裁掉)。然后生成对应的cpp方法。</p>
+<h1>泛型的应用</h1>
+<ol>
 <li>泛型类</li>
 <li>泛型方法</li>
 <li>泛型委托</li>
 <li>泛型接口</li>
 </ol>
-<h1 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h1><ul>
-<li><p>基类约束。要求 T 必须是<code>Fruit</code>或者<code>Fruit的派生类</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fruit</span> &#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Banana</span> : <span class="title">Fruit</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">Fruit</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口约束</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IDisposeble</span>&#123; <span class="function"><span class="keyword">void</span> <span class="title">dispose</span>()</span>; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Test2</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">IDisposeble</span>&#123; &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>引用类型约束。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test3</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">new</span> &#123; T defaultT = <span class="literal">null</span>; &#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>公有无参构造方法约束<br>如果有过个类型的约束时，<code>new()</code>必须放在最后。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test4</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">new</span>() &#123; T defaultT = <span class="keyword">new</span> T(); &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>值类型约束</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test5</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">struct</span> &#123; T defaultT = <span class="literal">default</span>(T); &#125;</span><br></pre></td></tr></table></figure></li>
+<h1>泛型约束</h1>
+<ul>
+<li>基类约束。要求 T 必须是<code>Fruit</code>或者<code>Fruit的派生类</code>。</li>
 </ul>
-<h1 id="泛型的协变-逆变"><a href="#泛型的协变-逆变" class="headerlink" title="泛型的协变&#x2F;逆变"></a>泛型的协变&#x2F;逆变</h1><p>如下代码，Banana是派生自Fruit，Babana可以转换为Fruit, 但是将派生类的集合(List&lt;Banana&gt;)转换为基类的集合(List&lt;Fruit&gt;)是不允许的。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fruit</span> &#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Banana</span> : <span class="title">Fruit</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">Fruit</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>接口约束</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IDisposeble</span>&#123; <span class="function"><span class="keyword">void</span> <span class="title">dispose</span>()</span>; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Test2</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">IDisposeble</span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>引用类型约束。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test3</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">new</span> &#123; T defaultT = <span class="literal">null</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>公有无参构造方法约束<br>
+如果有过个类型的约束时，<code>new()</code>必须放在最后。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test4</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">new</span>() &#123; T defaultT = <span class="keyword">new</span> T(); &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>值类型约束</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test5</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">struct</span> &#123; T defaultT = <span class="literal">default</span>(T); &#125;</span><br></pre></td></tr></table></figure>
+<h1>泛型的协变/逆变</h1>
+<p>如下代码，Banana是派生自Fruit，Babana可以转换为Fruit, 但是将派生类的集合(List&lt;Banana&gt;)转换为基类的集合(List&lt;Fruit&gt;)是不允许的。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fruit</span> &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Banana</span> : <span class="title">Fruit</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">List&lt;Fruit&gt; fruits = <span class="keyword">new</span> List&lt;Banana&gt;();</span><br></pre></td></tr></table></figure>
 <p>为了结局这个问题，C# 4.0 提供的解决方案。</p>
-<h2 id="协变"><a href="#协变" class="headerlink" title="协变"></a>协变</h2><p>如：string-&gt;object （子类到父类的转换），使用 <code>out</code> 关键字。</p>
+<h2 id="协变"><a class="header-anchor" href="#协变">¶</a>协变</h2>
+<p>如：string-&gt;object （子类到父类的转换），使用 <code>out</code> 关键字。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICustomListOut</span>&lt;<span class="keyword">out</span> <span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomListOut</span>&lt;<span class="title">T</span>&gt; : <span class="title">ICustomListOut</span>&lt;<span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样就允许了</span></span><br><span class="line">ICustomListOut&lt;Fruit&gt; fruits = <span class="keyword">new</span> CustomListOut&lt;Banana&gt;();</span><br></pre></td></tr></table></figure>
-
-<h2 id="逆变"><a href="#逆变" class="headerlink" title="逆变"></a>逆变</h2><p>如：object-&gt;string （父类到子类的转换）,使用 <code>in</code> 关键字。</p>
+<h2 id="逆变"><a class="header-anchor" href="#逆变">¶</a>逆变</h2>
+<p>如：object-&gt;string （父类到子类的转换）,使用 <code>in</code> 关键字。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICustomListIn</span>&lt;<span class="keyword">in</span> <span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomListIn</span>&lt;<span class="title">T</span>&gt; : <span class="title">ICustomListIn</span>&lt;<span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"></span><br><span class="line">ICustomListIn&lt;Banana&gt; bananas = <span class="keyword">new</span> CustomListIn&lt;Fruit&gt;();</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -403,7 +423,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8E%86%E5%8F%B2%E8%83%8C%E6%99%AF"><span class="post-toc-text">历史背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%87%BA%E7%8E%B0"><span class="post-toc-text">泛型的出现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%8E%9F%E7%90%86"><span class="post-toc-text">泛型的原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%BA%94%E7%94%A8"><span class="post-toc-text">泛型的应用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F"><span class="post-toc-text">泛型约束</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%8D%8F%E5%8F%98-%E9%80%86%E5%8F%98"><span class="post-toc-text">泛型的协变&#x2F;逆变</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8D%8F%E5%8F%98"><span class="post-toc-text">协变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%86%E5%8F%98"><span class="post-toc-text">逆变</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">历史背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">泛型的出现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">泛型的原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">泛型的应用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">泛型约束</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">泛型的协变&#x2F;逆变</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8D%8F%E5%8F%98"><span class="post-toc-text">协变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%86%E5%8F%98"><span class="post-toc-text">逆变</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>

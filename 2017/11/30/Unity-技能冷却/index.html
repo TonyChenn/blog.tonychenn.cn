@@ -288,15 +288,18 @@
       
       
       <div>
-      <p>国际惯例：先放效果图：   </p>
+      <p>国际惯例：先放效果图：</p>
 <p><img src="https://img.tonychenn.cn/2017/11.30/show.jpg" alt="show"></p>
-<p> 那~就实现这个效果，当点击技能按钮后，技能进入冷却状态，技能逐渐冷却完成，相信经常玩游戏的都知道；</p>
-<p> 结构图：<br><img src="https://img.tonychenn.cn/2017/11.30/struct.jpg" alt="struct"></p>
-<p> 挺简单，解释在图片上；<br> 更改FillImage上的ImageType属性为:Failed;</p>
-<p> 下面实现由代码控制每次点击按钮进入冷却状态，2秒后冷却完成；</p>
+<p>那~就实现这个效果，当点击技能按钮后，技能进入冷却状态，技能逐渐冷却完成，相信经常玩游戏的都知道；</p>
+<p>结构图：<br>
+<img src="https://img.tonychenn.cn/2017/11.30/struct.jpg" alt="struct"></p>
+<p>挺简单，解释在图片上；<br>
+更改FillImage上的ImageType属性为:Failed;</p>
+<p>下面实现由代码控制每次点击按钮进入冷却状态，2秒后冷却完成；</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Skill</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line">    <span class="comment">//冷却时间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> ColdTime = <span class="number">2f</span>;</span><br><span class="line">    <span class="comment">//计时器</span></span><br><span class="line">    <span class="built_in">float</span> timer = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//是否开始冷却</span></span><br><span class="line">    <span class="built_in">bool</span> startTimer = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//冷却图片</span></span><br><span class="line">    <span class="keyword">private</span> Image fillImage;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> ()</span> &#123;</span><br><span class="line">        <span class="comment">//获得冷却图片</span></span><br><span class="line">        fillImage = transform.Find(<span class="string">&quot;FillImage&quot;</span>).GetComponent&lt;Image&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span> ()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (startTimer)</span><br><span class="line">        &#123;</span><br><span class="line">            timer += Time.deltaTime;</span><br><span class="line">            <span class="comment">//设置冷却图片显示比率</span></span><br><span class="line">            fillImage.fillAmount = (ColdTime - timer) / ColdTime;</span><br><span class="line">            <span class="keyword">if</span>(timer&gt;=ColdTime)</span><br><span class="line">            &#123;</span><br><span class="line">                fillImage.fillAmount = <span class="number">0</span>;</span><br><span class="line">                timer = <span class="number">0</span>;</span><br><span class="line">                startTimer = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnReleaseSkillClickListener</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//点击按钮开始冷却</span></span><br><span class="line">        startTimer = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p> Tony-Chen<br> 2017.11.30</p>
-<p> <strong>这个世界很美好，值得我们为之去奋斗。我只认同后半句。</strong></p>
+<p>Tony-Chen<br>
+2017.11.30</p>
+<p><strong>这个世界很美好，值得我们为之去奋斗。我只认同后半句。</strong></p>
 
     </div>
 

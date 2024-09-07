@@ -284,21 +284,32 @@
       
       
       <div>
-      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前写了cocos2dx中让图片变灰的原理。最近想要将Sprite改为自己想要的颜色。以为只需要调整rgb值即可：</p>
+      <h1>前言</h1>
+<p>之前写了cocos2dx中让图片变灰的原理。最近想要将Sprite改为自己想要的颜色。以为只需要调整rgb值即可：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 比如颜色变红</span><br><span class="line">gl_FragColor.rgba = vec4(255, 0, 0, textureColor.a);</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>如果贴图是白色的情况下是没问题的如下：<br></br><img src="https://img.tonychenn.cn/2022/1201/01.jpg"></p>
+<li>
+<p>如果贴图是白色的情况下是没问题的如下：<br>
+</br><img src="https://img.tonychenn.cn/2022/1201/01.jpg" alt=""></p>
 </li>
-<li><p>但是如果图片是带有颜色的，就变成了下面的样子了…<br></br><img src="https://img.tonychenn.cn/2022/1201/02.jpg"></p>
+<li>
+<p>但是如果图片是带有颜色的，就变成了下面的样子了…<br>
+</br><img src="https://img.tonychenn.cn/2022/1201/02.jpg" alt=""></p>
 </li>
 </ul>
 <p>所以上面方法是行不通的。</p>
-<h1 id="正确修改Sprite颜色"><a href="#正确修改Sprite颜色" class="headerlink" title="正确修改Sprite颜色"></a>正确修改Sprite颜色</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ol>
-<li>计算原图的灰度<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float grey = gl_FragColor.r * 0.299 + gl_FragColor.b * 0.587 + gl_FragColor.g * 0.114;</span><br></pre></td></tr></table></figure></li>
-<li>将目标颜色乘以灰度<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置目标颜色为红色</span><br><span class="line">vec3 targetColor = vec3(255, 0, 0);</span><br><span class="line">gl_FragColor.rgb = targetColor * grey;</span><br></pre></td></tr></table></figure></li>
+<h1>正确修改Sprite颜色</h1>
+<h2 id="原理"><a class="header-anchor" href="#原理">¶</a>原理</h2>
+<ol>
+<li>计算原图的灰度</li>
 </ol>
-<p>看下效果：<br><img src="https://img.tonychenn.cn/2022/1201/03.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float grey = gl_FragColor.r * 0.299 + gl_FragColor.b * 0.587 + gl_FragColor.g * 0.114;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>将目标颜色乘以灰度</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置目标颜色为红色</span><br><span class="line">vec3 targetColor = vec3(255, 0, 0);</span><br><span class="line">gl_FragColor.rgb = targetColor * grey;</span><br></pre></td></tr></table></figure>
+<p>看下效果：<br>
+<img src="https://img.tonychenn.cn/2022/1201/03.jpg" alt=""></p>
 
     </div>
 
@@ -363,7 +374,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%AD%A3%E7%A1%AE%E4%BF%AE%E6%94%B9Sprite%E9%A2%9C%E8%89%B2"><span class="post-toc-text">正确修改Sprite颜色</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8E%9F%E7%90%86"><span class="post-toc-text">原理</span></a></li></ol></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">正确修改Sprite颜色</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8E%9F%E7%90%86"><span class="post-toc-text">原理</span></a></li></ol></li></ol> 
     </div>
   </aside> -->
 </div>
