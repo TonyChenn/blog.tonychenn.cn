@@ -186,7 +186,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -194,7 +194,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/site/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -202,7 +202,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//site/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -210,7 +210,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//site/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//site/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -226,7 +226,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -234,7 +234,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//site/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -286,10 +286,10 @@
       
       
       <div>
-      <p>在Editor/Perferences…下添加自己的模块设置界面。</p>
+      <p>在Editor&#x2F;Perferences…下添加自己的模块设置界面。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">Preferences</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> UNITY_2019_1_OR_NEWER</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MarkownSettings</span> : <span class="title">SettingsProvider</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MarkownSettings</span>(<span class="params"><span class="built_in">string</span> path, SettingsScope scopes = SettingsScope.User, IEnumerable&lt;<span class="built_in">string</span>&gt; keywords = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function">            : <span class="title">base</span>(<span class="params">path, scopes, keywords</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 自定义GUI</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnGUI</span>(<span class="params"><span class="built_in">string</span> searchContext</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.Button(<span class="string">&quot;测试&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">SettingsProvider</span>]</span><br><span class="line">    <span class="function"><span class="keyword">static</span> SettingsProvider <span class="title">MarkdownPreferences</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MarkownSettings(<span class="string">&quot;Preferences/Markdown&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        [<span class="meta">PreferenceItem( <span class="string">&quot;Markdown&quot;</span> )</span>]</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>效果图：<br>
-<img src="https://img.tonychenn.cn/2023/Q3/custom_setting_unit.jpg" alt=""></p>
+
+<p>效果图：<br><img src="https://img.tonychenn.cn/2023/Q3/custom_setting_unit.jpg"></p>
 
     </div>
 

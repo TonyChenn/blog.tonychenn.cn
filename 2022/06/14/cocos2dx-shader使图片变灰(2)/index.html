@@ -186,7 +186,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -194,7 +194,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/site/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -202,7 +202,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//site/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -210,7 +210,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//site/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -218,7 +218,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//site/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -226,7 +226,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -234,7 +234,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//site/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -286,8 +286,8 @@
       
       
       <div>
-      <h1>图片变灰公式</h1>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前片源的颜色</span></span><br><span class="line">vec4 c = texture2D(CC_Texture0, v_texCoord);</span><br><span class="line"><span class="comment">// 对颜色的RGB乘以向量(0.2126, 0.7152, 0.0722), 得到灰度颜色</span></span><br><span class="line">vec3 color = <span class="number">0.2126</span>*c.r + <span class="number">0.7152</span>*c.g + <span class="number">0.0722</span>*c.b</span><br></pre></td></tr></table></figure>
+      <h1 id="图片变灰公式"><a href="#图片变灰公式" class="headerlink" title="图片变灰公式"></a>图片变灰公式</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前片源的颜色</span></span><br><span class="line">vec4 c = texture2D(CC_Texture0, v_texCoord);</span><br><span class="line"><span class="comment">// 对颜色的RGB乘以向量(0.2126, 0.7152, 0.0722), 得到灰度颜色</span></span><br><span class="line">vec3 color = <span class="number">0.2126</span>*c.r + <span class="number">0.7152</span>*c.g + <span class="number">0.0722</span>*c.b</span><br></pre></td></tr></table></figure>
+
 <p>效果图如下：</p>
 <p><img src="https://img.tonychenn.cn/2022/0614/cocos2dx_shader_grey.png" alt="cocos2dx_shader_grey"></p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> vert = <span class="string">[[</span></span><br><span class="line"><span class="string">    attribute vec4 a_position;      // 默认坐标</span></span><br><span class="line"><span class="string">    attribute vec2 a_texCoord;      // 默认纹理坐标</span></span><br><span class="line"><span class="string">    attribute vec4 a_color;         // 默认颜色</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    #ifdef GL_ES  </span></span><br><span class="line"><span class="string">    varying lowp vec4 v_fragmentColor;  // 顶点</span></span><br><span class="line"><span class="string">    varying mediump vec2 v_texCoord;    // 坐标</span></span><br><span class="line"><span class="string">    #else                      </span></span><br><span class="line"><span class="string">    varying vec4 v_fragmentColor; </span></span><br><span class="line"><span class="string">    varying vec2 v_texCoord;  </span></span><br><span class="line"><span class="string">    #endif    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    void main() </span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">        gl_Position = CC_PMatrix * a_position; </span></span><br><span class="line"><span class="string">        v_fragmentColor = a_color;</span></span><br><span class="line"><span class="string">        v_texCoord = a_texCoord;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">]]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> frag = <span class="string">[[</span></span><br><span class="line"><span class="string">    #ifdef GL_ES </span></span><br><span class="line"><span class="string">    precision mediump float; </span></span><br><span class="line"><span class="string">    #endif</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    varying vec4 v_fragmentColor; </span></span><br><span class="line"><span class="string">    varying vec2 v_texCoord;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    void main(void) </span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">        // 当前片源的颜色</span></span><br><span class="line"><span class="string">        vec4 c = texture2D(CC_Texture0, v_texCoord);</span></span><br><span class="line"><span class="string">        gl_FragColor.xyz = vec3(0.2126*c.r + 0.7152*c.g + 0.0722*c.b);</span></span><br><span class="line"><span class="string">        gl_FragColor.w = c.w;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">]]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> glProgram = cc.GLProgram:createWithByteArrays(vert, frag)</span><br><span class="line"><span class="keyword">local</span> glProgramState = cc.GLProgramState:getOrCreateWithGLProgram(glProgram)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> logo = <span class="built_in">self</span>.holder:getChildByName(<span class="string">&quot;Sprite_start_logo&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> size = logo:getTexture():getContentSizeInPixels()</span><br><span class="line"></span><br><span class="line">logo:setGLProgramState(glProgramState)</span><br></pre></td></tr></table></figure>
@@ -354,7 +354,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">图片变灰公式</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%9B%BE%E7%89%87%E5%8F%98%E7%81%B0%E5%85%AC%E5%BC%8F"><span class="post-toc-text">图片变灰公式</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

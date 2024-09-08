@@ -188,7 +188,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -196,7 +196,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/site/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -204,7 +204,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//site/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -212,7 +212,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//site/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -220,7 +220,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//site/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -228,7 +228,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -236,7 +236,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//site/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -288,8 +288,7 @@
       
       
       <div>
-      <h1>访问修饰符</h1>
-<p>访问修饰符有：public, internal, protected, protected internal, privite。其中protected, internal在IL中没有意义，不会用于反射API。除了public是<code>IsPublic</code>类型，其他都是<code>IsNotPublic</code>类型。但是也是可以通过下面方式判断internal，protected等。</p>
+      <h1 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h1><p>访问修饰符有：public, internal, protected, protected internal, privite。其中protected, internal在IL中没有意义，不会用于反射API。除了public是<code>IsPublic</code>类型，其他都是<code>IsNotPublic</code>类型。但是也是可以通过下面方式判断internal，protected等。</p>
 <table>
 <thead>
 <tr>
@@ -297,8 +296,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>IsAssembly</td>
 <td>是不是 internal</td>
 </tr>
@@ -310,22 +308,16 @@
 <td>IsFamilyOrAssembly</td>
 <td>是不是 protected internal</td>
 </tr>
-</tbody>
-</table>
-<h1>值类型</h1>
-<p>枚举<br>
-基础类型(int,float,char)<br>
-结构体</p>
-<h1>类</h1>
-<table>
+</tbody></table>
+<h1 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h1><p>枚举<br>基础类型(int,float,char)<br>结构体</p>
+<h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><table>
 <thead>
 <tr>
 <th>判断方法</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>IsClass</td>
 <td>类或委托(不是值类型或接口)</td>
 </tr>
@@ -333,18 +325,15 @@
 <td>IsGenericType</td>
 <td>类或委托是不是泛型类型</td>
 </tr>
-</tbody>
-</table>
-<h2 id="继承"><a class="header-anchor" href="#继承">¶</a>继承</h2>
-<p>父类，接口</p>
-<p>C# 成员关键字: readonly, const<br>
-C# 声明修饰符: sealed, virtual, abstract, override, static, new</p>
-<h1>System.Type</h1>
-<p>表示类型声明有：类、接口、数组、值类型、枚举、类型参数、泛型类型定义，以及开放或封闭构造的泛型。</p>
+</tbody></table>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>父类，接口</p>
+<p>C# 成员关键字: readonly, const<br>C# 声明修饰符: sealed, virtual, abstract, override, static, new</p>
+<h1 id="System-Type"><a href="#System-Type" class="headerlink" title="System.Type"></a>System.Type</h1><p>表示类型声明有：类、接口、数组、值类型、枚举、类型参数、泛型类型定义，以及开放或封闭构造的泛型。</p>
 <p>常用属性有:</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Name           <span class="comment">//类型名</span></span><br><span class="line">Namespace      <span class="comment">//命名空间</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//判断类型</span></span><br><span class="line">IsInterface         <span class="comment">//接口(不是类或值类型)</span></span><br><span class="line"></span><br><span class="line">IsAbstract          <span class="comment">//抽象类并且必须被重写</span></span><br><span class="line">IsVirtual           <span class="comment">//虚方法</span></span><br><span class="line">IsHideBySig         <span class="comment">//判断是否有抽象(virtual、override、abstract、new 修饰的方法都是 true)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">             <span class="comment">//</span></span><br><span class="line">BaseType            <span class="comment">//该类的基类</span></span><br><span class="line"></span><br><span class="line">IsValueType         <span class="comment">//值类型</span></span><br><span class="line">IsPrimitive         <span class="comment">//基础类型</span></span><br><span class="line">IsEnum              <span class="comment">//枚举</span></span><br><span class="line">IsArray             <span class="comment">//数组</span></span><br><span class="line">Attributes          <span class="comment">//当前类型相关的属性</span></span><br><span class="line"></span><br><span class="line">IsGenericType       <span class="comment">//是否是泛型</span></span><br><span class="line">GenericTypeArguments<span class="comment">//获取此类型泛型类型参数的数组</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//访问修饰符</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//其他修饰符</span></span><br><span class="line">IsSealed            <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">IsStatic            <span class="comment">//是否是静态(const 也是静态)</span></span><br></pre></td></tr></table></figure>
 <p>常用方法有：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">GetInterfaces()         <span class="comment">//获取继承的所有接口</span></span><br><span class="line">GetInterface(String)</span><br><span class="line"></span><br><span class="line">IsSubclassOf(type)      <span class="comment">//是否派生于type</span></span><br><span class="line"></span><br><span class="line">GetMethods()            <span class="comment">//所有公共方法</span></span><br><span class="line">GetMethod(String)</span><br><span class="line">GetParameters()         <span class="comment">//获取方法中所有参数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GetFields()             <span class="comment">//所有字段</span></span><br><span class="line">GetProperties()         <span class="comment">//所有属性</span></span><br><span class="line"></span><br><span class="line">GetArrayRank()          <span class="comment">//获取数组维度</span></span><br><span class="line">GetElementType()        <span class="comment">//回去数组元素类型</span></span><br><span class="line"></span><br><span class="line">GetConstructors()       <span class="comment">//获取公共构造函数</span></span><br><span class="line"></span><br><span class="line">GetEnumNames()          <span class="comment">//枚举的所有成员名称</span></span><br><span class="line">GetEnumValues()</span><br><span class="line"></span><br><span class="line">GetEvents()             <span class="comment">//所有公共事件</span></span><br><span class="line">GetEvent(String)</span><br><span class="line"></span><br><span class="line">GetFields()             <span class="comment">//所有公共字段</span></span><br><span class="line">GetField(String)</span><br></pre></td></tr></table></figure>
+
 <p>获取Type</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取变量类型</span></span><br><span class="line"><span class="keyword">typeof</span>(a)</span><br><span class="line">a.GetType()</span><br><span class="line"></span><br><span class="line"><span class="comment">//从程序集获取所有Type:</span></span><br><span class="line">System.Type[] types = assembly.GetTypes();</span><br></pre></td></tr></table></figure>
 
@@ -411,7 +400,7 @@ C# 声明修饰符: sealed, virtual, abstract, override, static, new</p>
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">访问修饰符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">值类型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="post-toc-text">继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">System.Type</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="post-toc-text">访问修饰符</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">值类型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%B1%BB"><span class="post-toc-text">类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="post-toc-text">继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#System-Type"><span class="post-toc-text">System.Type</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

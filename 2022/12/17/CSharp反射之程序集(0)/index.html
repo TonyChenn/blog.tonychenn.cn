@@ -188,7 +188,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -196,7 +196,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/site/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -204,7 +204,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//site/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -212,7 +212,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//site/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -220,7 +220,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//site/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -228,7 +228,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -236,7 +236,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//site/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -288,14 +288,12 @@
       
       
       <div>
-      <h1>什么是反射？</h1>
-<ul>
+      <h1 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h1><ul>
 <li>在运行时检查并使用元数据和编译代码的操作称为反射。</li>
-<li>反射提供描述程序集、模块和类型的对象（Type 类型）。</li>
+<li>反射提供描述程序集、模块和类型的对象（Type 类型）。 </li>
 <li>可以使用反射动态地创建类型的实例，将类型绑定到现有对象，或从现有对象中获取类型，然后调用其方法或访问器字段和属性。</li>
 </ul>
-<h1>关于C#反射</h1>
-<p>C#程序编译后会生成dll或exe文件。一个dll对应一个程序集。他们的区别是：exe有运行的入口可以直接运行，dll没有入口只能被其他exe调用。</p>
+<h1 id="关于C-反射"><a href="#关于C-反射" class="headerlink" title="关于C#反射"></a>关于C#反射</h1><p>C#程序编译后会生成dll或exe文件。一个dll对应一个程序集。他们的区别是：exe有运行的入口可以直接运行，dll没有入口只能被其他exe调用。</p>
 <p>不管exe还是dll,都会包含：</p>
 <ol>
 <li>资源文件</li>
@@ -303,12 +301,10 @@
 <li>IL代码</li>
 </ol>
 <p>而反射就是在运行时去检查和使用元数据(metadata)及编译代码的操作。</p>
-<h1>程序集(Assembly)操作</h1>
-<p>通过<code>Assembly</code>即可手动加载程序集，并实现对其操作。Unity的运行时代码编译后在<code>Assembly-CSharp</code>中，编辑器相关代码在<code>Assembly-CSharp-Editor</code>中。<br>
-常用加载程序集方法：</p>
+<h1 id="程序集-Assembly-操作"><a href="#程序集-Assembly-操作" class="headerlink" title="程序集(Assembly)操作"></a>程序集(Assembly)操作</h1><p>通过<code>Assembly</code>即可手动加载程序集，并实现对其操作。Unity的运行时代码编译后在<code>Assembly-CSharp</code>中，编辑器相关代码在<code>Assembly-CSharp-Editor</code>中。<br>常用加载程序集方法：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载某个程序集</span></span><br><span class="line">Assembly.Load(<span class="string">&quot;AssemblyName&quot;</span>)</span><br><span class="line"><span class="comment">//根据程序集名称或路径加载,不仅可以加载当前程序集，还可以加载当前所依赖的其他程序集</span></span><br><span class="line">Assembly.LoadFile(<span class="string">&quot;AssemblyPath&quot;</span>)</span><br><span class="line"><span class="comment">//与LoadFile用法一样，但是只加载当前程序集</span></span><br><span class="line">Assembly.LoadFrom(<span class="string">&quot;AssemblyPath&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//加载项目中所有程序集</span></span><br><span class="line">Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();</span><br></pre></td></tr></table></figure>
-<h1>Unity中使用反射要点</h1>
-<ol>
+
+<h1 id="Unity中使用反射要点"><a href="#Unity中使用反射要点" class="headerlink" title="Unity中使用反射要点"></a>Unity中使用反射要点</h1><ol>
 <li>反射在IOS端有限制，最好不使用</li>
 <li>如果游戏要发布到IOS, 逻辑中不要使用反射</li>
 <li>编辑器拓展工具随便用</li>
@@ -377,7 +373,7 @@
   <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
     <div class="widget">
       <h3 class="title">目录</h3>
-      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">什么是反射？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">关于C#反射</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">程序集(Assembly)操作</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Unity中使用反射要点</span></a></li></ol> 
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%EF%BC%9F"><span class="post-toc-text">什么是反射？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%B3%E4%BA%8EC-%E5%8F%8D%E5%B0%84"><span class="post-toc-text">关于C#反射</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%A8%8B%E5%BA%8F%E9%9B%86-Assembly-%E6%93%8D%E4%BD%9C"><span class="post-toc-text">程序集(Assembly)操作</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Unity%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E8%A6%81%E7%82%B9"><span class="post-toc-text">Unity中使用反射要点</span></a></li></ol> 
     </div>
   </aside> -->
 </div>

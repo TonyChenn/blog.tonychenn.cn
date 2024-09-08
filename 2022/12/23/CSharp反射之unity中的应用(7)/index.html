@@ -188,7 +188,7 @@
         <ul class="mdui-menu" id="share_menu">
             
                 <li class="mdui-menu-item">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         facebook
                     </a>
                 </li>
@@ -196,7 +196,7 @@
             
             
                 <li class="mdui-menu-item">
-                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/site/index.html" target="_blank" class="mdui-ripple">
                         QQ
                     </a>
                 </li>
@@ -204,7 +204,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
+                    <a href="https://twitter.com/intent/tweet?text=&url=https://blog.tonychenn.cn//site/index.html&via=Tony Chenn" target="_blank" class="mdui-ripple">
                         twitter
                     </a>
                 </li>
@@ -212,7 +212,7 @@
         
             
                 <li class="mdui-menu-item">
-                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=&url=https://blog.tonychenn.cn//site/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
                         weibo
                     </a>
                 </li>
@@ -220,7 +220,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//site/index.html&text=" target="_blank" class="mdui-ripple">
                         telegram
                     </a>
                 </li>
@@ -228,7 +228,7 @@
 
             
                 <li class="mdui-menu-item">
-                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//site/index.html" target="_blank" class="mdui-ripple">
                         googleplus
                     </a>
                 </li>
@@ -236,7 +236,7 @@
         
               
                 <li class="mdui-menu-item">
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//site/index.html&title=" target="_blank" class="mdui-ripple">
                         linkedin
                     </a>
                 </li>
@@ -292,11 +292,8 @@
 <p>但是在做编辑器、工具链相关等不用注重效率时，那是<strong>真香</strong>。</p>
 <p>在学习与尝试游戏框架过程中，我发现多数菜单都是在顶部MenuItem中，而设置相关要么是直接写死在代码，要么时每个工具都搞一个自己的窗口，如：打Assetbundle,转换配置表，等等。那样真是太乱了。</p>
 <p>那能不能将一个框架中所有设置模块，插件模块，工具链模块整合到一个窗口中呢？就像Unity中的Editor&gt;Perference面板一样呢？</p>
-<p><img src="https://img.tonychenn.cn/2022/1223/preferences.jpg" alt=""></p>
-<p>答案是当然可以。利用反射你也可以做出这样的整合工具，看下效果图：<br>
-<img src="https://img.tonychenn.cn/2022/1223/pkg_setting.jpg" alt=""><br>
-<img src="https://img.tonychenn.cn/2022/1223/pkg_api.jpg" alt=""><br>
-这里展示两个功能并简单介绍下：</p>
+<p><img src="https://img.tonychenn.cn/2022/1223/preferences.jpg"></p>
+<p>答案是当然可以。利用反射你也可以做出这样的整合工具，看下效果图：<br><img src="https://img.tonychenn.cn/2022/1223/pkg_setting.jpg"><br><img src="https://img.tonychenn.cn/2022/1223/pkg_api.jpg"><br>这里展示两个功能并简单介绍下：</p>
 <p>对于最左侧菜单模块：</p>
 <p>创建一个类并继承提供的接口<code>IPage</code>，即可在左侧添加一个菜单项。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">APIInfo(<span class="string">&quot;NPackage&quot;</span>, <span class="string">&quot;IPage&quot;</span>, @<span class="string">&quot;继承此接口，会在NPackage窗口添加一个菜单项。</span></span></span><br><span class="line"><span class="string"><span class="meta">菜单项的名称在`GetPageName`方法中设置。</span></span></span><br><span class="line"><span class="string"><span class="meta">新页面绘制在DrawWndUI()方法中实现&quot;</span>)</span>]</span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> N-Package 左侧页签</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IPage</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 页签名称</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">GetPageName</span>()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 绘制UI</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">DrawWndUI</span>(<span class="params">EditorWindow window, <span class="built_in">object</span> data = <span class="literal">null</span></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
