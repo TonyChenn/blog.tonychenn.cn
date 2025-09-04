@@ -1,0 +1,43 @@
+.mdm_theme_dark{
+    background: #3b3b3b;
+}
+
+.mdm_theme_dark a,
+.mdm_theme_dark h1,
+.mdm_theme_dark h2,
+.mdm_theme_dark h3,
+.mdm_theme_dark h4,
+.mdm_theme_dark h5,
+.mdm_theme_dark h6{
+  color: #ccc;
+}
+
+.mdm_theme_dark code{
+  background-color: #616161
+}
+
+
+.mdm_theme_dark .mdui-color-indigo{
+    background-color: #212121 !important;
+}
+
+/* .mdm_theme_dark #summary,
+.mdm_theme_dark .title_font{
+    color: #9E9E9E;
+} */
+
+  /*post item背景*/
+.mdm_theme_dark .article,
+.mdm_theme_dark .mdui-panel-item,
+.mdm_theme_dark .post_tag,
+.mdm_theme_dark #post-item{
+    background-color: #3b3b3b;
+}
+
+.mdm_theme_dark .mdui-panel-item .mdui-panel-item-title,
+.mdm_theme_dark .info,
+.mdm_theme_dark figure .line,
+.mdm_theme_dark .article li,
+.mdm_theme_dark .article p{
+  color: rgba(255,255,255,0.54);
+}
