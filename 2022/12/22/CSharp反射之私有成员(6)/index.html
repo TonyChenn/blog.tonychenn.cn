@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>CSharp反射之私有成员(6) - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSharp反射之私有成员(6) - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://img.tonychenn.cn/2022/0829/icon.jpg">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2022/0829/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">CSharp反射之私有成员(6)</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <p>为了防止文章内容太乱，所以之前的所有文章都是通过反射获取公有变量。这一篇就是只记录C#非公有成员的操作。同时这一章更加体现出反射的强大：</p>
+<ol>
+<li>对于非公有类可以创建其对象。</li>
+<li>对于非公有字段可以获取及修改其值。</li>
+<li>对于非公有方法可以获取及调用。</li>
+</ol>
+<p>为什么要说是非公有成员呢？因为除了public是公有，其它类型的保护修饰符都是属于private的，在第二篇文章中有讲到。</p>
+<p>那反射公有成员和非公有成员有什么不同呢？其实原理都是一样的，在访问非公有成员时只需要加上<code>BindingFlags</code>即可。<code>BindingFlags</code>是一个枚举，常用的有：</p>
+<table>
+<thead>
+<tr>
+<th>BindingFlags</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BindingFlags.Public</td>
+<td>公有</td>
+</tr>
+<tr>
+<td>BindingFlags.NonPublic</td>
+<td>非公有</td>
+</tr>
+<tr>
+<td>BindingFlags.Instance</td>
+<td>实例成员</td>
+</tr>
+<tr>
+<td>BindingFlags.Static</td>
+<td>静态成员</td>
+</tr>
+<tr>
+<td>BindingFlags.IgnoreCase</td>
+<td>忽略成员大小写</td>
+</tr>
+<tr>
+<td>BindingFlags.CreateInstance</td>
+<td>调用构造函数</td>
+</tr>
+<tr>
+<td>BindingFlags.InvokeMethod</td>
+<td>调用方法</td>
+</tr>
+<tr>
+<td>前置类如下，下面通过反射获取下面成员。</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>可以看出只需要对公有成员的反射操作稍加修改即可实现反射非公有成员，下面例子看看吧。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Animal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> ID = <span class="number">1001</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Animal</span>()</span> &#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Animal</span>(<span class="params"><span class="built_in">int</span> age</span>)</span> &#123; Age = age; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Speak</span>()</span> &#123; Console.WriteLine(<span class="string">&quot;沉默中...&quot;</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Speak</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span> &#123; Console.WriteLine(<span class="string">&quot;says: &quot;</span> + msg); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">string</span> MSG = <span class="string">&quot;hello!&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> Exp &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">Calculate</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b</span>)</span> &#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="实例化私有对象"><a href="#实例化私有对象" class="headerlink" title="实例化私有对象"></a>实例化私有对象</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Activator创建实例，第二个参数传入是否是私有成员(bool)。</span></span><br><span class="line">Assembly assembly = Assembly.GetExecutingAssembly();</span><br><span class="line">Type type = assembly.GetType(<span class="string">&quot;Study.Animal&quot;</span>);</span><br><span class="line"><span class="built_in">object</span> obj = Activator.CreateInstance(type, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过构造方法</span></span><br><span class="line">ConstructorInfo constructor = type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, <span class="literal">null</span>, Type.EmptyTypes, <span class="literal">null</span>);</span><br><span class="line"><span class="built_in">object</span> obj = constructor.Invoke(<span class="keyword">new</span> <span class="built_in">object</span>[] &#123; &#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="非静态成员"><a href="#非静态成员" class="headerlink" title="非静态成员"></a>非静态成员</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 私有字段的获取与修改(非静态)</span></span><br><span class="line">FieldInfo field = type.GetField(<span class="string">&quot;ID&quot;</span>, BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">Console.WriteLine(field.GetValue(obj));</span><br><span class="line">field.SetValue(obj, <span class="number">999</span>);</span><br><span class="line">Console.WriteLine(field.GetValue(obj));</span><br><span class="line"><span class="comment">//&gt; 1001</span></span><br><span class="line"><span class="comment">//&gt; 999</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 私有属性的获取与修改(非静态)</span></span><br><span class="line">PropertyInfo property = type.GetProperty(<span class="string">&quot;Age&quot;</span>, BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">Console.WriteLine(property.GetValue(obj));</span><br><span class="line">property.SetValue(obj, <span class="number">99</span>);</span><br><span class="line">Console.WriteLine(property.GetValue(obj));</span><br><span class="line"><span class="comment">//&gt; 0</span></span><br><span class="line"><span class="comment">//&gt; 99</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果该方法只有一个重载，并且没有参数</span></span><br><span class="line"><span class="comment">//MethodInfo method0 = type.GetMethod(&quot;Speak&quot;, BindingFlags.NonPublic | BindingFlags.Instance);</span></span><br><span class="line"><span class="comment">//method0.Invoke(obj, new object[] &#123; &#125;);</span></span><br><span class="line"><span class="comment">//&gt; 沉默中...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果方法有多个重载</span></span><br><span class="line">MethodInfo method = type.GetMethod(<span class="string">&quot;Speak&quot;</span>, BindingFlags.NonPublic | BindingFlags.Instance, <span class="literal">null</span>, <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">string</span>) &#125;, <span class="literal">null</span>);</span><br><span class="line">method.Invoke(obj, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="string">&quot;hello&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静态字段</span></span><br><span class="line">FieldInfo field = type.GetField(<span class="string">&quot;MSG&quot;</span>, BindingFlags.NonPublic | BindingFlags.Static);</span><br><span class="line">Console.WriteLine(field.GetValue(<span class="literal">null</span>));</span><br><span class="line">field.SetValue(<span class="literal">null</span>, <span class="string">&quot;hi&quot;</span>);</span><br><span class="line">Console.WriteLine(field.GetValue(<span class="literal">null</span>));</span><br><span class="line"><span class="comment">//&gt; hello!</span></span><br><span class="line"><span class="comment">//&gt; hi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态私有属性</span></span><br><span class="line">PropertyInfo property = type.GetProperty(<span class="string">&quot;Exp&quot;</span>, BindingFlags.NonPublic | BindingFlags.Static);</span><br><span class="line">Console.WriteLine(property.GetValue(<span class="literal">null</span>));</span><br><span class="line">property.SetValue(<span class="literal">null</span>, <span class="number">999</span>);</span><br><span class="line">Console.WriteLine(property.GetValue(<span class="literal">null</span>));</span><br><span class="line"><span class="comment">//&gt; 0</span></span><br><span class="line"><span class="comment">//&gt; 999</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态方法</span></span><br><span class="line">MethodInfo method = type.GetMethod(<span class="string">&quot;Calculate&quot;</span>, BindingFlags.NonPublic | BindingFlags.Static, <span class="literal">null</span>, <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">int</span>), <span class="keyword">typeof</span>(<span class="built_in">int</span>) &#125;, <span class="literal">null</span>);</span><br><span class="line"><span class="built_in">object</span> result = method.Invoke(<span class="literal">null</span>, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="number">100</span>, <span class="number">100</span> &#125;);</span><br><span class="line">Console.WriteLine(result);</span><br><span class="line"><span class="comment">//&gt; 200</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%A7%81%E6%9C%89%E5%AF%B9%E8%B1%A1"><span class="post-toc-text">实例化私有对象</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%9D%9E%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="post-toc-text">非静态成员</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="post-toc-text">静态成员</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

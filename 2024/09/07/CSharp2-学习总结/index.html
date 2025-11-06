@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>CSharp2-学习总结 - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSharp2-学习总结 - 默然的博客 | 默然的博客">
+    
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">CSharp2-学习总结</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <h2 id="CSharp-2"><a href="#CSharp-2" class="headerlink" title="CSharp 2"></a>CSharp 2</h2><p>C# 2 引入的各项特性让其风格发生了巨大变化，其中泛型与可空类型已是C#的重要组成部分。</p>
+<h3 id="1-泛型"><a href="#1-泛型" class="headerlink" title="1. 泛型"></a>1. 泛型</h3><p>引入泛型后，可以编写在编译时类型安全的通用代码。无需事先知道要使用的具体类型，即可在不同位置表示相同的类型。</p>
+<h3 id="2-从Array-ArrayList到List"><a href="#2-从Array-ArrayList到List" class="headerlink" title="2. 从Array, ArrayList到List&lt;T&gt;"></a>2. 从Array, ArrayList到List&lt;T&gt;</h3><h3 id="3-泛型约束"><a href="#3-泛型约束" class="headerlink" title="3. 泛型约束"></a>3. 泛型约束</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>引用类型约束</td>
+<td>where T : class</td>
+</tr>
+<tr>
+<td>值类型约束</td>
+<td>where T : struct</td>
+</tr>
+<tr>
+<td>构造器约束</td>
+<td>where T : new()</td>
+</tr>
+<tr>
+<td>接口&#x2F;类约束</td>
+<td>where T : SomeType</td>
+</tr>
+</tbody></table>
+<h2 id="4-静态构造方法"><a href="#4-静态构造方法" class="headerlink" title="4. 静态构造方法"></a>4. 静态构造方法</h2><p>  i. 无参数。ii. 无访问修饰符。 iii. 只在加载时调用，并且只调用一次。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ClassA</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="title">ClassA</span>()</span> &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-可空类型"><a href="#5-可空类型" class="headerlink" title="5. 可空类型"></a>5. 可空类型</h2><p>C#1时代，null只表示引用为空，但是经常会出现某些字段是需要为空。如果被引用就会出现<code>NullReferenceException</code>。而当时的解决方案是：</p>
+<ol>
+<li>加一个字段记录这个字段是不是空的。</li>
+<li>用一个默认值表示为空，如：最大值。</li>
+</ol>
+<p>C#2 引入可空类型 <code>Nullable&lt;T&gt;</code>,null不仅可以表示引用为空，还可以表示可空类型的HasValue 为false。下面的两个写法相同：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法一</span></span><br><span class="line">Nullable&lt;<span class="built_in">int</span>&gt; num1 = <span class="keyword">new</span> Nullable&lt;<span class="built_in">int</span>&gt;;</span><br><span class="line"><span class="keyword">if</span>(num1.HasValue) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写法二</span></span><br><span class="line"><span class="built_in">int</span>? num2 = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span>(num2 != <span class="literal">null</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="问号语法糖"><a href="#问号语法糖" class="headerlink" title="问号语法糖"></a>问号语法糖</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可空类型</span></span><br><span class="line"><span class="built_in">int</span>? num = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// a不为空返回a, 否则返回：b</span></span><br><span class="line"><span class="built_in">int</span> num1 = a ?? b;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果method不为空就执行method方法</span></span><br><span class="line">method?.invoke();</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-提出-匿名方法"><a href="#6-提出-匿名方法" class="headerlink" title="6. 提出 匿名方法"></a>6. 提出 匿名方法</h3><h3 id="拓展了泛型迭代器"><a href="#拓展了泛型迭代器" class="headerlink" title="拓展了泛型迭代器"></a>拓展了泛型迭代器</h3><p>迭代器是包含迭代器块的方法或属性。其中<code>IEnumerable</code>是可用于迭代的序列，<code>IEnumerator</code>则是像序列的游标卡尺。<code>IEnumerator</code>每次调用<code>MoveNext()</code>，游标都向前移动一个元素。</p>
+<ul>
+<li>yield return 用于生成返回序列的各个值。</li>
+<li>yield break 用于终止返回序列。</li>
+</ul>
+<h3 id="7-分部类型-partial"><a href="#7-分部类型-partial" class="headerlink" title="7. 分部类型(partial)"></a>7. 分部类型(partial)</h3><p>在C#2中新增了分部类，在C#3中对分部类又扩充了分部方法。<br>详见：<a href="">CSharp分部类与分部方法</a></p>
+<h3 id="8-新增静态类"><a href="#8-新增静态类" class="headerlink" title="8. 新增静态类"></a>8. 新增静态类</h3><p>静态类的主要目的就是写一些工具类。特点是：</p>
+<ol>
+<li>静态类的所有成员都是静态的（除了私有构造方法）</li>
+<li>不能存在公有构造方法，当然也不用单独再把构造方法标记为私有。</li>
+</ol>
+<h3 id="9-属性器getter-setter允许添加访问修饰符"><a href="#9-属性器getter-setter允许添加访问修饰符" class="headerlink" title="9. 属性器getter&#x2F;setter允许添加访问修饰符"></a>9. 属性器getter&#x2F;setter允许添加访问修饰符</h3><p>比如允许外部获取字段，不允许外部修改，或者修改数据时在set块中进行数据校验。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">class</span> <span class="title">ClassA</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">string</span> name;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">string</span> Name</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">set</span> &#123; name = <span class="keyword">value</span>; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-命名空间重命名"><a href="#10-命名空间重命名" class="headerlink" title="10. 命名空间重命名"></a>10. 命名空间重命名</h3><p>当引用的两个程序集拥有同一个类时，如：<br><code>UnityEngine.Object</code>与<code>System.Object</code>。这个时候就可以用<code>using</code>关键字对命名空间进行重命名：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UObject = UnityEngine.Object;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSharp-2"><span class="post-toc-text">CSharp 2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E6%B3%9B%E5%9E%8B"><span class="post-toc-text">1. 泛型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E4%BB%8EArray-ArrayList%E5%88%B0List"><span class="post-toc-text">2. 从Array, ArrayList到List&lt;T&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F"><span class="post-toc-text">3. 泛型约束</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-%E9%9D%99%E6%80%81%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="post-toc-text">4. 静态构造方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-%E5%8F%AF%E7%A9%BA%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">5. 可空类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%97%AE%E5%8F%B7%E8%AF%AD%E6%B3%95%E7%B3%96"><span class="post-toc-text">问号语法糖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-%E6%8F%90%E5%87%BA-%E5%8C%BF%E5%90%8D%E6%96%B9%E6%B3%95"><span class="post-toc-text">6. 提出 匿名方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8B%93%E5%B1%95%E4%BA%86%E6%B3%9B%E5%9E%8B%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="post-toc-text">拓展了泛型迭代器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-%E5%88%86%E9%83%A8%E7%B1%BB%E5%9E%8B-partial"><span class="post-toc-text">7. 分部类型(partial)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-%E6%96%B0%E5%A2%9E%E9%9D%99%E6%80%81%E7%B1%BB"><span class="post-toc-text">8. 新增静态类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-%E5%B1%9E%E6%80%A7%E5%99%A8getter-setter%E5%85%81%E8%AE%B8%E6%B7%BB%E5%8A%A0%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="post-toc-text">9. 属性器getter&#x2F;setter允许添加访问修饰符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E9%87%8D%E5%91%BD%E5%90%8D"><span class="post-toc-text">10. 命名空间重命名</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

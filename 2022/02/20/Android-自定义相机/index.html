@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>Android-自定义相机 - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Android-自定义相机 - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://img.tonychenn.cn/2022/0220/icon.jpg">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2022/0220/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">Android-自定义相机</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写的第二版了，第一版直接将相机实现部分和cocos放一块了，显的很乱，代码也很乱，所以重构了一遍。</p>
+<p>这一遍将Android相机部分单独抽离部分。是一个AndroidStudio工程，并将项目环境还原成cocos项目中minSdk为19，targetSdk为21。相机预览部分layout同样采用动态添加的方式。达到后面直接将代码放到cocos中就能直接使用的目的。</p>
+<p>项目选用SurfaceView + Camera(相对Camera2)实现。原因是可以兼容老工程使用，基础的一些功能是完全够用的。内存占用方面据说也是比TextureView更低。</p>
+<p>同样这一版也同样存在着一些问题：</p>
+<ol>
+<li><p>上面说到minSdk为19，targetSdk为21。也就是在Android6.0之前的。打包出来设备默认开启清单(Manifest)中所有权限，无需动态申请权限。放到23版本的工程中，先确认是否需要进行动态申请权限,并解决。刚好笔者之前也对这部分做过总结，可以参考下：<a href="https://blog.tonychenn.cn/2018/03/16/Android-Android%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90">android中的权限介绍</a>，<a href="https://blog.tonychenn.cn/2017/10/16/Android-%E5%8A%A8%E6%80%81%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90">android动态申请权限</a><br>（TIP: 为了解决安卓高版本中权限被手动禁止导致无法正常使用的情况，就弹出提示让玩家跳转到设置界面进行手动配置。）</p>
+</li>
+<li><p>暂不支持设备设置自动旋转屏幕，旋转屏幕会导致关闭相机。不影响使用，后续再研究，有知道的希望能后不吝赐教，在下方留言。</p>
+</li>
+</ol>
+<h1 id="加一波权限"><a href="#加一波权限" class="headerlink" title="加一波权限"></a>加一波权限</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--AndroidManifest.xml--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--相机--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.CAMERA&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--读写存储卡--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">&quot;android.hardware.camera&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">&quot;android.hardware.camera.autofocus&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h1><p>把相机的各种操作单独抽离出来作为一个工具类<code>CameraHelper.java</code>，包括：判断是否有相机，开启相机，销毁相机，切换相机，拍照等接口。</p>
+<h2 id="判断是否有相机"><a href="#判断是否有相机" class="headerlink" title="判断是否有相机"></a>判断是否有相机</h2><p>使用了<code>Camera.getNumberOfCameras()</code>接口获取相机数量来判断是否有相机，发现无相机的设备也会返回2。最终选择尝试打开相机捕获异常来判断有没有相机。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">HasCamera</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        mCamera = Camera.open(cameraID);</span><br><span class="line">        mCamera.release();</span><br><span class="line">        mCamera=<span class="literal">null</span>;</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception exception)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开相机"><a href="#打开相机" class="headerlink" title="打开相机"></a>打开相机</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">OpenCamera</span><span class="params">(SurfaceHolder holder)</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        Log.d(TAG,<span class="string">&quot;打开相机: &quot;</span> + cameraID);</span><br><span class="line">        mCamera = Camera.open(cameraID);</span><br><span class="line">        Camera.getCameraInfo(cameraID, cameraInfo);</span><br><span class="line">        initCamera();           <span class="comment">// 初始化相机</span></span><br><span class="line">        setDispalyRotation();   <span class="comment">// 设置旋转</span></span><br><span class="line">        StartPreview(holder);   <span class="comment">// 开启预览</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex)&#123;</span><br><span class="line">        ex.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置相机"><a href="#配置相机" class="headerlink" title="配置相机"></a>配置相机</h2><p>打开相机后，首先拿到相机的配置参数，然后再初始化相机的自动或手动对焦，图片格式，预览尺寸等参数，最后再应用到相机。相机预览尺寸有点坑，后面也会开篇介绍，点我-&gt;<a href="https://blog.tonychenn.cn/2021/12/09/cocos2dx%E8%B0%83%E6%95%99%E5%AE%89%E5%8D%93%E7%9B%B8%E6%9C%BA%E9%A2%84%E8%A7%88">调教android相机全屏预览</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化相机</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">initCamera</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        parameters = mCamera.getParameters();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置自动聚焦</span></span><br><span class="line">        <span class="keyword">if</span> (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_AUTO)) &#123;</span><br><span class="line">            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE))&#123;</span><br><span class="line">            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        parameters.setPictureFormat(ImageFormat.JPEG);</span><br><span class="line">        parameters.setPreviewFormat(ImageFormat.NV21);</span><br><span class="line">        parameters.setExposureCompensation(<span class="number">0</span>); <span class="comment">// 设置曝光强度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 拿到屏幕尺寸</span></span><br><span class="line">        <span class="type">DisplayMetrics</span> <span class="variable">metrics</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DisplayMetrics</span>();</span><br><span class="line">        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 要保证宽&gt;高</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">screenWidth</span> <span class="operator">=</span> metrics.widthPixels &gt; metrics.heightPixels ? metrics.widthPixels : metrics.heightPixels;</span><br><span class="line">        <span class="type">int</span> <span class="variable">screenHeight</span> <span class="operator">=</span> metrics.widthPixels &lt; metrics.heightPixels ? metrics.widthPixels : metrics.heightPixels;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据屏幕尺寸选择出一个最合适的尺寸</span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="type">Point</span>  <span class="variable">previousSize</span> <span class="operator">=</span> findBestPreviewSizeValue(parameters.getSupportedPreviewSizes(), screenWidth, screenHeight);</span><br><span class="line">        parameters.setPreviewSize(previousSize.x, previousSize.y);</span><br><span class="line"></span><br><span class="line">        mCamera.setParameters(parameters);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception ex)&#123;</span><br><span class="line">        ex.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="开始预览"><a href="#开始预览" class="headerlink" title="开始预览"></a>开始预览</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始预览</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">StartPreview</span><span class="params">(SurfaceHolder holder)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mCamera != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">&quot;开始预览&quot;</span>);</span><br><span class="line">            mCamera.setPreviewDisplay(holder);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (IOException ex)&#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!isPrevious)&#123;</span><br><span class="line">            mCamera.startPreview();</span><br><span class="line">            isPrevious = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="结束预览"><a href="#结束预览" class="headerlink" title="结束预览"></a>结束预览</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">StopPreview</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mCamera != <span class="literal">null</span>)&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">&quot;StopPreview&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(isPrevious) &#123;</span><br><span class="line">            mCamera.stopPreview();</span><br><span class="line">            isPrevious = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="销毁相机"><a href="#销毁相机" class="headerlink" title="销毁相机"></a>销毁相机</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">DestoryCamera</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mCamera != <span class="literal">null</span>)&#123;</span><br><span class="line">        Log.d(TAG,<span class="string">&quot;销毁相机&quot;</span>);</span><br><span class="line">        mCamera.setPreviewCallback(<span class="literal">null</span>);</span><br><span class="line">        mCamera.stopPreview();</span><br><span class="line">        mCamera.release();</span><br><span class="line">        mCamera=<span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换相机"><a href="#切换相机" class="headerlink" title="切换相机"></a>切换相机</h2><p>android后置相机索引是0，前置相机索引是1。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">SwitchCamera</span><span class="params">(SurfaceHolder holder)</span>&#123;</span><br><span class="line">    cameraID = cameraID == <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    DestoryCamera();</span><br><span class="line">    OpenCamera(holder);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h2><p>camera正统的拍照方式是使用<code>takePicture</code>这个API。但是使用这种方式会导致拍照时间会几秒，体验不好。后面有一篇专门解决拍照缓慢的问题：<a href="https://blog.tonychenn.cn/2021/12/09/cocos2dx-%E8%A7%A3%E5%86%B3Android%E7%9B%B8%E6%9C%BA%E6%8B%8D%E7%85%A7%E7%BC%93%E6%85%A2">android相机拍照缓慢解决方案</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">public void TakePicture(Camera.PictureCallback callback)&#123;</span></span><br><span class="line"><span class="comment">    //shutter: 自定义拍照声音(咔嚓)，默认null就行</span></span><br><span class="line"><span class="comment">    mCamera.takePicture(shutter,raw, callback);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="自定义SurfaceView"><a href="#自定义SurfaceView" class="headerlink" title="自定义SurfaceView"></a>自定义SurfaceView</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CameraSurfaceView</span> <span class="keyword">extends</span> <span class="title class_">SurfaceView</span> <span class="keyword">implements</span> <span class="title class_">SurfaceHolder</span>.Callback &#123;</span><br><span class="line">    <span class="keyword">private</span> CameraHelper cameraHelper;</span><br><span class="line">    <span class="keyword">private</span> SurfaceHolder surfaceHolder;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">CameraSurfaceView</span><span class="params">(Activity activity, CameraHelper cameraHelper)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(activity);</span><br><span class="line">        <span class="built_in">this</span>.cameraHelper = cameraHelper;</span><br><span class="line">        <span class="built_in">this</span>.surfaceHolder = <span class="built_in">this</span>.getHolder();</span><br><span class="line">        surfaceHolder.addCallback(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// region SurfaceHolder.Callback</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(cameraHelper != <span class="literal">null</span>)&#123;</span><br><span class="line">            cameraHelper.OpenCamera(holder);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">surfaceChanged</span><span class="params">(SurfaceHolder holder, <span class="type">int</span> format, <span class="type">int</span> width, <span class="type">int</span> height)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(cameraHelper!=<span class="literal">null</span>)&#123;</span><br><span class="line">            cameraHelper.StopPreview();</span><br><span class="line">            cameraHelper.StartPreview(holder);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(cameraHelper!=<span class="literal">null</span>)</span><br><span class="line">            cameraHelper.DestoryCamera();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// end region</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="安卓中的例子"><a href="#安卓中的例子" class="headerlink" title="安卓中的例子"></a>安卓中的例子</h1><p>随便搞了3个按钮，分别是打开相机，拍照和关闭相机，下面分别实现这些功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启相机</span></span><br><span class="line"><span class="keyword">if</span>(cameraHelper.HasCamera())&#123;</span><br><span class="line">    cameraSurfaceView = <span class="keyword">new</span> <span class="title class_">CameraSurfaceView</span>(Cocos2dxActivity.<span class="built_in">this</span>, cameraHelper);</span><br><span class="line">    <span class="comment">// layout 是一个FrameLayout, 将预览界面添加到FrameLayout下，层级是0</span></span><br><span class="line">    layout.addView(cameraSurfaceView, <span class="number">0</span>);</span><br><span class="line">    cameraHelper.OpenCamera(cameraSurfaceView.getHolder());</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// 没有相机或者没权限呢？？</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拍照</span></span><br><span class="line">cameraHelper.TakePicture(<span class="keyword">new</span> <span class="title class_">Camera</span>.PreviewCallback() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onPreviewFrame</span><span class="params">(<span class="type">byte</span>[] data, Camera camera)</span> &#123;</span><br><span class="line">        <span class="type">Bitmap</span> <span class="variable">bmp</span> <span class="operator">=</span> getBmpPicData(data, camera);</span><br><span class="line">        saveBitmap(bmp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭相机</span></span><br><span class="line">cameraHelper.DestoryCamera();</span><br><span class="line">layout.removeView(cameraSurfaceView);</span><br><span class="line">OpenCamera.setEnabled(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决设备无相机或没权限问题"><a href="#解决设备无相机或没权限问题" class="headerlink" title="解决设备无相机或没权限问题"></a>解决设备无相机或没权限问题</h1><p>那就弹出一个对话框，让用户跳转到设置界面检查是不是权限没开，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Intent</span> <span class="variable">intent</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Intent</span>(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);</span><br><span class="line">intent.setData(Uri.fromParts(<span class="string">&quot;package&quot;</span>,<span class="built_in">this</span>.getPackageName(), <span class="literal">null</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2022/0220/pervious.gif" alt="error"></p>
+<h1 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h1><p><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/CustomAndroidCamera/blob/master/app/src/main/java/com/example/demo/CameraHelper.java">CameraHelper.java</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/CustomAndroidCamera/blob/master/app/src/main/java/com/example/demo/CameraSurfaceView.java">CameraSurfaceView.java</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/CustomAndroidCamera/blob/master/app/src/main/java/com/example/demo/Cocos2dxActivity.java">Cocos2dxActivity.java</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/CustomAndroidCamera/blob/master/app/src/main/AndroidManifest.xml">AndroidManifest.xml</a></p>
+<h1 id="工程地址"><a href="#工程地址" class="headerlink" title="工程地址"></a>工程地址</h1><p><a target="_blank" rel="noopener" href="https://gitlab.uuzu.com/chentc/CustomAndroidCamera">https://gitlab.uuzu.com/chentc/CustomAndroidCamera</a></p>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8A%A0%E4%B8%80%E6%B3%A2%E6%9D%83%E9%99%90"><span class="post-toc-text">加一波权限</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B"><span class="post-toc-text">正式开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%9B%B8%E6%9C%BA"><span class="post-toc-text">判断是否有相机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%89%93%E5%BC%80%E7%9B%B8%E6%9C%BA"><span class="post-toc-text">打开相机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AE%E7%9B%B8%E6%9C%BA"><span class="post-toc-text">配置相机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%A7%8B%E9%A2%84%E8%A7%88"><span class="post-toc-text">开始预览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E6%9D%9F%E9%A2%84%E8%A7%88"><span class="post-toc-text">结束预览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%94%80%E6%AF%81%E7%9B%B8%E6%9C%BA"><span class="post-toc-text">销毁相机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%87%E6%8D%A2%E7%9B%B8%E6%9C%BA"><span class="post-toc-text">切换相机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%8B%8D%E7%85%A7"><span class="post-toc-text">拍照</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89SurfaceView"><span class="post-toc-text">自定义SurfaceView</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%89%E5%8D%93%E4%B8%AD%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="post-toc-text">安卓中的例子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E8%AE%BE%E5%A4%87%E6%97%A0%E7%9B%B8%E6%9C%BA%E6%88%96%E6%B2%A1%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98"><span class="post-toc-text">解决设备无相机或没权限问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6"><span class="post-toc-text">源文件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%9C%B0%E5%9D%80"><span class="post-toc-text">工程地址</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

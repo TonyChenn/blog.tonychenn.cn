@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>Unity-入坑AssetBundle（一） - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Unity-入坑AssetBundle（一） - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://img.tonychenn.cn/2018/12.13/icon.jpg">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2018/12.13/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">Unity-入坑AssetBundle（一）</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <p>AssetBundle（以下称AB）是学习热更新的基础，这也是第一次学，边学边总结边记录下来，希望能给也在开始学热更新的你一些帮助。</p>
+<h1 id="AssetBundle的用处？"><a href="#AssetBundle的用处？" class="headerlink" title="AssetBundle的用处？"></a>AssetBundle的用处？</h1><p>首先，学习AssetBundle是为之后学习Lua做准备。</p>
+<ol>
+<li>AB包是一个压缩包，包含贴图，模型，声音，场景等文件；</li>
+<li>AB包本身保存着各个AB包之间的依赖关系；</li>
+<li>AB包可以使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/LZMA/10542921?fr=aladdin">LZMA</a>或<a target="_blank" rel="noopener" href="https://lz4.github.io/lz4/">LZ4</a>的方式进行压缩，减小AB包的大小，从而更快的网络传输。</li>
+<li>AssetBundle允许Unity在运行时通过使用一些方法动态加载数据资源。</li>
+<li>打包软件时，将一些文件放在AB包中，从而减小安装包的大小。</li>
+</ol>
+<h1 id="什么是AssetBundle"><a href="#什么是AssetBundle" class="headerlink" title="什么是AssetBundle?"></a>什么是AssetBundle?</h1><h2 id="从文件层面上看："><a href="#从文件层面上看：" class="headerlink" title="从文件层面上看："></a>从文件层面上看：</h2><p>AB包分为两部分</p>
+<ul>
+<li>serialized file:资源打碎存放在一个对象中，最后保存在一个序列化文件中（只有一个）</li>
+<li>resource files:将一些图片，音乐等二进制资源单独保存起来，方便快速加载（多个）</li>
+</ul>
+<h2 id="程序上看"><a href="#程序上看" class="headerlink" title="程序上看:"></a>程序上看:</h2><p>是一个对象，通过使用代码从AB包中加载出来的对象。</p>
+<h1 id="生成AB包"><a href="#生成AB包" class="headerlink" title="生成AB包"></a>生成AB包</h1><ol>
+<li>压缩方式选择</li>
+</ol>
+<ul>
+<li>None 使用LZMA压缩算法，压缩后体积最小，加载时间最长，使用前进行整体解压，解压后重新使用LZ4压缩</li>
+<li>UncompressedAssetBundle 不进行压缩，体积最大，加载速度最快</li>
+<li>ChunkBasedCompression 使用LZ4算法压缩，压缩效率没有LZMA好，但使用资源时不用整体解压，使用哪个解压哪个。</li>
+</ul>
+<ol start="2">
+<li>打包的AB包不允许多平台使用。</li>
+</ol>
+<h2 id="使用代码进行生成"><a href="#使用代码进行生成" class="headerlink" title="使用代码进行生成"></a>使用代码进行生成</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//dir   生成后保存的文件夹</span></span><br><span class="line"><span class="comment">//BuildAssetBundleOptions   压缩方式</span></span><br><span class="line"><span class="comment">//BuildTarget   打包平台</span></span><br><span class="line">BuildPipeline.BuildAssetBundles(dir,</span><br><span class="line">                BuildAssetBundleOptions.None, </span><br><span class="line">                BuildTarget.StandaloneWindows64);</span><br></pre></td></tr></table></figure>
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p><a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/AssetBundles-Browser">https://github.com/Unity-Technologies/AssetBundles-Browser</a></p>
+<h1 id="上传AB包"><a href="#上传AB包" class="headerlink" title="上传AB包"></a>上传AB包</h1><p>略</p>
+<h1 id="加载AB包中的资源"><a href="#加载AB包中的资源" class="headerlink" title="加载AB包中的资源"></a>加载AB包中的资源</h1><h2 id="从文件加载"><a href="#从文件加载" class="headerlink" title="从文件加载"></a>从文件加载</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">LoadFromFile</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    AssetBundle abPack = AssetBundle.LoadFromFile(path);</span><br><span class="line">    <span class="keyword">if</span> (abPack == <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//异步</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">LoadFromFileAsync</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> req = AssetBundle.LoadFromFileAsync(path);</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> req;</span><br><span class="line">    AssetBundle abPack = req.assetBundle;</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="从内存加载"><a href="#从内存加载" class="headerlink" title="从内存加载"></a>从内存加载</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">LoadFromMemory</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> abPack = AssetBundle.LoadFromMemory(File.ReadAllBytes(path));</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//异步</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">LoadFromMemoryAsync</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> req=AssetBundle.LoadFromMemoryAsync(File.ReadAllBytes(path));</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> req;</span><br><span class="line">    AssetBundle abPack = req.assetBundle;</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="从服务器加载（推荐）"><a href="#从服务器加载（推荐）" class="headerlink" title="从服务器加载（推荐）"></a>从服务器加载（推荐）</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">UseWebReq</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> uri = <span class="string">&quot;http://www.xxx.xxx.xxx/AssetBundles/cubewall.u3d&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> req = UnityWebRequestAssetBundle.GetAssetBundle(uri);</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> req.SendWebRequest();</span><br><span class="line">    AssetBundle abPack = DownloadHandlerAssetBundle.GetContent(req);</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="WWW的方式从服务器加载（逐渐被淘汰）"><a href="#WWW的方式从服务器加载（逐渐被淘汰）" class="headerlink" title="WWW的方式从服务器加载（逐渐被淘汰）"></a>WWW的方式从服务器加载（逐渐被淘汰）</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">Use3w</span>(<span class="params"><span class="built_in">string</span> path</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    WWW www = WWW.LoadFromCacheOrDownload(<span class="string">@&quot;file:///&quot;</span> + path,<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//WWW www = WWW.LoadFromCacheOrDownload(@&quot;https://&quot; + url);</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> www;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrEmpty(www.error))</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    AssetBundle abPack = www.assetBundle;</span><br><span class="line">    <span class="keyword">var</span> prefab = abPack.LoadAsset&lt;GameObject&gt;(<span class="string">&quot;Cube&quot;</span>);</span><br><span class="line">    Instantiate(prefab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的方法，就可以实现将打包到AB包的预制体实例化出来了，但是出现了问题，预制体处于材质丢失状态，所以我们需要将预制体所依赖的贴图，材质等加载到内存中。<b>那么问题来了，每个预制体上有1-n个各种类型的素材，三五个还好能手动添加到内存，但是多了这样就不行了！！</b>那就引出了minifest文件：</p>
+<p><img src="https://img.tonychenn.cn/2018/12.13/minifest.jpg" alt="minifest"></p>
+<p>打开查看：</p>
+<p><img src="https://img.tonychenn.cn/2018/12.13/open.jpg" alt="open"></p>
+<p>里面包含了cubewall的所有依赖库，下面就是加载minifest文件，在加载所有依赖文件：</p>
+<h1 id="加载minifest和依赖文件"><a href="#加载minifest和依赖文件" class="headerlink" title="加载minifest和依赖文件"></a>加载minifest和依赖文件</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> _LoadMinifest(<span class="built_in">string</span> path)</span><br><span class="line">&#123;</span><br><span class="line">    AssetBundle AB = AssetBundle.LoadFromFile(path);</span><br><span class="line">    <span class="keyword">var</span> minifest = AB.LoadAsset&lt;AssetBundleManifest&gt;(<span class="string">&quot;AssetBundleManifest&quot;</span>);</span><br><span class="line">    <span class="comment">//获取所有cubewall.u3d的依赖的名称</span></span><br><span class="line">    <span class="built_in">string</span>[] names = minifest.GetAllDependencies(<span class="string">&quot;cubewall.u3d&quot;</span>);</span><br><span class="line">    <span class="comment">//加载所有cubewall.u3d的依赖</span></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> names)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(item);</span><br><span class="line">        AssetBundle.LoadFromFile(Application.dataPath + <span class="string">&quot;/AssetBundles/&quot;</span> + item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2018/12.13/show.jpg"></p>
+<h1 id="卸载AssetBundle"><a href="#卸载AssetBundle" class="headerlink" title="卸载AssetBundle"></a>卸载AssetBundle</h1><p>当一些资源使用过后不会再使用的资源，我们就可以将他们卸载了，从而减少内存对的使用，当然当资源还需要使用就被卸载就会导致资源丢失。所以何时卸载资源就是一个问题了！</p>
+<h2 id="卸载所有资源，即使资源还正在使用也依然会被卸载"><a href="#卸载所有资源，即使资源还正在使用也依然会被卸载" class="headerlink" title="卸载所有资源，即使资源还正在使用也依然会被卸载"></a>卸载所有资源，即使资源还正在使用也依然会被卸载</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AssetBundle.UnLoad(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="卸载所有没有使用的资源，但是会导致没有卸载的资源永远不可卸载，若资源会多次加载卸载会导致内存泄漏。"><a href="#卸载所有没有使用的资源，但是会导致没有卸载的资源永远不可卸载，若资源会多次加载卸载会导致内存泄漏。" class="headerlink" title="卸载所有没有使用的资源，但是会导致没有卸载的资源永远不可卸载，若资源会多次加载卸载会导致内存泄漏。"></a>卸载所有没有使用的资源，但是会导致没有卸载的资源永远不可卸载，若资源会多次加载卸载会导致内存泄漏。</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AssetBundle.UnLoad(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.unity3d.com/ScriptReference/AssetBundle.html">https://docs.unity3d.com/ScriptReference/AssetBundle.html</a></li>
+<li>siki-AssetBundle</li>
+</ul>
+<div align="right">TonyChenn<br> </div>
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AssetBundle%E7%9A%84%E7%94%A8%E5%A4%84%EF%BC%9F"><span class="post-toc-text">AssetBundle的用处？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFAssetBundle"><span class="post-toc-text">什么是AssetBundle?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%8E%E6%96%87%E4%BB%B6%E5%B1%82%E9%9D%A2%E4%B8%8A%E7%9C%8B%EF%BC%9A"><span class="post-toc-text">从文件层面上看：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%8A%E7%9C%8B"><span class="post-toc-text">程序上看:</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%94%9F%E6%88%90AB%E5%8C%85"><span class="post-toc-text">生成AB包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E7%94%9F%E6%88%90"><span class="post-toc-text">使用代码进行生成</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="post-toc-text">使用插件</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8A%E4%BC%A0AB%E5%8C%85"><span class="post-toc-text">上传AB包</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8A%A0%E8%BD%BDAB%E5%8C%85%E4%B8%AD%E7%9A%84%E8%B5%84%E6%BA%90"><span class="post-toc-text">加载AB包中的资源</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%8E%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD"><span class="post-toc-text">从文件加载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%8E%E5%86%85%E5%AD%98%E5%8A%A0%E8%BD%BD"><span class="post-toc-text">从内存加载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8A%A0%E8%BD%BD%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="post-toc-text">从服务器加载（推荐）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WWW%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8A%A0%E8%BD%BD%EF%BC%88%E9%80%90%E6%B8%90%E8%A2%AB%E6%B7%98%E6%B1%B0%EF%BC%89"><span class="post-toc-text">WWW的方式从服务器加载（逐渐被淘汰）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8A%A0%E8%BD%BDminifest%E5%92%8C%E4%BE%9D%E8%B5%96%E6%96%87%E4%BB%B6"><span class="post-toc-text">加载minifest和依赖文件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8D%B8%E8%BD%BDAssetBundle"><span class="post-toc-text">卸载AssetBundle</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8D%B8%E8%BD%BD%E6%89%80%E6%9C%89%E8%B5%84%E6%BA%90%EF%BC%8C%E5%8D%B3%E4%BD%BF%E8%B5%84%E6%BA%90%E8%BF%98%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E4%B9%9F%E4%BE%9D%E7%84%B6%E4%BC%9A%E8%A2%AB%E5%8D%B8%E8%BD%BD"><span class="post-toc-text">卸载所有资源，即使资源还正在使用也依然会被卸载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8D%B8%E8%BD%BD%E6%89%80%E6%9C%89%E6%B2%A1%E6%9C%89%E4%BD%BF%E7%94%A8%E7%9A%84%E8%B5%84%E6%BA%90%EF%BC%8C%E4%BD%86%E6%98%AF%E4%BC%9A%E5%AF%BC%E8%87%B4%E6%B2%A1%E6%9C%89%E5%8D%B8%E8%BD%BD%E7%9A%84%E8%B5%84%E6%BA%90%E6%B0%B8%E8%BF%9C%E4%B8%8D%E5%8F%AF%E5%8D%B8%E8%BD%BD%EF%BC%8C%E8%8B%A5%E8%B5%84%E6%BA%90%E4%BC%9A%E5%A4%9A%E6%AC%A1%E5%8A%A0%E8%BD%BD%E5%8D%B8%E8%BD%BD%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E3%80%82"><span class="post-toc-text">卸载所有没有使用的资源，但是会导致没有卸载的资源永远不可卸载，若资源会多次加载卸载会导致内存泄漏。</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83"><span class="post-toc-text">参考</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

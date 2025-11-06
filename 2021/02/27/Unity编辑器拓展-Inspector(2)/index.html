@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>Unity编辑器拓展-Inspector(2) - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Unity编辑器拓展-Inspector(2) - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://img.tonychenn.cn/2021/0227/icon.png">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2021/0227/icon.png)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">Unity编辑器拓展-Inspector(2)</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <p>Unity编辑器已经提供一些拓展。我们只需要添加对应的属性去访问这些拓展即可.当然<br>在Unity中，我们可以根据不同情况使用不同的方式将一些属性的值显示在Inspector面板中:</p>
+<ol>
+<li>通过将字段声明为<code>public</code>类型即可在<code>Inspector</code>面板中看到.</li>
+<li>如果不想将public类型变量显示在Inspector，可以使用<code>HideInInspector</code>。</li>
+<li>也可以使用<code>SerializeField</code>将私有类型的变量显示在Inspector面板。</li>
+</ol>
+<h1 id="Inspector面板的外观"><a href="#Inspector面板的外观" class="headerlink" title="Inspector面板的外观"></a>Inspector面板的外观</h1><h2 id="隐藏public类型的字段"><a href="#隐藏public类型的字段" class="headerlink" title="隐藏public类型的字段"></a>隐藏public类型的字段</h2><p>当组件的一些属性是<code>public</code>类型时，编辑器会默认将该属性绘制在Inspector面板，但是当我们不想让它显示时，即可使用<code>[HideInInspector]</code>修饰属性即可。</p>
+<h2 id="显示privite类型字段"><a href="#显示privite类型字段" class="headerlink" title="显示privite类型字段"></a>显示privite类型字段</h2><p>同上面,privite类型默认在编辑器中不显示，可以通过<code>[SerializeField]</code>修饰让其显示。</p>
+<h2 id="滑块进行范围选择"><a href="#滑块进行范围选择" class="headerlink" title="滑块进行范围选择"></a>滑块进行范围选择</h2><p>通过添加<code>[Range(a, b)]</code>修饰字段即可将数值类型修饰为滑块，a,b 为滑块的滑动范围。支持int,float,long,double 类型。效果图如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Range(0,100)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> Age;</span><br><span class="line">[<span class="meta">Range(0,10)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> Hp;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2021/0227/range.jpg" alt="range"></p>
+<h2 id="文本输入框修饰"><a href="#文本输入框修饰" class="headerlink" title="文本输入框修饰"></a>文本输入框修饰</h2><p>默认的文本输入框是单行的TextArea,可以通过<code>TextArea,Multiline</code>来实现多行输入，个人感觉<code>Multiline</code>比<code>TextArea</code>功能更强大。区别如下：</p>
+<ol>
+<li>前者不会自动换行，后者可以自动换行显示</li>
+<li>前者不能通过鼠标滑轮滚动，后者可以</li>
+<li>前者输入多行没有滚动条，后者有。</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Multiline(4)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Content;</span><br><span class="line">[<span class="meta">TextArea(4,6)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Info;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2021/0227/textarea.jpg" alt="textarea"></p>
+<h2 id="颜色选择框"><a href="#颜色选择框" class="headerlink" title="颜色选择框"></a>颜色选择框</h2><p>默认情况与使用<code>ColorUsage(true)</code>相同，参数是是否显示Alpha通道。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">ColorUsage(false)</span>]</span><br><span class="line"><span class="keyword">public</span> Color color1;</span><br><span class="line"><span class="keyword">public</span> Color color2;</span><br></pre></td></tr></table></figure>
+<h2 id="属性间空格"><a href="#属性间空格" class="headerlink" title="属性间空格"></a>属性间空格</h2><p>使用<code>Space[num]</code>进行对该属性的向下偏移num</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Space(15)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Name;</span><br></pre></td></tr></table></figure>
+<h2 id="提示信息"><a href="#提示信息" class="headerlink" title="提示信息"></a>提示信息</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Tooltip(<span class="string">&quot;这是一个提示&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Name;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2021/0227/tooltip.jpg" alt="tooltip"></p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用<code>[Header(msg)]</code>将可以进行分类在一起的属性上面加一个标题，便于开发过程中的理解与使用。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Header(<span class="string">&quot;组件信息&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">SerializeField</span>] SImage image = <span class="literal">null</span>;</span><br><span class="line">[<span class="meta">SerializeField</span>] GameObject prefab = <span class="literal">null</span>;</span><br><span class="line">[<span class="meta">SerializeField</span>] SText text = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2021/0227/header.jpg" alt="header"></p>
+<h1 id="组件与属性的右击菜单"><a href="#组件与属性的右击菜单" class="headerlink" title="组件与属性的右击菜单"></a>组件与属性的右击菜单</h1><h2 id="组件的右击菜单"><a href="#组件的右击菜单" class="headerlink" title="组件的右击菜单"></a>组件的右击菜单</h2><p>直接放在方法上面。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">ContextMenu(<span class="string">&quot;按钮1&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ContextMenuHandler</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Debug.Log(<span class="string">&quot;测试&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2021/0227/contextmenu.jpg" alt="contextmenu"></p>
+<h2 id="单个属性右击菜单"><a href="#单个属性右击菜单" class="headerlink" title="单个属性右击菜单"></a>单个属性右击菜单</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">ContextMenuItem(<span class="string">&quot;Reset&quot;</span>, <span class="string">&quot;ResetFunction&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">ContextMenuItem(<span class="string">&quot;Random&quot;</span>, <span class="string">&quot;RandomFunction&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">Range(1, 100)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> HP;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ResetFunction</span>()</span> &#123; <span class="keyword">this</span>.HP = <span class="number">100</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RandomFunction</span>()</span> &#123; <span class="keyword">this</span>.HP = Random.Range(<span class="number">0</span>, <span class="number">100</span>); &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.tonychenn.cn/2021/0227/contextmenuitem.jpg" alt="contextmenuitem"></p>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Inspector%E9%9D%A2%E6%9D%BF%E7%9A%84%E5%A4%96%E8%A7%82"><span class="post-toc-text">Inspector面板的外观</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9A%90%E8%97%8Fpublic%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AD%97%E6%AE%B5"><span class="post-toc-text">隐藏public类型的字段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%98%BE%E7%A4%BAprivite%E7%B1%BB%E5%9E%8B%E5%AD%97%E6%AE%B5"><span class="post-toc-text">显示privite类型字段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%BB%91%E5%9D%97%E8%BF%9B%E8%A1%8C%E8%8C%83%E5%9B%B4%E9%80%89%E6%8B%A9"><span class="post-toc-text">滑块进行范围选择</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E6%A1%86%E4%BF%AE%E9%A5%B0"><span class="post-toc-text">文本输入框修饰</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E6%A1%86"><span class="post-toc-text">颜色选择框</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%9E%E6%80%A7%E9%97%B4%E7%A9%BA%E6%A0%BC"><span class="post-toc-text">属性间空格</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF"><span class="post-toc-text">提示信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A0%87%E9%A2%98"><span class="post-toc-text">标题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%BB%84%E4%BB%B6%E4%B8%8E%E5%B1%9E%E6%80%A7%E7%9A%84%E5%8F%B3%E5%87%BB%E8%8F%9C%E5%8D%95"><span class="post-toc-text">组件与属性的右击菜单</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%8F%B3%E5%87%BB%E8%8F%9C%E5%8D%95"><span class="post-toc-text">组件的右击菜单</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8D%95%E4%B8%AA%E5%B1%9E%E6%80%A7%E5%8F%B3%E5%87%BB%E8%8F%9C%E5%8D%95"><span class="post-toc-text">单个属性右击菜单</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>
