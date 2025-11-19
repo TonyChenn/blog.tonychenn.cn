@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>Unity中mono与il2cpp - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Unity中mono与il2cpp - 默然的博客 | 默然的博客">
+    
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">Unity中mono与il2cpp</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <h1 id="先说下AOT和JIT"><a href="#先说下AOT和JIT" class="headerlink" title="先说下AOT和JIT"></a>先说下AOT和JIT</h1><h2 id="JIT"><a href="#JIT" class="headerlink" title="JIT"></a>JIT</h2><p>JIT即：just in time，即时编译。正式点的定义：</p>
+<blockquote>
+<p>一个程序在它运行的时候创建并且运行了全新的代码，而并非那些最初作为这个程序的一部分保存在硬盘上的固有的代码。就叫JIT。</p>
+</blockquote>
+<p>要点：</p>
+<ol>
+<li>程序要运行</li>
+<li>会生成新的代码，与包内代码不同</li>
+<li>运行创建的新代码</li>
+<li>ios封了内存（或者堆）的可执行权限,也就封了JIT</li>
+</ol>
+<h2 id="AOT"><a href="#AOT" class="headerlink" title="AOT"></a>AOT</h2><p>与JIT相反。</p>
+<p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/murongxiaopifu/p/4278947.html">谁偷了我的热更新？Mono，JIT，iOS</a></li>
+</ol>
+<h1 id="什么是跨平台？"><a href="#什么是跨平台？" class="headerlink" title="什么是跨平台？"></a>什么是跨平台？</h1><p>简单来说就是写一套代码,一次编译，不需要修改任何代码，就可以在所支持的不同平台运行，不依赖操作系统，也不依赖硬件。</p>
+<h1 id="Unity如何实现跨平台"><a href="#Unity如何实现跨平台" class="headerlink" title="Unity如何实现跨平台"></a>Unity如何实现跨平台</h1><p>Unity的脚本处理有两种：</p>
+<h2 id="Mono"><a href="#Mono" class="headerlink" title="Mono"></a>Mono</h2><p>Mono是Xamarin提供的一个自由开放源码。Mono包括：<code>C#编译器</code>和<code>CIL虚拟机</code>及其他核心类库。<br><img src="https://img.tonychenn.cn/2022/0706/mono.jpg"></p>
+<p>C#编译器(mcs)用来将C#代码编译成CIL(中间语言)，CLI虚拟机的作用是将IL语言翻译成对应平台支持的原生码，IL的运行是依托于Mono虚拟机。</p>
+<p>这样只需要不同平台拥有对应平台的Mono虚拟机，即可实现C#编译成的IL代码运行在对应的平台，这样Mono就实现了跨平台。</p>
+<p>但是Mono有一些缺点，甚至是致命的缺点，如下：</p>
+<ol>
+<li>运行效率较慢。</li>
+<li>Mono虚拟机移植困难，甚至某些平台无法移植，影响Unity的跨平台性。</li>
+<li>Unity与Mono的授权问题。</li>
+</ol>
+<p>为了解决这些问题，unity推出了il2cpp的技术。在了解il2cpp之前先看下<code>il、CIL、CLR之间的关系</code>。</p>
+<h3 id="IL，CIL，CLR-分别是什么"><a href="#IL，CIL，CLR-分别是什么" class="headerlink" title="IL，CIL，CLR 分别是什么"></a>IL，CIL，CLR 分别是什么</h3><ul>
+<li>IL: Intermediate Language，是一种属于通用语言架构和.NET框架的低阶的人类可读的编程语言。</li>
+<li>CIL: Common Intermediate Language，特指在.Net平台下的IL标准</li>
+<li>CLR: Common Language Runtime，通用语言运行时</li>
+</ul>
+<p><img src="https://img.tonychenn.cn/2022/0706/il.png" alt="il"></p>
+<p>通过上图可以看出：将**支持IL的语言(如C#)**的代码通过自己的编译器编译为 <strong>IL中间代码</strong>，最后统一由Mono虚拟机 执行IL代码。</p>
+<h2 id="IL2CPP"><a href="#IL2CPP" class="headerlink" title="IL2CPP"></a>IL2CPP</h2><p><code>il2cpp</code>就是将上面生成的IL代码转换成<code>C++</code>代码，然后通过不同平台的il2cpp虚拟机去编译执行转译好的<code>C++</code>代码。</p>
+<p>为什么需要有<code>il2cpp VM（虚拟机）</code>这个东西呢？<br>那是C++本身是没这个东西的，<code>C++</code>中本身也是不支持C#中的一些“骚操作”的，如：反射，GC，泛型，虚函数，接口，线程管理等，而这些就是<code>il2cpp VM</code>要做的事情，而对于其他代码则是交给原生的<code>c++</code>执行了。</p>
+<p><img src="https://img.tonychenn.cn/2022/0706/il2cpp.png" alt="il2cpp"></p>
+<h3 id="il2cpp-VM-如何实现的GC"><a href="#il2cpp-VM-如何实现的GC" class="headerlink" title="il2cpp VM 如何实现的GC?"></a>il2cpp VM 如何实现的GC?</h3><p>答：GC是一套垃圾回收算法。如：标记清除算法、分代收集算法等。unity中使用的是标记清除算法。只需要在il2cpp VM中实现一套GC算法使用即可。</p>
+<h3 id="il2cpp-VM-如何实现的反射"><a href="#il2cpp-VM-如何实现的反射" class="headerlink" title="il2cpp VM 如何实现的反射?"></a>il2cpp VM 如何实现的反射?</h3><p>C++本身不支持反射。<br>在il2cpp编译过程中会根据反射过程调用的类型或方法信息分别转换为C++的结构体和函数信息，并生成一个中间文件。</p>
+<p>在cpp执行过程中先读取中间文件获得类型信息和方法信息。然后直接使用这些信息或执行这些方法。</p>
+<h3 id="il2cpp-的缺点"><a href="#il2cpp-的缺点" class="headerlink" title="il2cpp 的缺点"></a>il2cpp 的缺点</h3><ol>
+<li>c# -&gt; cpp不好调试，报错日志不清楚。</li>
+<li>AOT 不支持热更新。（但目前已有解决方案<code>HyBridCLR</code>）<br> HybridCLR的原理是：给il2cpp VM 提供一个特性，能够解释执行dll。</li>
+</ol>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%88%E8%AF%B4%E4%B8%8BAOT%E5%92%8CJIT"><span class="post-toc-text">先说下AOT和JIT</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JIT"><span class="post-toc-text">JIT</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AOT"><span class="post-toc-text">AOT</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%B9%B3%E5%8F%B0%EF%BC%9F"><span class="post-toc-text">什么是跨平台？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Unity%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%B9%B3%E5%8F%B0"><span class="post-toc-text">Unity如何实现跨平台</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mono"><span class="post-toc-text">Mono</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IL%EF%BC%8CCIL%EF%BC%8CCLR-%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="post-toc-text">IL，CIL，CLR 分别是什么</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IL2CPP"><span class="post-toc-text">IL2CPP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#il2cpp-VM-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84GC"><span class="post-toc-text">il2cpp VM 如何实现的GC?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#il2cpp-VM-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8F%8D%E5%B0%84"><span class="post-toc-text">il2cpp VM 如何实现的反射?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#il2cpp-%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="post-toc-text">il2cpp 的缺点</span></a></li></ol></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

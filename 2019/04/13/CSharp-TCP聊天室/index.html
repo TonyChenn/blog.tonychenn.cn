@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>CSharp-TCP聊天室 - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSharp-TCP聊天室 - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://img.tonychenn.cn/2019/0413/icon.jpg">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://img.tonychenn.cn/2019/0413/icon.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">CSharp-TCP聊天室</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h1><p>TCP是一种面向连接的，可靠的，基于字节流的传输层通讯协议。记录下Winform基于TCP协议的连天室。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h2><h3 id="事件类型包括上线，下线，广播消息，一对一消息，"><a href="#事件类型包括上线，下线，广播消息，一对一消息，" class="headerlink" title="事件类型包括上线，下线，广播消息，一对一消息，"></a>事件类型包括上线，下线，广播消息，一对一消息，</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> EventType</span><br><span class="line">&#123;</span><br><span class="line">    Exit = <span class="number">0</span>,       <span class="comment">//下线</span></span><br><span class="line">    Online,         <span class="comment">//上线</span></span><br><span class="line">    BroadCast,      <span class="comment">//群发</span></span><br><span class="line">    OneToOne,       <span class="comment">//一对一，一对多</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。"><a href="#封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。" class="headerlink" title="封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。"></a>封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Client</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//套接字</span></span><br><span class="line">    <span class="keyword">private</span> Socket client;</span><br><span class="line">    <span class="comment">//名称</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">byte</span>[] data = <span class="keyword">new</span> <span class="built_in">byte</span>[<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">bool</span> IsConnected</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> client.Connected; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Client</span>(<span class="params">Socket client</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.client = client;</span><br><span class="line">        <span class="comment">//开启线程接收消息</span></span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(RecvMsg);</span><br><span class="line">        thread.Start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SendMsg</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        client.Send(Encoding.UTF8.GetBytes(msg));</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//接收到消息后将消息转发给所有客户端</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RecvMsg</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">int</span> length = client.Receive(data);</span><br><span class="line">                <span class="built_in">string</span> msg = Encoding.UTF8.GetString(data, <span class="number">0</span>, length);</span><br><span class="line">                Console.WriteLine(<span class="string">&quot;收到：&quot;</span> + msg);</span><br><span class="line">                <span class="built_in">string</span>[] _data = msg.Split(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">                <span class="keyword">this</span>.name = _data[<span class="number">1</span>];</span><br><span class="line">                Program.BroadCastMsg(msg);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(Exception ex)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.WriteLine(ex.Message);</span><br><span class="line">                client.Shutdown(SocketShutdown.Both);</span><br><span class="line">                client.Close();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除"><a href="#创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除" class="headerlink" title="创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除"></a>创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] <span class="keyword">args</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    server = <span class="keyword">new</span> Socket(</span><br><span class="line">        AddressFamily.InterNetwork, </span><br><span class="line">        SocketType.Stream, </span><br><span class="line">        ProtocolType.Tcp);</span><br><span class="line">    server.Bind(</span><br><span class="line">        <span class="keyword">new</span> IPEndPoint(IPAddress.Parse(<span class="string">&quot;127.0.0.1&quot;</span>), <span class="number">3399</span>));</span><br><span class="line">    server.Listen(<span class="number">10</span>);</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;服务器正在运行...&quot;</span>);</span><br><span class="line">    Thread th = <span class="keyword">new</span> Thread(WatchingClient);</span><br><span class="line">    th.Start();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听客户端的连接</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">WatchingClient</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Socket cc = server.Accept();</span><br><span class="line">        Client client = <span class="keyword">new</span> Client(cc);</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;新的客户端连接成功&quot;</span>);</span><br><span class="line">        clientList.Add(client);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户"><a href="#当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户" class="headerlink" title="当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户"></a>当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户</h3><p>客户端发来的口令格式为：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Online</td>
+<td>上线</td>
+<td>“Online:”+用户名</td>
+</tr>
+<tr>
+<td>Exit</td>
+<td>下线</td>
+<td>“Exit:”+用户名</td>
+</tr>
+<tr>
+<td>BroadCast</td>
+<td>群发消息</td>
+<td>“BroadCast:”+消息内容</td>
+</tr>
+<tr>
+<td>OneToOne</td>
+<td>私聊消息</td>
+<td>“OneToOne:”+”用户1^用户2^…^用户n:”+消息内容</td>
+</tr>
+</tbody></table>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//转发消息</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BroadCastMsg</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    RemoveLogOutUser();</span><br><span class="line">    <span class="built_in">string</span>[] data = msg.Split(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="keyword">switch</span>(data[<span class="number">0</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Online&quot;</span>:</span><br><span class="line">            <span class="keyword">foreach</span> (Client item <span class="keyword">in</span> clientList)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (item.IsConnected)</span><br><span class="line">                    item.SendMsg(EventType.Online + <span class="string">&quot;:&quot;</span> + SerializeUser());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;OneToOne&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;BroadCast&quot;</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Exit&quot;</span>:</span><br><span class="line">            <span class="keyword">foreach</span> (Client client <span class="keyword">in</span> clientList)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (client.IsConnected)</span><br><span class="line">                    client.SendMsg(msg);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="界面设计"><a href="#界面设计" class="headerlink" title="界面设计"></a>界面设计</h3><p>待补充</p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>输入用户名后，进行登录，连接服务器，告诉服务器自己上线。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//登录操作</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">Login</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    IPAddress ip = IPAddress.Parse(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">    client = <span class="keyword">new</span> Socket(</span><br><span class="line">            AddressFamily.InterNetwork,</span><br><span class="line">            SocketType.Stream,</span><br><span class="line">            ProtocolType.Tcp);</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        client.Connect(<span class="keyword">new</span> IPEndPoint(ip, <span class="number">3399</span>));</span><br><span class="line">        client.Send(Encoding.UTF8.GetBytes(EventType.Online + <span class="string">&quot;:&quot;</span> + uid));</span><br><span class="line">        MessageBox.Show(<span class="string">&quot;登陆成功&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">        MessageBox.Show(<span class="string">&quot;登录失败！！&quot;</span>+ex.Message);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="下线，告诉服务器自己要下线了，然后关闭连接"><a href="#下线，告诉服务器自己要下线了，然后关闭连接" class="headerlink" title="下线，告诉服务器自己要下线了，然后关闭连接"></a>下线，告诉服务器自己要下线了，然后关闭连接</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Btn_logout_Click</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        client.Send(Encoding.UTF8.GetBytes(EventType.Exit + <span class="string">&quot;:&quot;</span> + uid));</span><br><span class="line">        client.Close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">new</span> Exception(<span class="string">&quot;注销失败&quot;</span>+ex.Message);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span></span><br><span class="line">    &#123;</span><br><span class="line">        Environment.Exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="对接收到服务器端发来消息的处理及响应"><a href="#对接收到服务器端发来消息的处理及响应" class="headerlink" title="对接收到服务器端发来消息的处理及响应"></a>对接收到服务器端发来消息的处理及响应</h3><p>由于Winform中默认无法在线程中操作UI,所以需要特殊的方法，当然方法不止一种。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RecvMsgHandler</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span>[] data = msg.Split(<span class="string">&#x27;:&#x27;</span>);</span><br><span class="line">    <span class="built_in">string</span> method = data[<span class="number">0</span>];</span><br><span class="line">    Thread thread = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">switch</span>(method)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Online&quot;</span>:</span><br><span class="line">            <span class="comment">//开启线程，更新在线用户列表</span></span><br><span class="line">            thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ParameterizedThreadStart(AddOnLineUser));</span><br><span class="line">            thread.Start(data[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;OneToOne&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> (DeSerializeUser(data[<span class="number">1</span>]).Contains(uid))</span><br><span class="line">            &#123;</span><br><span class="line">                thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ParameterizedThreadStart(UpdateChatMsg));</span><br><span class="line">                thread.Start(data[<span class="number">2</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;BroadCast&quot;</span>:</span><br><span class="line">            thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ParameterizedThreadStart(UpdateChatMsg));</span><br><span class="line">            thread.Start(data[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;Exit&quot;</span>:</span><br><span class="line">            thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ParameterizedThreadStart(RemoveOnLineUser));</span><br><span class="line">            thread.Start(data[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 只例举线程中更新UI中的更新在线用户列表</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">AddOnLineUser</span>(<span class="params"><span class="built_in">object</span> obj</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(Lb_online_user.InvokeRequired)</span><br><span class="line">    &#123;</span><br><span class="line">        Dele d = <span class="keyword">new</span> Dele((obj1) =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            Lb_online_user.Items.Clear();</span><br><span class="line"></span><br><span class="line">            List&lt;<span class="built_in">string</span>&gt; cur = DeSerializeUser(obj1.ToString());</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="built_in">string</span> item <span class="keyword">in</span> cur)</span><br><span class="line">            &#123;</span><br><span class="line">                Lb_online_user.Items.Add(item);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        Lb_online_user.Invoke(d, obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h3><p>根据不同的信息类型发送不同信息口令</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Btn_Send_Click</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span>(SendMessageType.BroadCast==sendType &amp;&amp; NullOrEmpty(Tb_edit.Text))</span><br><span class="line">        MessageBox.Show(<span class="string">&quot;发送的消息不能为空&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>((SendMessageType.OneToOne==sendType &amp;&amp; GetUserCheckedCount()==<span class="number">0</span>) || NullOrEmpty(Tb_edit.Text))</span><br><span class="line">        MessageBox.Show(<span class="string">&quot;发送的消息不能为空,发送成员不能为空&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span>(sendType)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> SendMessageType.BroadCast:</span><br><span class="line">                client.Send(</span><br><span class="line">                    Encoding.UTF8.GetBytes(</span><br><span class="line">                        EventType.BroadCast + <span class="string">&quot;:&quot;</span> + uid + <span class="string">&quot;群发：&quot;</span> + Tb_edit.Text));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="comment">// 消息类型 : 接收者 ：消息</span></span><br><span class="line">            <span class="keyword">case</span> SendMessageType.OneToOne:</span><br><span class="line">                client.Send(</span><br><span class="line">                    Encoding.UTF8.GetBytes(</span><br><span class="line">                        EventType.OneToOne + <span class="string">&quot;:&quot;</span> + </span><br><span class="line">                        SerializeUser()+ <span class="string">&quot;:&quot;</span> + </span><br><span class="line">                        uid + <span class="string">&quot;私发：&quot;</span> + Tb_edit.Text));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Tb_edit.Text = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>链接:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1nDbiIxLaBPveQKLg00UMYw">https://pan.baidu.com/s/1nDbiIxLaBPveQKLg00UMYw</a>  密码:h6kd</p>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言:</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="post-toc-text">介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="post-toc-text">服务器端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E5%8C%85%E6%8B%AC%E4%B8%8A%E7%BA%BF%EF%BC%8C%E4%B8%8B%E7%BA%BF%EF%BC%8C%E5%B9%BF%E6%92%AD%E6%B6%88%E6%81%AF%EF%BC%8C%E4%B8%80%E5%AF%B9%E4%B8%80%E6%B6%88%E6%81%AF%EF%BC%8C"><span class="post-toc-text">事件类型包括上线，下线，广播消息，一对一消息，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B0%81%E8%A3%85%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%B1%BB%EF%BC%8C%E5%8C%85%E5%90%AB%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%A5%97%E6%8E%A5%E5%AD%97%EF%BC%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%EF%BC%8C%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E3%80%82"><span class="post-toc-text">封装客户端类，包含客户端套接字，客户端名称，发送消息，接收消息。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BAtcp%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BC%80%E5%90%AF%E7%BA%BF%E7%A8%8B%E7%9B%91%E5%90%AC%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%BD%93%E6%9C%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E5%90%8E%EF%BC%8C%E5%B0%86%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AD%98%E5%85%A5%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8%E4%B8%AD%E3%80%82%E6%AF%8F%E6%AC%A1%E5%90%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E6%97%B6%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E6%9C%89%E6%96%AD%E5%BC%80%E7%9A%84%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%9C%89%E5%B0%B1%E4%BB%8E%E5%88%97%E8%A1%A8%E4%B8%AD%E7%A7%BB%E9%99%A4"><span class="post-toc-text">创建tcp连接，开启线程监听客户端的连接，当有客户端连接后，将连接的客户端存入一个列表中。每次向客户端发送消息时检测是否有断开的连接，如果有就从列表中移除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BD%93%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8A%E7%BA%BF%E5%90%8E%E4%BC%9A%E7%BB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%91%E9%80%81%E4%B8%80%E4%B8%AA%E4%B8%8A%E7%BA%BF%E5%8F%A3%E4%BB%A4%EF%BC%8C%E5%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A3%80%E6%B5%8B%E5%88%B0%E8%AF%A5%E5%8F%A3%E4%BB%A4%E5%90%8E%E9%80%9A%E7%9F%A5%E6%89%80%E6%9C%89%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9B%B4%E6%96%B0%E5%9C%A8%E7%BA%BF%E5%88%97%E8%A1%A8%EF%BC%8C%E5%B9%B6%E6%8A%8A%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E5%88%97%E8%A1%A8%E5%8F%91%E7%BB%99%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="post-toc-text">当客户端上线后会给服务器端发送一个上线口令，当服务器检测到该口令后通知所有客户端更新在线列表，并把在线用户列表发给所有用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="post-toc-text">客户端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1"><span class="post-toc-text">界面设计</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%99%BB%E5%BD%95"><span class="post-toc-text">登录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%8B%E7%BA%BF%EF%BC%8C%E5%91%8A%E8%AF%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%B7%B1%E8%A6%81%E4%B8%8B%E7%BA%BF%E4%BA%86%EF%BC%8C%E7%84%B6%E5%90%8E%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5"><span class="post-toc-text">下线，告诉服务器自己要下线了，然后关闭连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%B9%E6%8E%A5%E6%94%B6%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%91%E6%9D%A5%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86%E5%8F%8A%E5%93%8D%E5%BA%94"><span class="post-toc-text">对接收到服务器端发来消息的处理及响应</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="post-toc-text">发送消息</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="post-toc-text">完整代码</span></a></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

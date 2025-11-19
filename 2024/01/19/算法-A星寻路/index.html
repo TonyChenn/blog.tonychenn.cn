@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>算法-A星寻路 - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="算法-A星寻路 - 默然的博客 | 默然的博客">
+    
+    
+        <meta property="og:image" content="https://game.tonychenn.cn/apps/AStarSearchPath/index.html">
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://game.tonychenn.cn/apps/AStarSearchPath/index.html)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">算法-A星寻路</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <p>关于自动寻路，在游戏中还是经常会遇到的。如角色如何代价最小(距离少，时间快，方式支持)移动到某个位置。本篇记录下A*寻路的流程与优化。</p>
+<p>为了做一个可以方便展示在web的demo，更好拆解寻路的步骤，所以本篇用了cocos creater + ts实现。</p>
+<p>A星算法是dijkstra的升级版(<a href="https://blog.tonychenn.cn/2024/01/17/%E7%AE%97%E6%B3%95-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89(Dijkstra)/">算法-迪杰斯特拉</a>)，也是属于广度搜索遍历，不同于dijkstra，A星不需要遍历图中所有的节点。而是尽可能的去靠近终点。可以做个想象：地图比作一个挂起来的迷宫，起点在上方，终点在下方，从上方注入水，水会随着重力尽可能向下方(终点)流去。</p>
+<p>所以AStar 是可以找到<code>一个</code>最快的路径，即当前的最优解，但这个最快<code>不是唯一</code>的，也<code>可能不是最优</code>的。有点像贪心。其时间复杂度为：O(logN)</p>
+<h1 id="A星算法用到的几个变量"><a href="#A星算法用到的几个变量" class="headerlink" title="A星算法用到的几个变量"></a>A星算法用到的几个变量</h1><ol>
+<li>设定起点为A，终点为B。</li>
+<li>开放列表(OpenList)：记录所有待检测的节点。</li>
+<li>关闭列表(CloseList)：记录所有已经检测过的节点。</li>
+<li>G值：当前节点到下一个节点N(<code>八点</code> 之一)的代价。</li>
+<li>H值：下一个节点N到终点B的代价。（忽略有墙）</li>
+<li>F值：F &#x3D; G + H</li>
+</ol>
+<p>代价值的计算：</p>
+<ul>
+<li>垂直或者左右相邻记作：10</li>
+<li>斜对角相邻记作：<math><msqrt><mn>10</mn><mo>+</mo><mn>10</mn></msqrt><mo>≈</mo><mn>14</mn></math></li>
+</ul>
+<h1 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h1><ul>
+<li><code>八点</code>指：“上、下、左、右、左上、左下、右上、右下”共八个点。</li>
+<li><code>有效八点</code>指：<code>八点</code>中剔除：<ol>
+<li>不可达的点(墙)</li>
+<li>已经加入CloseList &#x2F; OpenList的点</li>
+</ol>
+</li>
+<li><code>三围</code>指 上面定义的三个值：“G, H, F”。</li>
+</ul>
+<h1 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h1><ol>
+<li>将起点作为当前点放入OpenList。</li>
+<li>遍历所有OpenList找到F值最小的点(MinFNode)，如果F相同则先择H值最小的点。</li>
+<li>把MinFNode从OpenList移除，并加入CloseList。</li>
+<li><ol>
+<li>没有<code>有效八点</code>，回到步骤2。</li>
+<li>拥有有<code>效八点</code>,遍历MinFNode的<code>有效八点</code>，根据以下情况计算<code>三围</code>。<ul>
+<li>相邻点不在OpenList中。计算<code>三围</code>，加入OpenList。</li>
+<li>相邻点已在OpenList中, 跳过。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>如果当前点是终点则结束寻路；否则回到步骤2。</li>
+<li>直到达到终点，回溯找到起点。</li>
+</ol>
+<h1 id="可视化Demo"><a href="#可视化Demo" class="headerlink" title="可视化Demo"></a>可视化Demo</h1><p>用cocos creater 做了一个demo，详细展示出寻路的步骤。<br>如下，绿色节点是在OpenList中找到的最小节点，只需依次点击绿色方块，直到达到终点。最后绘制出寻路路径。</p>
+<iframe width="100%" height="420px" src="https://game.tonychenn.cn/apps/AStarSearchPath/index.html" frameborder="0"></iframe>
+
+
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">PathFind</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">    <span class="meta">@property</span>(&#123;<span class="attr">type</span>: <span class="title class_">Vec2</span>, <span class="attr">displayName</span>:<span class="string">&quot;开始点&quot;</span>&#125;)</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">startPos</span>:<span class="title class_">Vec2</span> = <span class="keyword">new</span> <span class="title class_">Vec2</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="meta">@property</span>(&#123;<span class="attr">type</span>: <span class="title class_">Vec2</span>, <span class="attr">displayName</span>:<span class="string">&quot;结束点&quot;</span>&#125;)</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">endPos</span>: <span class="title class_">Vec2</span> = <span class="keyword">new</span> <span class="title class_">Vec2</span>(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">StartNode</span>: <span class="title class_">MapNode</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">EndNode</span>: <span class="title class_">MapNode</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开放列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">OpenList</span>: <span class="title class_">IDict</span>&lt;<span class="built_in">string</span>, <span class="title class_">MapNode</span>&gt; = <span class="keyword">new</span> <span class="title class_">IDict</span>&lt;<span class="built_in">string</span>, <span class="title class_">MapNode</span>&gt;();</span><br><span class="line">    <span class="comment">// 关闭列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">CloseList</span>: <span class="title class_">IDict</span>&lt;<span class="built_in">string</span>, <span class="title class_">MapNode</span>&gt; = <span class="keyword">new</span> <span class="title class_">IDict</span>&lt;<span class="built_in">string</span>, <span class="title class_">MapNode</span>&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加入开放列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">Add2OpenList</span>(<span class="attr">node</span>: <span class="title class_">MapNode</span>): <span class="built_in">void</span>&#123; node.<span class="title class_">SetColor</span>(<span class="title class_">Color</span>.<span class="property">CYAN</span>); <span class="variable language_">this</span>.<span class="property">OpenList</span>.<span class="title class_">Add</span>(node.<span class="title class_">GetKey</span>(), node); &#125;</span><br><span class="line">    <span class="comment">// 加入关闭列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">Add2CloseList</span>(<span class="attr">node</span>: <span class="title class_">MapNode</span>): <span class="built_in">void</span>&#123; node.<span class="title class_">SetColor</span>(<span class="title class_">Color</span>.<span class="property">GRAY</span>); <span class="variable language_">this</span>.<span class="property">CloseList</span>.<span class="title class_">Add</span>(node.<span class="title class_">GetKey</span>(), node); &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="attr">rowNodes</span>: <span class="title class_">IMapRow</span>[] = [];</span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">onLoad</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> rowsNode = <span class="variable language_">this</span>.<span class="property">node</span>.<span class="title function_">getChildByName</span>(<span class="string">&#x27;Rows&#x27;</span>);</span><br><span class="line">        <span class="keyword">let</span> rows = rowsNode.<span class="property">children</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; rows.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">const</span> element = rows[i];</span><br><span class="line">            <span class="keyword">let</span> childs = element.<span class="property">children</span>;</span><br><span class="line">            <span class="keyword">let</span> <span class="attr">cells</span>:<span class="title class_">MapNode</span>[] = [];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>,jMax = childs.<span class="property">length</span>; j &lt; jMax; j++) &#123;</span><br><span class="line">                <span class="keyword">const</span> cell = childs[j].<span class="title function_">getComponent</span>(<span class="title class_">MapNode</span>);</span><br><span class="line">                cell.<span class="title class_">Init</span>(j, i);</span><br><span class="line">                cells.<span class="title function_">push</span>(cell);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">let</span> <span class="attr">row</span>:<span class="title class_">IMapRow</span> = &#123;<span class="attr">row</span>: element, <span class="attr">cells</span>: cells&#125;;</span><br><span class="line"></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">rowNodes</span>.<span class="title function_">push</span>(row);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title class_">Messenger</span>.<span class="title class_">AddListener</span>(<span class="string">&#x27;click_node&#x27;</span>, <span class="variable language_">this</span>.<span class="property">ClickMapNodeCallback</span>, <span class="variable language_">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">start</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">StartNode</span> = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(<span class="variable language_">this</span>.<span class="property">startPos</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">startPos</span>.<span class="property">y</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">StartNode</span>.<span class="property">NodeType</span> = <span class="title class_">NodeType</span>.<span class="property">Start</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">EndNode</span> = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(<span class="variable language_">this</span>.<span class="property">endPos</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">endPos</span>.<span class="property">y</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">EndNode</span>.<span class="property">NodeType</span> = <span class="title class_">NodeType</span>.<span class="property">End</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">Add2OpenList</span>(<span class="variable language_">this</span>.<span class="property">StartNode</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">RefreshEightNode</span>(<span class="variable language_">this</span>.<span class="property">StartNode</span>, <span class="variable language_">this</span>.<span class="property">EndNode</span>);</span><br><span class="line">        <span class="keyword">let</span> node = <span class="variable language_">this</span>.<span class="title class_">GetMinOpenListNode</span>();</span><br><span class="line">        node.<span class="property">ClickEnable</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">onDestroy</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="title class_">Messenger</span>.<span class="title class_">RemoveListener</span>(<span class="string">&#x27;click_node&#x27;</span>, <span class="variable language_">this</span>.<span class="property">ClickMapNodeCallback</span>, <span class="variable language_">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 左上角为起点↓→</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">GetNode</span>(<span class="attr">x</span>:<span class="built_in">number</span>, <span class="attr">y</span>:<span class="built_in">number</span>): <span class="title class_">MapNode</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="attr">row</span>:<span class="title class_">IMapRow</span> = <span class="variable language_">this</span>.<span class="property">rowNodes</span>[y];</span><br><span class="line">        <span class="keyword">let</span> <span class="attr">cells</span>:<span class="title class_">MapNode</span>[] = row.<span class="property">cells</span>;</span><br><span class="line">        <span class="keyword">return</span> row.<span class="property">cells</span>[x];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获得8点</span></span><br><span class="line">    <span class="comment">// 1. 不超界</span></span><br><span class="line">    <span class="comment">// 2. 不是墙</span></span><br><span class="line">    <span class="comment">// 3. 不在开放列表，不在闭合列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">GetEightNode</span>(<span class="attr">node</span>:<span class="title class_">MapNode</span>): <span class="title class_">MapNode</span>[]&#123;</span><br><span class="line">        <span class="keyword">let</span> data = [];</span><br><span class="line">        <span class="keyword">let</span> x = node.<span class="property">PosX</span>;</span><br><span class="line">        <span class="keyword">let</span> y = node.<span class="property">PosY</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="title function_">checkAndAdd</span>=(<span class="params">item</span>)=&gt;&#123;</span><br><span class="line">            <span class="keyword">let</span> key = item.<span class="title class_">GetKey</span>();</span><br><span class="line">            <span class="keyword">if</span>(item.<span class="property">NodeType</span> != <span class="title class_">NodeType</span>.<span class="property">Wall</span> &amp;&amp; !<span class="variable language_">this</span>.<span class="property">OpenList</span>.<span class="title class_">HasKey</span>(key) &amp;&amp; !<span class="variable language_">this</span>.<span class="property">CloseList</span>.<span class="title class_">HasKey</span>(key))&#123;</span><br><span class="line">                item.<span class="property">PreNode</span> = node;</span><br><span class="line">                data.<span class="title function_">push</span>(item);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123; <span class="keyword">let</span> left = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x-<span class="number">1</span>, y);     <span class="title function_">checkAndAdd</span>(left); &#125;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">9</span>)&#123; <span class="keyword">let</span> right= <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x+<span class="number">1</span>, y);     <span class="title function_">checkAndAdd</span>(right); &#125;</span><br><span class="line">        <span class="keyword">if</span>(y &gt; <span class="number">0</span>)&#123; <span class="keyword">let</span> top  = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x, y-<span class="number">1</span>);     <span class="title function_">checkAndAdd</span>(top); &#125;</span><br><span class="line">        <span class="keyword">if</span>(y &lt; <span class="number">6</span>)&#123; <span class="keyword">let</span> buttom = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x, y+<span class="number">1</span>);   <span class="title function_">checkAndAdd</span>(buttom); &#125;</span><br><span class="line">        <span class="keyword">if</span>(x&gt;<span class="number">0</span> &amp;&amp; y&gt;<span class="number">0</span>)&#123;<span class="keyword">let</span> l_t = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x-<span class="number">1</span>, y-<span class="number">1</span>);<span class="title function_">checkAndAdd</span>(l_t); &#125;</span><br><span class="line">        <span class="keyword">if</span>(x&gt;<span class="number">0</span> &amp;&amp; y&lt;<span class="number">6</span>)&#123;<span class="keyword">let</span> l_b = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x-<span class="number">1</span>, y+<span class="number">1</span>);<span class="title function_">checkAndAdd</span>(l_b); &#125;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;<span class="number">9</span> &amp;&amp; y&gt;<span class="number">0</span>)&#123;<span class="keyword">let</span> r_t = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x+<span class="number">1</span>, y-<span class="number">1</span>);<span class="title function_">checkAndAdd</span>(r_t); &#125;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;<span class="number">9</span> &amp;&amp; y&lt;<span class="number">6</span>)&#123;<span class="keyword">let</span> r_b = <span class="variable language_">this</span>.<span class="title class_">GetNode</span>(x+<span class="number">1</span>, y+<span class="number">1</span>);<span class="title function_">checkAndAdd</span>(r_b); &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 刷新8点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">RefreshEightNode</span>(<span class="attr">node</span>: <span class="title class_">MapNode</span>, <span class="attr">endNode</span>: <span class="title class_">MapNode</span>): <span class="built_in">void</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="title class_">GetEightNode</span>(node);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`8点个数：<span class="subst">$&#123;nodes.length&#125;</span>`</span>);</span><br><span class="line">        <span class="keyword">if</span>(nodes.<span class="property">length</span> == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从openList移除,加入闭合列表</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">OpenList</span>.<span class="title class_">Remove</span>(node.<span class="title class_">GetKey</span>());</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">Add2CloseList</span>(node);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nodes.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">const</span> element = nodes[i];</span><br><span class="line">            element.<span class="title class_">SetColor</span>(math.<span class="property">Color</span>.<span class="property">CYAN</span>);</span><br><span class="line">            <span class="keyword">let</span> g_x = <span class="title class_">Math</span>.<span class="title function_">abs</span>(node.<span class="property">PosX</span> - element.<span class="property">PosX</span>);</span><br><span class="line">            <span class="keyword">let</span> g_y = <span class="title class_">Math</span>.<span class="title function_">abs</span>(node.<span class="property">PosY</span> - element.<span class="property">PosY</span>);</span><br><span class="line">            <span class="keyword">let</span> g_value = g_x + g_y == <span class="number">1</span> ? <span class="number">10</span> : <span class="number">14</span>;</span><br><span class="line">            element.<span class="property">GValue</span> = g_value;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> h_x = <span class="title class_">Math</span>.<span class="title function_">abs</span>(endNode.<span class="property">PosX</span> - element.<span class="property">PosX</span>);</span><br><span class="line">            <span class="keyword">let</span> h_y = <span class="title class_">Math</span>.<span class="title function_">abs</span>(endNode.<span class="property">PosY</span> - element.<span class="property">PosY</span>);</span><br><span class="line">            <span class="keyword">let</span> min = <span class="title class_">Math</span>.<span class="title function_">min</span>(h_x, h_y);</span><br><span class="line">            <span class="keyword">let</span> max = <span class="title class_">Math</span>.<span class="title function_">max</span>(h_x, h_y);</span><br><span class="line">            <span class="keyword">let</span> h_value = <span class="number">14</span>*min + <span class="number">10</span>* (max-min);</span><br><span class="line">            element.<span class="property">HValue</span> = h_value;</span><br><span class="line">            element.<span class="property">FValue</span> = g_value + h_value;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">OpenList</span>.<span class="title class_">Add</span>(element.<span class="title class_">GetKey</span>(), element);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获得OpenList中最小节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">GetMinOpenListNode</span>(): <span class="title class_">MapNode</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> items = <span class="variable language_">this</span>.<span class="property">OpenList</span>.<span class="title class_">Values</span>();</span><br><span class="line">        <span class="keyword">if</span>(items.<span class="property">length</span> == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="attr">result</span>:<span class="title class_">MapNode</span> = items[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>,iMax = items.<span class="property">length</span>;i&lt;iMax;i++)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(result.<span class="property">FValue</span> &gt; items[i].<span class="property">FValue</span>) &#123;</span><br><span class="line">                result = items[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(result.<span class="property">FValue</span> == items[i].<span class="property">FValue</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(result.<span class="property">HValue</span> &gt; items[i].<span class="property">HValue</span>)&#123;</span><br><span class="line">                    result = items[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="title class_">GetEightNode</span>(result);</span><br><span class="line">        <span class="keyword">if</span>(nodes.<span class="property">length</span> &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            result.<span class="title class_">SetColor</span>(<span class="title class_">Color</span>.<span class="property">GREEN</span>);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">OpenList</span>.<span class="title class_">Remove</span>(result.<span class="title class_">GetKey</span>());</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">Add2CloseList</span>(result);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title class_">GetMinOpenListNode</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 点击节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">ClickMapNodeCallback</span>(<span class="attr">clickNode</span>: <span class="title class_">MapNode</span>): <span class="built_in">void</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(clickNode.<span class="property">PosX</span>, clickNode.<span class="property">PosY</span>);</span><br><span class="line">        <span class="keyword">if</span>(clickNode == <span class="variable language_">this</span>.<span class="property">EndNode</span>)&#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title class_">PrintSearchPath</span>(<span class="variable language_">this</span>.<span class="property">EndNode</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        clickNode.<span class="property">ClickEnable</span> = <span class="literal">false</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">Add2OpenList</span>(clickNode);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">RefreshEightNode</span>(clickNode, <span class="variable language_">this</span>.<span class="property">EndNode</span>);</span><br><span class="line">        <span class="keyword">let</span> node = <span class="variable language_">this</span>.<span class="title class_">GetMinOpenListNode</span>();</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        node.<span class="property">ClickEnable</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 回溯，展示完整寻路路径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title class_">PrintSearchPath</span>(<span class="attr">node</span>?: <span class="title class_">MapNode</span>):<span class="built_in">void</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">null</span>)&#123; node = <span class="variable language_">this</span>.<span class="property">EndNode</span>; &#125;</span><br><span class="line">        node.<span class="title class_">SetColor</span>(math.<span class="property">Color</span>.<span class="property">GREEN</span>);</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="variable language_">this</span>.<span class="property">StartNode</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(node.<span class="property">PreNode</span> == <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title class_">PrintSearchPath</span>(node.<span class="property">PreNode</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个节点挂载的脚本</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">MapNode</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">    <span class="meta">@property</span>(<span class="title class_">Label</span>) <span class="keyword">private</span> <span class="attr">labelG</span>:<span class="title class_">Label</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="meta">@property</span>(<span class="title class_">Label</span>) <span class="keyword">private</span> <span class="attr">labelH</span>:<span class="title class_">Label</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="meta">@property</span>(<span class="title class_">Label</span>) <span class="keyword">private</span> <span class="attr">labelF</span>:<span class="title class_">Label</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@property</span>(&#123;<span class="attr">type</span>: <span class="title class_">Enum</span>(<span class="title class_">NodeType</span>), <span class="attr">serializable</span>: <span class="literal">true</span>, <span class="attr">visible</span>: <span class="literal">true</span>&#125;)</span><br><span class="line">    <span class="keyword">public</span> _nodeType = <span class="title class_">NodeType</span>.<span class="property">Road</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">PosX</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">PosY</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">sprite</span>:<span class="title class_">Sprite</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="attr">button</span>:<span class="title class_">Button</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 记录前置节点</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">PreNode</span>: <span class="title class_">MapNode</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">get</span> <span class="title function_">NodeType</span>()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_nodeType</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">set</span> <span class="title function_">NodeType</span>(<span class="params"><span class="attr">type</span>: <span class="title class_">NodeType</span></span>)&#123;</span><br><span class="line">        <span class="keyword">switch</span>(<span class="keyword">type</span>)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="title class_">NodeType</span>.<span class="property">Road</span>:  <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="title class_">NodeType</span>.<span class="property">Wall</span>:  <span class="variable language_">this</span>.<span class="title class_">SetColor</span>(math.<span class="property">Color</span>.<span class="property">BLACK</span>); <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="title class_">NodeType</span>.<span class="property">Start</span>: <span class="variable language_">this</span>.<span class="title class_">SetColor</span>(math.<span class="property">Color</span>.<span class="property">GREEN</span>); <span class="variable language_">this</span>.<span class="property">labelF</span>.<span class="property">string</span> = <span class="string">&#x27;开始点&#x27;</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="title class_">NodeType</span>.<span class="property">End</span>:   <span class="variable language_">this</span>.<span class="title class_">SetColor</span>(math.<span class="property">Color</span>.<span class="property">RED</span>); <span class="variable language_">this</span>.<span class="property">labelF</span>.<span class="property">string</span> = <span class="string">&#x27;结束点&#x27;</span>; <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">_nodeType</span> = <span class="keyword">type</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// G</span></span><br><span class="line">    <span class="keyword">private</span> <span class="attr">_g_value</span>:<span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">get</span> <span class="title function_">GValue</span>()&#123; <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_g_value</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">set</span> <span class="title function_">GValue</span>(<span class="params"><span class="attr">g</span>: <span class="built_in">number</span></span>)&#123; <span class="variable language_">this</span>.<span class="property">_g_value</span> = g; <span class="variable language_">this</span>.<span class="property">labelG</span>.<span class="property">string</span> = g+<span class="string">&quot;&quot;</span>; &#125;</span><br><span class="line">    <span class="comment">// H</span></span><br><span class="line">    <span class="keyword">private</span> <span class="attr">_h_value</span>:<span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">get</span> <span class="title function_">HValue</span>()&#123; <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_h_value</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">set</span> <span class="title function_">HValue</span>(<span class="params"><span class="attr">h</span>: <span class="built_in">number</span></span>)&#123; <span class="variable language_">this</span>.<span class="property">_h_value</span> = h; <span class="variable language_">this</span>.<span class="property">labelH</span>.<span class="property">string</span> = h+<span class="string">&quot;&quot;</span>; &#125;</span><br><span class="line">    <span class="comment">// F</span></span><br><span class="line">    <span class="keyword">private</span> <span class="attr">_f_value</span>:<span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">get</span> <span class="title function_">FValue</span>()&#123; <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_f_value</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">set</span> <span class="title function_">FValue</span>(<span class="params"><span class="attr">f</span>: <span class="built_in">number</span></span>)&#123; <span class="variable language_">this</span>.<span class="property">_f_value</span> = f; <span class="variable language_">this</span>.<span class="property">labelF</span>.<span class="property">string</span> = f+<span class="string">&quot;&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">set</span> <span class="title function_">ClickEnable</span>(<span class="params"><span class="attr">enabled</span>: <span class="built_in">boolean</span></span>)&#123; <span class="variable language_">this</span>.<span class="property">button</span>.<span class="property">enabled</span> = enabled; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">onLoad</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">labelG</span>.<span class="property">string</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">labelH</span>.<span class="property">string</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">labelF</span>.<span class="property">string</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">sprite</span> = <span class="variable language_">this</span>.<span class="title function_">getComponent</span>(<span class="title class_">Sprite</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">button</span> = <span class="variable language_">this</span>.<span class="title function_">getComponent</span>(<span class="title class_">Button</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">NodeType</span> = <span class="variable language_">this</span>.<span class="property">_nodeType</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">button</span>.<span class="property">enabled</span> = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">button</span>.<span class="property">node</span>.<span class="title function_">on</span>(<span class="title class_">Button</span>.<span class="property">EventType</span>.<span class="property">CLICK</span>,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="title class_">Messenger</span>.<span class="property">BroadcastT</span>&lt;<span class="title class_">MapNode</span>&gt;(<span class="string">&quot;click_node&quot;</span>, <span class="variable language_">this</span>);</span><br><span class="line">        &#125;, <span class="variable language_">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">Init</span>(<span class="attr">x</span>:<span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span>)&#123;<span class="variable language_">this</span>.<span class="property">PosX</span> = x; <span class="variable language_">this</span>.<span class="property">PosY</span> = y; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置颜色</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">SetColor</span>(<span class="attr">color</span>:<span class="title class_">Color</span>)&#123; <span class="variable language_">this</span>.<span class="property">sprite</span>.<span class="property">color</span> = color; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title class_">GetKey</span>(): <span class="built_in">string</span>&#123; <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.PosX&#125;</span>_<span class="subst">$&#123;<span class="variable language_">this</span>.PosY&#125;</span>`</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="对于长距离导航"><a href="#对于长距离导航" class="headerlink" title="对于长距离导航"></a>对于长距离导航</h2><p>如果距离比较远，中间的障碍物比较多时，寻路所需时间就会逐渐增加，甚至达到CPU的瓶颈，导致卡顿。可以提前计算出一些常用路径存放到数据文件中。如下图中所示<br>A、B点之间的路径为离线计算好的。现在想要C点走到D点，只需要开始C点找到最近的导航点A，结束点找到导航点B.然后 C—&gt;A—&gt;B—&gt;D。<br><img src="https://img.tonychenn.cn/2024/q1/a_star_1.svg"></p>
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#A%E6%98%9F%E7%AE%97%E6%B3%95%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%A0%E4%B8%AA%E5%8F%98%E9%87%8F"><span class="post-toc-text">A星算法用到的几个变量</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%BA%A6%E5%AE%9A"><span class="post-toc-text">约定</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="post-toc-text">算法流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96Demo"><span class="post-toc-text">可视化Demo</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">代码实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%BC%98%E5%8C%96"><span class="post-toc-text">优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AF%B9%E4%BA%8E%E9%95%BF%E8%B7%9D%E7%A6%BB%E5%AF%BC%E8%88%AA"><span class="post-toc-text">对于长距离导航</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>CSharp与CPP交互之P/Invoke - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSharp与CPP交互之P/Invoke - 默然的博客 | 默然的博客">
+    
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">CSharp与CPP交互之P/Invoke</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>术业有专攻，当然编程语言也是这样。而不同的应用场景下单一语言或者并不能满足需求。比如：一些性能要求高的模块可以用CPP实现。常见的如游戏开发引擎，譬如Unity底层使用CPP开发，上层使用C#包装，充分利用两种语言的优势。又比如一些已有的CPP库没有对应语言的库供使用，那么互操作的重要性就体现出来了。</p>
+<h1 id="C-与CPP互操作的方式"><a href="#C-与CPP互操作的方式" class="headerlink" title="C#与CPP互操作的方式"></a>C#与CPP互操作的方式</h1><ol>
+<li><p>P&#x2F;Invoke 是可用于从托管代码访问非托管库中的结构、回调和函数的一种技术。它允许托管代码调用非托管代码。对于C#通过P&#x2F;Invoke可以很方便的实现对CPP方法的调用。但是对于CPP中比较复杂的数据类型时，操作比较繁琐。</p>
+</li>
+<li><p>C++&#x2F;CLI 是微软对C++语言做的拓展，允许C++与托管语言的相互操作。非常适合处理非常复杂的数据类型和对象。但语法比较复杂，写起来比较难受，并且只支持windows平台。</p>
+</li>
+<li><p>比较新的方案：Mono&#x2F;CoreCLR。没自己绑定过，后续研究了再补充。</p>
+</li>
+<li><p>COM互操作，C++&#x2F;WinRT 也没用过。</p>
+</li>
+</ol>
+<h1 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h1><p>下面是将cocos2dx中Node的<code>getTag/setTag</code>方法导出的一个实例。</p>
+<ol>
+<li>定义一个方法，方法名最好与CPP中保持一致（当然也可以在DllImport特性中指定），参数与CPP中保持一致。</li>
+<li>使用<code>extern</code>标记此方法，告诉编译器此方法在Native中实现。因此也不需要写方法体。</li>
+<li>给当前方法加一个<code>DllImport</code>特性，并制定从哪里导入，和调用约定。</li>
+</ol>
+<p>DllImport 的一些常用参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CallingConvention</td>
+<td>指定调用约定,调用方需要与被调用方保持一致，如：Cdecl、StdCall</td>
+</tr>
+<tr>
+<td>EntryPoint</td>
+<td>导入的方法名</td>
+</tr>
+<tr>
+<td>CharSet</td>
+<td>指定字符集，确保非托管字符串到非托管字符串不会乱码，如：CharSet.Ansi、CharSet.Unicode</td>
+</tr>
+<tr>
+<td>SetLastError</td>
+<td>约定调用失败了获取系统反回的错误码</td>
+</tr>
+</tbody></table>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入链接库xgame.dll，因为 getChildrenCount方法在xgame.dll中</span></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;xgame.dll&quot;</span>, CallingConvention = CallingConvention.Cdecl, EntryPoint = <span class="string">&quot;getTag&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="built_in">int</span> <span class="title">GetTag</span>(<span class="params">IntPtr node</span>)</span>;</span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;&quot;</span>xgame.dll<span class="string">&quot;&quot;</span>, CallingConvention = CallingConvention.Cdecl, EntryPoint = <span class="string">&quot;setTag&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">SetTag</span>(<span class="params">IntPtr node, <span class="built_in">int</span> tag</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>那么C++中的导出方法该如何实现呢？</p>
+<ol>
+<li><code>extern &quot;C&quot;</code> 约定使用C语言的方法生成方法名，不然导出的方法名乱七八糟，可以自行使用dumpbin查看。</li>
+<li>使用 <code>__declspec(dllexport)</code>标记需要导出的方法。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    __declspec(dllexport) <span class="function"><span class="type">int</span> <span class="title">getTag</span><span class="params">(<span class="type">void</span>* obj)</span></span>&#123;</span><br><span class="line">        <span class="type">const</span> cocos2d::Node* node = <span class="built_in">static_cast</span>&lt;cocos2d::Node*&gt;(obj);</span><br><span class="line">	    <span class="keyword">return</span> node-&gt;<span class="built_in">getTag</span>();</span><br><span class="line">    &#125;</span><br><span class="line">	__declspec(dllexport) <span class="function"><span class="type">void</span> <span class="title">setTag</span><span class="params">(<span class="type">void</span>* obj, <span class="type">int</span> tag)</span></span>&#123;</span><br><span class="line">        cocos2d::Node* node = <span class="built_in">static_cast</span>&lt;cocos2d::Node*&gt;(obj);</span><br><span class="line">	    node-&gt;<span class="built_in">setTag</span>(tag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个例子展示了int参数的传递，其他的数据类型对应如下：</p>
+<table>
+<thead>
+<tr>
+<th>C#</th>
+<th>CPP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int&#x2F;float&#x2F;double</td>
+<td>int&#x2F;float&#x2F;double</td>
+</tr>
+<tr>
+<td>sbyte</td>
+<td>char</td>
+</tr>
+<tr>
+<td>string</td>
+<td>char*</td>
+</tr>
+<tr>
+<td>IntPtr</td>
+<td>void*</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>bool</td>
+</tr>
+</tbody></table>
+<h1 id="string类型的传递"><a href="#string类型的传递" class="headerlink" title="string类型的传递"></a>string类型的传递</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CPP</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    __declspec(dllexport) <span class="function"><span class="type">const</span> <span class="type">char</span>* <span class="title">getName</span><span class="params">(<span class="type">void</span>* obj)</span></span>&#123;</span><br><span class="line">        <span class="type">const</span> cocos2d::Node* node = <span class="built_in">static_cast</span>&lt;cocos2d::Node*&gt;(obj);</span><br><span class="line">        <span class="type">const</span> <span class="type">char</span>* name = node-&gt;<span class="built_in">getName</span>().<span class="built_in">c_str</span>();</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    __declspec(dllexport) <span class="function"><span class="type">void</span> <span class="title">setName</span><span class="params">(<span class="type">void</span>* obj, <span class="type">const</span> <span class="type">char</span>* name)</span></span>&#123;</span><br><span class="line">        cocos2d::Node* node = <span class="built_in">static_cast</span>&lt;cocos2d::Node*&gt;(nodeObj);</span><br><span class="line">        node-&gt;<span class="built_in">setName</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C#</span></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;xgame.dll&quot;</span>, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, EntryPoint = <span class="string">&quot;getName&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> IntPtr <span class="title">getNameNative</span>(<span class="params">IntPtr nodePtr</span>)</span>;</span><br><span class="line"></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;xgame.dll&quot;</span>, CallingConvention = CallingConvention.Cdecl, EntryPoint = <span class="string">&quot;setName&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">setNameNative</span>(<span class="params">IntPtr nodePtr, [MarshalAs(UnmanagedType.LPStr</span>)] <span class="built_in">string</span> name)</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">GetName</span>(<span class="params">IntPtr node</span>)</span> &#123; <span class="keyword">return</span> Marshal.PtrToStringAnsi(getNameNative(node)); &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetName</span>(<span class="params">IntPtr node, <span class="built_in">string</span> <span class="keyword">value</span></span>)</span> &#123; setNameNative(node, <span class="keyword">value</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="数组的传递"><a href="#数组的传递" class="headerlink" title="数组的传递"></a>数组的传递</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">	<span class="comment">/// 获取子节点</span></span><br><span class="line">	<span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">	<span class="comment">/// &lt;param name=&quot;node&quot;&gt;&lt;/param&gt;</span></span><br><span class="line">	<span class="comment">/// &lt;param name=&quot;outPtr&quot;&gt;子节点数组指针&lt;/param&gt;</span></span><br><span class="line">	<span class="comment">/// &lt;param name=&quot;outCount&quot;&gt;子节点数量&lt;/param&gt;</span></span><br><span class="line">    __declspec(dllexport) <span class="function"><span class="type">void</span> <span class="title">getChildren</span><span class="params">(cocos2d::Node* node, cocos2d::Node*** outPtr, <span class="type">int</span>* outCount)</span></span>&#123;</span><br><span class="line">		<span class="keyword">auto</span>&amp; array = node-&gt;<span class="built_in">getChildren</span>();</span><br><span class="line">		<span class="type">int</span> n = <span class="built_in">getChildrenCount</span>(node);</span><br><span class="line">		*outCount = n;</span><br><span class="line"></span><br><span class="line">		*outPtr = (n == <span class="number">0</span>) ? <span class="literal">nullptr</span> : &amp;(*array.<span class="built_in">begin</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">DllImport(<span class="string">&quot;xgame.dll&quot;</span>, CallingConvention = CallingConvention.Cdecl)</span>]</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">getChildren</span>(<span class="params">IntPtr node, <span class="keyword">out</span> IntPtr data, <span class="keyword">out</span> <span class="built_in">int</span> count</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">unsafe</span> <span class="keyword">static</span> IntPtr[] <span class="title">GetChildren</span>(<span class="params">IntPtr node</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	IntPtr headPtr = IntPtr.Zero;</span><br><span class="line">	<span class="built_in">int</span> childCount = <span class="number">0</span>;</span><br><span class="line">	getChildren(node, <span class="keyword">out</span> headPtr, <span class="keyword">out</span> childCount);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	Span&lt;IntPtr&gt; span = (headPtr == IntPtr.Zero || childCount &lt;= <span class="number">0</span>) ?</span><br><span class="line">						Span&lt;IntPtr&gt;.Empty : <span class="keyword">new</span> Span&lt;IntPtr&gt;((<span class="keyword">void</span>*)headPtr, childCount);</span><br><span class="line">	IntPtr[] childArray = <span class="keyword">new</span> IntPtr[childCount];</span><br><span class="line">	span.CopyTo(childArray);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> childArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="自定义对象的传递"><a href="#自定义对象的传递" class="headerlink" title="自定义对象的传递"></a>自定义对象的传递</h1><p>这里将子节点包装成一个对象再进行传递</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Cocos2dNodeArray</span> &#123; cocos2d::Node** data; <span class="type">size_t</span> size; &#125;;</span><br><span class="line">    <span class="comment">//CPP</span></span><br><span class="line">    __declspec(dllexport) <span class="function">Cocos2dNodeArray <span class="title">getChildren</span><span class="params">(cocos2d::Node* node)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">const</span> cocos2d::Vector&lt;cocos2d::Node*&gt;&amp; array = node-&gt;<span class="built_in">getChildren</span>();</span><br><span class="line">        <span class="type">const</span> <span class="type">ssize_t</span> count = node-&gt;<span class="built_in">getChildrenCount</span>();</span><br><span class="line">        Cocos2dNodeArray result;</span><br><span class="line">        result.size = count;</span><br><span class="line">        result.data = (cocos2d::Node**)<span class="built_in">malloc</span>(count * <span class="built_in">sizeof</span>(cocos2d::Node*));</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            result.data[i] = array.<span class="built_in">at</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C#</span></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;xgame.dll&quot;</span>, CallingConvention = CallingConvention.Cdecl)</span>]</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> Cocos2dNodeArray <span class="title">getChildren</span>(<span class="params">IntPtr node</span>)</span>;</span><br><span class="line"></span><br><span class="line">[<span class="meta">StructLayout(LayoutKind.Sequential)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> Cocos2dNodeArray &#123; <span class="keyword">public</span> IntPtr data; <span class="keyword">public</span> <span class="built_in">int</span> count; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IntPtr[] <span class="title">GetChildren</span>(<span class="params">IntPtr node</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    Cocos2dNodeArray array = getChildren(node);</span><br><span class="line">    <span class="built_in">int</span> count = array.count;</span><br><span class="line"></span><br><span class="line">    IntPtr[] ptrArray = <span class="keyword">new</span> IntPtr[array.count];</span><br><span class="line">    Marshal.Copy(array.data, ptrArray, <span class="number">0</span>, array.count);</span><br><span class="line">    <span class="keyword">return</span> ptrArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="C-传递方法委托到CPP"><a href="#C-传递方法委托到CPP" class="headerlink" title="C#传递方法委托到CPP"></a>C#传递方法委托到CPP</h1><p>这里是给cocos2dx的所有节点注入下C#的回调</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">UnmanagedFunctionPointer(CallingConvention.Cdecl)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">OnCtorCallback</span>(<span class="params">IntPtr parent, IntPtr child</span>)</span>;</span><br><span class="line"></span><br><span class="line">[<span class="meta">DllImport(<span class="string">&quot;xgame.dll&quot;</span>, CallingConvention = CallingConvention.Cdecl，EntryPoint = <span class="string">&quot;setCtorCallback&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">SetCtorCallback</span>(<span class="params">OnCtorCallback ctor</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注入委托</span></span><br><span class="line">CCNativeNode.SetCtorCallback((parentPtr, childPtr) =&gt; &#123; <span class="comment">/** TODO */</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>CPP 中使用委托</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CCNodeAPI.h</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(*CtorCallback)</span><span class="params">(<span class="type">void</span>* parent, <span class="type">void</span>* child)</span></span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    __declspec(dllexport) <span class="function"><span class="type">void</span> <span class="title">setCtorCallback</span><span class="params">(CtorCallback callback)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Node::<span class="built_in">setCSharpCtorCallback</span>([callback](Node* parent, Node* child) &#123;<span class="keyword">if</span> (callback) <span class="built_in">callback</span>(parent, child); &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// cocos2dx Node.h</span></span><br><span class="line"><span class="type">static</span> std::function&lt;<span class="type">void</span>(Node*, Node*)&gt; _onCSharpCtorCallback;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">setCSharpCtorCallback</span><span class="params">(<span class="type">const</span> std::function&lt;<span class="type">void</span>(Node*, Node*)&gt;&amp; callback)</span> </span>&#123; _onCSharpCtorCallback = callback; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// cocos2dx Node.cpp</span></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">std::function&lt;<span class="type">void</span>(Node*, Node*)&gt; Node::_onCSharpCtorCallback = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行回调</span></span><br><span class="line"><span class="function">Node * <span class="title">Node::create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node * ret = <span class="built_in">new</span> (std::nothrow) <span class="built_in">Node</span>();</span><br><span class="line">    <span class="comment">// ...省略...</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> CC_BIND_CSHARP</span></span><br><span class="line">    <span class="keyword">if</span> (Node::_onCSharpCtorCallback) Node::_onCSharpCtorCallback(ret-&gt;_parent, ret);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="为啥要用C语言的方式导出？"><a href="#为啥要用C语言的方式导出？" class="headerlink" title="为啥要用C语言的方式导出？"></a>为啥要用C语言的方式导出？</h2><p>本地人不小心加了命名空间，导致C#一直找不到native 方法，被坑了，通过dumpbin查看发现CPP导出的方法名比较乱，如下。<br>顺便记录下查看dll的所有导出方法：<code>dumpbin \EXPORTS dll_path</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 不约定的如下：</span><br><span class="line">487  1E6 00472812 ?clone@Waves3D@cocos2d@@QBEPAVGrid3DAction@2@XZ = @ILT+18445(?clone@Waves3D@cocos2d@@QBEPAVGrid3DAction@2@XZ)</span><br><span class="line"></span><br><span class="line">// 约定C语言的如下：</span><br><span class="line">525  20C 0048AA8E getName = @ILT+117385(_getName)</span><br><span class="line">542  21D 00478C0D setName = @ILT+44040(_setName)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-%E4%B8%8ECPP%E4%BA%92%E6%93%8D%E4%BD%9C%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="post-toc-text">C#与CPP互操作的方式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="post-toc-text">一个简单的例子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#string%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%A0%E9%80%92"><span class="post-toc-text">string类型的传递</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E4%BC%A0%E9%80%92"><span class="post-toc-text">数组的传递</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BC%A0%E9%80%92"><span class="post-toc-text">自定义对象的传递</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-%E4%BC%A0%E9%80%92%E6%96%B9%E6%B3%95%E5%A7%94%E6%89%98%E5%88%B0CPP"><span class="post-toc-text">C#传递方法委托到CPP</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%B6%E4%BB%96"><span class="post-toc-text">其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%BA%E5%95%A5%E8%A6%81%E7%94%A8C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%BC%E5%87%BA%EF%BC%9F"><span class="post-toc-text">为啥要用C语言的方式导出？</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>

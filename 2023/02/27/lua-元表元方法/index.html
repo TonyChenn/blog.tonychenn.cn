@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    
+
+    <title>lua-元表元方法 - 默然的博客</title>
+
+    <meta property="og:url" content="https://blog.tonychenn.cn">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="lua-元表元方法 - 默然的博客 | 默然的博客">
+    
+    
+
+    
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--https://github.com/Dreamer365/FunLazy-->
+    <script src="https://unpkg.com/funlazy@latest"></script>
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    
+<script src="/js/mdm.js"></script>
+
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script data-ad-client="ca-pub-8181303774570877" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+<!--header_bar-->
+<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+    <div class="mdui-toolbar mdui-color-indigo">  
+        <a class="mdui-btn mdui-btn-icon mdui-hidden-sm-up" mdui-menu="{target: '#example-2'}">
+            <i class="mdui-icon material-icons">menu</i>
+        </a>
+        <ul class="mdui-menu" id="example-2">
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">home</i>
+                    首页
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="https://tonychenn.cn" class="mdui-ripple"  target='_blank'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">public</i>
+                    主站
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/tags" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">local_offer</i>
+                    标签
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/archives" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">library_books</i>
+                    归档
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+                <li class="mdui-menu-item">
+                    
+                    <a href="/about" class="mdui-ripple"  target='_self'>
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">error_outline</i>
+                    关于
+                </a>
+                </li>
+                <li class="mdui-divider"></li>
+            
+        </ul>
+        <!--大屏-->
+        
+            
+            <a href="/" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                首页
+            </a>
+        
+            
+            <a href="https://tonychenn.cn" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_blank'>
+                主站
+            </a>
+        
+            
+            <a href="/tags" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                标签
+            </a>
+        
+            
+            <a href="/archives" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                归档
+            </a>
+        
+            
+            <a href="/about" class="mdui-typo-title mdui-ripple mdui-ripple-white mdui-hidden-xs" target='_self'>
+                关于
+            </a>
+        
+        <div class="mdui-toolbar-spacer"></div>
+
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+
+        <!--分享-->
+        
+        <button class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#share_menu'}">
+            <i class="mdui-icon material-icons">share</i>
+        </button>
+        
+        <ul class="mdui-menu" id="share_menu">
+            
+                <li class="mdui-menu-item">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        facebook
+                    </a>
+                </li>
+            
+            
+            
+                <li class="mdui-menu-item">
+                    <a href="https://connect.qq.com/widget/shareqq/index.html?site=默然的博客&title=about&summary=&pics=https://blog.tonychenn.cnundefined&url=https://blog.tonychenn.cn/about/index.html" target="_blank" class="mdui-ripple">
+                        QQ
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://twitter.com/intent/tweet?text=about&url=https://blog.tonychenn.cn//about/index.html&via=TonyChenn" target="_blank" class="mdui-ripple">
+                        twitter
+                    </a>
+                </li>
+            
+        
+            
+                <li class="mdui-menu-item">
+                    <a href="https://service.weibo.com/share.php?appkey=&title=about&url=https://blog.tonychenn.cn//about/index.html&pic=&searchPic=false&style=simple" target="_blank" class="mdui-ripple">
+                        weibo
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://telegram.me/share/url?url=https://blog.tonychenn.cn//about/index.html&text=about" target="_blank" class="mdui-ripple">
+                        telegram
+                    </a>
+                </li>
+            
+
+            
+                <li class="mdui-menu-item">
+                    <a href="https://plus.google.com/share?url=https://blog.tonychenn.cn//about/index.html" target="_blank" class="mdui-ripple">
+                        googleplus
+                    </a>
+                </li>
+              
+        
+              
+                <li class="mdui-menu-item">
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://blog.tonychenn.cn//about/index.html&title=about" target="_blank" class="mdui-ripple">
+                        linkedin
+                    </a>
+                </li>
+              
+            </ul>
+        
+        
+        <button onclick="themeChange()"
+            class="mdui-btn mdui-btn-icon mdui-ripple mdui-text-color-white" 
+            mdui-tooltip="{content: '切换亮/暗色模式'}">
+            <i class="mdui-icon material-icons" id="themeIcon">brightness_7</i>
+        </button>
+        <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+    </div>
+  </div>
+<!--Header-->
+
+
+<div class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="mdui-card-media" style="overflow: hidden;">
+        <div class="header-content">
+            <span class="header_title">lua-元表元方法</span></br>
+            <p id="hitokoto">一言加载中...</p>
+        </div>
+    </div>
+</div>
+
+<div class="mdui-center article-section" id="content-inner">
+  <!--博文详细内容-->
+<div class="">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <div class="article article-bg mdui-center">
+    <div class="article-info">
+      <!--文章内容广告-->
+      
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      
+      
+      <div>
+      <h1 id="元表元方法"><a href="#元表元方法" class="headerlink" title="元表元方法"></a>元表元方法</h1><p>lua中每个值都可以拥有元表（但不一定有）。元表也是普通表，只是用来记录数据在某些特定条件下的操作行为。如: 对表进行相加操作时，lua会判断是否存在<code>__add</code>的元方法，并对其进行调用。可以通过<code>setmetatable(table,metatable)</code>的方式设置元表。通过<code>getmetatable(table)</code>获取元表。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 两个表相加</span></span><br><span class="line">t1, t2 = &#123;num = <span class="number">1</span>&#125;, &#123;num = <span class="number">2</span>&#125;</span><br><span class="line">mt = &#123; <span class="built_in">__add</span> = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span></span> <span class="keyword">return</span> &#123;num = a.num + b.num&#125; <span class="keyword">end</span> &#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t1, mt)</span><br><span class="line"><span class="built_in">setmetatable</span>(t2, mt)</span><br><span class="line"></span><br><span class="line">t3 = t1 + t2</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;result = &quot;</span>..t3.num)</span><br><span class="line"><span class="comment">-- &gt; result = 3</span></span><br></pre></td></tr></table></figure>
+
+<p>数学计算相关部分元方法的key如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__add: +(加)        __sub: -(减)        __mul: x(乘)</span><br><span class="line">__div: ÷(除)        __mod: %(取余)      __unm: -(相反数)</span><br><span class="line">__concat: ..(连接)  __eq: ==(相等)      __lt: &lt;(小于)</span><br><span class="line">__le: &gt;(大于)       __pow: ^(乘幂)</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<li>如果两个表具有相同的元方法，那在执行此计算时没有问题。</li>
+<li>如果两个表具有不同的元方法：<ul>
+<li>第一个值有元表，以第一个为准</li>
+<li>第一个没，第二个有元表，以第二个为准</li>
+<li>都没有：无法计算，报错</li>
+</ul>
+</li>
+</ol>
+<h1 id="一些特殊的元方法"><a href="#一些特殊的元方法" class="headerlink" title="一些特殊的元方法"></a>一些特殊的元方法</h1><h2 id="tostring"><a href="#tostring" class="headerlink" title="__tostring"></a>__tostring</h2><p>用来修改表的输出行为。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;<span class="number">200</span>,<span class="number">300</span>,<span class="number">400</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__tostring</span> = <span class="function"><span class="keyword">function</span><span class="params">(table)</span></span></span><br><span class="line">    <span class="keyword">local</span> result = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(<span class="built_in">table</span>) <span class="keyword">do</span></span><br><span class="line">        result = result .. k .. <span class="string">&quot; : &quot;</span> .. v..<span class="string">&quot;\n&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; 1 : 200</span></span><br><span class="line"><span class="comment">--&gt; 2 : 300</span></span><br><span class="line"><span class="comment">--&gt; 3 : 400</span></span><br><span class="line"><span class="comment">--&gt; </span></span><br></pre></td></tr></table></figure>
+<h2 id="index"><a href="#index" class="headerlink" title="__index"></a>__index</h2><p><strong>–&gt;用于查询访问&lt;–</strong>。当通过<code>key</code>访问表中数据时，如果表中这个key是没有值的，那么在<code>__index</code>元方法存在时就会访问元方法。</p>
+<ul>
+<li>如果<code>__index</code>元方法是一张表。就会从这张表中取数据</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;name = <span class="string">&quot;tom&quot;</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = &#123; name = <span class="string">&quot;default&quot;</span>, age = <span class="number">0</span> &#125;&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.name)</span><br><span class="line"><span class="built_in">print</span>(t.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; tom</span></span><br><span class="line"><span class="comment">--&gt; 0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果<code>__index</code>元方法是一个function。那么就会调用此方法。</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span><span class="params">(table, key)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;表中不存在key：&quot;</span>..key)  </span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.count)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; 表中不存在key：count</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="newindex"><a href="#newindex" class="headerlink" title="__newindex"></a>__newindex</h2><p><strong>–&gt;用于更新修改&lt;–</strong>。当对一个当前不存在的key赋值时，如果存在<code>__newindex</code>元方法，会调用此元方法而不是直接赋值。同样<code>__newindex</code>可以是方法也可以是一个表。</p>
+<ul>
+<li>是一个方法。</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;k1 = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__newindex</span> = <span class="function"><span class="keyword">function</span><span class="params">(_table, k, v)</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请不要尝试给&quot;</span>..k..<span class="string">&quot;赋值&quot;</span>)</span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.k1)</span><br><span class="line">t.k2 = <span class="string">&quot;Kitty&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t.k2)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; Tom</span></span><br><span class="line"><span class="comment">--&gt; 请不要尝试给k2赋值</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是表。添加的数据会添加在元方法的表中(如下的mt中)，而不是t中。</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;k1 = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">mt = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__newindex</span> = mt&#125;)</span><br><span class="line"><span class="built_in">print</span>(t.k1)</span><br><span class="line">t.k2 = <span class="string">&quot;Kitty&quot;</span></span><br><span class="line"><span class="built_in">print</span>(t.k2)</span><br><span class="line"><span class="built_in">print</span>(mt.k2)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; Tom</span></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br><span class="line"><span class="comment">--&gt; Kitty</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="忽略元表"><a href="#忽略元表" class="headerlink" title="忽略元表"></a>忽略元表</h2><p>当我们需要忽略<code>__index</code>和<code>__newindex</code>时。</p>
+<ul>
+<li>可以通过<code>rawget</code>函数忽略__index元方法，存粹的调用表中的值。使用<code>rawset</code>函数忽略__newindex元方法，纯粹的给表赋值。</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;name = <span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">mt1 = &#123;age = <span class="number">0</span>&#125;</span><br><span class="line">mt2 = <span class="function"><span class="keyword">function</span><span class="params">(t, k, v)</span></span> <span class="built_in">print</span>(<span class="string">&quot;不许赋值！&quot;</span>) <span class="keyword">end</span></span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__index</span> = mt1 ,<span class="built_in">__newindex</span> = mt2&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">rawget</span>(t, <span class="string">&quot;age&quot;</span>))</span><br><span class="line"><span class="built_in">rawset</span>(t, <span class="string">&quot;age&quot;</span>, <span class="number">999</span>)</span><br><span class="line"><span class="built_in">print</span>(t.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; nil</span></span><br><span class="line"><span class="comment">--&gt; 999</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="一个出自网络的例子"><a href="#一个出自网络的例子" class="headerlink" title="一个出自网络的例子"></a>一个出自网络的例子</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> smartMan=&#123;name=<span class="string">&quot;none&quot;</span>&#125;</span><br><span class="line"><span class="keyword">local</span> other = &#123;name = <span class="string">&quot;大家好&quot;</span>&#125; </span><br><span class="line"><span class="keyword">local</span> t1=&#123;&#125;</span><br><span class="line"><span class="keyword">local</span> mt = &#123; <span class="built_in">__index</span> = smartMan, <span class="built_in">__newindex</span> = other&#125; </span><br><span class="line"><span class="built_in">setmetatable</span>(t1, mt); </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;other的名字,赋值前:&quot;</span> .. other.name); </span><br><span class="line">t1.name = <span class="string">&quot;小偷&quot;</span>; </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;other的名字,赋值后:&quot;</span> .. other.name); </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;t1的名字:&quot;</span> .. t1.name); </span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; other的名字,赋值前:大家好</span></span><br><span class="line"><span class="comment">--&gt; other的名字,赋值后:小偷</span></span><br><span class="line"><span class="comment">--&gt; t1的名字:none</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="call"><a href="#call" class="headerlink" title="__call"></a>__call</h2><p>把表当作方法调用时会被调用。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t = &#123;&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(t, &#123;<span class="built_in">__call</span> = <span class="function"><span class="keyword">function</span><span class="params">(self, data)</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello &quot;</span>..data</span><br><span class="line"><span class="keyword">end</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(t(<span class="string">&quot;jobs&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; hello jobs</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+      
+    <div class="mdui-container">
+        <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"
+            mdui-dialog="{target: '#reward-dialog'}">赏</button>
+        <div class="mdui-dialog" id="reward-dialog">
+            <div class="reward-title">写博客不易，请我喝杯咖啡？ </div>
+            <div class="mdui-divider"></div>
+            <div class="mdui-tab mdui-tab-full-width" id="reward-tab">
+                <a href="#reward-alipay" class="mdui-ripple">支付宝</a>
+                <a href="#reward-wechat" class="mdui-ripple">微信</a>
+            </div>
+            <div id="reward-alipay">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="mdui-center noclick">
+            </div>
+            <div id="reward-wechat">
+                <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="mdui-center noclick">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var tab = new mdui.Tab('#reward-tab');
+        mdui.$('#reward-dialog').on('open.mdui.dialog', function () {
+        tab.handleUpdate();
+        });
+    </script>
+
+
+    </div>
+  </div>
+
+  
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<div class="article article-bg talk-info mdui-center">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</div>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%85%83%E8%A1%A8%E5%85%83%E6%96%B9%E6%B3%95"><span class="post-toc-text">元表元方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="post-toc-text">注意</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%9A%84%E5%85%83%E6%96%B9%E6%B3%95"><span class="post-toc-text">一些特殊的元方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tostring"><span class="post-toc-text">__tostring</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#index"><span class="post-toc-text">__index</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#newindex"><span class="post-toc-text">__newindex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BF%BD%E7%95%A5%E5%85%83%E8%A1%A8"><span class="post-toc-text">忽略元表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E4%B8%AA%E5%87%BA%E8%87%AA%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="post-toc-text">一个出自网络的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#call"><span class="post-toc-text">__call</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+</div>
+
+
+  <!--footer-->
+  <footer class="mdui-color-indigo">
+    <div class="mdui-container">
+        <div style="text-align: center; padding: 20px;">
+            <div >
+                Copyright &copy;
+                TonyChenn&nbsp&nbsp2025
+                &nbspTheme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" 
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true" 
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+</div>
+
+<!--goTop-->
+<div class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-pink">
+    <i class="mdui-icon material-icons">arrow_upward</i>
+</div>
+</html>
