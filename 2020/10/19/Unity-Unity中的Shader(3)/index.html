@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Unity-Unity中的Shader(3)｜默然的博客</title>
+<meta name="description" content="Unity Shader定义了渲染所需的各种代码（如片元着色器，顶点着色器），属性（如使用了哪些纹理）和指令（渲染和标签设置），而材质允许我们调节这些属性，并将最终结果赋给对应的模型">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2020/10/19/Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2020/10/19/Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-Unity中的Shader(3)｜默然的博客">
+<meta property="og:description" content="Unity Shader定义了渲染所需的各种代码（如片元着色器，顶点着色器），属性（如使用了哪些纹理）和指令（渲染和标签设置），而材质允许我们调节这些属性，并将最终结果赋给对应的模型">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unity-Unity中的Shader(3)｜默然的博客">
+<meta name="twitter:description" content="Unity Shader定义了渲染所需的各种代码（如片元着色器，顶点着色器），属性（如使用了哪些纹理）和指令（渲染和标签设置），而材质允许我们调节这些属性，并将最终结果赋给对应的模型">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2020-10-19T07:32:00.000Z">
+<meta property="article:modified_time" content="2020-10-19T07:32:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity-Unity中的Shader(3)","description":"Unity Shader定义了渲染所需的各种代码（如片元着色器，顶点着色器），属性（如使用了哪些纹理）和指令（渲染和标签设置），而材质允许我们调节这些属性，并将最终结果赋给对应的模型","url":"https://blog.tonychenn.cn/2020/10/19/Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2020/10/19/Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2020-10-19T07:32:00.000Z","dateModified":"2020-10-19T07:32:00.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F19%2FUnity-Unity%25E4%25B8%25AD%25E7%259A%2584Shader(3)%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)&amp;summary=Unity%20Shader%E5%AE%9A%E4%B9%89%E4%BA%86%E6%B8%B2%E6%9F%93%E6%89%80%E9%9C%80%E7%9A%84%E5%90%84%E7%A7%8D%E4%BB%A3%E7%A0%81%EF%BC%88%E5%A6%82%E7%89%87%E5%85%83%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%8C%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%EF%BC%89%EF%BC%8C%E5%B1%9E%E6%80%A7%EF%BC%88%E5%A6%82%E4%BD%BF%E7%94%A8%E4%BA%86%E5%93%AA%E4%BA%9B%E7%BA%B9%E7%90%86%EF%BC%89%E5%92%8C%E6%8C%87%E4%BB%A4%EF%BC%88%E6%B8%B2%E6%9F%93%E5%92%8C%E6%A0%87%E7%AD%BE%E8%AE%BE%E7%BD%AE%EF%BC%89%EF%BC%8C%E8%80%8C%E6%9D%90%E8%B4%A8%E5%85%81%E8%AE%B8%E6%88%91%E4%BB%AC%E8%B0%83%E8%8A%82%E8%BF%99%E4%BA%9B%E5%B1%9E%E6%80%A7%EF%BC%8C%E5%B9%B6%E5%B0%86%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C%E8%B5%8B%E7%BB%99%E5%AF%B9%E5%BA%94%E7%9A%84%E6%A8%A1%E5%9E%8B&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F19%2FUnity-Unity%25E4%25B8%25AD%25E7%259A%2584Shader(3)%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F19%2FUnity-Unity%25E4%25B8%25AD%25E7%259A%2584Shader(3)%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F19%2FUnity-Unity%25E4%25B8%25AD%25E7%259A%2584Shader(3)%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F19%2FUnity-Unity%25E4%25B8%25AD%25E7%259A%2584Shader(3)%2F&amp;text=Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F19%2FUnity-Unity%25E4%25B8%25AD%25E7%259A%2584Shader(3)%2F&amp;title=Unity-Unity%E4%B8%AD%E7%9A%84Shader(3)" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Unity-Unity中的Shader(3)</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2020-10-19T07:32:00.000Z">2020-10-19</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="UnityShader与材质"><a href="#UnityShader与材质" class="headerlink" title="UnityShader与材质"></a>UnityShader与材质</h2><p>Unity Shader定义了渲染所需的各种代码（如片元着色器，顶点着色器），属性（如使用了哪些纹理）和指令（渲染和标签设置），而材质允许我们调节这些属性，并将最终结果赋给对应的模型。</p>
+<h2 id="Unity中四种Shader模板"><a href="#Unity中四种Shader模板" class="headerlink" title="Unity中四种Shader模板"></a>Unity中四种Shader模板</h2><ul>
+<li><p>Standard Surface Shader<br>包含了标准光照模型的表面着色器模板，是一种基于物理的着色器系统，以模拟真实的方式模拟材质和灯光的关系，可以轻松的表现出各种金属反光效果。</p>
+</li>
+<li><p>Unlit Shader<br>基于顶点片段着色器，不受光照影响，包含雾效的基本顶点&#x2F;片元着色器，多用于特效，UI特效的制作。</p>
+</li>
+<li><p>Image Effect Shader<br>也是顶点片段着色器，只不过是为实现各种屏幕后处理效果提供的一个基本模板。</p>
+</li>
+<li><p>Compute Shader<br>是运行在显卡上的一段程序，独立于常规渲染管线，可以直接将GPU作为并行处理器加以利用，使GPU不仅具备3D渲染能力，也有其他运算能力。</p>
+</li>
+</ul>
+<h2 id="Unity-Shader结构"><a href="#Unity-Shader结构" class="headerlink" title="Unity Shader结构"></a>Unity Shader结构</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Custom/TestShader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    // 可以将属性暴露在Inspector面板</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        //属性</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // unity会根据目标平台从下面的SubShader中选择一个合适的运行</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        //显卡A的SubShader</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        //显卡B的SubShader</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 上面所有SubShader都不支持的话就用下面的Diffuse备用</span><br><span class="line">    FallBack &quot;Diffuse&quot;</span><br><span class="line">    CustomEditor &quot;EditorName&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Shader名称"><a href="#Shader名称" class="headerlink" title="Shader名称"></a>Shader名称</h2><p>shader文件的第一行设置Shader的名字，如上面的Shader的名字是：”Custom&#x2F;TestShader”.如果把路径名称放在Hidden下面的话，比如：<br>Shader “Hidden&#x2F;TestShader”<br>则表示在材质面板中隐藏此Shader,将无法通过材质下拉列表中找到它。这在做一些不需暴露的Shader时很有用处，可以使Shader下拉列表更精简整洁。</p>
+<h2 id="属性-Properties"><a href="#属性-Properties" class="headerlink" title="属性(Properties)"></a>属性(Properties)</h2><p>Properties语句块的作用仅仅是为了让这些属性可以出现在材质面板上。</p>
+<h3 id="Properties结构"><a href="#Properties结构" class="headerlink" title="Properties结构"></a>Properties结构</h3><ul>
+<li>_Name 变量名，必须以下划线开头</li>
+<li>display name 显示在材质面板上的名称</li>
+<li>PropertiesType 变量类型</li>
+<li>DefaultValue 默认值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Properties&#123;</span><br><span class="line">    _Name(&quot;display name&quot;,PropertiesType) = DefaultValue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h3><table>
+<thead>
+<tr>
+<th>属性类型</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Number相关</td>
+<td></td>
+</tr>
+<tr>
+<td>Int</td>
+<td>_Int(“数字”, Int) &#x3D; 1</td>
+</tr>
+<tr>
+<td>Int</td>
+<td>[IntRange]_Float(“整数”, Range( 0 , 10)) &#x3D; 1</td>
+</tr>
+<tr>
+<td>Toggle</td>
+<td>[Toggle]_Float(“我是Toggle”, Range( 0 , 1)) &#x3D; 1</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>_Float(“浮点数”, Float) &#x3D; 1.6</td>
+</tr>
+<tr>
+<td>Range(min, max)</td>
+<td>_Range(“Range”, Range(0.0, 1.0)) &#x3D; 0.5</td>
+</tr>
+<tr>
+<td>Vector,Color相关</td>
+<td></td>
+</tr>
+<tr>
+<td>Color</td>
+<td>_Color(“颜色”, Color) &#x3D; (1,1,1,1)</td>
+</tr>
+<tr>
+<td>Vector</td>
+<td>_Vector(“向量”, Vector) &#x3D;(1, 2, 3, 4)</td>
+</tr>
+<tr>
+<td>2D</td>
+<td>_2D (“2D”, 2D) &#x3D; “white” {}</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>_3D(“3D”, 3D) &#x3D; “black” {}</td>
+</tr>
+<tr>
+<td>Cube</td>
+<td>_Cube(“Cube”,Cube) &#x3D; “white”{}</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>[Enum(UnityEngine.Rendering.CullMode)]_Float(“CullMode”, Float) &#x3D; 1</td>
+</tr>
+</tbody></table>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://img.tonychenn.cn/2020/1019/UnityShaderProperties.jpg" alt="UnityShaderProperties.jpg"></p>
+<h2 id="SubShader"><a href="#SubShader" class="headerlink" title="SubShader"></a>SubShader</h2><p>每个Unity Shader最少包含1个SubShader块。当Unity需要加载当前Shader时会扫描所有的SubShader块，找到一个能在目标平台运行的SubShader,如果都不支持的话，会使用FallBack中指定的Unity Shader.</p>
+<h3 id="SubShader结构"><a href="#SubShader结构" class="headerlink" title="SubShader结构"></a>SubShader结构</h3><p>Subshader中定义了可选的Tags,RenderSetup(状态)，和一系列的Pass,每个Pass中都定义了一次完整的渲染流程，所以Pass数目过多会导致渲染性能下降，要减少使用Pass.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">&#123;</span><br><span class="line">    Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">    Pass&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h4><p>SubShader的Tags是一个键值对，键和值都是字符串类型。这些键值对用来告诉Unity渲染引擎：SubShader希望怎样以及合适渲染这个对象。标签类型表如下：</p>
+<ul>
+<li>Queue 渲染队列，指定对象什么时候渲染，值有：<ol>
+<li>Background（值为1000，此队列最先渲染）</li>
+<li>Geometry（值为2000，通常用于不透明物体）</li>
+<li>AlphaTest （值为2450）</li>
+<li>Transparent（值为3000，常用于半透明对象）</li>
+<li>Overlay（值为4000，常用于叠加效果）</li>
+</ol>
+</li>
+<li>RenderType</li>
+<li>DisableBatching</li>
+<li>ForceNoShadowCasting</li>
+<li>IgnoreProjector</li>
+<li>CanUseSpriteAtlas 是否可用于精灵(Sprites)打包图集，bool类型</li>
+<li>PreviewType 指明在材质面板如何预览该材质。材质的默认预览时个球形，可以设置为其他类型，如”Plane”,”SkyBox”</li>
+</ul>
+<h4 id="RenderSetup"><a href="#RenderSetup" class="headerlink" title="RenderSetup"></a>RenderSetup</h4><h4 id="Pass块"><a href="#Pass块" class="headerlink" title="Pass块"></a>Pass块</h4><h2 id="Fallback"><a href="#Fallback" class="headerlink" title="Fallback"></a>Fallback</h2><p>跟在SubShader最后面。作用是当上面所有SubShader都不能在当前显卡运行的话，就运行这个Shader吧。当然课可以通过<b>Fallback off</b>关闭Fallback,意思是当所有SubShader都不能用时，就不管它了，直接跳过。</p>
+<h2 id="CustomEditor"><a href="#CustomEditor" class="headerlink" title="CustomEditor"></a>CustomEditor</h2><p>自定义界面,与功能无关，暂时不管。</p>
+<h2 id="Shader和材质球的关系"><a href="#Shader和材质球的关系" class="headerlink" title="Shader和材质球的关系"></a>Shader和材质球的关系</h2><ol>
+<li>一个Shader可以与无数个材质球关联，一个材质球同一时刻只能有一个shader。</li>
+<li>材质球可以赋予到模型，shader不行。</li>
+<li>材质球如同shader的实例，每个材质球不同参数可以呈现不同的效果，修改shader时，对应所有关联的材质球都会发生变化。</li>
+</ol>
+<h2 id="大佬提供的学习建议-taecg"><a href="#大佬提供的学习建议-taecg" class="headerlink" title="大佬提供的学习建议(taecg)"></a>大佬提供的学习建议(taecg)</h2><ol>
+<li><p>Unlit Shader,这是最基本也是最简单的模版，通过学习它了解顶点片断着色器的基本构成，以及对Shader有初步的认识。</p>
+</li>
+<li><p>利用顶点片断着色器做一些简单案例，比如一些游戏内常用的效果，与此同时深入学习Shader语法，以及用到的相关数学运算符。</p>
+</li>
+<li><p>尝试优化你的Shader，提升美术效果，减少变体数，减少运算量。</p>
+</li>
+<li><p>读一读渲染管线的书，加深对Shader理解的宽度与高度。</p>
+</li>
+<li><p>开始接触光照模型，了解Surface Shader。</p>
+</li>
+<li><p>各种光照算法研究一通。。。。顺便复习下数学。。。</p>
+</li>
+<li><p>屏幕后处理Shader</p>
+</li>
+<li><p>Compute Shader</p>
+</li>
+<li><p>各种实例制作，不断强化美感、图形学以及数学。</p>
+</li>
+</ol>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2020/05/14/Unity-NGUI%E7%89%A9%E4%BD%93%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/" title="Unity-NGUI物体扫光特效">Unity-NGUI物体扫光特效</a></li>
+<li><a href="/2020/09/25/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%80)/" title="Unity-Shader笔记之渲染管线(一)">Unity-Shader笔记之渲染管线(一)</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2020/10/28/xLua-CSharp%E8%AE%BF%E9%97%AELua(2)/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">xLua-CSharp访问Lua(2)</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2020/10/19/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8BDrawCall(%E4%BA%8C)/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Unity-Shader笔记之DrawCall(二)</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2023/03/16/Unity-Shader%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84(%E4%B8%89)/">
+            <span class="related-post-title">Unity-Shader的组成结构(三)</span>
+            <time datetime="2023-03-16T10:52:17.000Z">2023-03-16</time>
+          </a>
+        
+          <a class="related-post-link" href="/2020/10/19/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8BDrawCall(%E4%BA%8C)/">
+            <span class="related-post-title">Unity-Shader笔记之DrawCall(二)</span>
+            <time datetime="2020-10-19T07:02:00.000Z">2020-10-19</time>
+          </a>
+        
+          <a class="related-post-link" href="/2020/09/25/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%80)/">
+            <span class="related-post-title">Unity-Shader笔记之渲染管线(一)</span>
+            <time datetime="2020-09-25T09:19:00.000Z">2020-09-25</time>
+          </a>
+        
+          <a class="related-post-link" href="/2020/05/14/Unity-NGUI%E7%89%A9%E4%BD%93%E6%89%AB%E5%85%89%E7%89%B9%E6%95%88/">
+            <span class="related-post-title">Unity-NGUI物体扫光特效</span>
+            <time datetime="2020-05-14T05:55:42.000Z">2020-05-14</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UnityShader%E4%B8%8E%E6%9D%90%E8%B4%A8"><span class="post-toc-text">UnityShader与材质</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unity%E4%B8%AD%E5%9B%9B%E7%A7%8DShader%E6%A8%A1%E6%9D%BF"><span class="post-toc-text">Unity中四种Shader模板</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unity-Shader%E7%BB%93%E6%9E%84"><span class="post-toc-text">Unity Shader结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Shader%E5%90%8D%E7%A7%B0"><span class="post-toc-text">Shader名称</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B1%9E%E6%80%A7-Properties"><span class="post-toc-text">属性(Properties)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Properties%E7%BB%93%E6%9E%84"><span class="post-toc-text">Properties结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">属性类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="post-toc-text">效果图</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SubShader"><span class="post-toc-text">SubShader</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SubShader%E7%BB%93%E6%9E%84"><span class="post-toc-text">SubShader结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Tags"><span class="post-toc-text">Tags</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RenderSetup"><span class="post-toc-text">RenderSetup</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Pass%E5%9D%97"><span class="post-toc-text">Pass块</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Fallback"><span class="post-toc-text">Fallback</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CustomEditor"><span class="post-toc-text">CustomEditor</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Shader%E5%92%8C%E6%9D%90%E8%B4%A8%E7%90%83%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="post-toc-text">Shader和材质球的关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%A7%E4%BD%AC%E6%8F%90%E4%BE%9B%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%BB%BA%E8%AE%AE-taecg"><span class="post-toc-text">大佬提供的学习建议(taecg)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

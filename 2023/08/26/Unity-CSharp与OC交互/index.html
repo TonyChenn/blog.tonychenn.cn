@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Unity-CSharp与OC交互｜默然的博客</title>
+<meta name="description" content="日本一位大佬写过一篇文章，很不错了。 [[Unity] C とObjective-Cの連携まとめ](https://qiita.com/tkyaji/items/74d485a021c75ed10bca)">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-CSharp与OC交互｜默然的博客">
+<meta property="og:description" content="日本一位大佬写过一篇文章，很不错了。 [[Unity] C とObjective-Cの連携まとめ](https://qiita.com/tkyaji/items/74d485a021c75ed10bca)">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unity-CSharp与OC交互｜默然的博客">
+<meta name="twitter:description" content="日本一位大佬写过一篇文章，很不错了。 [[Unity] C とObjective-Cの連携まとめ](https://qiita.com/tkyaji/items/74d485a021c75ed10bca)">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2023-08-26T06:42:29.000Z">
+<meta property="article:modified_time" content="2023-08-26T06:42:29.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity-CSharp与OC交互","description":"日本一位大佬写过一篇文章，很不错了。 [[Unity] C とObjective-Cの連携まとめ](https://qiita.com/tkyaji/items/74d485a021c75ed10bca)","url":"https://blog.tonychenn.cn/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2023-08-26T06:42:29.000Z","dateModified":"2023-08-26T06:42:29.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F08%2F26%2FUnity-CSharp%25E4%25B8%258EOC%25E4%25BA%25A4%25E4%25BA%2592%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92&amp;summary=%E6%97%A5%E6%9C%AC%E4%B8%80%E4%BD%8D%E5%A4%A7%E4%BD%AC%E5%86%99%E8%BF%87%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E5%BE%88%E4%B8%8D%E9%94%99%E4%BA%86%E3%80%82%20%5B%5BUnity%5D%20C%20%E3%81%A8Objective-C%E3%81%AE%E9%80%A3%E6%90%BA%E3%81%BE%E3%81%A8%E3%82%81%5D(https%3A%2F%2Fqiita.com%2Ftkyaji%2Fitems%2F74d485a021c75ed10bca)&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F08%2F26%2FUnity-CSharp%25E4%25B8%258EOC%25E4%25BA%25A4%25E4%25BA%2592%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F08%2F26%2FUnity-CSharp%25E4%25B8%258EOC%25E4%25BA%25A4%25E4%25BA%2592%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F08%2F26%2FUnity-CSharp%25E4%25B8%258EOC%25E4%25BA%25A4%25E4%25BA%2592%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F08%2F26%2FUnity-CSharp%25E4%25B8%258EOC%25E4%25BA%25A4%25E4%25BA%2592%2F&amp;text=Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F08%2F26%2FUnity-CSharp%25E4%25B8%258EOC%25E4%25BA%25A4%25E4%25BA%2592%2F&amp;title=Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Unity-CSharp与OC交互</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2023-08-26T06:42:29.000Z">2023-08-26</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>日本一位大佬写过一篇文章，很不错了。<br><a target="_blank" rel="noopener" href="https://qiita.com/tkyaji/items/74d485a021c75ed10bca">[Unity] C#とObjective-Cの連携まとめ</a></p>
+<p>略做翻译，记录一下。</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// 从 c # 调用的函数 </span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">sampleMethod1</span><span class="params">()</span> &#123;</span><br><span class="line">        NSLog(@<span class="string">&quot;sampleMethod1 called.&quot;</span>); </span><br><span class="line">    &#125; </span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    <span class="comment">// Sample.mm 定义的 c 函数在 c# 端定义如下</span></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sampleMethod1</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 Objective-C 端，创建一个定义 C 函数的源代码。 </li>
+<li>如果你想使用一个Objective-C类，你可以通过C函数调用它。 </li>
+<li>Objective-C 源文件位于 Assets&#x2F;Plugins&#x2F;iOS 下。</li>
+</ul>
+<p>在 C# 端，定义了与定义的 C 函数同名的外部静态方法。 调用此静态方法时，将调用定义的 C 函数。 </p>
+<h2 id="C-调用OC"><a href="#C-调用OC" class="headerlink" title="C#调用OC"></a>C#调用OC</h2><h2 id="基本数据类型（整数、浮点数、布尔值）、字符串"><a href="#基本数据类型（整数、浮点数、布尔值）、字符串" class="headerlink" title="基本数据类型（整数、浮点数、布尔值）、字符串"></a>基本数据类型（整数、浮点数、布尔值）、字符串</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// 从 c# 调用的函数 </span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">sampleMethod2</span><span class="params">(<span class="type">int</span> val1, <span class="type">float</span> val2, <span class="type">bool</span> val3, <span class="type">const</span> <span class="type">char</span> *val4)</span> &#123;</span><br><span class="line">        NSLog(@<span class="string">&quot;sampleMethod2 called. val1=%d, val2=%f, val3=%d, val4=%s&quot;</span>, val1, val2, val3, val4);</span><br><span class="line">    &#125; </span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sampleMethod2</span>(<span class="params"><span class="built_in">int</span> val1, <span class="built_in">float</span> val2, <span class="built_in">bool</span> val3, <span class="built_in">string</span> val4</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只需按原样传递原语即可。 字符串在 中接收。<code>const char *</code> </p>
+<h2 id="传递数组"><a href="#传递数组" class="headerlink" title="传递数组"></a>传递数组</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// 从 c # 调用的函数 </span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">sampleMethod3</span><span class="params">(<span class="type">int</span> *intArr, <span class="type">int</span> intArrSize, <span class="type">const</span> <span class="type">char</span> **strArr, <span class="type">int</span> strArrSize)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; intArrSize; i++) &#123;</span><br><span class="line">            NSLog(@<span class="string">&quot;arr1 %d : %d&quot;</span>, i, intArr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strArrSize; i++) &#123;</span><br><span class="line">            NSLog(@<span class="string">&quot;arr2 %d : %s&quot;</span>, i, strArr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sampleMethod3</span>(<span class="params"><span class="built_in">int</span>[] intArr, <span class="built_in">int</span> intArrSize, <span class="built_in">string</span>[] strArr, <span class="built_in">int</span> strArrSize</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用指针接收。 对于字符串，它是 的双指针。 我认为传递数组的大小也会很好。<code>const char</code></p>
+<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// C# 中函数的函数指针</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*cs_callback)</span><span class="params">(<span class="type">int</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">sampleMethod4</span><span class="params">(cs_callback callback)</span> &#123;</span><br><span class="line">        callback(<span class="number">9</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"><span class="keyword">using</span> AOT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    <span class="function"><span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">callback_delegate</span>(<span class="params"><span class="built_in">int</span> val</span>)</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sampleMethod4</span>(<span class="params">callback_delegate callback</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在 static 中定义回调函数，将其与 MonoPInvokeCallback 结合使用</span></span><br><span class="line">    [<span class="meta">MonoPInvokeCallback(typeof(callback_delegate))</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">cs_callback</span>(<span class="params"><span class="built_in">int</span> val</span>)</span> &#123;</span><br><span class="line">        UnityEngine.Debug.Log (<span class="string">&quot;cs_callback : &quot;</span> + val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sampleMethod4Invoker</span>()</span> &#123;</span><br><span class="line">        <span class="comment">// Static 方法可以直接传递给参数</span></span><br><span class="line">        sampleMethod4 (cs_callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CSharp静态方法可以作为函数指针传递给Objective-C。 您可以传递回调函数，并在该过程完成后调用它。 </p>
+<p>但是，当从Objective-C调用 CSharp 回调时， 我认为使用[UnitySendMessage]更简单、更常见。 </p>
+<h2 id="C-中的实例"><a href="#C-中的实例" class="headerlink" title="C# 中的实例"></a>C# 中的实例</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// C # 示例类的实例</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">void</span> *_Mono_Sample_Instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// C # 中函数的函数指针</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="title function_">void</span> <span class="params">(*cs_callback)</span><span class="params">(_Mono_Sample_Instance, <span class="type">int</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">sampleMethod5</span><span class="params">(_Mono_Sample_Instance instance)</span> &#123;</span><br><span class="line">        NSLog(@<span class="string">&quot;sampleMethod5 called.&quot;</span>);</span><br><span class="line">        <span class="comment">// C # 回调调用</span></span><br><span class="line">        cs_callback(instance, <span class="number">999</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    <span class="function"><span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">callback_delegate</span>(<span class="params">IntPtr gameObjectPtr, <span class="built_in">int</span> val</span>)</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sampleMethod5</span>(<span class="params">IntPtr gameObjectPtr, callback_delegate callback</span>)</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">MonoPInvokeCallback(typeof(callback_delegate))</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">cs_callback</span>(<span class="params">IntPtr gameObjectPtr, <span class="built_in">int</span> val</span>)</span> &#123;</span><br><span class="line">        GCHandle handle = (GCHandle) gameObjectPtr;</span><br><span class="line">        <span class="comment">// 从指针获取对象</span></span><br><span class="line">        GameObject gameObject = handle.Target <span class="keyword">as</span> GameObject;</span><br><span class="line">        <span class="comment">// 销毁对象</span></span><br><span class="line">        handle.Free();</span><br><span class="line"></span><br><span class="line">        UnityEngine.Debug.Log (<span class="string">&quot;cs_callback : &quot;</span> + gameObject.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sampleMethod5Invoker</span>()</span> &#123;</span><br><span class="line">        GameObject gameObject = <span class="keyword">new</span> GameObject (<span class="string">&quot;Sample_GameObject&quot;</span>);</span><br><span class="line">        <span class="comment">// Alloc使其不被GC回收</span></span><br><span class="line">        IntPtr gameObjectPtr = (IntPtr)GCHandle.Alloc(gameObject);</span><br><span class="line">        sampleMethod5 (gameObjectPtr, cs_callback);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>C# 的实例也可以在 IntPtr 中传递。 </li>
+<li>作为一种用法，我认为传递给Objective-C的C#实例将通过回调再次传递给C# </li>
+<li>如果使用它，则可以在传递上述静态方法并调用回调时从那里调用实例方法。</li>
+</ul>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><h2 id="基本类型（整数、浮点数、布尔值）、字符串"><a href="#基本类型（整数、浮点数、布尔值）、字符串" class="headerlink" title="基本类型（整数、浮点数、布尔值）、字符串"></a>基本类型（整数、浮点数、布尔值）、字符串</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">sampleMethod6</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="number">5</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">float</span> <span class="title function_">sampleMethod7</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="number">1.1f</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">sampleMethod8</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* <span class="title function_">sampleMethod9</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">char</span> *str = <span class="string">&quot;test&quot;</span>;</span><br><span class="line">        <span class="type">char</span>* retStr = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(str) + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">strcpy</span>(retStr, str);</span><br><span class="line">        retStr[<span class="built_in">strlen</span>(str)] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">return</span> retStr;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="built_in">int</span> <span class="title">sampleMethod6</span>()</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="built_in">float</span> <span class="title">sampleMethod7</span>()</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="built_in">bool</span> <span class="title">sampleMethod8</span>()</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="built_in">string</span> <span class="title">sampleMethod9</span>()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，字符串必须在 C 端为 malloc 并返回。 </p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">    <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">        <span class="type">void</span> <span class="title function_">sampleMethod10</span><span class="params">(<span class="type">int</span> **arrPtr, <span class="type">int</span> *size)</span> &#123;</span><br><span class="line">            <span class="type">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">            <span class="type">int</span> *retArr = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(arr));</span><br><span class="line">            <span class="built_in">memcpy</span>(retArr, arr, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">            *arrPtr = retArr;</span><br><span class="line">            *size = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sampleMethod10</span>(<span class="params"><span class="keyword">out</span> IntPtr arrPtr, <span class="keyword">out</span> <span class="built_in">int</span> size</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span>[] <span class="title">sampleMethod10Invoker</span>()</span> &#123;</span><br><span class="line">        IntPtr arrPtr = IntPtr.Zero;</span><br><span class="line">        <span class="built_in">int</span> size = <span class="number">0</span>;</span><br><span class="line">        sampleMethod10 (<span class="keyword">out</span> arrPtr, <span class="keyword">out</span> size);</span><br><span class="line">        <span class="built_in">int</span>[] arr = <span class="keyword">new</span> <span class="built_in">int</span>[size];</span><br><span class="line">        Marshal.Copy (arrPtr, arr, <span class="number">0</span>, size);</span><br><span class="line">        <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这很麻烦。 </br>似乎不可能简单地返回它（大小也需要返回），所以我通过引用（out&#x2F;ref）从C#传递 变量并接收它。 阵列受制于。 </li>
+<li>在 C 端，分配的数组的指针及其大小设置为通过引用传递的变量。 </li>
+<li>最后，将收到的数组复制到 C# 数组。<code>return IntPtr malloc IntPtr Marshal.Copy</code></li>
+</ul>
+<h2 id="Objective-C-的实例"><a href="#Objective-C-的实例" class="headerlink" title="Objective-C 的实例"></a>Objective-C 的实例</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@interface Sample : NSObject</span><br><span class="line">- (<span class="type">void</span>)test;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation Sample</span><br><span class="line">- (<span class="type">void</span>)test &#123;</span><br><span class="line">    NSLog(@<span class="string">&quot;test called.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    Sample* <span class="title function_">sample_init</span><span class="params">()</span> &#123;</span><br><span class="line">        Sample *sample = [[Sample alloc] init];</span><br><span class="line">        CFRetain((CFTypeRef)sample);</span><br><span class="line">        <span class="keyword">return</span> sample;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">sample_test</span><span class="params">(Sample *sample)</span> &#123;</span><br><span class="line">        [sample test];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> <span class="title function_">cfRelease</span><span class="params">(id *obj)</span> &#123;</span><br><span class="line">        CFRelease((CFTypeRef)obj);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Sample</span> &#123;</span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> IntPtr <span class="title">sample_init</span>()</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">sample_test</span>(<span class="params">IntPtr samplePtr</span>)</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">DllImport(<span class="string">&quot;__Internal&quot;</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">cfRelease</span>(<span class="params">IntPtr samplePtr</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sampleInvoker</span>()</span> &#123;</span><br><span class="line">        IntPtr objcPtr = sample_init ();</span><br><span class="line">        sample_test (objcPtr);</span><br><span class="line">        cfRelease (objcPtr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Objective-C 的实例可以由 IntPtr 在 C# 端维护。 </li>
+<li>当您想在 C# 端管理 Objective-C 实例的生命周期时很有用。 </li>
+<li>请注意，除非对象在此之后返回到 C#，否则 Objective-C 端将被释放。 </li>
+<li>在 C# 构造函数中创建 Objective-C 的实例，在析构函数中 保留并释放它可能是一个好主意。<code>retain</code></li>
+</ul>
+<h2 id="从-Objective-C-调用-C-中的方法"><a href="#从-Objective-C-调用-C-中的方法" class="headerlink" title="从 Objective-C 调用 C# 中的方法"></a>从 Objective-C 调用 C# 中的方法</h2><h2 id="Unity发送消息"><a href="#Unity发送消息" class="headerlink" title="Unity发送消息"></a>Unity发送消息</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnitySendMessage(<span class="string">&quot;GameObjectName&quot;</span>, <span class="string">&quot;MethodName&quot;</span>, <span class="string">&quot;Message to send&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>UnitySendMessage 调用指定游戏对象中包含的方法。 第三个参数是参数，但只能指定字符串。 此外，它变得异步，并发生一帧的延迟。 </p>
+<h2 id="使用函数指针在-C-中传递静态方法"><a href="#使用函数指针在-C-中传递静态方法" class="headerlink" title="使用函数指针在 C# 中传递静态方法"></a>使用函数指针在 C# 中传递静态方法</h2><p>上述方法。 实现起来很麻烦，所以如果没有问题，我觉得还是乖乖使用UnitySendMessage比较好。 </p>
+<h2 id="构建时的各种支持"><a href="#构建时的各种支持" class="headerlink" title="构建时的各种支持"></a>构建时的各种支持</h2><h2 id="将标准-iOS-框架添加到链接"><a href="#将标准-iOS-框架添加到链接" class="headerlink" title="将标准 iOS 框架添加到链接"></a>将标准 iOS 框架添加到链接</h2><p>在 Unity 编辑器上选择一个原生资源（.h、.m.mm.a.framework 等），然后 从检查器中检查相应的框架以链接它。 </p>
+<h2 id="将-iOS-标准库添加到链接（-dylib、-tbd）"><a href="#将-iOS-标准库添加到链接（-dylib、-tbd）" class="headerlink" title="将 iOS 标准库添加到链接（.dylib、.tbd）"></a>将 iOS 标准库添加到链接（.dylib、.tbd）</h2><p>由 PostProcessBuild 支持。 使用 Xcode Manipulation API。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PostBuildProcess</span> &#123;</span><br><span class="line">    [<span class="meta">PostProcessBuild</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnPostProcessBuild</span> (<span class="params">BuildTarget buildTarget, <span class="built_in">string</span> path</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">string</span> projPath = Path.Combine (path, <span class="string">&quot;Unity-iPhone.xcodeproj/project.pbxproj&quot;</span>);</span><br><span class="line"></span><br><span class="line">        PBXProject proj = <span class="keyword">new</span> PBXProject ();</span><br><span class="line">        proj.ReadFromString (File.ReadAllText (projPath));</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> target = proj.TargetGuidByName (<span class="string">&quot;Unity-iPhone&quot;</span>);</span><br><span class="line">        proj.AddFileToBuild(target, proj.AddFile(<span class="string">&quot;usr/lib/libsqlite3.tbd&quot;</span>, <span class="string">&quot;Frameworks/libsqlite3.tbd&quot;</span>, PBXSourceTree.Sdk));</span><br><span class="line">        proj.AddFileToBuild(target, proj.AddFile(<span class="string">&quot;usr/lib/libz.tbd&quot;</span>, <span class="string">&quot;Frameworks/libz.tbd&quot;</span>, PBXSourceTree.Sdk));</span><br><span class="line"></span><br><span class="line">        File.WriteAllText (projPath, proj.WriteToString ());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="将第三方框架-库添加到链接"><a href="#将第三方框架-库添加到链接" class="headerlink" title="将第三方框架&#x2F;库添加到链接"></a>将第三方框架&#x2F;库添加到链接</h2><p>只需将其放在资产&#x2F;插件&#x2F;iOS下，它就会被链接。 </p>
+<h2 id="配置添加到信息列表"><a href="#配置添加到信息列表" class="headerlink" title="配置添加到信息列表"></a>配置添加到信息列表</h2><p>由 PostProcessBuild 支持。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PostBuildProcess</span> &#123;</span><br><span class="line">    [<span class="meta">PostProcessBuild</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnPostProcessBuild</span> (<span class="params">BuildTarget buildTarget, <span class="built_in">string</span> path</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">string</span> plistPath = Path.Combine(path, <span class="string">&quot;Info.plist&quot;</span>);</span><br><span class="line">        PlistDocument plist = <span class="keyword">new</span> PlistDocument();</span><br><span class="line">        plist.ReadFromFile(plistPath);</span><br><span class="line"></span><br><span class="line">        PlistElementDict rootDict = plist.root;</span><br><span class="line"></span><br><span class="line">        PlistElementArray urlTypesArray = rootDict.CreateArray (<span class="string">&quot;CFBundleURLTypes&quot;</span>);</span><br><span class="line">        PlistElementDict dict = urlTypesArray.AddDict ();</span><br><span class="line">        dict.SetString (<span class="string">&quot;CFBundleURLName&quot;</span>, <span class="string">&quot;xxxxx&quot;</span>);</span><br><span class="line">        PlistElementArray schemesArray = dict.CreateArray (<span class="string">&quot;CFBundleURLSchemes&quot;</span>);</span><br><span class="line">        schemesArray.AddString (<span class="string">&quot;xxxxx&quot;</span>);</span><br><span class="line"></span><br><span class="line">        File.WriteAllText(plistPath, plist.WriteToString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此外，作为ATS对策，</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAppTransportSecurity<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAllowsArbitraryLoads<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果您只想这样做，只需在iOS上打开播放器设置并打开“允许通过HTTP 下载”（默认打开） </p>
+<h2 id="在构建时添加的各种标志"><a href="#在构建时添加的各种标志" class="headerlink" title="在构建时添加的各种标志"></a>在构建时添加的各种标志</h2><p>在 PostProcessBuild 中。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Assets/Editor/PostBuildProcess.cs</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PostBuildProcess</span> &#123;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">PostProcessBuild</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">OnPostProcessBuild</span> (<span class="params">BuildTarget buildTarget, <span class="built_in">string</span> path</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">string</span> projPath = Path.Combine (path, <span class="string">&quot;Unity-iPhone.xcodeproj/project.pbxproj&quot;</span>);</span><br><span class="line"></span><br><span class="line">        PBXProject proj = <span class="keyword">new</span> PBXProject ();</span><br><span class="line">        proj.ReadFromString (File.ReadAllText (projPath));</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> target = proj.TargetGuidByName (<span class="string">&quot;Unity-iPhone&quot;</span>);</span><br><span class="line">        <span class="comment">// Enabled Modules = YES</span></span><br><span class="line">        proj.SetBuildProperty (target, <span class="string">&quot;CLANG_ENABLE_MODULES&quot;</span>, <span class="string">&quot;YES&quot;</span>);</span><br><span class="line">        <span class="comment">// Enable Objective-C Exceptions = YES</span></span><br><span class="line">        proj.SetBuildProperty (target, <span class="string">&quot;GCC_ENABLE_OBJC_EXCEPTIONS&quot;</span>, <span class="string">&quot;YES&quot;</span>);</span><br><span class="line">        <span class="comment">// &quot;Other Linker Flags&quot; 添加 &quot;-ObjC&quot;</span></span><br><span class="line">        proj.AddBuildProperty (target, <span class="string">&quot;OTHER_LDFLAGS&quot;</span>, <span class="string">&quot;-ObjC&quot;</span>);</span><br><span class="line"></span><br><span class="line">        File.WriteAllText (projPath, proj.WriteToString ());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果您不知道要设置的键名称，请使用 . 我认为最快的方法是在xcodeproj中以文本形式打开project.pbxproj并查看内部。 </li>
+<li>您应该能够使用基本的PostProcessBuild编辑pbxproj和info.plist。 即使你不能用 PBXProject 类很好地设置它，你也可以在最坏的情况下替换读取的字符串。 </li>
+<li>如果要将“-fno-objc-arc”标志添加到源，请在 Unity 编辑器中选择 目标源，然后在检查器中将其设置为“编译标志”。</li>
+</ul>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2019/04/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(1)/" title="Unity-CSharp与Android交互(1)">Unity-CSharp与Android交互(1)</a></li>
+<li><a href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/" title="Unity-CSharp与Android交互(2)">Unity-CSharp与Android交互(2)</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2023/10/20/Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Winform路径选择框的优化</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Unity-CSharp与Android交互(2)</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(2)</span>
+            <time datetime="2023-08-26T06:41:41.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2019/04/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(1)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(1)</span>
+            <time datetime="2019-04-26T11:06:54.000Z">2019-04-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2026/06/29/cocos2dx-%E9%B8%BF%E8%92%99ArkTS%E4%B8%8ECpp%E4%BA%A4%E4%BA%92/">
+            <span class="related-post-title">Cocos2d-x 鸿蒙：ArkTS 与 C++ 双向交互</span>
+            <time datetime="2026-06-29T09:37:00.000Z">2026-06-29</time>
+          </a>
+        
+          <a class="related-post-link" href="/2025/04/20/CSharp%E4%B8%8ECPP%E4%BA%A4%E4%BA%92%E4%B9%8BP_Invoke/">
+            <span class="related-post-title">C# 与 C++ 互操作：P/Invoke 函数、字符串、数组与回调</span>
+            <time datetime="2025-04-20T09:48:32.000Z">2025-04-20</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="post-toc-text">基础</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-%E8%B0%83%E7%94%A8OC"><span class="post-toc-text">C#调用OC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%88%E6%95%B4%E6%95%B0%E3%80%81%E6%B5%AE%E7%82%B9%E6%95%B0%E3%80%81%E5%B8%83%E5%B0%94%E5%80%BC%EF%BC%89%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="post-toc-text">基本数据类型（整数、浮点数、布尔值）、字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%A0%E9%80%92%E6%95%B0%E7%BB%84"><span class="post-toc-text">传递数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="post-toc-text">静态方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="post-toc-text">C# 中的实例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="post-toc-text">返回值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%EF%BC%88%E6%95%B4%E6%95%B0%E3%80%81%E6%B5%AE%E7%82%B9%E6%95%B0%E3%80%81%E5%B8%83%E5%B0%94%E5%80%BC%EF%BC%89%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="post-toc-text">基本类型（整数、浮点数、布尔值）、字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%95%B0%E7%BB%84"><span class="post-toc-text">数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Objective-C-%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="post-toc-text">Objective-C 的实例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%8E-Objective-C-%E8%B0%83%E7%94%A8-C-%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">从 Objective-C 调用 C# 中的方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unity%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="post-toc-text">Unity发送消息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%9C%A8-C-%E4%B8%AD%E4%BC%A0%E9%80%92%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="post-toc-text">使用函数指针在 C# 中传递静态方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%84%E5%BB%BA%E6%97%B6%E7%9A%84%E5%90%84%E7%A7%8D%E6%94%AF%E6%8C%81"><span class="post-toc-text">构建时的各种支持</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B0%86%E6%A0%87%E5%87%86-iOS-%E6%A1%86%E6%9E%B6%E6%B7%BB%E5%8A%A0%E5%88%B0%E9%93%BE%E6%8E%A5"><span class="post-toc-text">将标准 iOS 框架添加到链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B0%86-iOS-%E6%A0%87%E5%87%86%E5%BA%93%E6%B7%BB%E5%8A%A0%E5%88%B0%E9%93%BE%E6%8E%A5%EF%BC%88-dylib%E3%80%81-tbd%EF%BC%89"><span class="post-toc-text">将 iOS 标准库添加到链接（.dylib、.tbd）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B0%86%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6-%E5%BA%93%E6%B7%BB%E5%8A%A0%E5%88%B0%E9%93%BE%E6%8E%A5"><span class="post-toc-text">将第三方框架&#x2F;库添加到链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0%E5%88%B0%E4%BF%A1%E6%81%AF%E5%88%97%E8%A1%A8"><span class="post-toc-text">配置添加到信息列表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9C%A8%E6%9E%84%E5%BB%BA%E6%97%B6%E6%B7%BB%E5%8A%A0%E7%9A%84%E5%90%84%E7%A7%8D%E6%A0%87%E5%BF%97"><span class="post-toc-text">在构建时添加的各种标志</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

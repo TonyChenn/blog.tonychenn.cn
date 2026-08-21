@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>iOS应用状态及监听｜默然的博客</title>
+<meta name="description" content="本文围绕“iOS应用状态及监听”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。适用于同类项目的实施、排错与复盘。">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2023/03/29/iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2023/03/29/iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS应用状态及监听｜默然的博客">
+<meta property="og:description" content="本文围绕“iOS应用状态及监听”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。适用于同类项目的实施、排错与复盘。">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="iOS应用状态及监听｜默然的博客">
+<meta name="twitter:description" content="本文围绕“iOS应用状态及监听”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。适用于同类项目的实施、排错与复盘。">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2023-03-29T05:14:09.000Z">
+<meta property="article:modified_time" content="2023-03-29T05:14:09.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"iOS应用状态及监听","description":"本文围绕“iOS应用状态及监听”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。适用于同类项目的实施、排错与复盘。","url":"https://blog.tonychenn.cn/2023/03/29/iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2023/03/29/iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2023-03-29T05:14:09.000Z","dateModified":"2023-03-29T05:14:09.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F03%2F29%2FiOS%25E5%25BA%2594%25E7%2594%25A8%25E7%258A%25B6%25E6%2580%2581%25E5%258F%258A%25E7%259B%2591%25E5%2590%25AC%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC&amp;summary=%E6%9C%AC%E6%96%87%E5%9B%B4%E7%BB%95%E2%80%9CiOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC%E2%80%9D%E6%95%B4%E7%90%86%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E3%80%81%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9%EF%BC%8C%E5%B9%B6%E8%A1%A5%E5%85%85%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E3%80%81%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F%E3%80%81%E5%B8%B8%E8%A7%81%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0%E4%B8%8E%E5%8F%AF%E5%A4%8D%E6%A0%B8%E7%9A%84%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C%E3%80%82%E9%80%82%E7%94%A8%E4%BA%8E%E5%90%8C%E7%B1%BB%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%AE%9E%E6%96%BD%E3%80%81%E6%8E%92%E9%94%99%E4%B8%8E%E5%A4%8D%E7%9B%98%E3%80%82&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F03%2F29%2FiOS%25E5%25BA%2594%25E7%2594%25A8%25E7%258A%25B6%25E6%2580%2581%25E5%258F%258A%25E7%259B%2591%25E5%2590%25AC%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F03%2F29%2FiOS%25E5%25BA%2594%25E7%2594%25A8%25E7%258A%25B6%25E6%2580%2581%25E5%258F%258A%25E7%259B%2591%25E5%2590%25AC%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F03%2F29%2FiOS%25E5%25BA%2594%25E7%2594%25A8%25E7%258A%25B6%25E6%2580%2581%25E5%258F%258A%25E7%259B%2591%25E5%2590%25AC%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F03%2F29%2FiOS%25E5%25BA%2594%25E7%2594%25A8%25E7%258A%25B6%25E6%2580%2581%25E5%258F%258A%25E7%259B%2591%25E5%2590%25AC%2F&amp;text=iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F03%2F29%2FiOS%25E5%25BA%2594%25E7%2594%25A8%25E7%258A%25B6%25E6%2580%2581%25E5%258F%258A%25E7%259B%2591%25E5%2590%25AC%2F&amp;title=iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">iOS应用状态及监听</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2023-03-29T05:14:09.000Z">2023-03-29</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="iOS应用的程序状态"><a href="#iOS应用的程序状态" class="headerlink" title="iOS应用的程序状态"></a>iOS应用的程序状态</h2><h2 id="正常启动一个app时"><a href="#正常启动一个app时" class="headerlink" title="正常启动一个app时"></a>正常启动一个app时</h2><ol>
+<li>not running: app未启动时处于<b>未运行状态</b></li>
+<li>inactive: 启动app后进入<b>未激活状态</b><ul>
+<li><code>application:willFinishLaunchingWithOptions</code>: 应用启动未进入状态保存的回调</li>
+<li><code>application:didFinishLaunchingWithOptions</code>: 基本的准备已经完成，可以启动的回调</li>
+</ul>
+</li>
+<li>active: 激活状态<ul>
+<li><code>applicationDidBecomeActive</code>: app已经切换到active状态后的回调</li>
+</ul>
+</li>
+</ol>
+<h2 id="切换到后台再切换到前台"><a href="#切换到后台再切换到前台" class="headerlink" title="切换到后台再切换到前台"></a>切换到后台再切换到前台</h2><ol>
+<li>active -&gt; inactive<ul>
+<li><code>applicationWillResignActive</code>: app将要从前台切换到后台的回调</li>
+</ul>
+</li>
+<li>background: 后台状态<ul>
+<li><code>applicationDidEnterBackground</code>: app已经进入后台的回调</li>
+</ul>
+</li>
+<li>inactive -&gt; active<ul>
+<li><code>applicationWillEnterForeground</code>: app将要从后台切换到前台的回调</li>
+<li><code>applicationDidBecomeActive</code>: app已经切换到active状态后的回调</li>
+</ul>
+</li>
+</ol>
+<h2 id="来回切换应用-锁屏解锁"><a href="#来回切换应用-锁屏解锁" class="headerlink" title="来回切换应用&#x2F;锁屏解锁"></a>来回切换应用&#x2F;锁屏解锁</h2><ul>
+<li>换到另一个app&#x2F;锁屏：由状态<code>active</code>切换到<code>inactive</code>，此时调用<code>applicationWillResignActive</code></li>
+<li>换到此app&#x2F;解锁：由状态<code>inactive</code>切换到<code>running</code>，此时调用<code>applicationDidEnterBackground</code></li>
+</ul>
+<h2 id="应用终止"><a href="#应用终止" class="headerlink" title="应用终止"></a>应用终止</h2><ul>
+<li><code>applicationWillTerminate</code>: app将要结束时的回调</li>
+</ul>
+<h2 id="使用应用状态的回调"><a href="#使用应用状态的回调" class="headerlink" title="使用应用状态的回调"></a>使用应用状态的回调</h2><h2 id="在AppDelegate中使用"><a href="#在AppDelegate中使用" class="headerlink" title="在AppDelegate中使用"></a>在AppDelegate中使用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</span><br><span class="line">    NSLog(@&quot;进入后台&quot;);</span><br><span class="line">&#125;</span><br><span class="line">- (void)applicationWillEnterForeground:(UIApplication *)application &#123;</span><br><span class="line">    NSLog(@&quot;进入前台&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用通知"><a href="#使用通知" class="headerlink" title="使用通知"></a>使用通知</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self </span><br><span class="line">    selector:@selector(enterBackground)</span><br><span class="line">    name:UIApplicationDidEnterBackgroundNotification</span><br><span class="line">    object:nil];</span><br><span class="line"></span><br><span class="line">- (void)enterBackground&#123;</span><br><span class="line">    NSLog(@&quot;进入后台&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[[NSNotificationCenter defaultCenter]addObserver:self </span><br><span class="line">    selector:@selector(enterForeground) </span><br><span class="line">    name:UIApplicationDidBecomeActiveNotification </span><br><span class="line">    object:nil];</span><br><span class="line"></span><br><span class="line">- (void)enterForeground&#123;</span><br><span class="line">    NSLog(@&quot;回到app&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2022/02/22/cocos2dx-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E7%94%B5%E6%B1%A0%E4%BF%A1%E6%81%AF/" title="Cocos2d-x 获取 Android 与 iOS 设备电池信息">Cocos2d-x 获取 Android 与 iOS 设备电池信息</a></li>
+<li><a href="/2022/03/08/cocos2dx-%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E9%80%8F%E6%98%8E/" title="Cocos2d-x 实现 Android 与 iOS 背景透明">Cocos2d-x 实现 Android 与 iOS 背景透明</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2023/06/25/Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Hackintosh-USB接口定制</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2023/03/16/Unity-Shader%E7%9A%84%E7%BB%84%E6%88%90%E7%BB%93%E6%9E%84(%E4%B8%89)/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Unity-Shader的组成结构(三)</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+            <span class="related-post-title">Unity-CSharp与OC交互</span>
+            <time datetime="2023-08-26T06:42:29.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/03/08/cocos2dx-%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E9%80%8F%E6%98%8E/">
+            <span class="related-post-title">Cocos2d-x 实现 Android 与 iOS 背景透明</span>
+            <time datetime="2022-03-08T11:11:00.000Z">2022-03-08</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/02/25/iOS%E5%86%99%E5%85%A5%E5%9B%BE%E7%89%87%E5%88%B0%E7%9B%B8%E5%86%8C/">
+            <span class="related-post-title">iOS写入图片到相册</span>
+            <time datetime="2022-02-25T08:02:00.000Z">2022-02-25</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/02/25/iOS%E5%8A%A8%E6%80%81%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90/">
+            <span class="related-post-title">iOS动态申请权限</span>
+            <time datetime="2022-02-25T06:43:00.000Z">2022-02-25</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#iOS%E5%BA%94%E7%94%A8%E7%9A%84%E7%A8%8B%E5%BA%8F%E7%8A%B6%E6%80%81"><span class="post-toc-text">iOS应用的程序状态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AD%A3%E5%B8%B8%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AAapp%E6%97%B6"><span class="post-toc-text">正常启动一个app时</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0%E5%90%8E%E5%8F%B0%E5%86%8D%E5%88%87%E6%8D%A2%E5%88%B0%E5%89%8D%E5%8F%B0"><span class="post-toc-text">切换到后台再切换到前台</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9D%A5%E5%9B%9E%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8-%E9%94%81%E5%B1%8F%E8%A7%A3%E9%94%81"><span class="post-toc-text">来回切换应用&#x2F;锁屏解锁</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BA%94%E7%94%A8%E7%BB%88%E6%AD%A2"><span class="post-toc-text">应用终止</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E7%9A%84%E5%9B%9E%E8%B0%83"><span class="post-toc-text">使用应用状态的回调</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9C%A8AppDelegate%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="post-toc-text">在AppDelegate中使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E7%9F%A5"><span class="post-toc-text">使用通知</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Unity HybridCLR 热更新接入与原理｜默然的博客</title>
+<meta name="description" content="从第一次在知乎听说 huatuo(现改名HybridCLR) 已经过去好多个月了，官方宣称 特性完整、零成本、高性能、低内存的近乎完美的Unity全平台原生c 热更方案 的口号直接吸引了我，单当时还没有应用到线上的项目，也是一直处于观望的态度。前几天再次看到时，">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2022/07/06/Unity%E5%88%92%E6%97%B6%E4%BB%A3%E7%9A%84CSharp%E7%83%AD%E6%9B%B4-HybirdCLR/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2022/07/06/Unity%E5%88%92%E6%97%B6%E4%BB%A3%E7%9A%84CSharp%E7%83%AD%E6%9B%B4-HybirdCLR/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity HybridCLR 热更新接入与原理｜默然的博客">
+<meta property="og:description" content="从第一次在知乎听说 huatuo(现改名HybridCLR) 已经过去好多个月了，官方宣称 特性完整、零成本、高性能、低内存的近乎完美的Unity全平台原生c 热更方案 的口号直接吸引了我，单当时还没有应用到线上的项目，也是一直处于观望的态度。前几天再次看到时，">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2022/0706/icon.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unity HybridCLR 热更新接入与原理｜默然的博客">
+<meta name="twitter:description" content="从第一次在知乎听说 huatuo(现改名HybridCLR) 已经过去好多个月了，官方宣称 特性完整、零成本、高性能、低内存的近乎完美的Unity全平台原生c 热更方案 的口号直接吸引了我，单当时还没有应用到线上的项目，也是一直处于观望的态度。前几天再次看到时，">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2022/0706/icon.jpg">
+
+
+
+<meta property="article:published_time" content="2022-07-06T05:06:08.000Z">
+<meta property="article:modified_time" content="2023-07-13T11:22:08.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity HybridCLR 热更新接入与原理","description":"从第一次在知乎听说 huatuo(现改名HybridCLR) 已经过去好多个月了，官方宣称 特性完整、零成本、高性能、低内存的近乎完美的Unity全平台原生c 热更方案 的口号直接吸引了我，单当时还没有应用到线上的项目，也是一直处于观望的态度。前几天再次看到时，","url":"https://blog.tonychenn.cn/2022/07/06/Unity%E5%88%92%E6%97%B6%E4%BB%A3%E7%9A%84CSharp%E7%83%AD%E6%9B%B4-HybirdCLR/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2022/07/06/Unity%E5%88%92%E6%97%B6%E4%BB%A3%E7%9A%84CSharp%E7%83%AD%E6%9B%B4-HybirdCLR/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2022-07-06T05:06:08.000Z","dateModified":"2023-07-13T11:22:08.000Z","image":"https://img.tonychenn.cn/2022/0706/icon.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F07%2F06%2FUnity%25E5%2588%2592%25E6%2597%25B6%25E4%25BB%25A3%25E7%259A%2584CSharp%25E7%2583%25AD%25E6%259B%25B4-HybirdCLR%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Unity%20HybridCLR%20%E7%83%AD%E6%9B%B4%E6%96%B0%E6%8E%A5%E5%85%A5%E4%B8%8E%E5%8E%9F%E7%90%86&amp;summary=%E4%BB%8E%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%9C%A8%E7%9F%A5%E4%B9%8E%E5%90%AC%E8%AF%B4%20huatuo(%E7%8E%B0%E6%94%B9%E5%90%8DHybridCLR)%20%E5%B7%B2%E7%BB%8F%E8%BF%87%E5%8E%BB%E5%A5%BD%E5%A4%9A%E4%B8%AA%E6%9C%88%E4%BA%86%EF%BC%8C%E5%AE%98%E6%96%B9%E5%AE%A3%E7%A7%B0%20%E7%89%B9%E6%80%A7%E5%AE%8C%E6%95%B4%E3%80%81%E9%9B%B6%E6%88%90%E6%9C%AC%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E4%BD%8E%E5%86%85%E5%AD%98%E7%9A%84%E8%BF%91%E4%B9%8E%E5%AE%8C%E7%BE%8E%E7%9A%84Unity%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%8E%9F%E7%94%9Fc%20%E7%83%AD%E6%9B%B4%E6%96%B9%E6%A1%88%20%E7%9A%84%E5%8F%A3%E5%8F%B7%E7%9B%B4%E6%8E%A5%E5%90%B8%E5%BC%95%E4%BA%86%E6%88%91%EF%BC%8C%E5%8D%95%E5%BD%93%E6%97%B6%E8%BF%98%E6%B2%A1%E6%9C%89%E5%BA%94%E7%94%A8%E5%88%B0%E7%BA%BF%E4%B8%8A%E7%9A%84%E9%A1%B9%E7%9B%AE%EF%BC%8C%E4%B9%9F%E6%98%AF%E4%B8%80%E7%9B%B4%E5%A4%84%E4%BA%8E%E8%A7%82%E6%9C%9B%E7%9A%84%E6%80%81%E5%BA%A6%E3%80%82%E5%89%8D%E5%87%A0%E5%A4%A9%E5%86%8D%E6%AC%A1%E7%9C%8B%E5%88%B0%E6%97%B6%EF%BC%8C&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2022%2F0706%2Ficon.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F07%2F06%2FUnity%25E5%2588%2592%25E6%2597%25B6%25E4%25BB%25A3%25E7%259A%2584CSharp%25E7%2583%25AD%25E6%259B%25B4-HybirdCLR%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Unity%20HybridCLR%20%E7%83%AD%E6%9B%B4%E6%96%B0%E6%8E%A5%E5%85%A5%E4%B8%8E%E5%8E%9F%E7%90%86&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F07%2F06%2FUnity%25E5%2588%2592%25E6%2597%25B6%25E4%25BB%25A3%25E7%259A%2584CSharp%25E7%2583%25AD%25E6%259B%25B4-HybirdCLR%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Unity%20HybridCLR%20%E7%83%AD%E6%9B%B4%E6%96%B0%E6%8E%A5%E5%85%A5%E4%B8%8E%E5%8E%9F%E7%90%86&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F07%2F06%2FUnity%25E5%2588%2592%25E6%2597%25B6%25E4%25BB%25A3%25E7%259A%2584CSharp%25E7%2583%25AD%25E6%259B%25B4-HybirdCLR%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2022%2F0706%2Ficon.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F07%2F06%2FUnity%25E5%2588%2592%25E6%2597%25B6%25E4%25BB%25A3%25E7%259A%2584CSharp%25E7%2583%25AD%25E6%259B%25B4-HybirdCLR%2F&amp;text=Unity%20HybridCLR%20%E7%83%AD%E6%9B%B4%E6%96%B0%E6%8E%A5%E5%85%A5%E4%B8%8E%E5%8E%9F%E7%90%86" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F07%2F06%2FUnity%25E5%2588%2592%25E6%2597%25B6%25E4%25BB%25A3%25E7%259A%2584CSharp%25E7%2583%25AD%25E6%259B%25B4-HybirdCLR%2F&amp;title=Unity%20HybridCLR%20%E7%83%AD%E6%9B%B4%E6%96%B0%E6%8E%A5%E5%85%A5%E4%B8%8E%E5%8E%9F%E7%90%86" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2022/0706/icon.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Unity HybridCLR 热更新接入与原理</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2022-07-06T05:06:08.000Z">2022-07-06</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2023-07-13T11:22:08.000Z">2023-07-13</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从第一次在知乎听说<code>huatuo(现改名HybridCLR)</code>已经过去好多个月了，官方宣称<code>特性完整、零成本、高性能、低内存的近乎完美的Unity全平台原生c#热更方案</code>的口号直接吸引了我，单当时还没有应用到线上的项目，也是一直处于观望的态度。前几天再次看到时，PC&#x2F;android&#x2F;ios 均已跑通，并有项目正式上线android&#x2F;ios。且多位业内大佬也是对其大为赞赏并称其为“划时代的热更解决方案”，紧跟大佬脚步，遂决定深入了解学习下怎么用。</p>
+<h2 id="目前热更新解决方案"><a href="#目前热更新解决方案" class="headerlink" title="目前热更新解决方案"></a>目前热更新解决方案</h2><ul>
+<li>lua：xLua, toLua, sLua,…(百花齐放)</li>
+<li>CSharp热更：ILRuntime</li>
+<li>il2cpp: HybridCLR</li>
+</ul>
+<h2 id="Mono-vs-IL2CPP"><a href="#Mono-vs-IL2CPP" class="headerlink" title="Mono vs IL2CPP"></a>Mono vs IL2CPP</h2><p>详细查看 <a href="/2022/07/06/Unity%E4%B8%ADmono%E4%B8%8Eil2cpp/" title="Unity中mono与il2cpp">Unity Mono 与 IL2CPP</a>。</p>
+<p><img src="https://img.tonychenn.cn/2022/0706/mono_il2cpp.png" alt="mono_il2cpp"></p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ol>
+<li><code>c++</code>运行效率高，速度快</li>
+<li>mono编译速度快</li>
+<li><code>c++</code>跨平台能力强，移植方便</li>
+<li><code>c++</code>是AOT</li>
+</ol>
+<h2 id="HybridCLR"><a href="#HybridCLR" class="headerlink" title="HybridCLR"></a>HybridCLR</h2><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li><p>近乎完整实现了<a target="_blank" rel="noopener" href="https://www.ecma-international.org/publications-and-standards/standards/ecma-335/">ECMA-335规范</a>除了 下文中”限制和注意事项” 之外的特性都支持。</p>
+</li>
+<li><p>零学习和使用成本。 HybridCLR将纯AOT runtime增强为完整的runtime，使得热更新代码与AOT代码无缝工作。脚本类与AOT类在同一个运行时内，可以随意写继承、反射、多线程(volatile、ThreadStatic、Task、async)之类的代码。不需要额外写任何特殊代码、没有代码生成，也没有什么特殊限制。</p>
+</li>
+<li><p>执行高效。实现了一个极其高效的寄存器解释器，所有指标都大幅优于其他热更新方案。<a target="_blank" rel="noopener" href="https://focus-creative-games.github.io/hybridclr/benchmark/#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A"><del>性能测试报告</del></a></p>
+</li>
+<li><p>内存高效。 热更新脚本中定义的类跟普通c#类占用一样的内存空间，远优于其他热更新方案。<a target="_blank" rel="noopener" href="https://focus-creative-games.github.io/hybridclr/benchmark/#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%8A%A5%E5%91%8A"><del>内存占用报告</del></a></p>
+</li>
+<li><p>原生支持hotfix修复AOT部分代码。几乎不增加任何开发和运行开销。</p>
+</li>
+</ol>
+<h2 id="为什么可以实现热更？"><a href="#为什么可以实现热更？" class="headerlink" title="为什么可以实现热更？"></a>为什么可以实现热更？</h2><p>引用下官方的回答：</p>
+<blockquote>
+<p>HybridCLR扩充了il2cpp的代码，使它由纯AOT runtime变成‘AOT+Interpreter’ 混合runtime，进而原生支持动态加载assembly，使得基于il2cpp backend打包的游戏不仅能在Android平台，也能在IOS、Consoles等限制了JIT的平台上高效地以AOT+interpreter混合模式执行。从底层彻底支持了热更新。</p>
+</blockquote>
+<p>通俗的讲就是，加载dll时判断类型，如果是AOT类型就通过<code>IL2CPP AOT</code>执行，否则通过<code>IL2CPP Interpreter</code>执行。<br><img src="https://img.tonychenn.cn/2022/0706/architecture.jpg" alt="Unity HybridCLR 热更新接入与原理"></p>
+<h2 id="为什么是划时代的热更新解决方案？"><a href="#为什么是划时代的热更新解决方案？" class="headerlink" title="为什么是划时代的热更新解决方案？"></a>为什么是划时代的热更新解决方案？</h2><p>参考烟雨大神描述</p>
+<p><img src="https://img.tonychenn.cn/2022/0706/desc.jpg" alt="Unity HybridCLR 热更新接入与原理"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://hybridclr.doc.code-philosophy.com/docs/intro">官方文档</a></p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2023/08/12/Unity%E5%9C%A8Perference%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9D%97%E8%AE%BE%E7%BD%AE/" title="Unity 在 Preferences 中添加模块设置">Unity 在 Preferences 中添加模块设置</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2022/07/06/Unity%E4%B8%ADmono%E4%B8%8Eil2cpp/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Unity中mono与il2cpp</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2022/06/22/cocos2dx-shader%E5%A4%96%E5%8F%91%E5%85%89/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Cocos2d-x Shader 外发光与呼吸效果</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2024/03/28/Unity-Shader%E6%94%AF%E6%8C%81%E7%9A%84%E8%AF%AD%E4%B9%89(%E5%9B%9B)/">
+            <span class="related-post-title">Unity-Shader支持的语义(四)</span>
+            <time datetime="2024-03-28T11:02:51.000Z">2024-03-28</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/01/19/%E7%AE%97%E6%B3%95-A%E6%98%9F%E5%AF%BB%E8%B7%AF/">
+            <span class="related-post-title">算法-A星寻路</span>
+            <time datetime="2024-01-19T06:45:19.000Z">2024-01-19</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+            <span class="related-post-title">Unity-CSharp与OC交互</span>
+            <time datetime="2023-08-26T06:42:29.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(2)</span>
+            <time datetime="2023-08-26T06:41:41.000Z">2023-08-26</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%AE%E5%89%8D%E7%83%AD%E6%9B%B4%E6%96%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="post-toc-text">目前热更新解决方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mono-vs-IL2CPP"><span class="post-toc-text">Mono vs IL2CPP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="post-toc-text">优缺点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HybridCLR"><span class="post-toc-text">HybridCLR</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%B9%E7%82%B9"><span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E7%83%AD%E6%9B%B4%EF%BC%9F"><span class="post-toc-text">为什么可以实现热更？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%92%E6%97%B6%E4%BB%A3%E7%9A%84%E7%83%AD%E6%9B%B4%E6%96%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9F"><span class="post-toc-text">为什么是划时代的热更新解决方案？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83"><span class="post-toc-text">参考</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

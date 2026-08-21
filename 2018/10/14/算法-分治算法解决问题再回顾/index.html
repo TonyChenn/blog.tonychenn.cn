@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>分治算法解决问题再回顾｜默然的博客</title>
+<meta name="description" content="对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2018/10/14/%E7%AE%97%E6%B3%95-%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2018/10/14/%E7%AE%97%E6%B3%95-%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分治算法解决问题再回顾｜默然的博客">
+<meta property="og:description" content="对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2018/10.14/icon.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="分治算法解决问题再回顾｜默然的博客">
+<meta name="twitter:description" content="对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2018/10.14/icon.jpg">
+
+
+
+<meta property="article:published_time" content="2018-10-14T13:31:48.000Z">
+<meta property="article:modified_time" content="2018-10-14T13:31:48.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"分治算法解决问题再回顾","description":"对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）","url":"https://blog.tonychenn.cn/2018/10/14/%E7%AE%97%E6%B3%95-%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2018/10/14/%E7%AE%97%E6%B3%95-%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2018-10-14T13:31:48.000Z","dateModified":"2018-10-14T13:31:48.000Z","image":"https://img.tonychenn.cn/2018/10.14/icon.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F10%2F14%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2588%2586%25E6%25B2%25BB%25E7%25AE%2597%25E6%25B3%2595%25E8%25A7%25A3%25E5%2586%25B3%25E9%2597%25AE%25E9%25A2%2598%25E5%2586%258D%25E5%259B%259E%25E9%25A1%25BE%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE&amp;summary=%E5%AF%B9%E4%BA%8E%E4%B8%80%E4%B8%AA%E8%A7%84%E6%A8%A1%E4%B8%BAN%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E5%A6%82%E6%9E%9C%E8%AF%A5%E9%97%AE%E9%A2%98%E8%83%BD%E5%A4%9F%E7%9B%B4%E6%8E%A5%E8%A7%A3%E5%86%B3%EF%BC%8C%E5%B0%B1%E7%9B%B4%E6%8E%A5%E8%A7%A3%E5%86%B3%EF%BC%9B%E5%90%A6%E5%88%99%E5%B0%B1%E5%B0%86%E6%AD%A4%E9%97%AE%E9%A2%98%E5%88%86%E8%A7%A3%E4%B8%BAK%E4%B8%AA%E4%B8%8E%E5%8E%9F%E9%97%AE%E9%A2%98%E5%BD%A2%E5%BC%8F%E7%9B%B8%E5%90%8C%E7%9A%84%E5%AD%90%E9%97%AE%E9%A2%98%EF%BC%8C%E9%80%9A%E8%BF%87%E9%80%92%E5%BD%92%E7%9A%84%E6%96%B9%E5%BC%8F%E6%B1%82%E8%A7%A3%E5%AD%90%E9%97%AE%E9%A2%98%EF%BC%8C%E9%80%9A%E8%BF%87%E6%95%B4%E5%90%88%E5%AD%90%E9%97%AE%E9%A2%98%E4%BB%8E%E8%80%8C%E8%A7%A3%E5%86%B3%E5%8E%9F%E9%97%AE%E9%A2%98%E7%9A%84%E7%AD%96%E7%95%A5%E5%B0%B1%E6%98%AF%E5%88%86%E6%B2%BB%E6%80%9D%E6%83%B3%EF%BC%88%E6%88%96%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5%EF%BC%89&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2018%2F10.14%2Ficon.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F10%2F14%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2588%2586%25E6%25B2%25BB%25E7%25AE%2597%25E6%25B3%2595%25E8%25A7%25A3%25E5%2586%25B3%25E9%2597%25AE%25E9%25A2%2598%25E5%2586%258D%25E5%259B%259E%25E9%25A1%25BE%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F10%2F14%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2588%2586%25E6%25B2%25BB%25E7%25AE%2597%25E6%25B3%2595%25E8%25A7%25A3%25E5%2586%25B3%25E9%2597%25AE%25E9%25A2%2598%25E5%2586%258D%25E5%259B%259E%25E9%25A1%25BE%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F10%2F14%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2588%2586%25E6%25B2%25BB%25E7%25AE%2597%25E6%25B3%2595%25E8%25A7%25A3%25E5%2586%25B3%25E9%2597%25AE%25E9%25A2%2598%25E5%2586%258D%25E5%259B%259E%25E9%25A1%25BE%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2018%2F10.14%2Ficon.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F10%2F14%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2588%2586%25E6%25B2%25BB%25E7%25AE%2597%25E6%25B3%2595%25E8%25A7%25A3%25E5%2586%25B3%25E9%2597%25AE%25E9%25A2%2598%25E5%2586%258D%25E5%259B%259E%25E9%25A1%25BE%2F&amp;text=%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F10%2F14%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2588%2586%25E6%25B2%25BB%25E7%25AE%2597%25E6%25B3%2595%25E8%25A7%25A3%25E5%2586%25B3%25E9%2597%25AE%25E9%25A2%2598%25E5%2586%258D%25E5%259B%259E%25E9%25A1%25BE%2F&amp;title=%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%86%8D%E5%9B%9E%E9%A1%BE" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2018/10.14/icon.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">分治算法解决问题再回顾</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2018-10-14T13:31:48.000Z">2018-10-14</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="什么是分治思想呢？"><a href="#什么是分治思想呢？" class="headerlink" title="什么是分治思想呢？"></a>什么是分治思想呢？</h2><p>对于一个规模为N的问题，如果该问题能够直接解决，就直接解决；否则就将此问题分解为K个与原问题形式相同的子问题，通过递归的方式求解子问题，通过整合子问题从而解决原问题的策略就是分治思想（或分治策略）</p>
+<h2 id="分治法求最大子数组"><a href="#分治法求最大子数组" class="headerlink" title="分治法求最大子数组"></a>分治法求最大子数组</h2><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>现在呢有17天的股票价格数据，问在哪天买入，哪天卖出才能使收益最高？</p>
+<p><img src="https://img.tonychenn.cn/2018/10.14/problem.jpg" alt="problem"></p>
+<h2 id="解决方案一（暴力求解）"><a href="#解决方案一（暴力求解）" class="headerlink" title="解决方案一（暴力求解）"></a>解决方案一（暴力求解）</h2><p>逐个求解，比较获得最大值的那一组，实现过程省略，参考：我的博文<a target="_blank" rel="noopener" href="https://tonychenn.github.io/2017/11/02/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%A4%A7%E5%AD%97%E4%B8%B2%E5%92%8C/">算法-最大字串和</a></p>
+<h2 id="解决方案二（分治）"><a href="#解决方案二（分治）" class="headerlink" title="解决方案二（分治）"></a>解决方案二（分治）</h2><h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><ol>
+<li>计算出每天的价格波动表如下：</li>
+</ol>
+<p><img src="https://img.tonychenn.cn/2018/10.14/cal.jpg" alt="cal"></p>
+<ol start="2">
+<li>将数据从中间分为左右两部分。此时有三种情况：<ul>
+<li>买入天数在左侧部分，卖出天数在左侧部分（此时与原问题相似，递归的解决）</li>
+<li>买入天数在右侧部分，卖出天数在右侧部分（此时与原问题相似，递归的解决）</li>
+<li>买入天数在左侧部分，卖出天数在右侧部分（可直接解决）</li>
+</ul>
+</li>
+<li>上代码</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//保存最大子数组数据</span></span><br><span class="line"><span class="keyword">struct</span> SubArray</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//买入天数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> startIndex;</span><br><span class="line">    <span class="comment">//卖出天数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> endIndex;</span><br><span class="line">    <span class="comment">//最大利润</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> total;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> SubArray <span class="title">GetMaxSubArray</span>(<span class="params"><span class="built_in">int</span>[] array,<span class="built_in">int</span> start,<span class="built_in">int</span> end</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//递归的结束位置</span></span><br><span class="line">    <span class="keyword">if</span>(start==end)</span><br><span class="line">    &#123;</span><br><span class="line">        SubArray temp;</span><br><span class="line">        temp.startIndex = start;</span><br><span class="line">        temp.endIndex = end;</span><br><span class="line">        temp.total = array[start];</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//设置中点</span></span><br><span class="line">    <span class="built_in">int</span> mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">//买入天数在左侧部分，卖出天数在左侧部分</span></span><br><span class="line">    SubArray subArray1 = GetMaxSubArray(array, start, mid);</span><br><span class="line">    <span class="comment">//买入天数在右侧部分，卖出天数在右侧部分</span></span><br><span class="line">    SubArray subArray2 = GetMaxSubArray(array, mid + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//买入天数在左侧部分，卖出天数在右侧部分</span></span><br><span class="line">    <span class="comment">//左侧最大值</span></span><br><span class="line">    <span class="built_in">int</span> max1 = array[mid];</span><br><span class="line">    <span class="built_in">int</span> max1Temp = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> startIndex = mid;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = mid; i &gt;=start ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        max1Temp += array[i];</span><br><span class="line">        <span class="keyword">if</span> (max1Temp &gt; max1)</span><br><span class="line">        &#123;</span><br><span class="line">            max1 = max1Temp;</span><br><span class="line">            startIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//买入天数在左侧部分，卖出天数在右侧部分</span></span><br><span class="line">    <span class="comment">//右侧最大值</span></span><br><span class="line">    <span class="built_in">int</span> max2 = array[mid + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">int</span> max2Temp = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">int</span> endIndex = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = mid+<span class="number">1</span>; i &lt;end; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        max2Temp += array[i];</span><br><span class="line">        <span class="keyword">if</span>(max2Temp&gt;max2)</span><br><span class="line">        &#123;</span><br><span class="line">            max2 = max2Temp;</span><br><span class="line">            endIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SubArray subArray3;</span><br><span class="line">    subArray3.startIndex = startIndex;</span><br><span class="line">    subArray3.endIndex = endIndex;</span><br><span class="line">    subArray3.total = max1 + max2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (subArray1.total &gt;= subArray2.total &amp;&amp; subArray1.total &gt;= subArray3.total)</span><br><span class="line">        <span class="keyword">return</span> subArray1;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (subArray2.total &gt;= subArray1.total &amp;&amp; subArray2.total &gt;= subArray3.total)</span><br><span class="line">        <span class="keyword">return</span> subArray2;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> subArray3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] <span class="keyword">args</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span>[] priceArray = &#123; <span class="number">100</span>, <span class="number">113</span>, <span class="number">110</span>, <span class="number">85</span>, <span class="number">105</span>, <span class="number">102</span>, <span class="number">86</span>, <span class="number">63</span>, <span class="number">81</span>, <span class="number">101</span>, <span class="number">94</span>, <span class="number">106</span>, <span class="number">101</span>, <span class="number">79</span>, <span class="number">94</span> &#125;;</span><br><span class="line">    <span class="built_in">int</span>[] fluctuateArray = <span class="keyword">new</span> <span class="built_in">int</span>[priceArray.Length - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获得价格波动值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; fluctuateArray.Length; i++)</span><br><span class="line">        fluctuateArray[i] = priceArray[i + <span class="number">1</span>] - priceArray[i];</span><br><span class="line"></span><br><span class="line">    SubArray curr= GetMaxSubArray(fluctuateArray, <span class="number">0</span>, fluctuateArray.Length<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;买入天数：&quot;</span>+curr.startIndex + <span class="string">&quot; 卖出天数：&quot;</span> + curr.endIndex+<span class="number">1</span> + <span class="string">&quot; 最大利润:&quot;</span> + curr.total);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里似乎需要一个结果：</p>
+<p><img src="https://img.tonychenn.cn/2018/10.14/result.jpg" alt="result"></p>
+<div align="right">TonyChenn</br>2018.10.17</div>
+
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2017/10/12/%E7%AE%97%E6%B3%95-%E4%BB%8E%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%BC%80%E5%A7%8B%EF%BC%8C%E8%AE%A1%E7%AE%97%E7%B4%AF%E5%92%8C%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/" title="算法-从第一个元素开始，计算累和的最大值">算法-从第一个元素开始，计算累和的最大值</a></li>
+<li><a href="/2023/02/28/%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/" title="算法-单链表反转">算法-单链表反转</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2018/10/15/%E7%9F%AD%E8%A7%86%E9%A2%91-%E4%BD%A0%E5%91%A2%EF%BC%8C%E8%A6%81%E5%81%9A%E4%B8%80%E4%B8%AA%E5%8F%AF%E7%88%B1%E7%9A%84%E5%A7%91%E5%A8%98/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">你呢，要做一个可爱的的姑娘...</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2018/10/13/%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">算法-排序算法总结</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2024/01/19/%E7%AE%97%E6%B3%95-A%E6%98%9F%E5%AF%BB%E8%B7%AF/">
+            <span class="related-post-title">算法-A星寻路</span>
+            <time datetime="2024-01-19T06:45:19.000Z">2024-01-19</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/01/17/%E7%AE%97%E6%B3%95-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89(Dijkstra)/">
+            <span class="related-post-title">算法-迪杰斯特拉(Dijkstra)</span>
+            <time datetime="2024-01-17T12:10:57.000Z">2024-01-17</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/11/03/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E4%B8%93%E9%A2%98/">
+            <span class="related-post-title">算法-链表专题</span>
+            <time datetime="2023-11-03T06:33:11.000Z">2023-11-03</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/02/28/%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/">
+            <span class="related-post-title">算法-单链表反转</span>
+            <time datetime="2023-02-28T08:09:53.000Z">2023-02-28</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E6%B2%BB%E6%80%9D%E6%83%B3%E5%91%A2%EF%BC%9F"><span class="post-toc-text">什么是分治思想呢？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%86%E6%B2%BB%E6%B3%95%E6%B1%82%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84"><span class="post-toc-text">分治法求最大子数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="post-toc-text">问题描述：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%88%E6%9A%B4%E5%8A%9B%E6%B1%82%E8%A7%A3%EF%BC%89"><span class="post-toc-text">解决方案一（暴力求解）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89"><span class="post-toc-text">解决方案二（分治）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%9D%E6%83%B3"><span class="post-toc-text">思想</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

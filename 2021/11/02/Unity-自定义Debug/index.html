@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Unity-自定义Debug｜默然的博客</title>
+<meta name="description" content="上面代码如果直接放到工程中使用，双击打印的日志会直接进入Log文件，而不是我们调用的地方。解决方案就是 把Log类打包成dll 然后放到u3d的 Plugins 目录下">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2021/11/02/Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2021/11/02/Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-自定义Debug｜默然的博客">
+<meta property="og:description" content="上面代码如果直接放到工程中使用，双击打印的日志会直接进入Log文件，而不是我们调用的地方。解决方案就是 把Log类打包成dll 然后放到u3d的 Plugins 目录下">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unity-自定义Debug｜默然的博客">
+<meta name="twitter:description" content="上面代码如果直接放到工程中使用，双击打印的日志会直接进入Log文件，而不是我们调用的地方。解决方案就是 把Log类打包成dll 然后放到u3d的 Plugins 目录下">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2021-11-02T10:54:00.000Z">
+<meta property="article:modified_time" content="2021-11-02T10:54:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity-自定义Debug","description":"上面代码如果直接放到工程中使用，双击打印的日志会直接进入Log文件，而不是我们调用的地方。解决方案就是 把Log类打包成dll 然后放到u3d的 Plugins 目录下","url":"https://blog.tonychenn.cn/2021/11/02/Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2021/11/02/Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2021-11-02T10:54:00.000Z","dateModified":"2021-11-02T10:54:00.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2021%2F11%2F02%2FUnity-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589Debug%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug&amp;summary=%E4%B8%8A%E9%9D%A2%E4%BB%A3%E7%A0%81%E5%A6%82%E6%9E%9C%E7%9B%B4%E6%8E%A5%E6%94%BE%E5%88%B0%E5%B7%A5%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%8F%8C%E5%87%BB%E6%89%93%E5%8D%B0%E7%9A%84%E6%97%A5%E5%BF%97%E4%BC%9A%E7%9B%B4%E6%8E%A5%E8%BF%9B%E5%85%A5Log%E6%96%87%E4%BB%B6%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E6%88%91%E4%BB%AC%E8%B0%83%E7%94%A8%E7%9A%84%E5%9C%B0%E6%96%B9%E3%80%82%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%B0%B1%E6%98%AF%20%E6%8A%8ALog%E7%B1%BB%E6%89%93%E5%8C%85%E6%88%90dll%20%E7%84%B6%E5%90%8E%E6%94%BE%E5%88%B0u3d%E7%9A%84%20Plugins%20%E7%9B%AE%E5%BD%95%E4%B8%8B&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2021%2F11%2F02%2FUnity-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589Debug%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2021%2F11%2F02%2FUnity-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589Debug%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2021%2F11%2F02%2FUnity-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589Debug%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2021%2F11%2F02%2FUnity-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589Debug%2F&amp;text=Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2021%2F11%2F02%2FUnity-%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589Debug%2F&amp;title=Unity-%E8%87%AA%E5%AE%9A%E4%B9%89Debug" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Unity-自定义Debug</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2021-11-02T10:54:00.000Z">2021-11-02</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><ol>
+<li>在Runtime下可以控制日志是否打印，方便后期调试;</li>
+<li>在C#中添加dump方法，可以像lua一样对class,Array,IList,dict,string,值类型的信息查看;</li>
+<li>打印带颜色日志麻烦。</li>
+</ol>
+<h2 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Reflection;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UObject = UnityEngine.Object;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Log</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 日志等级</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> LevelEum Level = LevelEum.All;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> API</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 普通日志</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Info</span>(<span class="params"><span class="built_in">object</span> message, UObject context = <span class="literal">null</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">int</span>)Level &gt; <span class="number">0</span>)</span><br><span class="line">            Debug.Log(message, context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Info</span>(<span class="params"><span class="built_in">object</span> message, Color color, UObject context = <span class="literal">null</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Info(<span class="string">$&quot;&lt;color=#<span class="subst">&#123;getColorHex(color)&#125;</span>&gt;<span class="subst">&#123;message&#125;</span>&lt;/color&gt;&quot;</span>, context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RedInfo</span>(<span class="params"><span class="built_in">object</span> message, UObject context = <span class="literal">null</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Info(<span class="string">$&quot;&lt;color=red&gt;<span class="subst">&#123;message&#125;</span>&lt;/color&gt;&quot;</span>, context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GreenInfo</span>(<span class="params"><span class="built_in">object</span> message, UObject context = <span class="literal">null</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Info(<span class="string">$&quot;&lt;color=green&gt;<span class="subst">&#123;message&#125;</span>&lt;/color&gt;&quot;</span>, context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 警告消息</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Warning</span>(<span class="params"><span class="built_in">object</span> message, UObject context = <span class="literal">null</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">int</span>)Level &gt;= <span class="number">2</span>)</span><br><span class="line">            Debug.LogWarning(message, context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 错误消息</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Error</span>(<span class="params"><span class="built_in">object</span> message, UObject context = <span class="literal">null</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">int</span>)Level &gt;= <span class="number">1</span>)</span><br><span class="line">            Debug.LogError(message, context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Dump</span>(<span class="params"><span class="built_in">object</span> obj, <span class="built_in">int</span> maxLayer = <span class="number">5</span></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        mMaxLayer = maxLayer;</span><br><span class="line">        builder.Remove(<span class="number">0</span>, builder.Length);</span><br><span class="line">        builder.AppendLine(<span class="string">&quot;dump info &quot;</span>);</span><br><span class="line">        dumpHandler(obj, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        Info(builder.ToString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> privite</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">string</span> SPACE = <span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> StringBuilder builder = <span class="keyword">new</span> StringBuilder(<span class="string">&quot;&quot;</span>, <span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> mMaxLayer = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dumpHandler</span>(<span class="params"><span class="built_in">object</span> obj, <span class="built_in">int</span> layer</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj == <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.Append(<span class="string">&quot;null&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.Type t = obj.GetType();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">is</span> <span class="built_in">string</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.Append(<span class="string">&quot;\&quot;&quot;</span>);</span><br><span class="line">            builder.Append(obj);</span><br><span class="line">            builder.Append(<span class="string">&quot;\&quot;,&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (t.IsValueType)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.Append(obj);</span><br><span class="line">            builder.Append(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (obj <span class="keyword">is</span> IList list)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.AppendLine(<span class="string">&quot;[&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (layer &lt;= mMaxLayer)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; list.Count; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    appendSpace(layer);</span><br><span class="line">                    builder.Append(i);</span><br><span class="line">                    builder.Append(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">                    dumpHandler(list[i], layer + <span class="number">1</span>);</span><br><span class="line">                    builder.AppendLine();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                builder.Append(<span class="string">&quot;List Data...&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            builder.Append(<span class="string">&quot;]&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (obj <span class="keyword">is</span> IDictionary dict)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.AppendLine(<span class="string">&quot;&#123;&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (layer &lt;= mMaxLayer)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">foreach</span> (<span class="keyword">var</span> key <span class="keyword">in</span> dict.Keys)</span><br><span class="line">                &#123;</span><br><span class="line">                    builder.Append(key.ToString());</span><br><span class="line">                    builder.AppendLine(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">                    dumpHandler(dict[key], layer + <span class="number">1</span>);</span><br><span class="line">                    builder.AppendLine();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                builder.Append(<span class="string">&quot;Dictionary Data...&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            builder.AppendLine(<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (t.IsArray)</span><br><span class="line">        &#123;</span><br><span class="line">            System.Array array = obj <span class="keyword">as</span> System.Array;</span><br><span class="line">            builder.Append(<span class="string">&quot;[&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (layer &lt;= mMaxLayer)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; array.Length; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    builder.Append(i);</span><br><span class="line">                    builder.Append(<span class="string">&quot; : &quot;</span>);</span><br><span class="line">                    dumpHandler(array.GetValue(i), layer + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                builder.Append(<span class="string">&quot;Array Data...&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            builder.Append(<span class="string">&quot;]&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (t.IsClass)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.AppendLine(<span class="string">&quot;&#123;&quot;</span>);</span><br><span class="line">            <span class="keyword">var</span> fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance);</span><br><span class="line">            appendSpace(layer);</span><br><span class="line">            builder.AppendLine(<span class="string">&quot;// 字段如下：&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (fields.Length &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (layer &lt;= mMaxLayer)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">foreach</span> (FieldInfo info <span class="keyword">in</span> fields)</span><br><span class="line">                    &#123;</span><br><span class="line">                        appendSpace(layer);</span><br><span class="line">                        builder.Append(info.Name);</span><br><span class="line">                        builder.Append(<span class="string">&quot; : &quot;</span>);</span><br><span class="line">                        <span class="built_in">object</span> <span class="keyword">value</span> = info.GetValue(obj);</span><br><span class="line">                        dumpHandler(<span class="keyword">value</span>, layer + <span class="number">1</span>);</span><br><span class="line">                        builder.AppendLine();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    builder.Append(<span class="string">&quot;Class...&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            builder.AppendLine();</span><br><span class="line">            appendSpace(layer);</span><br><span class="line">            builder.AppendLine(<span class="string">&quot;// 属性如下：&quot;</span>);</span><br><span class="line">            <span class="keyword">var</span> properties = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);</span><br><span class="line">            <span class="keyword">if</span> (properties.Length &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (layer &lt;= mMaxLayer)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">foreach</span> (PropertyInfo info <span class="keyword">in</span> properties)</span><br><span class="line">                    &#123;</span><br><span class="line">                        builder.Append(info.Name);</span><br><span class="line">                        builder.Append(<span class="string">&quot; : &quot;</span>);</span><br><span class="line">                        <span class="built_in">object</span> <span class="keyword">value</span> = info.GetGetMethod().Invoke(obj, <span class="literal">null</span>);</span><br><span class="line">                        dumpHandler(<span class="keyword">value</span>, layer + <span class="number">1</span>);</span><br><span class="line">                        builder.AppendLine();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    builder.Append(<span class="string">&quot;Class...&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            builder.Append(<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            RedInfo(<span class="string">&quot;unsupport type:&quot;</span> + t.FullName);</span><br><span class="line">            builder.Append(t.FullName);</span><br><span class="line">            builder.Append(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 缩进</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">private</span> <span class="keyword">void</span> <span class="title">appendSpace</span>(<span class="params"><span class="built_in">int</span> layer</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>, iMax = layer * <span class="number">3</span>; i &lt; iMax; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            builder.Append(SPACE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// UnityColor to hex</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">private</span> <span class="built_in">string</span> <span class="title">getColorHex</span>(<span class="params">Color color</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 这里用ToHtmlStringRGB竟然不行</span></span><br><span class="line">        <span class="keyword">return</span> ColorUtility.ToHtmlStringRGBA(color);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">enum</span> LevelEum</span><br><span class="line">    &#123;</span><br><span class="line">        None = <span class="number">0</span>, <span class="comment">// 不打印日志</span></span><br><span class="line">        OnlyError = <span class="number">1</span>, <span class="comment">// 只显示Error</span></span><br><span class="line">        Error_Warn = <span class="number">2</span>, <span class="comment">// Error和警告</span></span><br><span class="line">        All = <span class="number">3</span>, <span class="comment">// 所有日志</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决双击日志跳转到Log文件的问题"><a href="#解决双击日志跳转到Log文件的问题" class="headerlink" title="解决双击日志跳转到Log文件的问题"></a>解决双击日志跳转到Log文件的问题</h2><p>上面代码如果直接放到工程中使用，双击打印的日志会直接进入Log文件，而不是我们调用的地方。解决方案就是<code>把Log类打包成dll</code>然后放到u3d的<code>Plugins</code>目录下。</p>
+<p>啥？你不会搞Unity中可以用的类库？</p>
+<ol>
+<li>VS打开Unity工程，在解决方案资源管理器-&gt;解决方案目录下右击-&gt;添加-&gt;新建项目</li>
+<li>选择<code>类库(.Net Framework)</code>进行创建。</li>
+<li>右击创建的类库-&gt;属性-&gt;用程序-&gt;目标框架选择<code>Unity 3.5 .net Subset Base Class Libraries</code>，保存即可。(要是没这个选项就是你创建的类库类型不对，回第二部重新来过)</li>
+<li>在应用程序-&gt;生成事件中生成事件后命令行中填入直接复制到工程的命令：</li>
+</ol>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:: 下面是我的路径</span><br><span class="line"><span class="built_in">copy</span> $(TargetPath) $(TargetDir)..\..\..\UnityClient\Assets\Plugins\NDebug.dll</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>给库添加<code>UnityEngine.dll</code>的引用。（有需要的话）</li>
+<li>直接成成解决方案，就会生成dll,并复制到指定目录下。</li>
+</ol>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2021/05/12/%E7%9B%AE%E5%BD%95%E5%8F%8A%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%E8%A7%84%E8%8C%83%E6%95%B4%E7%90%86(03)/" title="目录及资源路径规范整理(03)">目录及资源路径规范整理(03)</a></li>
+<li><a href="/2021/11/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="设计模式-单例模式">设计模式-单例模式</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2021/11/04/git-%E5%AD%90%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">git-子模块管理</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2021/10/23/%E7%AE%97%E6%B3%95-%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E5%A4%B9B%E7%9B%B8%E5%AF%B9%E6%96%87%E4%BB%B6%E5%A4%B9A%E7%9A%84%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">算法-计算文件夹B相对文件夹A的相对路径</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2024/03/28/Unity-Shader%E6%94%AF%E6%8C%81%E7%9A%84%E8%AF%AD%E4%B9%89(%E5%9B%9B)/">
+            <span class="related-post-title">Unity-Shader支持的语义(四)</span>
+            <time datetime="2024-03-28T11:02:51.000Z">2024-03-28</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/01/19/%E7%AE%97%E6%B3%95-A%E6%98%9F%E5%AF%BB%E8%B7%AF/">
+            <span class="related-post-title">算法-A星寻路</span>
+            <time datetime="2024-01-19T06:45:19.000Z">2024-01-19</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+            <span class="related-post-title">Unity-CSharp与OC交互</span>
+            <time datetime="2023-08-26T06:42:29.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(2)</span>
+            <time datetime="2023-08-26T06:41:41.000Z">2023-08-26</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9D%E8%A1%B7"><span class="post-toc-text">初衷</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="post-toc-text">代码如下：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8F%8C%E5%87%BB%E6%97%A5%E5%BF%97%E8%B7%B3%E8%BD%AC%E5%88%B0Log%E6%96%87%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98"><span class="post-toc-text">解决双击日志跳转到Log文件的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

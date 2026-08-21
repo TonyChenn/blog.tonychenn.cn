@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Android 生成 Keystore 签名密钥｜默然的博客</title>
+<meta name="description" content="使用 JDK keytool 为 Android 应用生成发布签名 Keystore，说明别名、有效期、密码保管和证书指纹校验，避免因丢失密钥导致无法覆盖升级。">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2018/02/06/Android-%E7%94%9F%E6%88%90keystore%E5%AF%86%E9%92%A5/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2018/02/06/Android-%E7%94%9F%E6%88%90keystore%E5%AF%86%E9%92%A5/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 生成 Keystore 签名密钥｜默然的博客">
+<meta property="og:description" content="使用 JDK keytool 为 Android 应用生成发布签名 Keystore，说明别名、有效期、密码保管和证书指纹校验，避免因丢失密钥导致无法覆盖升级。">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2018/02.06/androidstudio.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Android 生成 Keystore 签名密钥｜默然的博客">
+<meta name="twitter:description" content="使用 JDK keytool 为 Android 应用生成发布签名 Keystore，说明别名、有效期、密码保管和证书指纹校验，避免因丢失密钥导致无法覆盖升级。">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2018/02.06/androidstudio.jpg">
+
+
+
+<meta property="article:published_time" content="2018-02-06T03:43:34.000Z">
+<meta property="article:modified_time" content="2026-08-19T16:00:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Android 生成 Keystore 签名密钥","description":"使用 JDK keytool 为 Android 应用生成发布签名 Keystore，说明别名、有效期、密码保管和证书指纹校验，避免因丢失密钥导致无法覆盖升级。","url":"https://blog.tonychenn.cn/2018/02/06/Android-%E7%94%9F%E6%88%90keystore%E5%AF%86%E9%92%A5/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2018/02/06/Android-%E7%94%9F%E6%88%90keystore%E5%AF%86%E9%92%A5/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2018-02-06T03:43:34.000Z","dateModified":"2026-08-19T16:00:00.000Z","image":"https://img.tonychenn.cn/2018/02.06/androidstudio.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F02%2F06%2FAndroid-%25E7%2594%259F%25E6%2588%2590keystore%25E5%25AF%2586%25E9%2592%25A5%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Android%20%E7%94%9F%E6%88%90%20Keystore%20%E7%AD%BE%E5%90%8D%E5%AF%86%E9%92%A5&amp;summary=%E4%BD%BF%E7%94%A8%20JDK%20keytool%20%E4%B8%BA%20Android%20%E5%BA%94%E7%94%A8%E7%94%9F%E6%88%90%E5%8F%91%E5%B8%83%E7%AD%BE%E5%90%8D%20Keystore%EF%BC%8C%E8%AF%B4%E6%98%8E%E5%88%AB%E5%90%8D%E3%80%81%E6%9C%89%E6%95%88%E6%9C%9F%E3%80%81%E5%AF%86%E7%A0%81%E4%BF%9D%E7%AE%A1%E5%92%8C%E8%AF%81%E4%B9%A6%E6%8C%87%E7%BA%B9%E6%A0%A1%E9%AA%8C%EF%BC%8C%E9%81%BF%E5%85%8D%E5%9B%A0%E4%B8%A2%E5%A4%B1%E5%AF%86%E9%92%A5%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E8%A6%86%E7%9B%96%E5%8D%87%E7%BA%A7%E3%80%82&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2018%2F02.06%2Fandroidstudio.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F02%2F06%2FAndroid-%25E7%2594%259F%25E6%2588%2590keystore%25E5%25AF%2586%25E9%2592%25A5%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Android%20%E7%94%9F%E6%88%90%20Keystore%20%E7%AD%BE%E5%90%8D%E5%AF%86%E9%92%A5&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F02%2F06%2FAndroid-%25E7%2594%259F%25E6%2588%2590keystore%25E5%25AF%2586%25E9%2592%25A5%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Android%20%E7%94%9F%E6%88%90%20Keystore%20%E7%AD%BE%E5%90%8D%E5%AF%86%E9%92%A5&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F02%2F06%2FAndroid-%25E7%2594%259F%25E6%2588%2590keystore%25E5%25AF%2586%25E9%2592%25A5%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2018%2F02.06%2Fandroidstudio.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F02%2F06%2FAndroid-%25E7%2594%259F%25E6%2588%2590keystore%25E5%25AF%2586%25E9%2592%25A5%2F&amp;text=Android%20%E7%94%9F%E6%88%90%20Keystore%20%E7%AD%BE%E5%90%8D%E5%AF%86%E9%92%A5" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F02%2F06%2FAndroid-%25E7%2594%259F%25E6%2588%2590keystore%25E5%25AF%2586%25E9%2592%25A5%2F&amp;title=Android%20%E7%94%9F%E6%88%90%20Keystore%20%E7%AD%BE%E5%90%8D%E5%AF%86%E9%92%A5" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2018/02.06/androidstudio.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Android 生成 Keystore 签名密钥</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2018-02-06T03:43:34.000Z">2018-02-06</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2026-08-19T16:00:00.000Z">2026-08-20</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>Android 应用覆盖安装时，包名相同还不够：新旧 APK 必须由同一签名证书签名。Keystore、别名和密码应作为发布资产备份，不要只保存在个人电脑的 JDK <code>bin</code> 目录。</p>
+<h2 id="生成-Keystore"><a href="#生成-Keystore" class="headerlink" title="生成 Keystore"></a>生成 Keystore</h2><p>在安装了 JDK 的终端中执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkeypair -v -keystore app-release.jks -<span class="built_in">alias</span> app-release -keyalg RSA -keysize 2048 -validity 10000</span><br></pre></td></tr></table></figure>
+
+<p>按提示填写 Keystore 密码、证书信息和别名密码。<code>-genkeypair</code> 是当前推荐写法；有效期应按组织的发布策略设置，不要把示例数值当作固定要求。</p>
+<h2 id="检查证书"><a href="#检查证书" class="headerlink" title="检查证书"></a>检查证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -v -keystore app-release.jks -<span class="built_in">alias</span> app-release</span><br></pre></td></tr></table></figure>
+
+<p>核对输出中的 SHA-1、SHA-256 指纹和证书有效期。若需接入第三方 SDK 或后台白名单，通常应提供对应的证书指纹，而不是上传 Keystore 文件。</p>
+<h2 id="安全与升级边界"><a href="#安全与升级边界" class="headerlink" title="安全与升级边界"></a>安全与升级边界</h2><p><img src="https://img.tonychenn.cn/2018/02.06/createKeystore.jpg" alt="Android 生成 Keystore 密钥"></p>
+<ul>
+<li>不要把 Keystore、明文密码或 <code>key.properties</code> 提交到公开仓库。</li>
+<li>发布过线上版本后，丢失原签名密钥会导致同包名应用无法覆盖升级；应离线加密备份并限制访问权限。</li>
+<li>Debug 签名不能替代发布签名；CI 应从受保护的密钥存储读取发布凭据。</li>
+</ul>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2022/04/30/Andrioid%E5%BA%93%E5%B7%A5%E7%A8%8B%E6%89%93%E5%8C%85aar%E5%8C%85/" title="Android 库工程打包 AAR">Android 库工程打包 AAR</a></li>
+<li><a href="/2022/04/27/Android-%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AAapk%E7%9A%84%E7%AD%BE%E5%90%8D%E6%98%AF%E5%90%A6%E4%B8%80%E6%A0%B7/" title="Android 比较两个 APK 的签名是否一致">比较两个 APK 的签名</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2018/03/16/Android-%E5%8F%8C%E5%87%BB%E8%BF%94%E5%9B%9E%E9%94%AE%E9%80%80%E5%87%BA%E7%A8%8B%E5%BA%8F/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Android-双击返回键退出程序</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2018/01/05/Unity-OnTriggerEnter%E4%B8%8EOnColliderEnter/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Unity OnTriggerEnter 与 OnCollisionEnter</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2023/12/21/Android-APK%E7%9A%84%E8%A7%A3%E5%8C%85%E4%B8%8E%E9%87%8D%E7%AD%BE%E5%90%8D/">
+            <span class="related-post-title">Android-APK的解包与重签名</span>
+            <time datetime="2023-12-21T05:29:14.000Z">2023-12-21</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(2)</span>
+            <time datetime="2023-08-26T06:41:41.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/04/30/Andrioid%E5%BA%93%E5%B7%A5%E7%A8%8B%E6%89%93%E5%8C%85aar%E5%8C%85/">
+            <span class="related-post-title">Android 库工程打包 AAR</span>
+            <time datetime="2022-04-30T06:36:57.000Z">2022-04-30</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/04/27/Android-%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AAapk%E7%9A%84%E7%AD%BE%E5%90%8D%E6%98%AF%E5%90%A6%E4%B8%80%E6%A0%B7/">
+            <span class="related-post-title">Android 比较两个 APK 的签名是否一致</span>
+            <time datetime="2022-04-27T09:21:06.000Z">2022-04-27</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%94%9F%E6%88%90-Keystore"><span class="post-toc-text">生成 Keystore</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A3%80%E6%9F%A5%E8%AF%81%E4%B9%A6"><span class="post-toc-text">检查证书</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E5%85%A8%E4%B8%8E%E5%8D%87%E7%BA%A7%E8%BE%B9%E7%95%8C"><span class="post-toc-text">安全与升级边界</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Cocos2d-x Shader 外发光与呼吸效果｜默然的博客</title>
+<meta name="description" content="通过周边 alpha 采样生成 Cocos2d-x Sprite 外发光，再周期性调整 glow_expand uniform 实现呼吸动画">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2022/06/22/cocos2dx-shader%E5%A4%96%E5%8F%91%E5%85%89/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2022/06/22/cocos2dx-shader%E5%A4%96%E5%8F%91%E5%85%89/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x Shader 外发光与呼吸效果｜默然的博客">
+<meta property="og:description" content="通过周边 alpha 采样生成 Cocos2d-x Sprite 外发光，再周期性调整 glow_expand uniform 实现呼吸动画">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2022/0614/cocos2dx_shader_glow_breathe.gif">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cocos2d-x Shader 外发光与呼吸效果｜默然的博客">
+<meta name="twitter:description" content="通过周边 alpha 采样生成 Cocos2d-x Sprite 外发光，再周期性调整 glow_expand uniform 实现呼吸动画">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2022/0614/cocos2dx_shader_glow_breathe.gif">
+
+
+
+<meta property="article:published_time" content="2022-06-22T09:53:17.000Z">
+<meta property="article:modified_time" content="2026-08-19T16:00:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cocos2d-x Shader 外发光与呼吸效果","description":"通过周边 alpha 采样生成 Cocos2d-x Sprite 外发光，再周期性调整 glow_expand uniform 实现呼吸动画","url":"https://blog.tonychenn.cn/2022/06/22/cocos2dx-shader%E5%A4%96%E5%8F%91%E5%85%89/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2022/06/22/cocos2dx-shader%E5%A4%96%E5%8F%91%E5%85%89/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2022-06-22T09:53:17.000Z","dateModified":"2026-08-19T16:00:00.000Z","image":"https://img.tonychenn.cn/2022/0614/cocos2dx_shader_glow_breathe.gif"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F06%2F22%2Fcocos2dx-shader%25E5%25A4%2596%25E5%258F%2591%25E5%2585%2589%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Cocos2d-x%20Shader%20%E5%A4%96%E5%8F%91%E5%85%89%E4%B8%8E%E5%91%BC%E5%90%B8%E6%95%88%E6%9E%9C&amp;summary=%E9%80%9A%E8%BF%87%E5%91%A8%E8%BE%B9%20alpha%20%E9%87%87%E6%A0%B7%E7%94%9F%E6%88%90%20Cocos2d-x%20Sprite%20%E5%A4%96%E5%8F%91%E5%85%89%EF%BC%8C%E5%86%8D%E5%91%A8%E6%9C%9F%E6%80%A7%E8%B0%83%E6%95%B4%20glow_expand%20uniform%20%E5%AE%9E%E7%8E%B0%E5%91%BC%E5%90%B8%E5%8A%A8%E7%94%BB&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2022%2F0614%2Fcocos2dx_shader_glow_breathe.gif&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F06%2F22%2Fcocos2dx-shader%25E5%25A4%2596%25E5%258F%2591%25E5%2585%2589%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Cocos2d-x%20Shader%20%E5%A4%96%E5%8F%91%E5%85%89%E4%B8%8E%E5%91%BC%E5%90%B8%E6%95%88%E6%9E%9C&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F06%2F22%2Fcocos2dx-shader%25E5%25A4%2596%25E5%258F%2591%25E5%2585%2589%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Cocos2d-x%20Shader%20%E5%A4%96%E5%8F%91%E5%85%89%E4%B8%8E%E5%91%BC%E5%90%B8%E6%95%88%E6%9E%9C&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F06%2F22%2Fcocos2dx-shader%25E5%25A4%2596%25E5%258F%2591%25E5%2585%2589%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2022%2F0614%2Fcocos2dx_shader_glow_breathe.gif&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F06%2F22%2Fcocos2dx-shader%25E5%25A4%2596%25E5%258F%2591%25E5%2585%2589%2F&amp;text=Cocos2d-x%20Shader%20%E5%A4%96%E5%8F%91%E5%85%89%E4%B8%8E%E5%91%BC%E5%90%B8%E6%95%88%E6%9E%9C" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F06%2F22%2Fcocos2dx-shader%25E5%25A4%2596%25E5%258F%2591%25E5%2585%2589%2F&amp;title=Cocos2d-x%20Shader%20%E5%A4%96%E5%8F%91%E5%85%89%E4%B8%8E%E5%91%BC%E5%90%B8%E6%95%88%E6%9E%9C" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2022/0614/cocos2dx_shader_glow_breathe.gif)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Cocos2d-x Shader 外发光与呼吸效果</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2022-06-22T09:53:17.000Z">2022-06-22</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2026-08-19T16:00:00.000Z">2026-08-20</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>本文先对透明像素周边做 alpha 采样生成外发光，再通过周期函数改变发光强度，形成呼吸效果。示例用于说明实现思路，移动端使用前需要验证 Shader 编译兼容性和采样性能。</p>
+<!-- more -->
+
+<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><ol>
+<li>不透明区域直接渲染原纹理。</li>
+<li>对透明区域周围的 alpha 进行采样，根据不透明采样点数量计算发光颜色和强度。</li>
+<li>周期性调整 <code>glow_expand</code>，实现呼吸效果。</li>
+</ol>
+<p><img src="https://img.tonychenn.cn/2022/0614/cocos2dx_shader_glow.jpg" alt="Cocos2d-x Sprite 外发光效果"></p>
+<h2 id="外发光-Shader"><a href="#外发光-Shader" class="headerlink" title="外发光 Shader"></a>外发光 Shader</h2><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// glow.fsh</span></span><br><span class="line"><span class="meta">#ifdef GL_ES</span></span><br><span class="line"><span class="keyword">precision</span> <span class="keyword">mediump</span> <span class="type">float</span>;</span><br><span class="line"><span class="meta">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> v_fragmentColor;</span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec2</span> v_texCoord;</span><br><span class="line"></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">vec2</span> resolution; <span class="comment">// 纹理像素宽高</span></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">vec3</span> glow_color;    <span class="comment">// 发光颜色</span></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">float</span> glow_expand; <span class="comment">// 发光强度</span></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">float</span> glow_range;  <span class="comment">// 发光范围</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="type">float</span> sampleNum = <span class="number">5.0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="type">float</span> AsNotAlpha = <span class="number">0.3</span>;  <span class="comment">// 0.0 - 1.0</span></span><br><span class="line"><span class="comment">// 思路：先过滤不透明点，然后按照角度找到这个范围内不透明的点的“不透明程度”，不透明程度越高，发光越多</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> debug(<span class="type">float</span> x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//vec4 col = texture2D(CC_Texture0, v_texCoord.xy);</span></span><br><span class="line">    <span class="comment">// if (v_texCoord.x &gt; 0.5 &amp;&amp; v_texCoord.y &gt; 0.5) </span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">gl_FragColor</span> = <span class="type">vec4</span>(x/<span class="number">255.0</span>, x/<span class="number">255.0</span>, x/<span class="number">255.0</span>, <span class="number">1.1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取像素周围不透明点的数量</span></span><br><span class="line"><span class="type">int</span> getStrokeCount()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec2</span> unit = <span class="number">1.0</span> / resolution.xy;<span class="comment">//单位坐标</span></span><br><span class="line">    <span class="type">float</span> r = glow_range;</span><br><span class="line">    <span class="type">float</span> <span class="built_in">step</span> = r / sampleNum;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//遍历一个矩形，当前的坐标为中心点，遍历矩形中每个像素点的颜色</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">float</span> x = -r; x &lt; r; x += <span class="built_in">step</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">float</span> y = -r; y &lt; r; y += <span class="built_in">step</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">vec4</span> col = <span class="built_in">texture2D</span>(CC_Texture0, v_texCoord + <span class="type">vec2</span>(x * unit.x, y * unit.y));</span><br><span class="line">            <span class="keyword">if</span>(col.a &gt; AsNotAlpha)</span><br><span class="line">            &#123;</span><br><span class="line">                count = count + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">vec4</span> myC = <span class="built_in">texture2D</span>(CC_Texture0, v_texCoord);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (myC.a &gt; AsNotAlpha)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">gl_FragColor</span> = v_fragmentColor * myC;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取像素周围不透明点的数量</span></span><br><span class="line">    <span class="type">int</span> strokeCount = getStrokeCount();</span><br><span class="line">    </span><br><span class="line">    <span class="type">float</span> totalSample = (sampleNum * <span class="number">2.0</span>) * (sampleNum * <span class="number">2.0</span>);</span><br><span class="line">    <span class="type">float</span> limit = totalSample * <span class="number">0.8</span>;</span><br><span class="line">    <span class="type">float</span> strokeCountF = <span class="type">float</span>(strokeCount);</span><br><span class="line">    <span class="keyword">if</span> (strokeCountF &gt; limit)  <span class="comment">//四周围有足够多不透明点时，这个点设成描边颜色</span></span><br><span class="line">    &#123;</span><br><span class="line">        myC.rgb = glow_color * glow_expand;</span><br><span class="line">        myC.a = strokeCountF * glow_expand / totalSample;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        myC.rgb = glow_color * strokeCountF * glow_expand / limit;</span><br><span class="line">        myC.a = strokeCountF * glow_expand / totalSample;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gl_FragColor</span> = v_fragmentColor * myC;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="兼容性与性能"><a href="#兼容性与性能" class="headerlink" title="兼容性与性能"></a>兼容性与性能</h3><p>这段 Shader 的双层循环边界来自 uniform。部分 OpenGL ES 2.0 驱动要求循环次数可在编译期确定，可能无法通过编译；同时，每个透明片元约进行 100 次纹理采样，大图或多个节点同时使用时开销较高。生产环境可改用固定循环上限、预生成外发光纹理，或使用横纵两次处理的方案。</p>
+<h2 id="实现呼吸效果"><a href="#实现呼吸效果" class="headerlink" title="实现呼吸效果"></a>实现呼吸效果</h2><p>通过 <code>scheduleUpdate</code> 周期性修改 <code>glow_expand</code>。可以使用 <code>sin</code> 或 <code>cos</code> 生成平滑变化：</p>
+<p><img src="https://img.tonychenn.cn/2022/0614/math_sin_cos.webp" alt="正弦和余弦函数曲线"></p>
+<p>alpha 不能为负，因此对 <code>sin(time)</code> 取绝对值：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logo:scheduleUpdate(<span class="function"><span class="keyword">function</span><span class="params">(delta)</span></span></span><br><span class="line">    <span class="built_in">time</span> = <span class="built_in">time</span> + delta</span><br><span class="line">    <span class="keyword">local</span> sin_value = <span class="built_in">math</span>.<span class="built_in">abs</span>(<span class="built_in">math</span>.<span class="built_in">sin</span>(<span class="built_in">time</span>))</span><br><span class="line">    glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, sin_value)</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
+
+<p>最终效果：</p>
+<p><img src="https://img.tonychenn.cn/2022/0614/cocos2dx_shader_glow_breathe.gif" alt="Cocos2d-x Shader 外发光呼吸动画"></p>
+<h2 id="完整-Lua-参数设置"><a href="#完整-Lua-参数设置" class="headerlink" title="完整 Lua 参数设置"></a>完整 Lua 参数设置</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> logo = <span class="built_in">self</span>.holder:getChildByName(<span class="string">&quot;Sprite_start_logo&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> size = logo:getTexture():getContentSizeInPixels()</span><br><span class="line"></span><br><span class="line">glProgramState:setUniformVec2(<span class="string">&quot;resolution&quot;</span>, &#123;x = size.width, y = size.height&#125;)</span><br><span class="line">glProgramState:setUniformVec3(<span class="string">&quot;glow_color&quot;</span>, cc.vec3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>))</span><br><span class="line">glProgramState:setUniformFloat(<span class="string">&quot;glow_range&quot;</span>, <span class="number">10</span>)</span><br><span class="line">glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">time</span> = <span class="number">0</span></span><br><span class="line">logo:scheduleUpdate(<span class="function"><span class="keyword">function</span><span class="params">(delta)</span></span></span><br><span class="line">    <span class="built_in">time</span> = <span class="built_in">time</span> + delta</span><br><span class="line">    <span class="keyword">local</span> sin_value = <span class="built_in">math</span>.<span class="built_in">sin</span>(<span class="built_in">time</span>)</span><br><span class="line">    glProgramState:setUniformFloat(<span class="string">&quot;glow_expand&quot;</span>, <span class="built_in">math</span>.<span class="built_in">abs</span>(sin_value))</span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"></span><br><span class="line">logo:setGLProgramState(glProgramState)</span><br></pre></td></tr></table></figure>
+
+<p>节点退出或效果结束时，应停止对应的更新回调，避免无效调度继续执行。</p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2022/06/14/cocos2dx-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9D%80%E8%89%B2%E5%99%A8(1)/" title="Cocos2d-x 自定义着色器入门（1）">Cocos2d-x 自定义着色器入门（1）</a></li>
+<li><a href="/2022/06/14/cocos2dx-shader%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F(3)/" title="Cocos2d-x Shader uniform 变量（3）">Cocos2d-x Shader uniform 变量（3）</a></li>
+<li><a href="/2022/06/22/cocos2dx-shader%E6%A8%A1%E7%B3%8A/" title="Cocos2d-x Shader 实现图片模糊">Cocos2d-x Shader 实现图片模糊</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2022/07/06/Unity%E5%88%92%E6%97%B6%E4%BB%A3%E7%9A%84CSharp%E7%83%AD%E6%9B%B4-HybirdCLR/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Unity HybridCLR 热更新接入与原理</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2022/06/22/cocos2dx-shader%E6%A8%A1%E7%B3%8A/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Cocos2d-x Shader 实现图片模糊</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2026/07/18/cocos2dx-TTF%20Label%20%E5%8A%A8%E6%80%81%E5%90%88%E6%89%B9%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">
+            <span class="related-post-title">Cocos2d-x 3.9：TTF Label 动态合批实现与踩坑记录</span>
+            <time datetime="2026-07-18T05:40:31.000Z">2026-07-18</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/12/01/cocos2dx-shader%E6%94%B9%E5%8F%98%E5%9B%BE%E7%89%87%E9%A2%9C%E8%89%B2(4)/">
+            <span class="related-post-title">Cocos2d-x Shader 改变图片颜色（4）</span>
+            <time datetime="2022-12-01T08:50:28.000Z">2022-12-01</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/06/22/cocos2dx-shader%E6%A8%A1%E7%B3%8A/">
+            <span class="related-post-title">Cocos2d-x Shader 实现图片模糊</span>
+            <time datetime="2022-06-22T05:53:00.000Z">2022-06-22</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/06/14/cocos2dx-shader%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F(3)/">
+            <span class="related-post-title">Cocos2d-x Shader uniform 变量（3）</span>
+            <time datetime="2022-06-14T07:51:14.000Z">2022-06-14</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">实现步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%96%E5%8F%91%E5%85%89-Shader"><span class="post-toc-text">外发光 Shader</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%BC%E5%AE%B9%E6%80%A7%E4%B8%8E%E6%80%A7%E8%83%BD"><span class="post-toc-text">兼容性与性能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%91%BC%E5%90%B8%E6%95%88%E6%9E%9C"><span class="post-toc-text">实现呼吸效果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%8C%E6%95%B4-Lua-%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="post-toc-text">完整 Lua 参数设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>
