@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>CSharp反射之私有成员(6)｜默然的博客</title>
+<meta name="description" content="为了防止文章内容太乱，所以之前的所有文章都是通过反射获取公有变量。这一篇就是只记录C 非公有成员的操作。同时这一章更加体现出反射的强大： 本文围绕“CSharp反射之私有成员(6)”整理实现步骤、适用范围、常见问题与验证要点">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2022/12/22/CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2022/12/22/CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSharp反射之私有成员(6)｜默然的博客">
+<meta property="og:description" content="为了防止文章内容太乱，所以之前的所有文章都是通过反射获取公有变量。这一篇就是只记录C 非公有成员的操作。同时这一章更加体现出反射的强大： 本文围绕“CSharp反射之私有成员(6)”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2022/0829/icon.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CSharp反射之私有成员(6)｜默然的博客">
+<meta name="twitter:description" content="为了防止文章内容太乱，所以之前的所有文章都是通过反射获取公有变量。这一篇就是只记录C 非公有成员的操作。同时这一章更加体现出反射的强大： 本文围绕“CSharp反射之私有成员(6)”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2022/0829/icon.jpg">
+
+
+
+<meta property="article:published_time" content="2022-12-22T05:49:21.000Z">
+<meta property="article:modified_time" content="2022-12-22T05:49:21.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSharp反射之私有成员(6)","description":"为了防止文章内容太乱，所以之前的所有文章都是通过反射获取公有变量。这一篇就是只记录C 非公有成员的操作。同时这一章更加体现出反射的强大： 本文围绕“CSharp反射之私有成员(6)”整理实现步骤、适用范围、常见问题与验证要点","url":"https://blog.tonychenn.cn/2022/12/22/CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2022/12/22/CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2022-12-22T05:49:21.000Z","dateModified":"2022-12-22T05:49:21.000Z","image":"https://img.tonychenn.cn/2022/0829/icon.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F12%2F22%2FCSharp%25E5%258F%258D%25E5%25B0%2584%25E4%25B9%258B%25E7%25A7%2581%25E6%259C%2589%25E6%2588%2590%25E5%2591%2598(6)%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)&amp;summary=%E4%B8%BA%E4%BA%86%E9%98%B2%E6%AD%A2%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E5%A4%AA%E4%B9%B1%EF%BC%8C%E6%89%80%E4%BB%A5%E4%B9%8B%E5%89%8D%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0%E9%83%BD%E6%98%AF%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E5%85%AC%E6%9C%89%E5%8F%98%E9%87%8F%E3%80%82%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E6%98%AF%E5%8F%AA%E8%AE%B0%E5%BD%95C%20%E9%9D%9E%E5%85%AC%E6%9C%89%E6%88%90%E5%91%98%E7%9A%84%E6%93%8D%E4%BD%9C%E3%80%82%E5%90%8C%E6%97%B6%E8%BF%99%E4%B8%80%E7%AB%A0%E6%9B%B4%E5%8A%A0%E4%BD%93%E7%8E%B0%E5%87%BA%E5%8F%8D%E5%B0%84%E7%9A%84%E5%BC%BA%E5%A4%A7%EF%BC%9A%20%E6%9C%AC%E6%96%87%E5%9B%B4%E7%BB%95%E2%80%9CCSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)%E2%80%9D%E6%95%B4%E7%90%86%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E3%80%81%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2022%2F0829%2Ficon.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F12%2F22%2FCSharp%25E5%258F%258D%25E5%25B0%2584%25E4%25B9%258B%25E7%25A7%2581%25E6%259C%2589%25E6%2588%2590%25E5%2591%2598(6)%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F12%2F22%2FCSharp%25E5%258F%258D%25E5%25B0%2584%25E4%25B9%258B%25E7%25A7%2581%25E6%259C%2589%25E6%2588%2590%25E5%2591%2598(6)%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F12%2F22%2FCSharp%25E5%258F%258D%25E5%25B0%2584%25E4%25B9%258B%25E7%25A7%2581%25E6%259C%2589%25E6%2588%2590%25E5%2591%2598(6)%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2022%2F0829%2Ficon.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F12%2F22%2FCSharp%25E5%258F%258D%25E5%25B0%2584%25E4%25B9%258B%25E7%25A7%2581%25E6%259C%2589%25E6%2588%2590%25E5%2591%2598(6)%2F&amp;text=CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F12%2F22%2FCSharp%25E5%258F%258D%25E5%25B0%2584%25E4%25B9%258B%25E7%25A7%2581%25E6%259C%2589%25E6%2588%2590%25E5%2591%2598(6)%2F&amp;title=CSharp%E5%8F%8D%E5%B0%84%E4%B9%8B%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98(6)" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2022/0829/icon.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">CSharp反射之私有成员(6)</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2022-12-22T05:49:21.000Z">2022-12-22</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>为了防止文章内容太乱，所以之前的所有文章都是通过反射获取公有变量。这一篇就是只记录C#非公有成员的操作。同时这一章更加体现出反射的强大：</p>
+<ol>
+<li>对于非公有类可以创建其对象。</li>
+<li>对于非公有字段可以获取及修改其值。</li>
+<li>对于非公有方法可以获取及调用。</li>
+</ol>
+<p>为什么要说是非公有成员呢？因为除了public是公有，其它类型的保护修饰符都是属于private的，在第二篇文章中有讲到。</p>
+<p>那反射公有成员和非公有成员有什么不同呢？其实原理都是一样的，在访问非公有成员时只需要加上<code>BindingFlags</code>即可。<code>BindingFlags</code>是一个枚举，常用的有：</p>
+<table>
+<thead>
+<tr>
+<th>BindingFlags</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BindingFlags.Public</td>
+<td>公有</td>
+</tr>
+<tr>
+<td>BindingFlags.NonPublic</td>
+<td>非公有</td>
+</tr>
+<tr>
+<td>BindingFlags.Instance</td>
+<td>实例成员</td>
+</tr>
+<tr>
+<td>BindingFlags.Static</td>
+<td>静态成员</td>
+</tr>
+<tr>
+<td>BindingFlags.IgnoreCase</td>
+<td>忽略成员大小写</td>
+</tr>
+<tr>
+<td>BindingFlags.CreateInstance</td>
+<td>调用构造函数</td>
+</tr>
+<tr>
+<td>BindingFlags.InvokeMethod</td>
+<td>调用方法</td>
+</tr>
+<tr>
+<td>前置类如下，下面通过反射获取下面成员。</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>可以看出只需要对公有成员的反射操作稍加修改即可实现反射非公有成员，下面例子看看吧。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Animal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> ID = <span class="number">1001</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Animal</span>()</span> &#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Animal</span>(<span class="params"><span class="built_in">int</span> age</span>)</span> &#123; Age = age; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Speak</span>()</span> &#123; Console.WriteLine(<span class="string">&quot;沉默中...&quot;</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Speak</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span> &#123; Console.WriteLine(<span class="string">&quot;says: &quot;</span> + msg); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">string</span> MSG = <span class="string">&quot;hello!&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> Exp &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">Calculate</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b</span>)</span> &#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实例化私有对象"><a href="#实例化私有对象" class="headerlink" title="实例化私有对象"></a>实例化私有对象</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Activator创建实例，第二个参数传入是否是私有成员(bool)。</span></span><br><span class="line">Assembly assembly = Assembly.GetExecutingAssembly();</span><br><span class="line">Type type = assembly.GetType(<span class="string">&quot;Study.Animal&quot;</span>);</span><br><span class="line"><span class="built_in">object</span> obj = Activator.CreateInstance(type, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过构造方法</span></span><br><span class="line">ConstructorInfo constructor = type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, <span class="literal">null</span>, Type.EmptyTypes, <span class="literal">null</span>);</span><br><span class="line"><span class="built_in">object</span> obj = constructor.Invoke(<span class="keyword">new</span> <span class="built_in">object</span>[] &#123; &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="非静态成员"><a href="#非静态成员" class="headerlink" title="非静态成员"></a>非静态成员</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 私有字段的获取与修改(非静态)</span></span><br><span class="line">FieldInfo field = type.GetField(<span class="string">&quot;ID&quot;</span>, BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">Console.WriteLine(field.GetValue(obj));</span><br><span class="line">field.SetValue(obj, <span class="number">999</span>);</span><br><span class="line">Console.WriteLine(field.GetValue(obj));</span><br><span class="line"><span class="comment">//&gt; 1001</span></span><br><span class="line"><span class="comment">//&gt; 999</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 私有属性的获取与修改(非静态)</span></span><br><span class="line">PropertyInfo property = type.GetProperty(<span class="string">&quot;Age&quot;</span>, BindingFlags.NonPublic | BindingFlags.Instance);</span><br><span class="line">Console.WriteLine(property.GetValue(obj));</span><br><span class="line">property.SetValue(obj, <span class="number">99</span>);</span><br><span class="line">Console.WriteLine(property.GetValue(obj));</span><br><span class="line"><span class="comment">//&gt; 0</span></span><br><span class="line"><span class="comment">//&gt; 99</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果该方法只有一个重载，并且没有参数</span></span><br><span class="line"><span class="comment">//MethodInfo method0 = type.GetMethod(&quot;Speak&quot;, BindingFlags.NonPublic | BindingFlags.Instance);</span></span><br><span class="line"><span class="comment">//method0.Invoke(obj, new object[] &#123; &#125;);</span></span><br><span class="line"><span class="comment">//&gt; 沉默中...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果方法有多个重载</span></span><br><span class="line">MethodInfo method = type.GetMethod(<span class="string">&quot;Speak&quot;</span>, BindingFlags.NonPublic | BindingFlags.Instance, <span class="literal">null</span>, <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">string</span>) &#125;, <span class="literal">null</span>);</span><br><span class="line">method.Invoke(obj, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="string">&quot;hello&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静态字段</span></span><br><span class="line">FieldInfo field = type.GetField(<span class="string">&quot;MSG&quot;</span>, BindingFlags.NonPublic | BindingFlags.Static);</span><br><span class="line">Console.WriteLine(field.GetValue(<span class="literal">null</span>));</span><br><span class="line">field.SetValue(<span class="literal">null</span>, <span class="string">&quot;hi&quot;</span>);</span><br><span class="line">Console.WriteLine(field.GetValue(<span class="literal">null</span>));</span><br><span class="line"><span class="comment">//&gt; hello!</span></span><br><span class="line"><span class="comment">//&gt; hi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态私有属性</span></span><br><span class="line">PropertyInfo property = type.GetProperty(<span class="string">&quot;Exp&quot;</span>, BindingFlags.NonPublic | BindingFlags.Static);</span><br><span class="line">Console.WriteLine(property.GetValue(<span class="literal">null</span>));</span><br><span class="line">property.SetValue(<span class="literal">null</span>, <span class="number">999</span>);</span><br><span class="line">Console.WriteLine(property.GetValue(<span class="literal">null</span>));</span><br><span class="line"><span class="comment">//&gt; 0</span></span><br><span class="line"><span class="comment">//&gt; 999</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态方法</span></span><br><span class="line">MethodInfo method = type.GetMethod(<span class="string">&quot;Calculate&quot;</span>, BindingFlags.NonPublic | BindingFlags.Static, <span class="literal">null</span>, <span class="keyword">new</span> Type[] &#123; <span class="keyword">typeof</span>(<span class="built_in">int</span>), <span class="keyword">typeof</span>(<span class="built_in">int</span>) &#125;, <span class="literal">null</span>);</span><br><span class="line"><span class="built_in">object</span> result = method.Invoke(<span class="literal">null</span>, <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; <span class="number">100</span>, <span class="number">100</span> &#125;);</span><br><span class="line">Console.WriteLine(result);</span><br><span class="line"><span class="comment">//&gt; 200</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2021/11/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="设计模式-单例模式">设计模式-单例模式</a></li>
+<li><a href="/2022/05/23/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="设计模式-工厂模式">设计模式-工厂模式</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2022/12/23/CSharp%E5%8F%8D%E5%B0%84%E4%B9%8Bunity%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8(7)/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">CSharp反射之unity中的应用(7)</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2022/12/22/CSharp%E5%8F%8D%E5%B0%84%E4%B8%8E%E7%89%B9%E6%80%A7(4)/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">CSharp反射与特性(4)</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2025/04/20/CSharp%E4%B8%8ECPP%E4%BA%A4%E4%BA%92%E4%B9%8BP_Invoke/">
+            <span class="related-post-title">C# 与 C++ 互操作：P/Invoke 函数、字符串、数组与回调</span>
+            <time datetime="2025-04-20T09:48:32.000Z">2025-04-20</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/11/04/winform%E9%87%8D%E5%AE%9A%E5%90%91Console%E6%97%A5%E5%BF%97/">
+            <span class="related-post-title">winform重定向Console日志</span>
+            <time datetime="2024-11-04T02:45:24.000Z">2024-11-04</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/10/12/winform%E4%B8%AD%E5%B5%8C%E5%85%A5%E7%AA%97%E4%BD%93/">
+            <span class="related-post-title">winform中嵌入窗体</span>
+            <time datetime="2024-10-12T08:15:01.000Z">2024-10-12</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/09/10/CSharp-%E5%88%86%E9%83%A8%E7%B1%BB%E4%B8%8E%E5%88%86%E9%83%A8%E6%96%B9%E6%B3%95/">
+            <span class="related-post-title">CSharp-分部类与分部方法</span>
+            <time datetime="2024-09-10T05:55:08.000Z">2024-09-10</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%A7%81%E6%9C%89%E5%AF%B9%E8%B1%A1"><span class="post-toc-text">实例化私有对象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9D%9E%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="post-toc-text">非静态成员</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="post-toc-text">静态成员</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

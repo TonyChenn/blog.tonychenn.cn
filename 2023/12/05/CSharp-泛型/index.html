@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>CSharp-泛型｜默然的博客</title>
+<meta name="description" content="泛型(Generic) 是C 2 提出的新功能，并非语法糖。 本文围绕“CSharp-泛型”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2023/12/05/CSharp-%E6%B3%9B%E5%9E%8B/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2023/12/05/CSharp-%E6%B3%9B%E5%9E%8B/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSharp-泛型｜默然的博客">
+<meta property="og:description" content="泛型(Generic) 是C 2 提出的新功能，并非语法糖。 本文围绕“CSharp-泛型”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CSharp-泛型｜默然的博客">
+<meta name="twitter:description" content="泛型(Generic) 是C 2 提出的新功能，并非语法糖。 本文围绕“CSharp-泛型”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2023-12-05T05:01:42.000Z">
+<meta property="article:modified_time" content="2023-12-05T05:01:42.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSharp-泛型","description":"泛型(Generic) 是C 2 提出的新功能，并非语法糖。 本文围绕“CSharp-泛型”整理实现步骤、适用范围、常见问题与验证要点，并补充关键配置、调用顺序、常见失败原因与可复核的验证结果。","url":"https://blog.tonychenn.cn/2023/12/05/CSharp-%E6%B3%9B%E5%9E%8B/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2023/12/05/CSharp-%E6%B3%9B%E5%9E%8B/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2023-12-05T05:01:42.000Z","dateModified":"2023-12-05T05:01:42.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F12%2F05%2FCSharp-%25E6%25B3%259B%25E5%259E%258B%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=CSharp-%E6%B3%9B%E5%9E%8B&amp;summary=%E6%B3%9B%E5%9E%8B(Generic)%20%E6%98%AFC%202%20%E6%8F%90%E5%87%BA%E7%9A%84%E6%96%B0%E5%8A%9F%E8%83%BD%EF%BC%8C%E5%B9%B6%E9%9D%9E%E8%AF%AD%E6%B3%95%E7%B3%96%E3%80%82%20%E6%9C%AC%E6%96%87%E5%9B%B4%E7%BB%95%E2%80%9CCSharp-%E6%B3%9B%E5%9E%8B%E2%80%9D%E6%95%B4%E7%90%86%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E3%80%81%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9%EF%BC%8C%E5%B9%B6%E8%A1%A5%E5%85%85%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E3%80%81%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F%E3%80%81%E5%B8%B8%E8%A7%81%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0%E4%B8%8E%E5%8F%AF%E5%A4%8D%E6%A0%B8%E7%9A%84%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C%E3%80%82&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F12%2F05%2FCSharp-%25E6%25B3%259B%25E5%259E%258B%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=CSharp-%E6%B3%9B%E5%9E%8B&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F12%2F05%2FCSharp-%25E6%25B3%259B%25E5%259E%258B%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=CSharp-%E6%B3%9B%E5%9E%8B&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F12%2F05%2FCSharp-%25E6%25B3%259B%25E5%259E%258B%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F12%2F05%2FCSharp-%25E6%25B3%259B%25E5%259E%258B%2F&amp;text=CSharp-%E6%B3%9B%E5%9E%8B" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F12%2F05%2FCSharp-%25E6%25B3%259B%25E5%259E%258B%2F&amp;title=CSharp-%E6%B3%9B%E5%9E%8B" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">CSharp-泛型</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2023-12-05T05:01:42.000Z">2023-12-05</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="历史背景"><a href="#历史背景" class="headerlink" title="历史背景"></a>历史背景</h2><p>泛型(Generic) 是C# 2 提出的新功能，并非语法糖。</p>
+<p>在 C# 1 时代没有泛型。想要保存一组数据，并将其内容打印出来。可以使用：</p>
+<ul>
+<li><p>数组<br>使用数组需要首先规划好数组的大小。如果超过数组大小显限制需要开辟新的空间并将数据复制过去，比较麻烦。</p>
+</li>
+<li><p>ArrayList<br>解决了手动扩容问题，但为了通用性底层使用了object类型的数组。但又抛出了新的问题：</p>
+<ol>
+<li>object类型装箱拆箱比较浪费性能。</li>
+<li>如果类型不匹配，在操作数据的时候很可能出现异常。</li>
+</ol>
+</li>
+<li><p>CollectionBase<br>StringCollection是派生自 CollectionBase。虽然解决了性能问题，但对开发者来说，不同数据类型都要手动写一个对应的工具类。增加了开发和维护的工作量。</p>
+</li>
+</ul>
+<p>对此 C# 1 束手无策。</p>
+<h2 id="泛型的出现"><a href="#泛型的出现" class="headerlink" title="泛型的出现"></a>泛型的出现</h2><p>泛型出现的目的是：实现使用同一个方法，满足不同参数做相同的事情。</p>
+<p>优势是：相较object类型，无需装箱拆箱操作，无性能损失。</p>
+<h2 id="泛型的原理"><a href="#泛型的原理" class="headerlink" title="泛型的原理"></a>泛型的原理</h2><p>泛型将参数类型的声明推迟到方法调用的时候。依赖.net framework 2.0 的编译器与JIT。<br>在代码编译期间将给泛型加个占位符。看下如下编译后的IL代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.class public auto ansi beforefieldinit ClassLibrary1.CustomList`1&lt;T&gt;</span><br><span class="line">	extends [System.Runtime]System.Object</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    // Fields</span><br><span class="line">    .field private !T[] data</span><br><span class="line"></span><br><span class="line">    // Methods</span><br><span class="line">    .method public hidebysig </span><br><span class="line">    instance void Add ( !T item ) cil managed </span><br><span class="line">    &#123; ... &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>List&lt;T&gt;</code> 转换成了 <code>CustomList</code>1&lt;T&gt;&#96;。其中：</p>
+<ul>
+<li>数字’1’：值泛型的度为1。</li>
+<li>T：类型占位符。</li>
+</ul>
+<p>只有在运行的时候根据T的不同类型填充进去在进行执行，这依赖JIT。</p>
+<p>但是对于Unity il2cpp。没有jit怎么办？<br>答：编译器在编译过程中会收集所有 T <strong>用到的类型</strong>(没用到的就回被剪裁掉)。然后生成对应的cpp方法。</p>
+<h2 id="泛型的应用"><a href="#泛型的应用" class="headerlink" title="泛型的应用"></a>泛型的应用</h2><ol>
+<li>泛型类</li>
+<li>泛型方法</li>
+<li>泛型委托</li>
+<li>泛型接口</li>
+</ol>
+<h2 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h2><ul>
+<li>基类约束。要求 T 必须是<code>Fruit</code>或者<code>Fruit的派生类</code>。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fruit</span> &#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Banana</span> : <span class="title">Fruit</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">Fruit</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>接口约束</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IDisposeble</span>&#123; <span class="function"><span class="keyword">void</span> <span class="title">dispose</span>()</span>; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Test2</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">IDisposeble</span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>引用类型约束。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test3</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">new</span> &#123; T defaultT = <span class="literal">null</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>公有无参构造方法约束<br>如果有过个类型的约束时，<code>new()</code>必须放在最后。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test4</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">new</span>() &#123; T defaultT = <span class="keyword">new</span> T(); &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>值类型约束</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test5</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">struct</span> &#123; T defaultT = <span class="literal">default</span>(T); &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型的协变-逆变"><a href="#泛型的协变-逆变" class="headerlink" title="泛型的协变&#x2F;逆变"></a>泛型的协变&#x2F;逆变</h2><p>如下代码，Banana是派生自Fruit，Babana可以转换为Fruit, 但是将派生类的集合(List&lt;Banana&gt;)转换为基类的集合(List&lt;Fruit&gt;)是不允许的。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fruit</span> &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Banana</span> : <span class="title">Fruit</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">List&lt;Fruit&gt; fruits = <span class="keyword">new</span> List&lt;Banana&gt;();</span><br></pre></td></tr></table></figure>
+<p>为了结局这个问题，C# 4.0 提供的解决方案。</p>
+<h2 id="协变"><a href="#协变" class="headerlink" title="协变"></a>协变</h2><p>如：string-&gt;object （子类到父类的转换），使用 <code>out</code> 关键字。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICustomListOut</span>&lt;<span class="keyword">out</span> <span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomListOut</span>&lt;<span class="title">T</span>&gt; : <span class="title">ICustomListOut</span>&lt;<span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样就允许了</span></span><br><span class="line">ICustomListOut&lt;Fruit&gt; fruits = <span class="keyword">new</span> CustomListOut&lt;Banana&gt;();</span><br></pre></td></tr></table></figure>
+
+<h2 id="逆变"><a href="#逆变" class="headerlink" title="逆变"></a>逆变</h2><p>如：object-&gt;string （父类到子类的转换）,使用 <code>in</code> 关键字。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICustomListIn</span>&lt;<span class="keyword">in</span> <span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomListIn</span>&lt;<span class="title">T</span>&gt; : <span class="title">ICustomListIn</span>&lt;<span class="title">T</span>&gt; &#123; &#125;</span><br><span class="line"></span><br><span class="line">ICustomListIn&lt;Banana&gt; bananas = <span class="keyword">new</span> CustomListIn&lt;Fruit&gt;();</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2021/11/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="设计模式-单例模式">设计模式-单例模式</a></li>
+<li><a href="/2022/05/23/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" title="设计模式-工厂模式">设计模式-工厂模式</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2023/12/21/Android-APK%E7%9A%84%E8%A7%A3%E5%8C%85%E4%B8%8E%E9%87%8D%E7%AD%BE%E5%90%8D/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Android-APK的解包与重签名</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2023/11/03/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E4%B8%93%E9%A2%98/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">算法-链表专题</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2025/04/20/CSharp%E4%B8%8ECPP%E4%BA%A4%E4%BA%92%E4%B9%8BP_Invoke/">
+            <span class="related-post-title">C# 与 C++ 互操作：P/Invoke 函数、字符串、数组与回调</span>
+            <time datetime="2025-04-20T09:48:32.000Z">2025-04-20</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/11/04/winform%E9%87%8D%E5%AE%9A%E5%90%91Console%E6%97%A5%E5%BF%97/">
+            <span class="related-post-title">winform重定向Console日志</span>
+            <time datetime="2024-11-04T02:45:24.000Z">2024-11-04</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/10/12/winform%E4%B8%AD%E5%B5%8C%E5%85%A5%E7%AA%97%E4%BD%93/">
+            <span class="related-post-title">winform中嵌入窗体</span>
+            <time datetime="2024-10-12T08:15:01.000Z">2024-10-12</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/09/10/CSharp-%E5%88%86%E9%83%A8%E7%B1%BB%E4%B8%8E%E5%88%86%E9%83%A8%E6%96%B9%E6%B3%95/">
+            <span class="related-post-title">CSharp-分部类与分部方法</span>
+            <time datetime="2024-09-10T05:55:08.000Z">2024-09-10</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8E%86%E5%8F%B2%E8%83%8C%E6%99%AF"><span class="post-toc-text">历史背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%87%BA%E7%8E%B0"><span class="post-toc-text">泛型的出现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%8E%9F%E7%90%86"><span class="post-toc-text">泛型的原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%BA%94%E7%94%A8"><span class="post-toc-text">泛型的应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F"><span class="post-toc-text">泛型约束</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%8D%8F%E5%8F%98-%E9%80%86%E5%8F%98"><span class="post-toc-text">泛型的协变&#x2F;逆变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8D%8F%E5%8F%98"><span class="post-toc-text">协变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%86%E5%8F%98"><span class="post-toc-text">逆变</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

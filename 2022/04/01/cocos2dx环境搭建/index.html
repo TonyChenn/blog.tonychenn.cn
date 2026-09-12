@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Cocos2d-x 3.17.2 环境搭建与 Android 构建边界｜默然的博客</title>
+<meta name="description" content="面向维护 Cocos2d-x 3.17.2 旧项目的环境记录，说明版本配套、创建工程、Android 资源目录，以及旧 NDK、Gradle、JDK 工具链的兼容风险">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2022/04/01/cocos2dx%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2022/04/01/cocos2dx%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x 3.17.2 环境搭建与 Android 构建边界｜默然的博客">
+<meta property="og:description" content="面向维护 Cocos2d-x 3.17.2 旧项目的环境记录，说明版本配套、创建工程、Android 资源目录，以及旧 NDK、Gradle、JDK 工具链的兼容风险">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cocos2d-x 3.17.2 环境搭建与 Android 构建边界｜默然的博客">
+<meta name="twitter:description" content="面向维护 Cocos2d-x 3.17.2 旧项目的环境记录，说明版本配套、创建工程、Android 资源目录，以及旧 NDK、Gradle、JDK 工具链的兼容风险">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2022-04-01T10:04:20.000Z">
+<meta property="article:modified_time" content="2026-08-19T16:00:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cocos2d-x 3.17.2 环境搭建与 Android 构建边界","description":"面向维护 Cocos2d-x 3.17.2 旧项目的环境记录，说明版本配套、创建工程、Android 资源目录，以及旧 NDK、Gradle、JDK 工具链的兼容风险","url":"https://blog.tonychenn.cn/2022/04/01/cocos2dx%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2022/04/01/cocos2dx%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2022-04-01T10:04:20.000Z","dateModified":"2026-08-19T16:00:00.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F04%2F01%2Fcocos2dx%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Cocos2d-x%203.17.2%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%20Android%20%E6%9E%84%E5%BB%BA%E8%BE%B9%E7%95%8C&amp;summary=%E9%9D%A2%E5%90%91%E7%BB%B4%E6%8A%A4%20Cocos2d-x%203.17.2%20%E6%97%A7%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95%EF%BC%8C%E8%AF%B4%E6%98%8E%E7%89%88%E6%9C%AC%E9%85%8D%E5%A5%97%E3%80%81%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B%E3%80%81Android%20%E8%B5%84%E6%BA%90%E7%9B%AE%E5%BD%95%EF%BC%8C%E4%BB%A5%E5%8F%8A%E6%97%A7%20NDK%E3%80%81Gradle%E3%80%81JDK%20%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E5%85%BC%E5%AE%B9%E9%A3%8E%E9%99%A9&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F04%2F01%2Fcocos2dx%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Cocos2d-x%203.17.2%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%20Android%20%E6%9E%84%E5%BB%BA%E8%BE%B9%E7%95%8C&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F04%2F01%2Fcocos2dx%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Cocos2d-x%203.17.2%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%20Android%20%E6%9E%84%E5%BB%BA%E8%BE%B9%E7%95%8C&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F04%2F01%2Fcocos2dx%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F04%2F01%2Fcocos2dx%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F&amp;text=Cocos2d-x%203.17.2%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%20Android%20%E6%9E%84%E5%BB%BA%E8%BE%B9%E7%95%8C" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2022%2F04%2F01%2Fcocos2dx%25E7%258E%25AF%25E5%25A2%2583%25E6%2590%25AD%25E5%25BB%25BA%2F&amp;title=Cocos2d-x%203.17.2%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%20Android%20%E6%9E%84%E5%BB%BA%E8%BE%B9%E7%95%8C" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Cocos2d-x 3.17.2 环境搭建与 Android 构建边界</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2022-04-01T10:04:20.000Z">2022-04-01</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2026-08-19T16:00:00.000Z">2026-08-20</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>本文记录的是 <strong>Cocos2d-x 3.17.2 旧项目维护环境</strong>，不是新项目的通用安装指南。该版本的 Android 模板、NDK、Gradle 与 Android Studio 必须按项目实际构建脚本配套；不要把不同年代的工具版本直接拼在一起。</p>
+<!-- more -->
+
+<h2 id="准备下载"><a href="#准备下载" class="headerlink" title="准备下载"></a>准备下载</h2><h3 id="必须"><a href="#必须" class="headerlink" title="必须"></a>必须</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/cocos2d/cocos2d-x/tree/cocos2d-x-3.17.2">Cocos2d-x 3.17.2 源码标签</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.python.org/downloads/release/python-2718/">Python 2.7.18（已停止维护）</a>，仅在旧版 <code>cocos2d-console</code> 确实依赖时使用</li>
+</ul>
+<h3 id="Win32-平台"><a href="#Win32-平台" class="headerlink" title="Win32 平台"></a>Win32 平台</h3><h3 id="Android-平台"><a href="#Android-平台" class="headerlink" title="Android 平台"></a>Android 平台</h3><ul>
+<li>Android SDK 与 Android Studio：以项目 Gradle Wrapper 支持范围为准。</li>
+<li>Android NDK：Cocos2d-x 3.17 的发布说明使用 NDK r16；原项目若锁定 r13b，应保留原有工具链并在独立环境中维护。</li>
+<li>JDK：版本由 Gradle／Android Gradle Plugin 决定，不能只根据系统已安装的 JDK 选择。</li>
+</ul>
+<h2 id="创建-Cocos2d-x-工程"><a href="#创建-Cocos2d-x-工程" class="headerlink" title="创建 Cocos2d-x 工程"></a>创建 Cocos2d-x 工程</h2><p>在 <code>cocos2d-x-3.17.2\tools\cocos2d-console\bin\</code> 路径下执行。原文的 <code>3.9</code> 路径与本文目标版本不一致：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cocos new projectName -p packageName -l language -d projectPath</span><br></pre></td></tr></table></figure>
+
+<h2 id="Win32-构建"><a href="#Win32-构建" class="headerlink" title="Win32 构建"></a>Win32 构建</h2><p>按工程随附的解决方案、第三方库与编译器工具集配置。不要将 Android 章节的 NDK、Gradle 设置套用到 Win32。</p>
+<h2 id="Android-构建"><a href="#Android-构建" class="headerlink" title="Android 构建"></a>Android 构建</h2><h3 id="环境变量与本地路径"><a href="#环境变量与本地路径" class="headerlink" title="环境变量与本地路径"></a>环境变量与本地路径</h3><ol>
+<li>安装项目所需的 Android SDK、NDK、JDK 和 CMake；版本以仓库中的 Gradle、<code>Application.mk</code>、<code>build.gradle</code> 及历史构建记录为准。</li>
+<li>如构建脚本需要，可配置 <code>ANDROID_SDK_ROOT</code>、<code>NDK_ROOT</code> 与 <code>JAVA_HOME</code>。不要再手工设置 <code>CLASSPATH</code> 中的 <code>dt.jar</code>、<code>tools.jar</code>；它们是旧 JDK 布局的做法。</li>
+<li><code>local.properties</code> 只保存机器本地路径，不应提交到仓库。旧版模板常见写法如下，键名是 <code>ndk.dir</code>，不是 <code>ndk.Path</code>：</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sdk.dir</span>=<span class="string">D\:\\software\\AndroidSDK</span></span><br><span class="line"><span class="attr">ndk.dir</span>=<span class="string">D\:\\software\\android-ndk-r13b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令行构建"><a href="#命令行构建" class="headerlink" title="命令行构建"></a>命令行构建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cocos compile -p android -l lua -m debug</span><br></pre></td></tr></table></figure>
+
+<h3 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h3><p>用 Android Studio 打开项目的 Android 工程即可。不要直接把 Gradle 7.1.1 和 Android Gradle Plugin 7.4 写进旧模板：它们与 r13b 等旧 NDK 工具链通常不兼容。升级前应单独评估 Gradle、AGP、JDK、NDK、CMake 和原生插件的完整组合。</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="找不到-JDK、NDK-或-SDK"><a href="#找不到-JDK、NDK-或-SDK" class="headerlink" title="找不到 JDK、NDK 或 SDK"></a>找不到 JDK、NDK 或 SDK</h3><p>先核对当前终端／IDE 实际读取到的路径、<code>local.properties</code> 与项目声明的版本。修改系统环境变量后，通常需要重启 IDE 或新开终端；仅重启并不能修复版本不匹配。</p>
+<h3 id="打包后黑屏"><a href="#打包后黑屏" class="headerlink" title="打包后黑屏"></a>打包后黑屏</h3><p>先检查 APK／AAB 中是否包含资源和 Lua 代码，再检查启动日志、ABI、动态库和首帧异常。若确认是 <code>libcocos2dx</code> 模块遗漏资源，可在对应模块的 <code>build.gradle</code> 配置资源目录；路径必须以当前工程结构为准：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sourceSets</span>.main &#123;</span><br><span class="line">        aidl.srcDir <span class="string">&quot;../java/src&quot;</span></span><br><span class="line">        java.srcDir <span class="string">&quot;../java/src&quot;</span></span><br><span class="line">        manifest.srcFile <span class="string">&quot;AndroidManifest.xml&quot;</span></span><br><span class="line"></span><br><span class="line">        assets.srcDir <span class="string">&quot;../../../../../../res/&quot;</span></span><br><span class="line">        assets.srcDir <span class="string">&quot;../../../../../../src/&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不要把示例中的 <code>res</code>、<code>src</code> 相对路径原样复制到其他项目；先以 <code>build.gradle</code> 所在目录计算真实相对路径。</p>
+<h2 id="版本结论"><a href="#版本结论" class="headerlink" title="版本结论"></a>版本结论</h2><p>Cocos2d-x 官方已不建议新项目从该引擎开始；维护既有 3.17.2 项目时，应锁定一套可复现的旧工具链，而不是盲目升级单个组件。</p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2022/02/22/cocos2dx-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E7%94%B5%E6%B1%A0%E4%BF%A1%E6%81%AF/" title="Cocos2d-x 获取 Android 与 iOS 设备电池信息">Cocos2d-x 获取 Android 与 iOS 设备电池信息</a></li>
+<li><a href="/2022/03/08/cocos2dx-%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E9%80%8F%E6%98%8E/" title="Cocos2d-x 实现 Android 与 iOS 背景透明">Cocos2d-x 实现 Android 与 iOS 背景透明</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2022/04/21/%E8%AE%B0%E5%BD%95%E4%BD%BF%E7%94%A8svn%E7%9A%84%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">SVN 工作副本权限与 cleanup 失败排查</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2022/03/30/cocos2dx-%E5%AE%9A%E6%97%B6%E5%99%A8/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Cocos2d-x Lua 定时器与调度器封装</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2022/03/08/cocos2dx-%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E9%80%8F%E6%98%8E/">
+            <span class="related-post-title">Cocos2d-x 实现 Android 与 iOS 背景透明</span>
+            <time datetime="2022-03-08T11:11:00.000Z">2022-03-08</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/02/22/cocos2dx-%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E7%94%B5%E6%B1%A0%E4%BF%A1%E6%81%AF/">
+            <span class="related-post-title">Cocos2d-x 获取 Android 与 iOS 设备电池信息</span>
+            <time datetime="2022-02-22T07:50:00.000Z">2022-02-22</time>
+          </a>
+        
+          <a class="related-post-link" href="/2022/02/18/cocos2dx-%E5%AE%9E%E7%8E%B0AR%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">
+            <span class="related-post-title">cocos2dx-实现AR功能开发总结</span>
+            <time datetime="2022-02-18T08:24:00.000Z">2022-02-18</time>
+          </a>
+        
+          <a class="related-post-link" href="/2021/12/09/cocos2dx-%E8%A7%A3%E5%86%B3Android%E7%9B%B8%E6%9C%BA%E6%8B%8D%E7%85%A7%E7%BC%93%E6%85%A2/">
+            <span class="related-post-title">cocos2dx-解决Android相机拍照缓慢</span>
+            <time datetime="2021-12-09T10:06:00.000Z">2021-12-09</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%87%86%E5%A4%87%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">准备下载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BF%85%E9%A1%BB"><span class="post-toc-text">必须</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Win32-%E5%B9%B3%E5%8F%B0"><span class="post-toc-text">Win32 平台</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android-%E5%B9%B3%E5%8F%B0"><span class="post-toc-text">Android 平台</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA-Cocos2d-x-%E5%B7%A5%E7%A8%8B"><span class="post-toc-text">创建 Cocos2d-x 工程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Win32-%E6%9E%84%E5%BB%BA"><span class="post-toc-text">Win32 构建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-%E6%9E%84%E5%BB%BA"><span class="post-toc-text">Android 构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%B8%8E%E6%9C%AC%E5%9C%B0%E8%B7%AF%E5%BE%84"><span class="post-toc-text">环境变量与本地路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9E%84%E5%BB%BA"><span class="post-toc-text">命令行构建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android-Studio"><span class="post-toc-text">Android Studio</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%89%BE%E4%B8%8D%E5%88%B0-JDK%E3%80%81NDK-%E6%88%96-SDK"><span class="post-toc-text">找不到 JDK、NDK 或 SDK</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%89%93%E5%8C%85%E5%90%8E%E9%BB%91%E5%B1%8F"><span class="post-toc-text">打包后黑屏</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%89%88%E6%9C%AC%E7%BB%93%E8%AE%BA"><span class="post-toc-text">版本结论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

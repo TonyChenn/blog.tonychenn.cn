@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>数学-3D数学｜默然的博客</title>
+<meta name="description" content="PS: 线代的知识都还给老师了...\ue411,还是记了笔记好... 左手坐标系与右手坐标系。Unity中使用左手坐标系。 本文围绕“数学-3D数学”整理实现步骤、适用范围、常见问题与验证要点">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2020/07/17/%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2020/07/17/%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学-3D数学｜默然的博客">
+<meta property="og:description" content="PS: 线代的知识都还给老师了...\ue411,还是记了笔记好... 左手坐标系与右手坐标系。Unity中使用左手坐标系。 本文围绕“数学-3D数学”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2020/0717/icon.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="数学-3D数学｜默然的博客">
+<meta name="twitter:description" content="PS: 线代的知识都还给老师了...\ue411,还是记了笔记好... 左手坐标系与右手坐标系。Unity中使用左手坐标系。 本文围绕“数学-3D数学”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2020/0717/icon.jpg">
+
+
+
+<meta property="article:published_time" content="2020-07-17T06:58:00.000Z">
+<meta property="article:modified_time" content="2024-03-26T11:06:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"数学-3D数学","description":"PS: 线代的知识都还给老师了...\\ue411,还是记了笔记好... 左手坐标系与右手坐标系。Unity中使用左手坐标系。 本文围绕“数学-3D数学”整理实现步骤、适用范围、常见问题与验证要点","url":"https://blog.tonychenn.cn/2020/07/17/%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2020/07/17/%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2020-07-17T06:58:00.000Z","dateModified":"2024-03-26T11:06:00.000Z","image":"https://img.tonychenn.cn/2020/0717/icon.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F07%2F17%2F%25E6%2595%25B0%25E5%25AD%25A6-3D%25E6%2595%25B0%25E5%25AD%25A6%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6&amp;summary=PS%3A%20%E7%BA%BF%E4%BB%A3%E7%9A%84%E7%9F%A5%E8%AF%86%E9%83%BD%E8%BF%98%E7%BB%99%E8%80%81%E5%B8%88%E4%BA%86...%5Cue411%2C%E8%BF%98%E6%98%AF%E8%AE%B0%E4%BA%86%E7%AC%94%E8%AE%B0%E5%A5%BD...%20%E5%B7%A6%E6%89%8B%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E5%8F%B3%E6%89%8B%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%82Unity%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%B7%A6%E6%89%8B%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%82%20%E6%9C%AC%E6%96%87%E5%9B%B4%E7%BB%95%E2%80%9C%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6%E2%80%9D%E6%95%B4%E7%90%86%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E3%80%81%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2020%2F0717%2Ficon.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F07%2F17%2F%25E6%2595%25B0%25E5%25AD%25A6-3D%25E6%2595%25B0%25E5%25AD%25A6%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F07%2F17%2F%25E6%2595%25B0%25E5%25AD%25A6-3D%25E6%2595%25B0%25E5%25AD%25A6%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F07%2F17%2F%25E6%2595%25B0%25E5%25AD%25A6-3D%25E6%2595%25B0%25E5%25AD%25A6%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2020%2F0717%2Ficon.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F07%2F17%2F%25E6%2595%25B0%25E5%25AD%25A6-3D%25E6%2595%25B0%25E5%25AD%25A6%2F&amp;text=%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F07%2F17%2F%25E6%2595%25B0%25E5%25AD%25A6-3D%25E6%2595%25B0%25E5%25AD%25A6%2F&amp;title=%E6%95%B0%E5%AD%A6-3D%E6%95%B0%E5%AD%A6" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2020/0717/icon.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">数学-3D数学</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2020-07-17T06:58:00.000Z">2020-07-17</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2024-03-26T11:06:00.000Z">2024-03-26</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>PS: 线代的知识都还给老师了…\ue411,还是记了笔记好…</p>
+<h2 id="笛卡尔坐标系"><a href="#笛卡尔坐标系" class="headerlink" title="笛卡尔坐标系"></a>笛卡尔坐标系</h2><p>左手坐标系与右手坐标系。Unity中使用左手坐标系。</p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><h2 id="向量加减"><a href="#向量加减" class="headerlink" title="向量加减"></a>向量加减</h2><p>两个向量相加减，结果仍然是向量。<br>a+b &#x3D; (aₓ+bₓ, aᵧ+bᵧ, a<sub>z</sub>+b<sub>z</sub>)<br>a+b &#x3D; (aₓ-bₓ, aᵧ-bᵧ, a<sub>z</sub>-b<sub>z</sub>)</p>
+<h2 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h2><p>模为1的矢量叫<strong>单位矢量</strong>，单位矢量也叫归一化的矢量。对于非零矢量，将其转化为单位矢量的过程叫做<strong>归一化</strong></p>
+<h2 id="向量点积-内积"><a href="#向量点积-内积" class="headerlink" title="向量点积(内积)"></a>向量点积(内积)</h2><p>向量的点积是标量。</p>
+<h3 id="点积计算公式"><a href="#点积计算公式" class="headerlink" title="点积计算公式"></a>点积计算公式</h3><p>a·b &#x3D; (aₓ,aᵧ,a<sub>z</sub>)·(bₓ,bᵧ,b<sub>z</sub>) &#x3D; aₓbₓ + aᵧbᵧ + a<sub>z</sub>b<sub>z</sub></p>
+<h3 id="点乘性质"><a href="#点乘性质" class="headerlink" title="点乘性质"></a>点乘性质</h3><ul>
+<li>交换律：a·b &#x3D; b·a</li>
+<li>结合律：a·(b+c) &#x3D; a·b + a·c</li>
+<li>一个矢量和本身进行的点积结果是该矢量的模的平方。v·v &#x3D; |v|²</li>
+<li>a·b &#x3D; |a||b|cosθ</li>
+</ul>
+<h2 id="向量叉积-外积"><a href="#向量叉积-外积" class="headerlink" title="向量叉积(外积)"></a>向量叉积(外积)</h2><p>向量的叉积依然是矢量。叉积的计算公式为：<br>cₓ &#x3D; aᵧb<sub>z</sub> - a<sub>z</sub>bᵧ<br>cᵧ &#x3D; a<sub>z</sub>bₓ - aₓb<sub>z</sub><br>c<sub>z</sub> &#x3D; aₓbᵧ - aᵧbₓ<br>a×b &#x3D; (aₓ,aᵧ,a<sub>z</sub>)×(bₓ,bᵧ,b<sub>z</sub>) &#x3D;(cₓ,cᵧ,c<sub>z</sub>)</p>
+<p>Math.cross(a,b)</p>
+<ul>
+<li>c⊥a，c⊥b，即向量c与向量a，b所在平面垂直</li>
+<li>两个向量相乘其积也是向量;</li>
+<li>模长|c| &#x3D; |a||b| sinθ</li>
+<li>a × b &#x3D; -b × a</li>
+</ul>
+<p>已知<strong>a</strong>&#x3D;(2,3,4);<br><strong>b</strong>&#x3D;(5,6,7);<br>计算<strong>a</strong> × <strong>b</strong>。</p>
+<ul>
+<li>叉积计算公式如下:</li>
+</ul>
+<p>则向量<strong>c</strong> &#x3D; (cₓ, cᵧ, c<sub>z</sub>) &#x3D; (3×7 - 4×6, 4×5 - 2×7, 2×6 - 3×5)&#x3D;(-3, 6, -3);</p>
+<p>叉积的作用：</p>
+<ol>
+<li>计算垂直于一个平面或三角面的矢量。</li>
+<li>判断三角面的朝向。</li>
+</ol>
+<p><img src="https://img.tonychenn.cn/2024/q1/math_axb.jpg" alt="数学-3D数学"></p>
+<h2 id="向量点积（内积）"><a href="#向量点积（内积）" class="headerlink" title="向量点积（内积）"></a>向量点积（内积）</h2><ul>
+<li>其结果是标量</li>
+<li>满足乘法交换律<br>点积在图形学上一个重要几何意义是：投影。投影的值也可能是负数(夹角 &gt; 90度)</li>
+</ul>
+<p><strong>a</strong> * <strong>b</strong>&#x3D;|a||b|cosθ</p>
+<p><strong>a</strong> * <strong>b</strong>&#x3D;aₓbₓ + aᵧbᵧ+….</p>
+<p>对于单位向量：$\widehat{a} $ 与 $\widehat{b} $：则：</br><br>$\widehat{a} \cdot \widehat{b} &#x3D;\frac{直角边}{斜边}&#x3D;\cos\theta $<br></br><br>$\theta &#x3D;\arccos(\widehat{a} \cdot \widehat{b})$</p>
+<h2 id="矩阵-matrix"><a href="#矩阵-matrix" class="headerlink" title="矩阵(matrix)"></a>矩阵(matrix)</h2><p>矢量可以看作是一个 nx1的列矩阵，或者 1xn的行矩阵，即：<br>(3,4,5) &#x3D;&gt; $\begin{bmatrix}3&amp;4&amp;5\end{bmatrix}$ &#x3D;&gt; $\begin{bmatrix}3\4\5\end{bmatrix}$</p>
+<h2 id="矩阵与标量的乘法"><a href="#矩阵与标量的乘法" class="headerlink" title="矩阵与标量的乘法"></a>矩阵与标量的乘法</h2><p>$k\mathbf{M} &#x3D; \mathbf{M}k &#x3D; k\begin{bmatrix}m_{11}&amp;m_{12}\m_{21}&amp;m_{22}\end{bmatrix}&#x3D;\begin{bmatrix}km_{11}&amp;km_{12}\km_{21}&amp;km_{22}\end{bmatrix}$</p>
+<h2 id="矩阵与矩阵的乘法"><a href="#矩阵与矩阵的乘法" class="headerlink" title="矩阵与矩阵的乘法"></a>矩阵与矩阵的乘法</h2><ul>
+<li>第一个矩阵的列数与第二个矩阵的行数必须相同才可以进行矩阵相乘。对于一个 m X n 的矩阵，与另一个n X b 的矩阵，其结果是一个 m行b列的矩阵。</li>
+<li>不满足则不可相乘。</li>
+<li>不满足交换律 AB ≠ BA</li>
+<li>满足结合律：(AB)C &#x3D; A(BC)</li>
+</ul>
+<h3 id="方块矩阵"><a href="#方块矩阵" class="headerlink" title="方块矩阵"></a>方块矩阵</h3><p>行与列相同</p>
+<h3 id="对角矩阵"><a href="#对角矩阵" class="headerlink" title="对角矩阵"></a>对角矩阵</h3><p>出了对角线其他元素都是0的矩阵。</p>
+<h3 id="单位矩阵"><a href="#单位矩阵" class="headerlink" title="单位矩阵"></a>单位矩阵</h3><p>对角线上值都为1的对角矩阵。</p>
+<h3 id="转置矩阵"><a href="#转置矩阵" class="headerlink" title="转置矩阵"></a>转置矩阵</h3><p>$\begin{bmatrix}1&amp;2&amp;3\4&amp;5&amp;6\end{bmatrix}^{T} &#x3D;\begin{bmatrix}1&amp;4\2&amp;5\3&amp;6\end{bmatrix}$</p>
+<ol>
+<li>矩阵的转置的转置 &#x3D; 原矩阵 ($(M^{T})^T&#x3D;M$)</li>
+<li>$(AB)^T &#x3D; B^TA^T$</li>
+</ol>
+<h3 id="逆矩阵"><a href="#逆矩阵" class="headerlink" title="逆矩阵"></a>逆矩阵</h3><p>一个矩阵M和它的逆矩阵$M^{-1}$相乘等于单位矩阵：<strong>I</strong>即： $MM^{-1} &#x3D; I$</p>
+<ol>
+<li>一个矩阵的<strong>行列式</strong>不为零就是可逆的。</li>
+<li>如果一个矩阵拥有逆矩阵，则该矩阵是：<strong>可逆的</strong> 或者 <strong>非奇异的</strong><br>如果一个矩阵没有逆矩阵，则该矩阵是：<strong>不可逆的</strong> 或者 <strong>奇异的</strong></li>
+<li>单位矩阵的逆矩阵是本身。</li>
+<li>$(M^T)^{-1} &#x3D; (M^{-1})^T$</li>
+<li>$(ABC)^{-1} &#x3D; C^{-1}B^{-1}A^{-1}$</li>
+</ol>
+<h3 id="正交矩阵"><a href="#正交矩阵" class="headerlink" title="正交矩阵"></a>正交矩阵</h3><p>一个矩阵和它的逆矩阵相乘等于单位矩阵，那么就说这个矩阵是<strong>正交的</strong>。即：</p>
+<p>$MM^T &#x3D; M^TM &#x3D; I$</p>
+<p>根据逆矩阵$MM^{-1} &#x3D; I$ 可以推导出:$M^T &#x3D; M^{-1}$</p>
+<p>在三维变换中经常需要使用逆矩阵来求解反向的变换，但是求解逆矩阵计算量很大，通过这个公式就可以反转一下矩阵进而简化求解。</p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2021/05/12/%E7%9B%AE%E5%BD%95%E5%8F%8A%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%E8%A7%84%E8%8C%83%E6%95%B4%E7%90%86(03)/" title="目录及资源路径规范整理(03)">目录及资源路径规范整理(03)</a></li>
+<li><a href="/2021/11/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="设计模式-单例模式">设计模式-单例模式</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2020/09/25/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%80)/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Unity-Shader笔记之渲染管线(一)</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2020/06/10/%E7%AE%97%E6%B3%95-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B9%8B%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">算法-动态规划之斐波那契数列</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2024/03/28/Unity-Shader%E6%94%AF%E6%8C%81%E7%9A%84%E8%AF%AD%E4%B9%89(%E5%9B%9B)/">
+            <span class="related-post-title">Unity-Shader支持的语义(四)</span>
+            <time datetime="2024-03-28T11:02:51.000Z">2024-03-28</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/01/19/%E7%AE%97%E6%B3%95-A%E6%98%9F%E5%AF%BB%E8%B7%AF/">
+            <span class="related-post-title">算法-A星寻路</span>
+            <time datetime="2024-01-19T06:45:19.000Z">2024-01-19</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+            <span class="related-post-title">Unity-CSharp与OC交互</span>
+            <time datetime="2023-08-26T06:42:29.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(2)</span>
+            <time datetime="2023-08-26T06:41:41.000Z">2023-08-26</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="post-toc-text">笛卡尔坐标系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%91%E9%87%8F"><span class="post-toc-text">向量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%91%E9%87%8F%E5%8A%A0%E5%87%8F"><span class="post-toc-text">向量加减</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="post-toc-text">归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%91%E9%87%8F%E7%82%B9%E7%A7%AF-%E5%86%85%E7%A7%AF"><span class="post-toc-text">向量点积(内积)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%82%B9%E7%A7%AF%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="post-toc-text">点积计算公式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%82%B9%E4%B9%98%E6%80%A7%E8%B4%A8"><span class="post-toc-text">点乘性质</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%91%E9%87%8F%E5%8F%89%E7%A7%AF-%E5%A4%96%E7%A7%AF"><span class="post-toc-text">向量叉积(外积)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%91%E9%87%8F%E7%82%B9%E7%A7%AF%EF%BC%88%E5%86%85%E7%A7%AF%EF%BC%89"><span class="post-toc-text">向量点积（内积）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9F%A9%E9%98%B5-matrix"><span class="post-toc-text">矩阵(matrix)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9F%A9%E9%98%B5%E4%B8%8E%E6%A0%87%E9%87%8F%E7%9A%84%E4%B9%98%E6%B3%95"><span class="post-toc-text">矩阵与标量的乘法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9F%A9%E9%98%B5%E4%B8%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E6%B3%95"><span class="post-toc-text">矩阵与矩阵的乘法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%96%B9%E5%9D%97%E7%9F%A9%E9%98%B5"><span class="post-toc-text">方块矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5"><span class="post-toc-text">对角矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8D%95%E4%BD%8D%E7%9F%A9%E9%98%B5"><span class="post-toc-text">单位矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5"><span class="post-toc-text">转置矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%80%86%E7%9F%A9%E9%98%B5"><span class="post-toc-text">逆矩阵</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5"><span class="post-toc-text">正交矩阵</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

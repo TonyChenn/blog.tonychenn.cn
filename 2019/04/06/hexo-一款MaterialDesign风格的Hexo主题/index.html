@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Hexo MDM Material Design 主题配置与使用｜默然的博客</title>
+<meta name="description" content="一款Hexo端优美的MaterialDesign风格主题 MDM 本文围绕“Hexo MDM Material Design 主题配置与使用”整理实现步骤、适用范围、常见问题与验证要点">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2019/04/06/hexo-%E4%B8%80%E6%AC%BEMaterialDesign%E9%A3%8E%E6%A0%BC%E7%9A%84Hexo%E4%B8%BB%E9%A2%98/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2019/04/06/hexo-%E4%B8%80%E6%AC%BEMaterialDesign%E9%A3%8E%E6%A0%BC%E7%9A%84Hexo%E4%B8%BB%E9%A2%98/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo MDM Material Design 主题配置与使用｜默然的博客">
+<meta property="og:description" content="一款Hexo端优美的MaterialDesign风格主题 MDM 本文围绕“Hexo MDM Material Design 主题配置与使用”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2019/0406/icon.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hexo MDM Material Design 主题配置与使用｜默然的博客">
+<meta name="twitter:description" content="一款Hexo端优美的MaterialDesign风格主题 MDM 本文围绕“Hexo MDM Material Design 主题配置与使用”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2019/0406/icon.jpg">
+
+
+
+<meta property="article:published_time" content="2019-04-06T11:49:01.000Z">
+<meta property="article:modified_time" content="2023-06-27T05:22:21.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hexo MDM Material Design 主题配置与使用","description":"一款Hexo端优美的MaterialDesign风格主题 MDM 本文围绕“Hexo MDM Material Design 主题配置与使用”整理实现步骤、适用范围、常见问题与验证要点","url":"https://blog.tonychenn.cn/2019/04/06/hexo-%E4%B8%80%E6%AC%BEMaterialDesign%E9%A3%8E%E6%A0%BC%E7%9A%84Hexo%E4%B8%BB%E9%A2%98/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2019/04/06/hexo-%E4%B8%80%E6%AC%BEMaterialDesign%E9%A3%8E%E6%A0%BC%E7%9A%84Hexo%E4%B8%BB%E9%A2%98/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2019-04-06T11:49:01.000Z","dateModified":"2023-06-27T05:22:21.000Z","image":"https://img.tonychenn.cn/2019/0406/icon.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2019%2F04%2F06%2Fhexo-%25E4%25B8%2580%25E6%25AC%25BEMaterialDesign%25E9%25A3%258E%25E6%25A0%25BC%25E7%259A%2584Hexo%25E4%25B8%25BB%25E9%25A2%2598%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Hexo%20MDM%20Material%20Design%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8&amp;summary=%E4%B8%80%E6%AC%BEHexo%E7%AB%AF%E4%BC%98%E7%BE%8E%E7%9A%84MaterialDesign%E9%A3%8E%E6%A0%BC%E4%B8%BB%E9%A2%98%20MDM%20%E6%9C%AC%E6%96%87%E5%9B%B4%E7%BB%95%E2%80%9CHexo%20MDM%20Material%20Design%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E2%80%9D%E6%95%B4%E7%90%86%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E3%80%81%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2019%2F0406%2Ficon.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2019%2F04%2F06%2Fhexo-%25E4%25B8%2580%25E6%25AC%25BEMaterialDesign%25E9%25A3%258E%25E6%25A0%25BC%25E7%259A%2584Hexo%25E4%25B8%25BB%25E9%25A2%2598%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Hexo%20MDM%20Material%20Design%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2019%2F04%2F06%2Fhexo-%25E4%25B8%2580%25E6%25AC%25BEMaterialDesign%25E9%25A3%258E%25E6%25A0%25BC%25E7%259A%2584Hexo%25E4%25B8%25BB%25E9%25A2%2598%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Hexo%20MDM%20Material%20Design%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2019%2F04%2F06%2Fhexo-%25E4%25B8%2580%25E6%25AC%25BEMaterialDesign%25E9%25A3%258E%25E6%25A0%25BC%25E7%259A%2584Hexo%25E4%25B8%25BB%25E9%25A2%2598%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2019%2F0406%2Ficon.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2019%2F04%2F06%2Fhexo-%25E4%25B8%2580%25E6%25AC%25BEMaterialDesign%25E9%25A3%258E%25E6%25A0%25BC%25E7%259A%2584Hexo%25E4%25B8%25BB%25E9%25A2%2598%2F&amp;text=Hexo%20MDM%20Material%20Design%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2019%2F04%2F06%2Fhexo-%25E4%25B8%2580%25E6%25AC%25BEMaterialDesign%25E9%25A3%258E%25E6%25A0%25BC%25E7%259A%2584Hexo%25E4%25B8%25BB%25E9%25A2%2598%2F&amp;title=Hexo%20MDM%20Material%20Design%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2019/0406/icon.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Hexo MDM Material Design 主题配置与使用</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2019-04-06T11:49:01.000Z">2019-04-06</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2023-06-27T05:22:21.000Z">2023-06-27</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h1 align="center">一款Hexo端优美的MaterialDesign风格主题 MDM</h1>
+
+<h3 align="center">简洁，轻巧，麻麻再也不用担心打开博客速度慢了</h3>
+<br><br>
+
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/HexoBlogWriteTool">Hexo 博文管理工具，麻麻再也不用担心忘记管理hexo博文的命令啦</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/TonyChenn/BlogExportTool">CSDN博文导出工具</a></li>
+</ol>
+<h2 id="更新介绍："><a href="#更新介绍：" class="headerlink" title="更新介绍："></a>更新介绍：</h2><h2 id="2023-6-27"><a href="#2023-6-27" class="headerlink" title="2023.6.27"></a>2023.6.27</h2><ol>
+<li>优化表格、代码块、blockquote的显示效果</li>
+<li>夜间模式显示优化</li>
+</ol>
+<h2 id="2023-2-14"><a href="#2023-2-14" class="headerlink" title="2023.2.14"></a>2023.2.14</h2><ol>
+<li><a href="#custom_sort">优化文章排序解决方案</a></li>
+</ol>
+<h2 id="2022-11-17"><a href="#2022-11-17" class="headerlink" title="2022.11.17"></a>2022.11.17</h2><ol>
+<li>升级HexoBlogWhriteTool<ul>
+<li>优化原来的难看的展示页面。</li>
+<li>未开启本地服务则不再拦截关闭事件。</li>
+</ul>
+</li>
+<li>修复jquery cdn失效</li>
+</ol>
+<h2 id="2022-4-4"><a href="#2022-4-4" class="headerlink" title="2022.4.4"></a>2022.4.4</h2><ol>
+<li>HexoWriteTool 支持win11</li>
+<li>优化博文置顶，显示置顶标识</li>
+<li>支持代码折叠，显示博文中代码语言</li>
+<li>header优化</li>
+<li>博文排版优化（博主超喜欢这个字体)</li>
+</ol>
+<h2 id="2021-3-25"><a href="#2021-3-25" class="headerlink" title="2021.3.25"></a>2021.3.25</h2><ol>
+<li>更新mdui到1.0.1并修复 日&#x2F;夜间模式，一键置顶</li>
+<li>美化 headerbar,文章详情部分</li>
+<li>支持图片LazyLoad</li>
+<li>界面布局优化</li>
+<li>美化代码框</li>
+</ol>
+<h2 id="2021-1-1"><a href="#2021-1-1" class="headerlink" title="2021.1.1"></a>2021.1.1</h2><ul>
+<li>升级hexo4.2.0后pwa无法使用, 解决方法看下面。</li>
+</ul>
+<h2 id="2020-11-12"><a href="#2020-11-12" class="headerlink" title="2020-11-12"></a>2020-11-12</h2><ol>
+<li>解决在IOS设备Safari浏览器上布局错乱问题</li>
+</ol>
+<h2 id="2020-10-31"><a href="#2020-10-31" class="headerlink" title="2020-10-31"></a>2020-10-31</h2><ol>
+<li>本地化支持</li>
+<li>取消缓存head.ejs,解决浏览器顶部Tab卡片中名称错误</li>
+<li>优化分享功能</li>
+</ol>
+<h2 id="2020-6-20"><a href="#2020-6-20" class="headerlink" title="2020-6-20"></a>2020-6-20</h2><ol>
+<li>文章置顶</li>
+<li>显示更新日期</li>
+</ol>
+<h2 id="2020-5-27："><a href="#2020-5-27：" class="headerlink" title="2020-5-27："></a>2020-5-27：</h2><ol>
+<li><a href="#pwa">PWA支持</a></li>
+<li>点击特效</li>
+<li>分享</li>
+<li>打赏</li>
+</ol>
+<h2 id="2020-4-10"><a href="#2020-4-10" class="headerlink" title="2020-4-10 :"></a>2020-4-10 :</h2><ol>
+<li><a href="#site_map">添加站点地图</a></li>
+<li>添加灰色(哀悼)模式</li>
+<li>添加谷歌广告开关</li>
+<li><a href="#emoji">支持Emoji表情</a></li>
+<li>添加Gitalk 评论方式</li>
+</ol>
+<h2 id="2020-1-14"><a href="#2020-1-14" class="headerlink" title="2020-1-14 :"></a>2020-1-14 :</h2><ol>
+<li>添加图片预览</li>
+<li>优化夜间模式</li>
+<li>文章代码排版。</li>
+</ol>
+<h2 id="art-演示"><a href="#art-演示" class="headerlink" title=":art:演示"></a>:art:演示</h2><p><a href="https://blog.tonychenn.cn/">tonychenn.cn</a> 觉得不错，点个Star</p>
+<h2 id="pushpin-介绍"><a href="#pushpin-介绍" class="headerlink" title=":pushpin:介绍"></a>:pushpin:介绍</h2><ol>
+<li>响应式布局，适配移动端和PC端</li>
+<li>优美MaterialDesign设计</li>
+<li>轻巧极速加载</li>
+</ol>
+<h2 id="实现的功能"><a href="#实现的功能" class="headerlink" title="实现的功能"></a>实现的功能</h2><ol>
+<li>基本的博客展示，首页，标签页，归档页，关于页</li>
+<li>一言随机内容展示</li>
+<li>使用Valine文章评论, 新增Gitalk</li>
+<li>开启访问人数，次数统计</li>
+<li>视频博文的展示播放</li>
+<li>全局灰色模式，白天&#x2F;夜晚模式</li>
+</ol>
+<h2 id="computer-PC端"><a href="#computer-PC端" class="headerlink" title=":computer:PC端"></a>:computer:PC端</h2><p><img src="https://img.tonychenn.cn/2019/0406/img1.jpg" alt="Hexo MDM Material Design 主题配置与使用"><br><img src="https://img.tonychenn.cn/2019/0406/img2.jpg" alt="Hexo MDM Material Design 主题配置与使用"><br><img src="https://img.tonychenn.cn/2019/0406/about.jpg" alt="Hexo MDM Material Design 主题配置与使用"></p>
+<h2 id="iphone-移动端"><a href="#iphone-移动端" class="headerlink" title=":iphone:移动端"></a>:iphone:移动端</h2><p><img src="https://img.tonychenn.cn/2019/0406/phone_main.jpg" alt="Hexo MDM Material Design 主题配置与使用"><br><img src="https://img.tonychenn.cn/2019/0406/phone_tag.jpg" alt="Hexo MDM Material Design 主题配置与使用"><br><img src="https://img.tonychenn.cn/2019/0406/phone_archives.jpg" alt="Hexo MDM Material Design 主题配置与使用"></p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>本博客使用mdm主题，更多细节，自行查看<a href="Tonychenn.cn">TonyChenn.cn</a></p>
+<h2 id="cd-安装"><a href="#cd-安装" class="headerlink" title=":cd:安装"></a>:cd:安装</h2><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/TonyChenn/hexo-theme-mdm</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> themes/mdm</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启站点地图模块"><a href="#开启站点地图模块" class="headerlink" title="开启站点地图模块"></a><span id="site_map">开启站点地图模块</h2><ol>
+<li>安装sitemap</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//google</span><br><span class="line">$ npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line">//baidu</span><br><span class="line">$ npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>配置sitemap<br>主题根目录下_config.yml文件中启用下面</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 站点地图</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br><span class="line">baidusitemap:</span><br><span class="line">  path: baidusitemap.xml</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>重新生成部署</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启Emoji表情支持"><a href="#开启Emoji表情支持" class="headerlink" title="开启Emoji表情支持"></a><span id="emoji">开启Emoji表情支持</h2><ol>
+<li>需要卸载旧的渲染器 &amp; 安装新的渲染器</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm un hexo-renderer-marked --save </span><br><span class="line">$ npm i hexo-renderer-markdown-it --save</span><br><span class="line">$ npm install markdown-it-emoji --save</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>heox配置文件中添加</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line">markdown:</span><br><span class="line">  render:</span><br><span class="line">    html: <span class="literal">true</span></span><br><span class="line">    xhtmlOut: <span class="literal">false</span></span><br><span class="line">    breaks: <span class="literal">true</span></span><br><span class="line">    linkify: <span class="literal">true</span></span><br><span class="line">    typographer: <span class="literal">true</span></span><br><span class="line">    quotes: <span class="string">&#x27;“”‘’&#x27;</span></span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">    - markdown-it-emoji</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: <span class="string">&#x27;v&#x27;</span></span><br><span class="line">    permalink: <span class="literal">true</span></span><br><span class="line">    permalinkClass: header-anchor</span><br><span class="line">    permalinkSymbol: ¶</span><br></pre></td></tr></table></figure>
+<h2 id="文章置顶及自定义排序"><a href="#文章置顶及自定义排序" class="headerlink" title="文章置顶及自定义排序"></a><span id="custom_sort">文章置顶及自定义排序</h2><p>请到Hexo项目下的<kbd>\node_modules\hexo-generator-index\lib\generator.js</kbd>找到该文件并打开。(js代码简单，不过多介绍，有需要修改的自行修改) 替换为如下内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非mdm主题请自行调整</span></span><br><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pagination = <span class="built_in">require</span>(<span class="string">&#x27;hexo-pagination&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params">locals</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> config = <span class="variable language_">this</span>.<span class="property">config</span>;</span><br><span class="line">  <span class="keyword">const</span> posts = locals.<span class="property">posts</span>.<span class="title function_">sort</span>(config.<span class="property">index_generator</span>.<span class="property">order_by</span>);</span><br><span class="line"></span><br><span class="line">  posts.<span class="property">data</span>.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.<span class="property">sticky</span> &amp;&amp; b.<span class="property">sticky</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span>(a.<span class="property">sticky</span> == b.<span class="property">sticky</span>) <span class="keyword">return</span> </span><br><span class="line">      <span class="keyword">return</span> b.<span class="property">sticky</span> - a.<span class="property">sticky</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(a.<span class="property">sticky</span> &amp;&amp; !b.<span class="property">sticky</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(!a.<span class="property">sticky</span> &amp;&amp; b.<span class="property">sticky</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">var</span> a_time = (<span class="title function_">typeof</span>(a.<span class="property">updatetime</span>) == <span class="string">&quot;undefined&quot;</span> || !a.<span class="property">updatetime</span>) ? a.<span class="property">date</span> : <span class="keyword">new</span> <span class="title class_">Date</span>(a.<span class="property">updatetime</span>).<span class="title function_">getTime</span>();</span><br><span class="line">      <span class="keyword">var</span> b_time = (<span class="title function_">typeof</span>(b.<span class="property">updatetime</span>) == <span class="string">&quot;undefined&quot;</span> || !b.<span class="property">updatetime</span>) ? b.<span class="property">date</span> : <span class="keyword">new</span> <span class="title class_">Date</span>(b.<span class="property">updatetime</span>).<span class="title function_">getTime</span>();</span><br><span class="line">      <span class="comment">//console.log(a_time+&quot;---&quot;+b_time+&quot;&gt;&gt;&gt;&quot;+a.title);</span></span><br><span class="line">      <span class="keyword">return</span> b_time - a_time;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> paginationDir = config.<span class="property">pagination_dir</span> || <span class="string">&#x27;page&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> path = config.<span class="property">index_generator</span>.<span class="property">path</span> || <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">pagination</span>(path, posts, &#123;</span><br><span class="line">    <span class="attr">perPage</span>: config.<span class="property">index_generator</span>.<span class="property">per_page</span>,</span><br><span class="line">    <span class="attr">layout</span>: [<span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;archive&#x27;</span>],</span><br><span class="line">    <span class="attr">format</span>: paginationDir + <span class="string">&#x27;/%d/&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">      <span class="attr">__index</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="开启PWA"><a href="#开启PWA" class="headerlink" title="开启PWA"></a>开启PWA</h2><p>待补充</p>
+<h2 id="hexo升级4-2-0后PWA失效"><a href="#hexo升级4-2-0后PWA失效" class="headerlink" title="hexo升级4.2.0后PWA失效"></a><span id="pwa">hexo升级4.2.0后PWA失效</h2><p>参考<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/4044">https://github.com/hexojs/hexo/issues/4044</a><br>在hexo-pwa插件没修复之前解决方案：打开<code>\node_modules\hexo-pwa\lib\serviceWorker.js</code> 修改下面内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">let</span> posts = <span class="variable language_">this</span>.<span class="property">locals</span>.<span class="property">cache</span>.<span class="property">posts</span>.<span class="property">data</span>;</span><br><span class="line">+ <span class="keyword">let</span> posts = locals.<span class="property">posts</span>.<span class="title function_">sort</span>(<span class="string">&#x27;-date&#x27;</span>).<span class="title function_">toArray</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><p>Github: <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">https://github.com/TonyChenn/hexo-theme-mdm</a><br>觉得不错？点个小星星给我个鼓励吧 (<em>_</em>)<br><img src="https://img.tonychenn.cn/2019/0406/star.jpg" alt="Hexo MDM Material Design 主题配置与使用"></p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2019/08/14/Hexo%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" title="Hexo管理工具">Hexo管理工具</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2019/04/13/CSharp-TCP%E8%81%8A%E5%A4%A9%E5%AE%A4/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">CSharp-TCP聊天室</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2019/04/05/Hackintosh-%E5%8D%87%E7%BA%A7Mojave%E5%90%8E%E8%8A%B1%E5%B1%8F%E9%97%AE%E9%A2%98/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Hackintosh升级Mojave后花屏问题</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2019/08/14/Hexo%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+            <span class="related-post-title">Hexo管理工具</span>
+            <time datetime="2019-08-14T05:27:05.000Z">2019-08-14</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">一款Hexo端优美的MaterialDesign风格主题 MDM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link"><span class="post-toc-text">简洁，轻巧，麻麻再也不用担心打开博客速度慢了</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%8E%A8%E8%8D%90"><span class="post-toc-text">推荐</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9B%B4%E6%96%B0%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="post-toc-text">更新介绍：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2023-6-27"><span class="post-toc-text">2023.6.27</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2023-2-14"><span class="post-toc-text">2023.2.14</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2022-11-17"><span class="post-toc-text">2022.11.17</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2022-4-4"><span class="post-toc-text">2022.4.4</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2021-3-25"><span class="post-toc-text">2021.3.25</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2021-1-1"><span class="post-toc-text">2021.1.1</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2020-11-12"><span class="post-toc-text">2020-11-12</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2020-10-31"><span class="post-toc-text">2020-10-31</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2020-6-20"><span class="post-toc-text">2020-6-20</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2020-5-27%EF%BC%9A"><span class="post-toc-text">2020-5-27：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2020-4-10"><span class="post-toc-text">2020-4-10 :</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2020-1-14"><span class="post-toc-text">2020-1-14 :</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#art-%E6%BC%94%E7%A4%BA"><span class="post-toc-text">:art:演示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pushpin-%E4%BB%8B%E7%BB%8D"><span class="post-toc-text">:pushpin:介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="post-toc-text">实现的功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#computer-PC%E7%AB%AF"><span class="post-toc-text">:computer:PC端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#iphone-%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="post-toc-text">:iphone:移动端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="post-toc-text">案例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cd-%E5%AE%89%E8%A3%85"><span class="post-toc-text">:cd:安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="post-toc-text">更新</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%90%AF%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE%E6%A8%A1%E5%9D%97"><span class="post-toc-text">开启站点地图模块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%90%AFEmoji%E8%A1%A8%E6%83%85%E6%94%AF%E6%8C%81"><span class="post-toc-text">开启Emoji表情支持</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6%E5%8F%8A%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F"><span class="post-toc-text">文章置顶及自定义排序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BC%80%E5%90%AFPWA"><span class="post-toc-text">开启PWA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#hexo%E5%8D%87%E7%BA%A74-2-0%E5%90%8EPWA%E5%A4%B1%E6%95%88"><span class="post-toc-text">hexo升级4.2.0后PWA失效</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD-1"><span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>
