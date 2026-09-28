@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Unity-晃动手机实现震动｜默然的博客</title>
+<meta name="description" content="用 Unity Input.acceleration 的三轴加速度变化量检测手机摇一摇，加入触发冷却，再用 Handheld.Vibrate 提供震动反馈。包含完整 C# 示例、参数说明、接入步骤和真机排查方法。">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2020/10/14/Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2020/10/14/Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-晃动手机实现震动｜默然的博客">
+<meta property="og:description" content="用 Unity Input.acceleration 的三轴加速度变化量检测手机摇一摇，加入触发冷却，再用 Handheld.Vibrate 提供震动反馈。包含完整 C# 示例、参数说明、接入步骤和真机排查方法。">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2020/1014/shake.gif">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unity-晃动手机实现震动｜默然的博客">
+<meta name="twitter:description" content="用 Unity Input.acceleration 的三轴加速度变化量检测手机摇一摇，加入触发冷却，再用 Handheld.Vibrate 提供震动反馈。包含完整 C# 示例、参数说明、接入步骤和真机排查方法。">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2020/1014/shake.gif">
+
+
+
+<meta property="article:published_time" content="2020-10-14T08:30:00.000Z">
+<meta property="article:modified_time" content="2026-09-28T16:00:00.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Unity-晃动手机实现震动","description":"用 Unity Input.acceleration 的三轴加速度变化量检测手机摇一摇，加入触发冷却，再用 Handheld.Vibrate 提供震动反馈。包含完整 C# 示例、参数说明、接入步骤和真机排查方法。","url":"https://blog.tonychenn.cn/2020/10/14/Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2020/10/14/Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2020-10-14T08:30:00.000Z","dateModified":"2026-09-28T16:00:00.000Z","image":"https://img.tonychenn.cn/2020/1014/shake.gif"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F14%2FUnity-%25E6%2599%2583%25E5%258A%25A8%25E6%2589%258B%25E6%259C%25BA%25E5%25AE%259E%25E7%258E%25B0%25E9%259C%2587%25E5%258A%25A8%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8&amp;summary=%E7%94%A8%20Unity%20Input.acceleration%20%E7%9A%84%E4%B8%89%E8%BD%B4%E5%8A%A0%E9%80%9F%E5%BA%A6%E5%8F%98%E5%8C%96%E9%87%8F%E6%A3%80%E6%B5%8B%E6%89%8B%E6%9C%BA%E6%91%87%E4%B8%80%E6%91%87%EF%BC%8C%E5%8A%A0%E5%85%A5%E8%A7%A6%E5%8F%91%E5%86%B7%E5%8D%B4%EF%BC%8C%E5%86%8D%E7%94%A8%20Handheld.Vibrate%20%E6%8F%90%E4%BE%9B%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88%E3%80%82%E5%8C%85%E5%90%AB%E5%AE%8C%E6%95%B4%20C%23%20%E7%A4%BA%E4%BE%8B%E3%80%81%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%E3%80%81%E6%8E%A5%E5%85%A5%E6%AD%A5%E9%AA%A4%E5%92%8C%E7%9C%9F%E6%9C%BA%E6%8E%92%E6%9F%A5%E6%96%B9%E6%B3%95%E3%80%82&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2020%2F1014%2Fshake.gif&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F14%2FUnity-%25E6%2599%2583%25E5%258A%25A8%25E6%2589%258B%25E6%259C%25BA%25E5%25AE%259E%25E7%258E%25B0%25E9%259C%2587%25E5%258A%25A8%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F14%2FUnity-%25E6%2599%2583%25E5%258A%25A8%25E6%2589%258B%25E6%259C%25BA%25E5%25AE%259E%25E7%258E%25B0%25E9%259C%2587%25E5%258A%25A8%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F14%2FUnity-%25E6%2599%2583%25E5%258A%25A8%25E6%2589%258B%25E6%259C%25BA%25E5%25AE%259E%25E7%258E%25B0%25E9%259C%2587%25E5%258A%25A8%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2020%2F1014%2Fshake.gif&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F14%2FUnity-%25E6%2599%2583%25E5%258A%25A8%25E6%2589%258B%25E6%259C%25BA%25E5%25AE%259E%25E7%258E%25B0%25E9%259C%2587%25E5%258A%25A8%2F&amp;text=Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2020%2F10%2F14%2FUnity-%25E6%2599%2583%25E5%258A%25A8%25E6%2589%258B%25E6%259C%25BA%25E5%25AE%259E%25E7%258E%25B0%25E9%259C%2587%25E5%258A%25A8%2F&amp;title=Unity-%E6%99%83%E5%8A%A8%E6%89%8B%E6%9C%BA%E5%AE%9E%E7%8E%B0%E9%9C%87%E5%8A%A8" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2020/1014/shake.gif)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Unity-晃动手机实现震动</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2020-10-14T08:30:00.000Z">2020-10-14</time>
+        </span>
+        
+          <span class="post-meta-date">
+            <span class="material-symbols-rounded" aria-hidden="true">edit_calendar</span>
+            更新于 <time datetime="2026-09-28T16:00:00.000Z">2026-09-29</time>
+          </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <p>本文实现一个常见的 Unity 手机交互：检测到摇一摇后，更新提示、通知业务，再调用 <code>Handheld.Vibrate()</code> 提供震动反馈。检测采用 <code>Input.acceleration</code> 的三轴变化量，并用冷却时间减少一次晃动连续触发的问题。</p>
+<p>示例使用传统 Input Manager 和 Unity UI（<code>Button</code>、<code>Text</code>），面向 Android &#x2F; iOS 手机。API 说明按 Unity 2022.3 文档核对；本次没有执行 Unity 编译或真机测试，阈值需要按设备、帧率和握持方式调整。</p>
+<!-- more -->
+
+<h2 id="摇一摇效果"><a href="#摇一摇效果" class="headerlink" title="摇一摇效果"></a>摇一摇效果</h2><p>下面是原文保留的效果图，不是本次新增代码的运行结果：</p>
+<p><img src="https://img.tonychenn.cn/2020/1014/shake.gif" alt="Unity 手机晃动与震动效果"></p>
+<h2 id="晃动检测原理：比较三轴加速度变化量"><a href="#晃动检测原理：比较三轴加速度变化量" class="headerlink" title="晃动检测原理：比较三轴加速度变化量"></a>晃动检测原理：比较三轴加速度变化量</h2><p><code>Input.acceleration</code> 返回设备加速度计最近一次的三轴读数，单位是 g。它会受到设备姿态与重力影响，不能简单把某个轴的绝对读数当成“正在摇手机”。<a target="_blank" rel="noopener" href="https://docs.unity3d.com/2022.3/Documentation/Manual/MobileInput.html">Unity 移动设备输入说明</a></p>
+<p>这个基础示例比较相邻两次读取的向量差：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 delta = currentAcceleration - previousAcceleration;</span><br><span class="line"><span class="built_in">bool</span> isShaking = delta.sqrMagnitude &gt;= shakeThreshold * shakeThreshold;</span><br></pre></td></tr></table></figure>
+
+<p>向量长度可以覆盖三个轴的正反方向变化。若只想检测 y 轴，可以使用 <code>Mathf.Abs(currentAcceleration.y - previousAcceleration.y)</code>，但会漏掉其他方向。</p>
+<p><code>shakeThreshold</code> 是<strong>晃动检测阈值</strong>，不控制震动马达强度，也没有固定的 <code>[0, 1]</code> 范围。相邻读数的差还受传感器采样和帧率影响；此算法不是严格的动作识别，快速转动手机也可能触发。要求更稳定时，需要按采样时间处理数据、加入滤波或分析一段时间内的运动；新 Input System 可参考 <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.inputsystem@1.4/manual/Sensors.html">传感器文档</a>。</p>
+<h2 id="完整-C-示例：三轴检测与触发冷却"><a href="#完整-C-示例：三轴检测与触发冷却" class="headerlink" title="完整 C# 示例：三轴检测与触发冷却"></a>完整 C# 示例：三轴检测与触发冷却</h2><p>保存为 <code>Test.cs</code>，挂到场景中的 GameObject。<code>BtnShake</code> 和 <code>Tip</code> 都可选：前者用于单独测试震动，后者显示晃动提示。业务代码可订阅 <code>Shaken</code> 事件，或在 <code>OnShake</code> 中接入处理。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Test</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Button BtnShake;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">private</span> Text Tip;</span><br><span class="line">    [<span class="meta">SerializeField, Min(0.01f)</span>] <span class="keyword">private</span> <span class="built_in">float</span> shakeThreshold = <span class="number">0.5f</span>;</span><br><span class="line">    [<span class="meta">SerializeField, Min(0f)</span>] <span class="keyword">private</span> <span class="built_in">float</span> cooldownSeconds = <span class="number">0.5f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">event</span> Action Shaken;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Vector3 previousAcceleration;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">bool</span> hasPreviousSample;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">float</span> nextShakeTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (BtnShake != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            BtnShake.onClick.AddListener(VibrateDevice);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        hasPreviousSample = <span class="literal">false</span>;</span><br><span class="line">        nextShakeTime = Time.unscaledTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnApplicationPause</span>(<span class="params"><span class="built_in">bool</span> paused</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!paused)</span><br><span class="line">        &#123;</span><br><span class="line">            hasPreviousSample = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!Application.isMobilePlatform || !SystemInfo.supportsAccelerometer)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Vector3 currentAcceleration = Input.acceleration;</span><br><span class="line">        <span class="keyword">if</span> (!hasPreviousSample)</span><br><span class="line">        &#123;</span><br><span class="line">            previousAcceleration = currentAcceleration;</span><br><span class="line">            hasPreviousSample = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Vector3 delta = currentAcceleration - previousAcceleration;</span><br><span class="line">        previousAcceleration = currentAcceleration;</span><br><span class="line">        <span class="keyword">if</span> (Time.unscaledTime &lt; nextShakeTime ||</span><br><span class="line">            delta.sqrMagnitude &lt; shakeThreshold * shakeThreshold)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        nextShakeTime = Time.unscaledTime + cooldownSeconds;</span><br><span class="line">        OnShake();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnShake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Tip != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Tip.text = <span class="string">&quot;晃动了&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(<span class="string">&quot;检测到摇一摇&quot;</span>);</span><br><span class="line">        VibrateDevice();</span><br><span class="line">        Shaken?.Invoke();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">VibrateDevice</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Application.isMobilePlatform)</span><br><span class="line">        &#123;</span><br><span class="line">            Handheld.Vibrate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnDestroy</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (BtnShake != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            BtnShake.onClick.RemoveListener(VibrateDevice);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>初始示例值</th>
+<th>调整方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>shakeThreshold</code></td>
+<td><code>0.5</code></td>
+<td>误触发多时提高；轻晃不触发时降低，需要真机调参</td>
+</tr>
+<tr>
+<td><code>cooldownSeconds</code></td>
+<td><code>0.5</code> 秒</td>
+<td>限制两次触发的最小间隔，持续晃动仍可能每隔一段时间触发</td>
+</tr>
+<tr>
+<td><code>BtnShake</code></td>
+<td>可不绑定</td>
+<td>按钮只触发震动，用于把马达反馈与传感器检测分开排查</td>
+</tr>
+<tr>
+<td><code>Tip</code></td>
+<td>可不绑定</td>
+<td>使用传统 Unity UI Text；TextMeshPro 项目需替换字段类型</td>
+</tr>
+</tbody></table>
+<p>第一帧仅保存读数，避免把初始姿态和零向量的差误判成摇动；恢复前台时重新取基准。冷却期间仍更新上次读数，且冷却使用 <code>Time.unscaledTime</code>，不会因 <code>Time.timeScale</code> 改变间隔。</p>
+<h2 id="如何接入场景"><a href="#如何接入场景" class="headerlink" title="如何接入场景"></a>如何接入场景</h2><ol>
+<li>将 <code>Test.cs</code> 挂到一个启用的 GameObject。</li>
+<li>如果要看 UI 提示，创建 Canvas 与 Text，将 Text 拖到 <code>Tip</code> 字段；按钮拖到 <code>BtnShake</code> 字段。</li>
+<li>此代码使用旧输入接口。使用新版 Unity 时，检查 Player Settings 的 Active Input Handling 包含 Input Manager；若仅启用新 Input System，应改用对应传感器接口。</li>
+<li>在目标手机上先点击按钮检查震动，再向不同方向晃动检查日志与 UI。编辑器里鼠标操作不能验证手机传感器或马达。</li>
+</ol>
+<h2 id="震动反馈与不震动时的排查"><a href="#震动反馈与不震动时的排查" class="headerlink" title="震动反馈与不震动时的排查"></a>震动反馈与不震动时的排查</h2><p><code>Handheld.Vibrate()</code> 不接收阈值、强度或时长参数；摇一摇检测成功，也不代表硬件一定产生可感知的震动。震动细节受平台和系统设置影响，需要定制反馈时通过原生接口实现。<a target="_blank" rel="noopener" href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Handheld.Vibrate.html">Unity Handheld.Vibrate API</a></p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>检查顺序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>点击按钮也不震动</td>
+<td>真机是否支持震动；系统设置；Android 最终 Manifest 的 <code>android.permission.VIBRATE</code>；平台调用日志</td>
+</tr>
+<tr>
+<td>按钮能震动，但摇动没反应</td>
+<td>组件是否启用；<code>SystemInfo.supportsAccelerometer</code>；输入后端；输出读数和 delta，检查阈值</td>
+</tr>
+<tr>
+<td>正向能触发、反向不能触发</td>
+<td>是否仍在使用原文的 <code>offset &gt; shakeStrength</code> 单向判断；改用绝对值或向量长度</td>
+</tr>
+<tr>
+<td>一次晃动触发多次</td>
+<td>增加冷却；确认场景中没有多个检测组件；持续晃动需要额外的动作结束判定</td>
+</tr>
+<tr>
+<td>旋转姿态就误触发</td>
+<td>加速度读数包含姿态影响；提高阈值或引入滤波，按设备实际采样调试</td>
+</tr>
+</tbody></table>
+<p>Android 震动权限定义见 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/Manifest.permission#VIBRATE">Manifest.permission.VIBRATE</a>。权限检查不能替代对目标设备的实际验证。</p>
+<h2 id="真机验证要点"><a href="#真机验证要点" class="headerlink" title="真机验证要点"></a>真机验证要点</h2><p>记录 Unity 版本、输入后端、手机型号、系统版本、阈值和冷却时间，再检查以下场景：静置、各轴正反方向晃动、连续晃动、慢速转动、切到后台后恢复，以及不绑定 UI 时的行为。本文没有声称这些场景已通过；原效果图也不能作为新示例的验证证据。</p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2019/04/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(1)/" title="Unity-CSharp与Android交互(1)">Unity C# 与 Android 原生交互（1）</a></li>
+<li><a href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/" title="Unity-CSharp与Android交互(2)">Unity C# 与 Android 原生交互（2）</a></li>
+<li><a href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/" title="Unity-CSharp与OC交互">Unity C# 与 Objective-C 交互</a></li>
+<li><a href="/2021/05/12/%E7%9B%AE%E5%BD%95%E5%8F%8A%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%E8%A7%84%E8%8C%83%E6%95%B4%E7%90%86(03)/" title="目录及资源路径规范整理(03)">目录及资源路径规范整理(03)</a></li>
+<li><a href="/2021/11/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="设计模式-单例模式">设计模式-单例模式</a></li>
+</ul>
+<h2 id="附录：原文-y-轴单向检测代码"><a href="#附录：原文-y-轴单向检测代码" class="headerlink" title="附录：原文 y 轴单向检测代码"></a>附录：原文 y 轴单向检测代码</h2><p>以下保留原代码及注释用于对照。原注释写“x坐标”，实际读取的是 y；“震动强度为 [0, 1]”的注释也不正确，<code>shakeStrength</code> 在这里是检测阈值。该片段没有取绝对值、没有冷却，不能作为上面改进版的替代实现。两段代码的类名都叫 <code>Test</code>，接入时只使用前面的完整示例。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> x坐标晃动监听</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Test</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] Button BtnShake;</span><br><span class="line">    [<span class="meta">SerializeField</span>] Text Tip;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> oldY = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">float</span> curY = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">float</span> offset = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//在Unity中震动强度为[0，1]</span></span><br><span class="line">    <span class="built_in">float</span> shakeStrength=<span class="number">.5f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        BtnShake.onClick.AddListener(() =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            Handheld.Vibrate();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        curY = Input.acceleration.y;</span><br><span class="line">        offset = curY - oldY;</span><br><span class="line">        oldY = curY;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(offset &gt; shakeStrength)</span><br><span class="line">        &#123;</span><br><span class="line">            Handheld.Vibrate();</span><br><span class="line">            Tip.text = <span class="string">&quot;晃动了&quot;</span>;</span><br><span class="line">            <span class="comment">//TODO</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2020/10/19/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8BDrawCall(%E4%BA%8C)/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">Unity-Shader笔记之DrawCall(二)</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2020/09/25/Unity-Shader%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF(%E4%B8%80)/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Unity-Shader笔记之渲染管线(一)</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2024/03/28/Unity-Shader%E6%94%AF%E6%8C%81%E7%9A%84%E8%AF%AD%E4%B9%89(%E5%9B%9B)/">
+            <span class="related-post-title">Unity-Shader支持的语义(四)</span>
+            <time datetime="2024-03-28T11:02:51.000Z">2024-03-28</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/01/19/%E7%AE%97%E6%B3%95-A%E6%98%9F%E5%AF%BB%E8%B7%AF/">
+            <span class="related-post-title">算法-A星寻路</span>
+            <time datetime="2024-01-19T06:45:19.000Z">2024-01-19</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+            <span class="related-post-title">Unity-CSharp与OC交互</span>
+            <time datetime="2023-08-26T06:42:29.000Z">2023-08-26</time>
+          </a>
+        
+          <a class="related-post-link" href="/2023/08/26/Unity-CSharp%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92(2)/">
+            <span class="related-post-title">Unity-CSharp与Android交互(2)</span>
+            <time datetime="2023-08-26T06:41:41.000Z">2023-08-26</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%91%87%E4%B8%80%E6%91%87%E6%95%88%E6%9E%9C"><span class="post-toc-text">摇一摇效果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%99%83%E5%8A%A8%E6%A3%80%E6%B5%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E6%AF%94%E8%BE%83%E4%B8%89%E8%BD%B4%E5%8A%A0%E9%80%9F%E5%BA%A6%E5%8F%98%E5%8C%96%E9%87%8F"><span class="post-toc-text">晃动检测原理：比较三轴加速度变化量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%8C%E6%95%B4-C-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%B8%89%E8%BD%B4%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%A7%A6%E5%8F%91%E5%86%B7%E5%8D%B4"><span class="post-toc-text">完整 C# 示例：三轴检测与触发冷却</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E6%8E%A5%E5%85%A5%E5%9C%BA%E6%99%AF"><span class="post-toc-text">如何接入场景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88%E4%B8%8E%E4%B8%8D%E9%9C%87%E5%8A%A8%E6%97%B6%E7%9A%84%E6%8E%92%E6%9F%A5"><span class="post-toc-text">震动反馈与不震动时的排查</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9"><span class="post-toc-text">真机验证要点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E5%8E%9F%E6%96%87-y-%E8%BD%B4%E5%8D%95%E5%90%91%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%A0%81"><span class="post-toc-text">附录：原文 y 轴单向检测代码</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

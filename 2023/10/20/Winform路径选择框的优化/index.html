@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Winform路径选择框的优化｜默然的博客</title>
+<meta name="description" content="winform自带的路径选择框(FolderBrowserDialog),真是不好用，路径一旦深了就让人抓狂... 如果能像文件选择框(OpenFileDialog)一样能输入路径就好了">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2023/10/20/Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2023/10/20/Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Winform路径选择框的优化｜默然的博客">
+<meta property="og:description" content="winform自带的路径选择框(FolderBrowserDialog),真是不好用，路径一旦深了就让人抓狂... 如果能像文件选择框(OpenFileDialog)一样能输入路径就好了">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Winform路径选择框的优化｜默然的博客">
+<meta name="twitter:description" content="winform自带的路径选择框(FolderBrowserDialog),真是不好用，路径一旦深了就让人抓狂... 如果能像文件选择框(OpenFileDialog)一样能输入路径就好了">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2023-10-20T07:36:12.000Z">
+<meta property="article:modified_time" content="2023-10-20T07:36:12.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Winform路径选择框的优化","description":"winform自带的路径选择框(FolderBrowserDialog),真是不好用，路径一旦深了就让人抓狂... 如果能像文件选择框(OpenFileDialog)一样能输入路径就好了","url":"https://blog.tonychenn.cn/2023/10/20/Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2023/10/20/Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2023-10-20T07:36:12.000Z","dateModified":"2023-10-20T07:36:12.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F10%2F20%2FWinform%25E8%25B7%25AF%25E5%25BE%2584%25E9%2580%2589%25E6%258B%25A9%25E6%25A1%2586%25E7%259A%2584%25E4%25BC%2598%25E5%258C%2596%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96&amp;summary=winform%E8%87%AA%E5%B8%A6%E7%9A%84%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86(FolderBrowserDialog)%2C%E7%9C%9F%E6%98%AF%E4%B8%8D%E5%A5%BD%E7%94%A8%EF%BC%8C%E8%B7%AF%E5%BE%84%E4%B8%80%E6%97%A6%E6%B7%B1%E4%BA%86%E5%B0%B1%E8%AE%A9%E4%BA%BA%E6%8A%93%E7%8B%82...%20%E5%A6%82%E6%9E%9C%E8%83%BD%E5%83%8F%E6%96%87%E4%BB%B6%E9%80%89%E6%8B%A9%E6%A1%86(OpenFileDialog)%E4%B8%80%E6%A0%B7%E8%83%BD%E8%BE%93%E5%85%A5%E8%B7%AF%E5%BE%84%E5%B0%B1%E5%A5%BD%E4%BA%86&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F10%2F20%2FWinform%25E8%25B7%25AF%25E5%25BE%2584%25E9%2580%2589%25E6%258B%25A9%25E6%25A1%2586%25E7%259A%2584%25E4%25BC%2598%25E5%258C%2596%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F10%2F20%2FWinform%25E8%25B7%25AF%25E5%25BE%2584%25E9%2580%2589%25E6%258B%25A9%25E6%25A1%2586%25E7%259A%2584%25E4%25BC%2598%25E5%258C%2596%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F10%2F20%2FWinform%25E8%25B7%25AF%25E5%25BE%2584%25E9%2580%2589%25E6%258B%25A9%25E6%25A1%2586%25E7%259A%2584%25E4%25BC%2598%25E5%258C%2596%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F10%2F20%2FWinform%25E8%25B7%25AF%25E5%25BE%2584%25E9%2580%2589%25E6%258B%25A9%25E6%25A1%2586%25E7%259A%2584%25E4%25BC%2598%25E5%258C%2596%2F&amp;text=Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F10%2F20%2FWinform%25E8%25B7%25AF%25E5%25BE%2584%25E9%2580%2589%25E6%258B%25A9%25E6%25A1%2586%25E7%259A%2584%25E4%25BC%2598%25E5%258C%2596%2F&amp;title=Winform%E8%B7%AF%E5%BE%84%E9%80%89%E6%8B%A9%E6%A1%86%E7%9A%84%E4%BC%98%E5%8C%96" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Winform路径选择框的优化</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2023-10-20T07:36:12.000Z">2023-10-20</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <blockquote>
+<p>winform自带的路径选择框(FolderBrowserDialog),真是不好用，路径一旦深了就让人抓狂…</br>如果能像文件选择框(OpenFileDialog)一样能输入路径就好了。</p>
+</blockquote>
+<p>so，bing一下,留个记录。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Reflection;</span><br><span class="line"><span class="keyword">using</span> System.Windows.Forms;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FolderSelectDialog</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> OpenFileDialog openFileDialog = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FolderSelectDialog</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        openFileDialog = <span class="keyword">new</span> OpenFileDialog</span><br><span class="line">        &#123;</span><br><span class="line">            Filter = <span class="string">&quot;Folders|\n&quot;</span>,</span><br><span class="line">            AddExtension = <span class="literal">false</span>,</span><br><span class="line">            CheckFileExists = <span class="literal">false</span>,</span><br><span class="line">            DereferenceLinks = <span class="literal">true</span>,</span><br><span class="line">            Multiselect = <span class="literal">false</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> Properties</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> InitialDirectory</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> openFileDialog.InitialDirectory; &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; openFileDialog.InitialDirectory = <span class="keyword">value</span> == <span class="literal">null</span> || <span class="keyword">value</span>.Length == <span class="number">0</span> ? Environment.CurrentDirectory : <span class="keyword">value</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Title</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> openFileDialog.Title; &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; openFileDialog.Title = <span class="keyword">value</span> ?? <span class="string">&quot;Select a folder&quot;</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> FolderName &#123; <span class="keyword">get</span> &#123; <span class="keyword">return</span> openFileDialog.FileName; &#125; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> Methods</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">ShowDialog</span>()</span> &#123; <span class="keyword">return</span> ShowDialog(IntPtr.Zero); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">ShowDialog</span>(<span class="params">IntPtr hWndOwner</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (Environment.OSVersion.Version.Major &gt;= <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> r = <span class="keyword">new</span> Reflector(<span class="string">&quot;System.Windows.Forms&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">uint</span> num = <span class="number">0</span>;</span><br><span class="line">            Type typeIFileDialog = r.GetType(<span class="string">&quot;FileDialogNative.IFileDialog&quot;</span>);</span><br><span class="line">            <span class="built_in">object</span> dialog = r.Call(openFileDialog, <span class="string">&quot;CreateVistaDialog&quot;</span>);</span><br><span class="line">            r.Call(openFileDialog, <span class="string">&quot;OnBeforeVistaDialog&quot;</span>, dialog);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">uint</span> options = (<span class="built_in">uint</span>)r.CallAs(<span class="keyword">typeof</span>(FileDialog), openFileDialog, <span class="string">&quot;GetOptions&quot;</span>);</span><br><span class="line">            options |= (<span class="built_in">uint</span>)r.GetEnum(<span class="string">&quot;FileDialogNative.FOS&quot;</span>, <span class="string">&quot;FOS_PICKFOLDERS&quot;</span>);</span><br><span class="line">            r.CallAs(typeIFileDialog, dialog, <span class="string">&quot;SetOptions&quot;</span>, options);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">object</span> pfde = r.New(<span class="string">&quot;FileDialog.VistaDialogEvents&quot;</span>, openFileDialog);</span><br><span class="line">            <span class="built_in">object</span>[] parameters = <span class="keyword">new</span> <span class="built_in">object</span>[] &#123; pfde, num &#125;;</span><br><span class="line">            r.CallAs2(typeIFileDialog, dialog, <span class="string">&quot;Advise&quot;</span>, parameters);</span><br><span class="line">            num = (<span class="built_in">uint</span>)parameters[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">int</span> num2 = (<span class="built_in">int</span>)r.CallAs(typeIFileDialog, dialog, <span class="string">&quot;Show&quot;</span>, hWndOwner);</span><br><span class="line">                flag = <span class="number">0</span> == num2;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">finally</span></span><br><span class="line">            &#123;</span><br><span class="line">                r.CallAs(typeIFileDialog, dialog, <span class="string">&quot;Unadvise&quot;</span>, num);</span><br><span class="line">                GC.KeepAlive(pfde);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> folderBrowserDialog = <span class="keyword">new</span> FolderBrowserDialog</span><br><span class="line">            &#123;</span><br><span class="line">                Description = <span class="keyword">this</span>.Title,</span><br><span class="line">                SelectedPath = <span class="keyword">this</span>.InitialDirectory,</span><br><span class="line">                ShowNewFolderButton = <span class="literal">false</span></span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">if</span> (folderBrowserDialog.ShowDialog(<span class="keyword">new</span> WindowWrapper(hWndOwner)) != DialogResult.OK) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            openFileDialog.FileName = folderBrowserDialog.SelectedPath;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WindowWrapper</span> : <span class="title">IWin32Window</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> IntPtr _hwnd;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WindowWrapper</span>(<span class="params">IntPtr handle</span>)</span> &#123; _hwnd = handle; &#125;</span><br><span class="line">    <span class="keyword">public</span> IntPtr Handle &#123; <span class="keyword">get</span> &#123; <span class="keyword">return</span> _hwnd; &#125; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Reflector</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> variables</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> m_ns;</span><br><span class="line">    <span class="keyword">public</span> Assembly assembly &#123; <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> Constructors</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Reflector</span>(<span class="params"><span class="built_in">string</span> ns</span>) : <span class="title">this</span>(<span class="params">ns, ns</span>)</span> &#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Reflector</span>(<span class="params"><span class="built_in">string</span> assemblyName, <span class="built_in">string</span> ns</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        m_ns = ns;</span><br><span class="line">        assembly = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">foreach</span> (AssemblyName name <span class="keyword">in</span> Assembly.GetExecutingAssembly().GetReferencedAssemblies())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (name.FullName.StartsWith(assemblyName))</span><br><span class="line">            &#123;</span><br><span class="line">                assembly = Assembly.Load(name);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Reflector</span>(<span class="params">Assembly assembly</span>)</span> &#123; <span class="keyword">this</span>.assembly = assembly; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br><span class="line">    <span class="meta">#<span class="keyword">region</span> Methods</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Type <span class="title">GetType</span>(<span class="params"><span class="built_in">string</span> typeName</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Type type = <span class="literal">null</span>;</span><br><span class="line">        <span class="built_in">string</span>[] names = typeName.Split(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (names.Length &gt; <span class="number">0</span>) type = assembly.GetType(m_ns + <span class="string">&quot;.&quot;</span> + names[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt; names.Length; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            type = type.GetNestedType(names[i], BindingFlags.NonPublic);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">New</span>(<span class="params"><span class="built_in">string</span> name, <span class="keyword">params</span> <span class="built_in">object</span>[] parameters</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Type type = GetType(name);</span><br><span class="line"></span><br><span class="line">        ConstructorInfo[] ctorInfos = type.GetConstructors();</span><br><span class="line">        <span class="keyword">foreach</span> (ConstructorInfo ci <span class="keyword">in</span> ctorInfos)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> ci.Invoke(parameters);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> &#123; &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">Call</span>(<span class="params"><span class="built_in">object</span> obj, <span class="built_in">string</span> func, <span class="keyword">params</span> <span class="built_in">object</span>[] parameters</span>)</span> =&gt; Call2(obj, func, parameters);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">Call2</span>(<span class="params"><span class="built_in">object</span> obj, <span class="built_in">string</span> func, <span class="built_in">object</span>[] parameters</span>)</span> =&gt; CallAs2(obj.GetType(), obj, func, parameters);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">CallAs</span>(<span class="params">Type type, <span class="built_in">object</span> obj, <span class="built_in">string</span> func, <span class="keyword">params</span> <span class="built_in">object</span>[] parameters</span>)</span> =&gt; CallAs2(type, obj, func, parameters);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">CallAs2</span>(<span class="params">Type type, <span class="built_in">object</span> obj, <span class="built_in">string</span> func, <span class="built_in">object</span>[] parameters</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        MethodInfo methInfo = type.GetMethod(func, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);</span><br><span class="line">        <span class="keyword">return</span> methInfo.Invoke(obj, parameters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">Get</span>(<span class="params"><span class="built_in">object</span> obj, <span class="built_in">string</span> prop</span>)</span> =&gt; GetAs(obj.GetType(), obj, prop);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">GetAs</span>(<span class="params">Type type, <span class="built_in">object</span> obj, <span class="built_in">string</span> prop</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        PropertyInfo propInfo = type.GetProperty(prop, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);</span><br><span class="line">        <span class="keyword">return</span> propInfo.GetValue(obj, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">object</span> <span class="title">GetEnum</span>(<span class="params"><span class="built_in">string</span> typeName, <span class="built_in">string</span> name</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Type type = GetType(typeName);</span><br><span class="line">        FieldInfo fieldInfo = type.GetField(name);</span><br><span class="line">        <span class="keyword">return</span> fieldInfo.GetValue(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2018/08/30/CSharp-CSDN%E5%8D%9A%E5%AE%A2%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7/" title="CSharp-CSDN博客导出工具">CSharp-CSDN博客导出工具</a></li>
+<li><a href="/2019/04/13/CSharp-TCP%E8%81%8A%E5%A4%A9%E5%AE%A4/" title="CSharp-TCP聊天室">CSharp-TCP聊天室</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2023/11/03/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8%E4%B8%93%E9%A2%98/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">算法-链表专题</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2023/08/26/Unity-CSharp%E4%B8%8EOC%E4%BA%A4%E4%BA%92/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">Unity-CSharp与OC交互</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2024/11/04/winform%E9%87%8D%E5%AE%9A%E5%90%91Console%E6%97%A5%E5%BF%97/">
+            <span class="related-post-title">winform重定向Console日志</span>
+            <time datetime="2024-11-04T02:45:24.000Z">2024-11-04</time>
+          </a>
+        
+          <a class="related-post-link" href="/2024/10/12/winform%E4%B8%AD%E5%B5%8C%E5%85%A5%E7%AA%97%E4%BD%93/">
+            <span class="related-post-title">winform中嵌入窗体</span>
+            <time datetime="2024-10-12T08:15:01.000Z">2024-10-12</time>
+          </a>
+        
+          <a class="related-post-link" href="/2019/08/14/Hexo%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+            <span class="related-post-title">Hexo管理工具</span>
+            <time datetime="2019-08-14T05:27:05.000Z">2019-08-14</time>
+          </a>
+        
+          <a class="related-post-link" href="/2019/04/13/CSharp-TCP%E8%81%8A%E5%A4%A9%E5%AE%A4/">
+            <span class="related-post-title">CSharp-TCP聊天室</span>
+            <time datetime="2019-04-13T05:22:25.000Z">2019-04-13</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

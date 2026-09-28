@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Python-酷狗音乐爬虫总结｜默然的博客</title>
+<meta name="description" content="博主之前用过C 写爬虫，被本学期学过Python后，冲着其：简单，干净，快捷的优点，就决定学下Python爬虫，下面记载使用Python做一个酷狗音乐下载的爬虫，和实现过程中遇到的问题，如果你也在学Python爬虫，希望这篇文章能给你带来一些帮助">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2018/11/19/Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E9%9F%B3%E9%A2%91%E4%B8%8B%E8%BD%BD%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2018/11/19/Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E9%9F%B3%E9%A2%91%E4%B8%8B%E8%BD%BD%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-酷狗音乐爬虫总结｜默然的博客">
+<meta property="og:description" content="博主之前用过C 写爬虫，被本学期学过Python后，冲着其：简单，干净，快捷的优点，就决定学下Python爬虫，下面记载使用Python做一个酷狗音乐下载的爬虫，和实现过程中遇到的问题，如果你也在学Python爬虫，希望这篇文章能给你带来一些帮助">
+
+<meta property="og:image" content="https://img.tonychenn.cn/2018/11.19/icon.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Python-酷狗音乐爬虫总结｜默然的博客">
+<meta name="twitter:description" content="博主之前用过C 写爬虫，被本学期学过Python后，冲着其：简单，干净，快捷的优点，就决定学下Python爬虫，下面记载使用Python做一个酷狗音乐下载的爬虫，和实现过程中遇到的问题，如果你也在学Python爬虫，希望这篇文章能给你带来一些帮助">
+
+<meta name="twitter:image" content="https://img.tonychenn.cn/2018/11.19/icon.jpg">
+
+
+
+<meta property="article:published_time" content="2018-11-19T13:22:28.000Z">
+<meta property="article:modified_time" content="2018-11-19T13:22:28.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python-酷狗音乐爬虫总结","description":"博主之前用过C 写爬虫，被本学期学过Python后，冲着其：简单，干净，快捷的优点，就决定学下Python爬虫，下面记载使用Python做一个酷狗音乐下载的爬虫，和实现过程中遇到的问题，如果你也在学Python爬虫，希望这篇文章能给你带来一些帮助","url":"https://blog.tonychenn.cn/2018/11/19/Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E9%9F%B3%E9%A2%91%E4%B8%8B%E8%BD%BD%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2018/11/19/Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E9%9F%B3%E9%A2%91%E4%B8%8B%E8%BD%BD%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2018-11-19T13:22:28.000Z","dateModified":"2018-11-19T13:22:28.000Z","image":"https://img.tonychenn.cn/2018/11.19/icon.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F11%2F19%2FPython-%25E9%2585%25B7%25E7%258B%2597%25E9%259F%25B3%25E4%25B9%2590%25E9%259F%25B3%25E9%25A2%2591%25E4%25B8%258B%25E8%25BD%25BD%25E7%2588%25AC%25E8%2599%25AB%25E6%2580%25BB%25E7%25BB%2593%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93&amp;summary=%E5%8D%9A%E4%B8%BB%E4%B9%8B%E5%89%8D%E7%94%A8%E8%BF%87C%20%E5%86%99%E7%88%AC%E8%99%AB%EF%BC%8C%E8%A2%AB%E6%9C%AC%E5%AD%A6%E6%9C%9F%E5%AD%A6%E8%BF%87Python%E5%90%8E%EF%BC%8C%E5%86%B2%E7%9D%80%E5%85%B6%EF%BC%9A%E7%AE%80%E5%8D%95%EF%BC%8C%E5%B9%B2%E5%87%80%EF%BC%8C%E5%BF%AB%E6%8D%B7%E7%9A%84%E4%BC%98%E7%82%B9%EF%BC%8C%E5%B0%B1%E5%86%B3%E5%AE%9A%E5%AD%A6%E4%B8%8BPython%E7%88%AC%E8%99%AB%EF%BC%8C%E4%B8%8B%E9%9D%A2%E8%AE%B0%E8%BD%BD%E4%BD%BF%E7%94%A8Python%E5%81%9A%E4%B8%80%E4%B8%AA%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%88%AC%E8%99%AB%EF%BC%8C%E5%92%8C%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%A0%E4%B9%9F%E5%9C%A8%E5%AD%A6Python%E7%88%AC%E8%99%AB%EF%BC%8C%E5%B8%8C%E6%9C%9B%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E8%83%BD%E7%BB%99%E4%BD%A0%E5%B8%A6%E6%9D%A5%E4%B8%80%E4%BA%9B%E5%B8%AE%E5%8A%A9&amp;pics=https%3A%2F%2Fimg.tonychenn.cn%2F2018%2F11.19%2Ficon.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F11%2F19%2FPython-%25E9%2585%25B7%25E7%258B%2597%25E9%259F%25B3%25E4%25B9%2590%25E9%259F%25B3%25E9%25A2%2591%25E4%25B8%258B%25E8%25BD%25BD%25E7%2588%25AC%25E8%2599%25AB%25E6%2580%25BB%25E7%25BB%2593%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F11%2F19%2FPython-%25E9%2585%25B7%25E7%258B%2597%25E9%259F%25B3%25E4%25B9%2590%25E9%259F%25B3%25E9%25A2%2591%25E4%25B8%258B%25E8%25BD%25BD%25E7%2588%25AC%25E8%2599%25AB%25E6%2580%25BB%25E7%25BB%2593%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F11%2F19%2FPython-%25E9%2585%25B7%25E7%258B%2597%25E9%259F%25B3%25E4%25B9%2590%25E9%259F%25B3%25E9%25A2%2591%25E4%25B8%258B%25E8%25BD%25BD%25E7%2588%25AC%25E8%2599%25AB%25E6%2580%25BB%25E7%25BB%2593%2F&amp;pic=https%3A%2F%2Fimg.tonychenn.cn%2F2018%2F11.19%2Ficon.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F11%2F19%2FPython-%25E9%2585%25B7%25E7%258B%2597%25E9%259F%25B3%25E4%25B9%2590%25E9%259F%25B3%25E9%25A2%2591%25E4%25B8%258B%25E8%25BD%25BD%25E7%2588%25AC%25E8%2599%25AB%25E6%2580%25BB%25E7%25BB%2593%2F&amp;text=Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2018%2F11%2F19%2FPython-%25E9%2585%25B7%25E7%258B%2597%25E9%259F%25B3%25E4%25B9%2590%25E9%259F%25B3%25E9%25A2%2591%25E4%25B8%258B%25E8%25BD%25BD%25E7%2588%25AC%25E8%2599%25AB%25E6%2580%25BB%25E7%25BB%2593%2F&amp;title=Python-%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://img.tonychenn.cn/2018/11.19/icon.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Python-酷狗音乐爬虫总结</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2018-11-19T13:22:28.000Z">2018-11-19</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博主之前用过C#写爬虫，被本学期学过Python后，冲着其：简单，干净，快捷的优点，就决定学下Python爬虫，下面记载使用Python做一个酷狗音乐下载的爬虫，和实现过程中遇到的问题，如果你也在学Python爬虫，希望这篇文章能给你带来一些帮助。</p>
+<h2 id="什么是爬虫？"><a href="#什么是爬虫？" class="headerlink" title="什么是爬虫？"></a>什么是爬虫？</h2><ol>
+<li>访问网址，抓取其html文档或者Json文档,对于某些网站具有反爬虫机制，所以需要模拟浏览器的用户代理（User Agent）的行为构造请求。</li>
+<li>筛选出第一步拿到的网页数据，筛选出需要的数据</li>
+</ol>
+<h2 id="获取搜索音乐列表Json"><a href="#获取搜索音乐列表Json" class="headerlink" title="获取搜索音乐列表Json"></a>获取搜索音乐列表Json</h2><p>通过网页解析网页从而拿到音乐数据。我们知道在酷狗中搜索歌曲时会访问一个固定的网址+搜索内容获取数据，如：<a target="_blank" rel="noopener" href="https://www.kugou.com/yy/html/search.html#searchType=song&searchKeyWord=%E5%8D%A1%E8%B7%AF%E9%87%8C">https://www.kugou.com/yy/html/search.html#searchType=song&amp;searchKeyWord=卡路里</a></p>
+<p><img src="https://img.tonychenn.cn/2018/11.19/kaluli.jpg" alt="Python-酷狗音乐爬虫总结"></p>
+<p>找到网页请求的Json数据，然后解析出来：老规矩F12。嗯，找到了：</p>
+<p><img src="https://img.tonychenn.cn/2018/11.19/json.jpg" alt="Python-酷狗音乐爬虫总结"></p>
+<p>看下地址,<a target="_blank" rel="noopener" href="https://songsearch.kugou.com/song_search_v2?callback=jQuery112407293972860894198_1542616202354&keyword=%E5%8D%A1%E8%B7%AF%E9%87%8C&page=1&pagesize=30&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1542616202356">https://songsearch.kugou.com/song_search_v2?callback&#x3D;jQuery112407293972860894198_1542616202354&amp;keyword&#x3D;卡路里&amp;page&#x3D;1&amp;pagesize&#x3D;30&amp;userid&#x3D;-1&amp;clientver&#x3D;&amp;platform&#x3D;WebFilter&amp;tag&#x3D;em&amp;filter&#x3D;2&amp;iscorrection&#x3D;1&amp;privilege_filter&#x3D;0&amp;_&#x3D;1542616202356</a>我们就可以通过此链接获取无门需要搜索歌曲的列表。但是分析下这个文件还是没有找到播放音乐的url,额…继续找…</p>
+<h2 id="获取歌曲信息Json"><a href="#获取歌曲信息Json" class="headerlink" title="获取歌曲信息Json"></a>获取歌曲信息Json</h2><p>点开一个音乐播放的条目，F12分析：</p>
+<p><img src="https://img.tonychenn.cn/2018/11.19/f12.jpg" alt="f12"></p>
+<p>竟然不存在音频文件，但事实音乐已经开始播放了，并且自动播放的。那只能说明播放音乐的url依然不再这里，老办法，查找json文件：</p>
+<p><img src="https://img.tonychenn.cn/2018/11.19/find.jpg" alt="find"></p>
+<p>嗯，没看错，就是在这里，那么获取这个的json的url是什么呢？怎么得到呢？</p>
+<p>看链接：<a target="_blank" rel="noopener" href="https://www.kugou.com/song/#hash=BEDD046FB30A0C443CD6F854574B065E&album_id=9175221">https://www.kugou.com/song/#hash=BEDD046FB30A0C443CD6F854574B065E&amp;album_id&#x3D;9175221</a> 也是一个固定的字符串与hash，album_id 组成的。那问题就变成了如何获取hash 和 album_id. 还记得之前获取的音乐列表的信息吗，当时只看懂了<b>SongName</b>,仔细对比查看：</p>
+<blockquote>
+<p>FileHash 对应 hash<br>AlbumID 对应 album_id</p>
+</blockquote>
+<h2 id="Json处理"><a href="#Json处理" class="headerlink" title="Json处理"></a>Json处理</h2><p>上面获取的音乐列表，音乐详细信息都不是标准的json文本，我们需要的是将其更正为标准的json</p>
+<ul>
+<li>音乐列表json处理：</li>
+</ul>
+<p><img src="https://img.tonychenn.cn/2018/11.19/dojson.jpg" alt="dojson"></p>
+<ul>
+<li>音乐详细信息的Json处理：</li>
+</ul>
+<p><img src="https://img.tonychenn.cn/2018/11.19/dojson2.jpg" alt="dojson2"></p>
+<h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将不规范的Json字符串，通过截取，返回规范的json数据</span></span><br><span class="line"><span class="comment"># 返回歌曲列表的Json</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_song_list_json</span>(<span class="params">unjson</span>):</span><br><span class="line">    start_index = unjson.index(<span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">    end_index = unjson.rindex(<span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">    unjson = unjson[start_index: end_index]</span><br><span class="line"></span><br><span class="line">    end_index = unjson.rindex(<span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">    <span class="comment"># 此句过后，content为正常的Json文件</span></span><br><span class="line">    str_json = unjson[<span class="number">0</span>:end_index] + <span class="string">&#x27;]&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> str_json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回每首歌曲的信息Json</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_music_info_json</span>(<span class="params">unjson</span>):</span><br><span class="line">    start_index = unjson.index(<span class="string">&#x27;&#123;&#x27;</span>)</span><br><span class="line">    end_index = unjson.rindex(<span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">    unjson = unjson[start_index: end_index]</span><br><span class="line">    start_index = unjson.index(<span class="string">&#x27;&#123;&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">    unjson = unjson[start_index: -<span class="number">1</span>]+<span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> unjson</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回播放Url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_play_url</span>(<span class="params">filehash, <span class="built_in">id</span>=<span class="number">0</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;https://www.kugou.com/song/#hash=&#x27;</span> + filehash+<span class="string">&#x27;&amp;album_id=&#x27;</span>+<span class="built_in">id</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回下载Url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_download_api</span>(<span class="params">callback, <span class="built_in">hash</span>, <span class="built_in">id</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;https://wwwapi.kugou.com/yy/index.php?r=play/getdata&amp;callback=&#x27;</span>+callback+<span class="string">&#x27;&amp;hash=&#x27;</span>+<span class="built_in">hash</span></span><br><span class="line"></span><br><span class="line">song_name = <span class="built_in">input</span>(<span class="string">&quot;请输入歌曲名称：&quot;</span>)</span><br><span class="line"><span class="comment"># 获取一条不正常的Json</span></span><br><span class="line">url = <span class="string">&#x27;https://songsearch.kugou.com/song_search_v2?callback=jQuery1124043482941576795797_1542458757544&amp;keyword=&#123;0&#125;&amp;page=1&amp;pagesize=30&amp;userid=-1&amp;clientver=&amp;platform=WebFilter&amp;tag=em&amp;filter=2&amp;iscorrection=1&amp;privilege_filter=0&amp;_=1542458757546&#x27;</span>.<span class="built_in">format</span>(song_name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面将不正常的json改正常</span></span><br><span class="line"><span class="comment"># 获取不正常Json内容</span></span><br><span class="line">content = requests.get(url).text</span><br><span class="line"><span class="comment"># 获取Callback码</span></span><br><span class="line">callback_end_index = content.index(<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">callback = content[<span class="number">0</span>: callback_end_index]</span><br><span class="line"></span><br><span class="line">content = get_song_list_json(content)</span><br><span class="line"></span><br><span class="line"><span class="comment">#解析json，返回音乐列表</span></span><br><span class="line">music_list = json.loads(content)</span><br><span class="line">imforlist = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示获取到的歌曲信息,并存放在imforlist列表中</span></span><br><span class="line">num = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> music_list:</span><br><span class="line">    imforlist.append(item)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(num)+<span class="string">&#x27;. &#x27;</span> + <span class="built_in">dict</span>(item)[<span class="string">&#x27;SongName&#x27;</span>])</span><br><span class="line">    num = <span class="built_in">int</span>(num)+<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入下载编号，下载对应歌曲</span></span><br><span class="line"><span class="built_in">id</span> = <span class="built_in">input</span>(<span class="string">&#x27;请输入下载编号：&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">int</span>(<span class="built_in">id</span>) &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">int</span>(<span class="built_in">id</span>) &lt;= <span class="built_in">int</span>(num):</span><br><span class="line">    item = <span class="built_in">dict</span>(imforlist[<span class="built_in">int</span>(<span class="built_in">id</span>)-<span class="number">1</span>])</span><br><span class="line">    download_api = get_download_api(callback, item[<span class="string">&#x27;FileHash&#x27;</span>], item[<span class="string">&#x27;AlbumID&#x27;</span>])</span><br><span class="line">    unjson = requests.get(download_api).text</span><br><span class="line">    download_url = re.findall(<span class="string">r&#x27;&quot;play_url&quot;:&quot;(.*?)&quot;&#x27;</span>, unjson)</span><br><span class="line">    download_url = <span class="built_in">str</span>(download_url[<span class="number">0</span>]).replace(<span class="string">&quot;\/&quot;</span>, <span class="string">&quot;/&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(download_url)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="built_in">str</span>(<span class="built_in">id</span>)+<span class="string">&#x27;.mp3&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        fp.write(requests.get(download_url).content)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;下载成功&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p><img src="https://img.tonychenn.cn/2018/11.19/result1.jpg" alt="result1"></p>
+<p><img src="https://img.tonychenn.cn/2018/11.19/result2.jpg" alt="result2"></p>
+<blockquote>
+<p>仅供学习使用，用于商业用途，本人不负责！</p>
+</blockquote>
+<div align='right'>TonyChenn<br>2018.11.19</div>
+
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2018/11/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="正则表达式学习总结">正则表达式学习总结</a></li>
+<li><a href="/2018/09/01/CSharp-%E4%BD%BF%E7%94%A8HtmlAgilityPack%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/" title="CSharp-使用HtmlAgilityPack实现网站爬虫总结">CSharp-使用HtmlAgilityPack实现网站爬虫总结</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2018/11/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">正则表达式学习总结</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2018/11/08/XPath%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">xpath学习总结</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2018/11/21/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+            <span class="related-post-title">正则表达式学习总结</span>
+            <time datetime="2018-11-21T01:02:09.000Z">2018-11-21</time>
+          </a>
+        
+          <a class="related-post-link" href="/2018/09/01/CSharp-%E4%BD%BF%E7%94%A8HtmlAgilityPack%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E7%88%AC%E8%99%AB%E6%80%BB%E7%BB%93/">
+            <span class="related-post-title">CSharp-使用HtmlAgilityPack实现网站爬虫总结</span>
+            <time datetime="2018-09-01T11:22:02.000Z">2018-09-01</time>
+          </a>
+        
+          <a class="related-post-link" href="/2018/08/30/CSharp-CSDN%E5%8D%9A%E5%AE%A2%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7/">
+            <span class="related-post-title">CSharp-CSDN博客导出工具</span>
+            <time datetime="2018-08-30T06:07:49.000Z">2018-08-30</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%88%AC%E8%99%AB%EF%BC%9F"><span class="post-toc-text">什么是爬虫？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%8E%B7%E5%8F%96%E6%90%9C%E7%B4%A2%E9%9F%B3%E4%B9%90%E5%88%97%E8%A1%A8Json"><span class="post-toc-text">获取搜索音乐列表Json</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%8E%B7%E5%8F%96%E6%AD%8C%E6%9B%B2%E4%BF%A1%E6%81%AFJson"><span class="post-toc-text">获取歌曲信息Json</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Json%E5%A4%84%E7%90%86"><span class="post-toc-text">Json处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="post-toc-text">代码实现：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="post-toc-text">运行结果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>

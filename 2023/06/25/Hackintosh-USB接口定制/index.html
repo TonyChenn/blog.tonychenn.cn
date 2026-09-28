@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mdm-color="#6750A4">
+<!--Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="google-site-verification" content="GZh2jRE6IgVXx8SYpoRZYwcs4_Wy7vWEAeSIHCs3UE8"/>
+    <meta name="baidu-site-verification" content="5EmnBCPDrY" />
+    <meta name="msvalidate.01" content="1068F0A80A375C4F15495C209787E358" />
+    
+
+<title>Hackintosh-USB接口定制｜默然的博客</title>
+<meta name="description" content="OpenCore官方文档: https://dortania.github.io/OpenCore-Post-Install/usb/ 本文围绕“Hackintosh-USB接口定制”整理实现步骤、适用范围、常见问题与验证要点">
+<meta name="author" content="TonyChenn">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://blog.tonychenn.cn/2023/06/25/Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6/">
+
+<meta property="og:site_name" content="默然的博客">
+<meta property="og:url" content="https://blog.tonychenn.cn/2023/06/25/Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hackintosh-USB接口定制｜默然的博客">
+<meta property="og:description" content="OpenCore官方文档: https://dortania.github.io/OpenCore-Post-Install/usb/ 本文围绕“Hackintosh-USB接口定制”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hackintosh-USB接口定制｜默然的博客">
+<meta name="twitter:description" content="OpenCore官方文档: https://dortania.github.io/OpenCore-Post-Install/usb/ 本文围绕“Hackintosh-USB接口定制”整理实现步骤、适用范围、常见问题与验证要点">
+
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg">
+
+
+
+<meta property="article:published_time" content="2023-06-25T05:13:24.000Z">
+<meta property="article:modified_time" content="2023-06-25T05:13:24.000Z">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hackintosh-USB接口定制","description":"OpenCore官方文档: https://dortania.github.io/OpenCore-Post-Install/usb/ 本文围绕“Hackintosh-USB接口定制”整理实现步骤、适用范围、常见问题与验证要点","url":"https://blog.tonychenn.cn/2023/06/25/Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.tonychenn.cn/2023/06/25/Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6/"},"author":{"@type":"Person","name":"TonyChenn","url":"https://blog.tonychenn.cn/about/"},"publisher":{"@type":"Person","name":"TonyChenn"},"datePublished":"2023-06-25T05:13:24.000Z","dateModified":"2023-06-25T05:13:24.000Z","image":"https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg"}</script>
+
+
+
+    <!--mdui-->
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script>
+        mdui.setColorScheme('#6750A4');
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!--jquery-->
+    
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <!--图片使用浏览器原生 loading="lazy"，不再额外加载懒加载库-->
+
+    <!--theme-->
+    
+<link rel="stylesheet" href="/css/mdm.css">
+
+    
+<link rel="stylesheet" href="/css/mdm_theme_dark.css">
+
+    <script src="/js/mdm.js?v=20260820-seo-1"></script>
+    
+    <!--高亮-->
+    
+<link rel="stylesheet" href="/css/solarized-light.css">
+
+    
+    <!--全局变灰-->
+    
+
+    <!--点击特效-->
+    
+        <script async src="/js/click-effect.js"></script>
+    
+
+    <!--代码块-->
+    
+<script src="/libs/codeblock/codeblock.js"></script>
+
+    
+<link rel="stylesheet" href="/libs/codeblock/codeblock.css">
+
+
+    <!--一言-->
+    
+        <script defer src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto"></script>
+    
+
+
+    <!--本地搜索-->
+    <!-- <script src="js/search.js"></script> -->
+    <!--自动提交给百度-->
+    
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'https://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    
+
+    <!---google ad config-->
+    
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8181303774570877" crossorigin="anonymous"></script>
+    
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <!--header_bar-->
+  
+
+<mdui-navigation-drawer id="navigationDrawer" class="navigation-drawer" modal close-on-esc close-on-overlay-click>
+    <div class="navigation-drawer-header">
+        <span class="material-symbols-rounded navigation-drawer-logo">auto_awesome</span>
+        <div>
+            <div class="navigation-drawer-title">默然的博客</div>
+            <div class="navigation-drawer-label">TonyChenn 的游戏客户端开发博客，记录 Cocos2d-x、C#、Unity、Win32 与鸿蒙开发中的源码分析、性能优化和工程实践。</div>
+        </div>
+    </div>
+    <nav class="navigation-drawer-list" aria-label="移动端主导航">
+        
+            
+            <a class="navigation-drawer-link" href="/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">home</span>
+                <span>首页</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="https://tonychenn.cn" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded" aria-hidden="true">public</span>
+                <span>主站</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/tags/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">local_offer</span>
+                <span>标签</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/archives/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">library_books</span>
+                <span>归档</span>
+            </a>
+        
+            
+            <a class="navigation-drawer-link" href="/about/" target="_self">
+                <span class="material-symbols-rounded" aria-hidden="true">error_outline</span>
+                <span>关于</span>
+            </a>
+        
+    </nav>
+</mdui-navigation-drawer>
+
+<mdui-top-app-bar class="top-app-bar" scroll-behavior="elevate">
+    <mdui-button-icon id="navigationDrawerButton" class="top-app-bar-mobile" icon="menu" aria-label="打开导航菜单"></mdui-button-icon>
+    <mdui-top-app-bar-title class="top-app-bar-title">默然的博客</mdui-top-app-bar-title>
+
+    <nav class="top-app-bar-links" aria-label="主导航">
+        <!--Desktop-->
+        
+            
+            <a href="/" target="_self" class="top-nav-link">首页</a>
+        
+            
+            <a href="https://tonychenn.cn" target="_blank" class="top-nav-link" rel="noopener noreferrer">主站</a>
+        
+            
+            <a href="/tags/" target="_self" class="top-nav-link">标签</a>
+        
+            
+            <a href="/archives/" target="_self" class="top-nav-link">归档</a>
+        
+            
+            <a href="/about/" target="_self" class="top-nav-link">关于</a>
+        
+    </nav>
+    <div class="top-app-bar-spacer"></div>
+
+    <!--Share-->
+    
+    <mdui-dropdown placement="bottom-end">
+        <mdui-button-icon slot="trigger" icon="share" aria-label="分享当前页面"></mdui-button-icon>
+        <mdui-menu>
+            
+                <mdui-menu-item href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F06%2F25%2FHackintosh-USB%25E6%258E%25A5%25E5%258F%25A3%25E5%25AE%259A%25E5%2588%25B6%2F" target="_blank" rel="noopener noreferrer">facebook</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://connect.qq.com/widget/shareqq/index.html?site=%E9%BB%98%E7%84%B6%E7%9A%84%E5%8D%9A%E5%AE%A2&amp;title=Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6&amp;summary=OpenCore%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%3A%20https%3A%2F%2Fdortania.github.io%2FOpenCore-Post-Install%2Fusb%2F%20%E6%9C%AC%E6%96%87%E5%9B%B4%E7%BB%95%E2%80%9CHackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6%E2%80%9D%E6%95%B4%E7%90%86%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E3%80%81%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E9%AA%8C%E8%AF%81%E8%A6%81%E7%82%B9&amp;pics=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F06%2F25%2FHackintosh-USB%25E6%258E%25A5%25E5%258F%25A3%25E5%25AE%259A%25E5%2588%25B6%2F" target="_blank" rel="noopener noreferrer">QQ</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://twitter.com/intent/tweet?text=Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F06%2F25%2FHackintosh-USB%25E6%258E%25A5%25E5%258F%25A3%25E5%25AE%259A%25E5%2588%25B6%2F&amp;via=TonyChenn" target="_blank" rel="noopener noreferrer">twitter</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://service.weibo.com/share.php?appkey=&amp;title=Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F06%2F25%2FHackintosh-USB%25E6%258E%25A5%25E5%258F%25A3%25E5%25AE%259A%25E5%2588%25B6%2F&amp;pic=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FTonyChenn%2FBlogPicture%2Fmain%2Fimg1.jpg&amp;searchPic=false&amp;style=simple" target="_blank" rel="noopener noreferrer">weibo</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://telegram.me/share/url?url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F06%2F25%2FHackintosh-USB%25E6%258E%25A5%25E5%258F%25A3%25E5%25AE%259A%25E5%2588%25B6%2F&amp;text=Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6" target="_blank" rel="noopener noreferrer">telegram</mdui-menu-item>
+            
+            
+                <mdui-menu-item href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.tonychenn.cn%2F2023%2F06%2F25%2FHackintosh-USB%25E6%258E%25A5%25E5%258F%25A3%25E5%25AE%259A%25E5%2588%25B6%2F&amp;title=Hackintosh-USB%E6%8E%A5%E5%8F%A3%E5%AE%9A%E5%88%B6" target="_blank" rel="noopener noreferrer">linkedin</mdui-menu-item>
+            
+        </mdui-menu>
+    </mdui-dropdown>
+    
+
+    <mdui-tooltip id="themeTooltip" content="切换到深色主题">
+        <mdui-button-icon id="themeIconButton" icon="dark_mode" aria-label="切换到深色主题"></mdui-button-icon>
+    </mdui-tooltip>
+</mdui-top-app-bar>
+
+  <!--Header-->
+  
+
+<header class="header" style="background-image: url(https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/img1.jpg)">
+    <div class="header-scrim"></div>
+    <div class="header-media" style="overflow: hidden;">
+        <div class="header-content">
+            <h1 id="page-title" class="header_title">Hackintosh-USB接口定制</h1>
+            
+                <p id="hitokoto">一言加载中...</p>
+            
+        </div>
+    </div>
+</header>
+
+
+  <main class="article-section" id="content-inner">
+    <!--博文详细内容-->
+
+
+<article class="post-article" aria-labelledby="page-title">
+  
+<link rel="stylesheet" href="/css/post.css">
+
+
+  <mdui-card variant="filled" class="article article-bg content-card">
+    <div class="article-info">
+      <div class="post-meta" aria-label="文章信息">
+        <a class="post-meta-author" rel="author" href="/about/">
+          <span class="material-symbols-rounded" aria-hidden="true">person</span>
+          <span>TonyChenn</span>
+        </a>
+        <span class="post-meta-date">
+          <span class="material-symbols-rounded" aria-hidden="true">calendar_today</span>
+          发布于 <time datetime="2023-06-25T05:13:24.000Z">2023-06-25</time>
+        </span>
+        
+      </div>
+
+      <!--文章内容广告-->
+      
+        <!-- AdSense 加载脚本由 head.ejs 统一引入，避免重复请求 -->
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-8181303774570877"
+     data-ad-slot="4472209190"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      
+
+      <div class="post-body">
+        <blockquote>
+<p>OpenCore官方文档: <a target="_blank" rel="noopener" href="https://dortania.github.io/OpenCore-Post-Install/usb/">https://dortania.github.io/OpenCore-Post-Install/usb/</a></p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文是在win平台利用USBToolBox进行定制，OpenCore官方文档中已经有在macOS平台定制的工具了：<a target="_blank" rel="noopener" href="https://github.com/corpnewt/USBMap">https://github.com/corpnewt/USBMap</a></p>
+<p>阅读前请查看更新时间，当前OpenCore 0.93。太过久远则无参考意义。</p>
+<h2 id="USB未定制可能出现的表现"><a href="#USB未定制可能出现的表现" class="headerlink" title="USB未定制可能出现的表现"></a>USB未定制可能出现的表现</h2><ul>
+<li>蓝牙无法使用，因为蓝牙走 USB 协议</li>
+<li>睡眠后立马就醒来</li>
+<li>USB 接口不能用或者速率无法跑满</li>
+<li>键盘&#x2F;鼠标不能用</li>
+</ul>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h2 id="USBToolBox-Tool"><a href="#USBToolBox-Tool" class="headerlink" title="USBToolBox Tool"></a><a target="_blank" rel="noopener" href="https://github.com/USBToolBox/tool/releases">USBToolBox Tool</a></h2><p>利用<a target="_blank" rel="noopener" href="https://github.com/USBToolBox/tool/releases">USBToolBox Tool</a> 在windows平台嗅探所有USB端口，然后导出内核拓展<code>UTBMap.kext</code>,注意：此内核拓展与其他设备不通用，需自行制作。</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ol>
+<li>USB 3.0设备 x 1</li>
+<li>USB 2.0设备 x 1</li>
+<li>windows系统</li>
+</ol>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li>下载并运行<a target="_blank" rel="noopener" href="https://github.com/USBToolBox/tool/releases">USBToolBox Tool</a>中windows.exe</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">D.  Discover Ports                  # 嗅探端口</span><br><span class="line">S.  Select Ports and Build Kext     # 查看端口</span><br><span class="line">C.  Change Settings                 # 设置</span><br><span class="line">Q.  Quit                            # 退出</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入：D 选择嗅探所有端口，嗅探界面每隔5秒刷新一次，依次使用USB2.0、USB3.0设备逐次插入所有USB孔。</li>
+<li>输入：B 结束嗅探。</li>
+<li>输入：S 查看结果，输入：K 导出<code>UTBMap.kext</code>内核拓展。</li>
+</ul>
+<h2 id="USBToolBox-Kext"><a href="#USBToolBox-Kext" class="headerlink" title="USBToolBox Kext"></a><a target="_blank" rel="noopener" href="https://github.com/USBToolBox/kext/releases">USBToolBox Kext</a></h2><h2 id="加载内核拓展"><a href="#加载内核拓展" class="headerlink" title="加载内核拓展"></a>加载内核拓展</h2><p>将 UTBMap.kext 与 USBToolBox.kext 放入 <code>OC/kext</code>目录中并加载。加载顺序为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- USBToolBox.kext </span><br><span class="line">- UTBMap.kext</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hackintool调优"><a href="#Hackintool调优" class="headerlink" title="Hackintool调优"></a>Hackintool调优</h2><p>然并卵。罗老师说：又不是不能用。</p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
+<li><a href="/2019/06/14/Hackintosh-%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E8%8A%B1%E5%B1%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="Hackintosh-登录界面花屏解决方法">Hackintosh-登录界面花屏解决方法</a></li>
+<li><a href="/2019/02/27/Hackintosh-%E5%90%AF%E5%8A%A8%E7%9B%98%E5%88%B6%E4%BD%9C/" title="Hackintosh-启动盘制作(一)">Hackintosh-启动盘制作(一)</a></li>
+</ul>
+
+      </div>
+
+      
+    <div class="reward-container">
+        <mdui-button class="reward-trigger" variant="tonal" icon="volunteer_activism" onclick="document.getElementById('reward-dialog').open = true;">&#36175;</mdui-button>
+        <mdui-dialog id="reward-dialog" class="reward-dialog" close-on-overlay-click close-on-esc headline="写博客不易，请我喝杯咖啡？">
+            <mdui-tabs value="reward-alipay" full-width>
+                <mdui-tab value="reward-alipay">&#25903;&#20184;&#23453;</mdui-tab>
+                <mdui-tab value="reward-wechat">&#24494;&#20449;</mdui-tab>
+
+                <mdui-tab-panel slot="panel" value="reward-alipay">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/alipay.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+                <mdui-tab-panel slot="panel" value="reward-wechat">
+                    <img src="https://cdn.jsdelivr.net/gh/TonyChenn/BlogPicture/main/wechat.jpg" class="reward-image noclick">
+                </mdui-tab-panel>
+            </mdui-tabs>
+            <mdui-button slot="action" variant="text" onclick="document.getElementById('reward-dialog').open = false;">&#20851;&#38381;</mdui-button>
+        </mdui-dialog>
+    </div>
+
+
+    </div>
+  </mdui-card>
+
+  
+    <nav class="post-navigation" aria-label="文章导航">
+      
+        <a class="post-navigation-link post-navigation-prev" href="/2023/06/25/CSharp%E7%BA%BF%E7%A8%8B/">
+          <span class="post-navigation-label"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>上一篇</span>
+          <span class="post-navigation-title">CSharp线程</span>
+        </a>
+      
+      
+        <a class="post-navigation-link post-navigation-next" href="/2023/03/29/iOS%E5%BA%94%E7%94%A8%E7%8A%B6%E6%80%81%E5%8F%8A%E7%9B%91%E5%90%AC/">
+          <span class="post-navigation-label">下一篇<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></span>
+          <span class="post-navigation-title">iOS应用状态及监听</span>
+        </a>
+      
+    </nav>
+  
+
+  
+    <section class="related-posts" aria-labelledby="related-posts-title">
+      <h2 id="related-posts-title">相关推荐</h2>
+      <div class="related-posts-grid">
+        
+          <a class="related-post-link" href="/2023/08/05/Hackintosh-%E9%A9%B1%E5%8A%A8intel%E7%BD%91%E5%8D%A1%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF/">
+            <span class="related-post-title">Hackintosh Intel 网卡与蓝牙驱动配置记录</span>
+            <time datetime="2023-08-05T09:36:11.000Z">2023-08-05</time>
+          </a>
+        
+          <a class="related-post-link" href="/2019/06/14/Hackintosh-%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E8%8A%B1%E5%B1%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+            <span class="related-post-title">Hackintosh-登录界面花屏解决方法</span>
+            <time datetime="2019-06-14T11:32:14.000Z">2019-06-14</time>
+          </a>
+        
+          <a class="related-post-link" href="/2019/04/05/Hackintosh-%E5%8D%87%E7%BA%A7Mojave%E5%90%8E%E8%8A%B1%E5%B1%8F%E9%97%AE%E9%A2%98/">
+            <span class="related-post-title">Hackintosh升级Mojave后花屏问题</span>
+            <time datetime="2019-04-05T03:31:24.000Z">2019-04-05</time>
+          </a>
+        
+          <a class="related-post-link" href="/2019/02/27/Hackintosh-%E5%90%AF%E5%8A%A8%E7%9B%98%E5%88%B6%E4%BD%9C/">
+            <span class="related-post-title">Hackintosh-启动盘制作(一)</span>
+            <time datetime="2019-02-27T02:39:09.000Z">2019-02-27</time>
+          </a>
+        
+      </div>
+    </section>
+  
+</article>
+
+
+
+
+	<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+	<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+	<mdui-card variant="filled" class="article article-bg talk-info content-card">
+		<h2>评论</h2>
+		<div id="gitalk-container"></div>
+	</mdui-card>
+
+  	<script type="text/javascript">
+		const gitalk = new Gitalk({
+			clientID: '9b72de255840a939dffc',
+			clientSecret: '9ad95d954f8f73a9caf2e79d533cb52d4d172d44',
+			repo: 'blog.tonychenn.cn',
+			owner: 'tonychenn',
+			admin: ['tonychenn'],
+			id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50 ，so use md5
+			distractionFreeMode: true,  // Facebook-like distraction free mode
+			proxy: ['https://proxy.cors.sh/https://github.com/login/oauth/access_token']
+		})
+		gitalk.render('gitalk-container')
+	</script>
+
+
+
+  <!-- <aside id="sidebar" class="mdui-shadow-2 mdui-hoverable">
+    <div class="widget">
+      <h3 class="title">目录</h3>
+      <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#USB%E6%9C%AA%E5%AE%9A%E5%88%B6%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="post-toc-text">USB未定制可能出现的表现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="post-toc-text">工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#USBToolBox-Tool"><span class="post-toc-text">USBToolBox Tool</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%9C%80%E6%B1%82"><span class="post-toc-text">需求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">步骤</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#USBToolBox-Kext"><span class="post-toc-text">USBToolBox Kext</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E6%8B%93%E5%B1%95"><span class="post-toc-text">加载内核拓展</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hackintool%E8%B0%83%E4%BC%98"><span class="post-toc-text">Hackintool调优</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%9B%B8%E5%85%B3%E9%98%85%E8%AF%BB"><span class="post-toc-text">相关阅读</span></a></li></ol> 
+    </div>
+  </aside> -->
+
+  </main>
+
+  <!--footer-->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="site-footer-content">
+            <div class="site-footer-copyright">
+                Copyright &copy;
+                TonyChenn&nbsp;2026
+                <span class="site-footer-separator">·</span>
+                Theme By
+                <a target="_blank" rel="noopener" href="https://github.com/TonyChenn/hexo-theme-mdm">mdm</a>
+            </div>
+            <div class="site-footer-github">
+                <iframe
+                        src="https://ghbtns.com/github-btn.html?user=TonyChenn&repo=hexo-theme-mdm&type=star&count=true"
+                        title="GitHub Star"
+                        frameborder="0" scrolling="0" width="91px" height="20px">
+                </iframe>
+            </div>
+        <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp总访客<span id="busuanzi_value_site_uv"></span>人 -->
+        </div>
+    </div>
+</footer>
+
+
+  <!--goTop-->
+  <mdui-fab class="go-top-fab" variant="primary" size="small" icon="arrow_upward" aria-label="返回顶部"></mdui-fab>
+
+</body>
+</html>
