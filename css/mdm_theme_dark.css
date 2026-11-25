@@ -1,0 +1,104 @@
+:root,
+.mdui-theme-light {
+    color: #000;
+    background-color: #fff;
+}
+
+.mdui-theme-dark {
+    color: #fff;
+    background-color: #3b3b3b;
+}
+
+.mdui-theme-dark body{
+    color: #fff;
+    background-color: #2f2f2f;
+}
+
+.mdui-theme-dark a,
+.mdui-theme-dark h1,
+.mdui-theme-dark h2,
+.mdui-theme-dark h3,
+.mdui-theme-dark h4,
+.mdui-theme-dark h5,
+.mdui-theme-dark h6{
+  color: #ccc;
+}
+
+.mdui-theme-dark code{
+  background-color: #616161;
+}
+
+.mdui-theme-dark .top-app-bar{
+    background: #212121;
+}
+
+/* .mdui-theme-dark #summary,
+.mdui-theme-dark .title_font{
+    color: #9E9E9E;
+} */
+
+/*post item閼冲本娅?*/
+.mdui-theme-dark .article,
+.mdui-theme-dark .article-bg,
+.mdui-theme-dark .post-card,
+.mdui-theme-dark .post-collapse,
+.mdui-theme-dark .post_tag,
+.mdui-theme-dark #post-item,
+.mdui-theme-dark .elevated-card{
+    background-color: #3b3b3b;
+}
+
+.mdui-theme-dark .post-collapse-title,
+.mdui-theme-dark .info,
+.mdui-theme-dark figure .line,
+.mdui-theme-dark .article li,
+.mdui-theme-dark .article p{
+  color: rgba(255,255,255,0.54);
+}
+
+/* Material Design 3 dark theme */
+.mdui-theme-dark,
+.mdui-theme-dark body {
+    background: rgb(var(--mdui-color-surface));
+    color: rgb(var(--mdui-color-on-surface));
+}
+
+.mdui-theme-dark a,
+.mdui-theme-dark h1,
+.mdui-theme-dark h2,
+.mdui-theme-dark h3,
+.mdui-theme-dark h4,
+.mdui-theme-dark h5,
+.mdui-theme-dark h6,
+.mdui-theme-dark .title_font,
+.mdui-theme-dark .post-collapse-title,
+.mdui-theme-dark .article li,
+.mdui-theme-dark .article p {
+    color: rgb(var(--mdui-color-on-surface));
+}
+
+.mdui-theme-dark code {
+    background: rgb(var(--mdui-color-surface-container-high));
+    color: rgb(var(--mdui-color-on-surface));
+}
+
+.mdui-theme-dark .top-app-bar {
+    background: rgba(var(--mdui-color-surface-container), 0.94);
+    color: rgb(var(--mdui-color-on-surface));
+}
+
+.mdui-theme-dark .article,
+.mdui-theme-dark .article-bg,
+.mdui-theme-dark .post-card,
+.mdui-theme-dark .post-collapse,
+.mdui-theme-dark .post_tag,
+.mdui-theme-dark #post-item,
+.mdui-theme-dark .elevated-card,
+.mdui-theme-dark .content-card {
+    background: rgb(var(--mdui-color-surface-container-low));
+}
+
+.mdui-theme-dark .info,
+.mdui-theme-dark figure .line {
+    color: rgb(var(--mdui-color-on-surface-variant));
+}
